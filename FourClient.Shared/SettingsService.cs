@@ -1,0 +1,100 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Windows.Graphics.Display;
+using Windows.Storage;
+using Windows.UI.Notifications;
+using Windows.UI.Xaml;
+
+namespace FourClient
+{
+    public static class SettingsService
+    {
+        public static bool IsPhablet { get { return DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel > 2; } }
+        public static ElementTheme MainTheme { get; private set; }
+        public static ElementTheme ArticleTheme { get; private set; }
+        public static bool FirstRun { get; private set; }
+        public static bool LiveTile { get; private set; }
+        public static new int FontSize { get; private set; }
+        public static string FontFace { get; private set; }
+        public static string YouTube { get; private set; }
+
+        static SettingsService()
+        {
+            LoadSettings();
+        }
+        public static void SetMainTheme(ElementTheme theme)
+        {
+            MainTheme = theme;
+            ApplicationData.Current.LocalSettings.Values["Theme"] = (int)theme;
+        }
+
+        public static void SetArticleTheme(ElementTheme theme)
+        {
+            ArticleTheme = theme;
+            ApplicationData.Current.LocalSettings.Values["ArticleTheme"] = (int)theme;
+        }
+
+        public static void SetLiveTile(bool liveTile)
+        {
+            LiveTile = liveTile;
+            ApplicationData.Current.LocalSettings.Values["LiveTile"] = liveTile;
+            if (!liveTile)
+            {
+                var updater = TileUpdateManager.CreateTileUpdaterForApplication();
+                var notifications = updater.GetScheduledTileNotifications();
+                foreach (var item in notifications)
+                {
+                    updater.RemoveFromSchedule(item);
+                }
+                updater.StopPeriodicUpdate();
+                updater.Clear();
+                updater.EnableNotificationQueue(false);
+            }
+        }
+
+        public static void SetFontSize(int fontSize)
+        {
+            FontSize = fontSize;
+            ApplicationData.Current.LocalSettings.Values["FontSize"] = fontSize;
+        }
+
+        public static void SetFontFace(string fontFace)
+        {
+            FontFace = fontFace;
+            ApplicationData.Current.LocalSettings.Values["FontFace"] = fontFace;
+        }
+
+        public static void SetYouTube(string youtube)
+        {
+            YouTube = youtube;
+            ApplicationData.Current.LocalSettings.Values["YouTube"] = youtube;
+        }
+
+        private static void LoadSettings()
+        {
+            //First Run            
+            var firstRun = ApplicationData.Current.LocalSettings.Values["FirstRun"];
+            FirstRun = firstRun != null ? (bool)firstRun : true;
+            ApplicationData.Current.LocalSettings.Values["FirstRun"] = false;
+            //Main Theme
+            var mainTheme = ApplicationData.Current.LocalSettings.Values["Theme"];
+            if (mainTheme != null) MainTheme = (ElementTheme)mainTheme;
+            //Article Theme
+            var articleTheme = ApplicationData.Current.LocalSettings.Values["ArticleTheme"];
+            if (articleTheme != null) ArticleTheme = (ElementTheme)articleTheme;
+            //LiveTile
+            var liveTile = ApplicationData.Current.LocalSettings.Values["LiveTile"];
+            LiveTile = liveTile != null ? (bool)liveTile : true;
+            //Font Size
+            var fontSize = ApplicationData.Current.LocalSettings.Values["FontSize"];
+            FontSize = fontSize != null ? (int)fontSize : (IsPhablet ? 2 : 3);
+            //Font Face
+            var fontFace = ApplicationData.Current.LocalSettings.Values["FontFace"];
+            FontFace = fontFace != null ? (string)fontFace : FontFace = "Segoe UI";
+            //YouTube
+            var youtube = ApplicationData.Current.LocalSettings.Values["YouTube"];
+            YouTube = youtube != null ? (string)youtube : YouTube = "vnd.youtube:";
+        }
+    }
+}

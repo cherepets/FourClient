@@ -1,0 +1,3701 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<doc>
+    <assembly>
+        <name>NotificationsExtensions</name>
+    </assembly>
+    <members>
+        <member name="T:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent">
+            <summary>
+            Notification content object to display a glyph on a tile's badge.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.BadgeContent.IBadgeNotificationContent">
+            <summary>
+            Base badge notification content interface.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.INotificationContent">
+            <summary>
+            Base notification content interface to retrieve notification Xml as a string.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.INotificationContent.GetContent">
+            <summary>
+            Retrieves the notification Xml content as a string.
+            </summary>
+            <returns>The notification Xml content as a string.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.INotificationContent.GetXml">
+            <summary>
+            Retrieves the notification Xml content as a WinRT Xml document.
+            </summary>
+            <returns>The notification Xml content as a WinRT Xml document.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.IBadgeNotificationContent.CreateNotification">
+            <summary>
+            Creates a WinRT BadgeNotification object based on the content.
+            </summary>
+            <returns>A WinRT BadgeNotification object based on the content.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.#ctor">
+            <summary>
+            Default constructor to create a glyph badge content object.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.#ctor(NotificationsExtensions.BadgeContent.GlyphValue)">
+            <summary>
+            Constructor to create a glyph badge content object with a glyph.
+            </summary>
+            <param name="glyph">The glyph to be displayed on the badge.</param>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.GetContent">
+            <summary>
+            Retrieves the notification Xml content as a string.
+            </summary>
+            <returns>The notification Xml content as a string.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.ToString">
+            <summary>
+            Retrieves the notification Xml content as a string.
+            </summary>
+            <returns>The notification Xml content as a string.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.GetXml">
+            <summary>
+            Retrieves the notification Xml content as a WinRT Xml document.
+            </summary>
+            <returns>The notification Xml content as a WinRT Xml document.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.CreateNotification">
+            <summary>
+            Creates a WinRT BadgeNotification object based on the content.
+            </summary>
+            <returns>A WinRT BadgeNotification object based on the content.</returns>
+        </member>
+        <member name="P:NotificationsExtensions.BadgeContent.BadgeGlyphNotificationContent.Glyph">
+            <summary>
+            The glyph to be displayed on the badge.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent">
+            <summary>
+            Notification content object to display a number on a tile's badge.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.#ctor">
+            <summary>
+            Default constructor to create a numeric badge content object.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.#ctor(System.UInt32)">
+            <summary>
+            Constructor to create a numeric badge content object with a number.
+            </summary>
+            <param name="number">
+            The number that will appear on the badge.  If the number is 0, the badge
+            will be removed.  The largest value that will appear on the badge is 99.
+            Numbers greater than 99 are allowed, but will be displayed as "99+".
+            </param>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.GetContent">
+            <summary>
+            Retrieves the notification Xml content as a string.
+            </summary>
+            <returns>The notification Xml content as a string.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.ToString">
+            <summary>
+            Retrieves the notification Xml content as a string.
+            </summary>
+            <returns>The notification Xml content as a string.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.GetXml">
+            <summary>
+            Retrieves the notification Xml content as a WinRT Xml document.
+            </summary>
+            <returns>The notification Xml content as a WinRT Xml document.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.CreateNotification">
+            <summary>
+            Creates a WinRT BadgeNotification object based on the content.
+            </summary>
+            <returns>A WinRT BadgeNotification object based on the content.</returns>
+        </member>
+        <member name="P:NotificationsExtensions.BadgeContent.BadgeNumericNotificationContent.Number">
+            <summary>
+            The number that will appear on the badge.  If the number is 0, the badge
+            will be removed.  The largest value that will appear on the badge is 99.
+            Numbers greater than 99 are allowed, but will be displayed as "99+".
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.INotificationContentText">
+            <summary>
+            A type contained by the tile and toast notification content objects that
+            represents a text field in the template.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.INotificationContentText.Text">
+            <summary>
+            The text value that will be shown in the text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.INotificationContentText.Lang">
+            <summary>
+            The language of the text field.  This proprety overrides the language provided in the
+            containing notification object.  The language should be specified using the
+            abbreviated language code as defined by BCP 47.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.INotificationContentImage">
+            <summary>
+            A type contained by the tile and toast notification content objects that
+            represents an image in a template.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.INotificationContentImage.Src">
+            <summary>
+            The location of the image.  Relative image paths use the BaseUri provided in the containing
+            notification object.  If no BaseUri is provided, paths are relative to ms-appx:///.
+            Only png and jpg images are supported.  Images must be 1024x1024 pixels or less, and smaller than
+            200 kB in size.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.INotificationContentImage.Alt">
+            <summary>
+            Alt text that describes the image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.INotificationContentImage.AddImageQuery">
+            <summary>
+            Controls if query strings that denote the client configuration of contrast, scale, and language setting should be appended to the Src
+            If true, Windows will append query strings onto the Src
+            If false, Windows will not append query strings onto the Src
+            Query string details:
+            Parameter: ms-contrast
+                Values: standard, black, white
+            Parameter: ms-scale
+                Values: 80, 100, 140, 180
+            Parameter: ms-lang
+                Values: The BCP 47 language tag set in the notification xml, or if omitted, the current preferred language of the user
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.NotificationBase">
+            <summary>
+            Base class for the notification content creation helper classes.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.NotificationBase.Images">
+            <summary>
+            Retrieves the list of images that can be manipulated on the notification content.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.NotificationBase.TextFields">
+            <summary>
+            Retrieves the list of text fields that can be manipulated on the notification content.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.NotificationBase.BaseUri">
+            <summary>
+            The base Uri path that should be used for all image references in the notification.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.NotificationContentValidationException">
+            <summary>
+            Exception returned when invalid notification content is provided.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileNotificationContent">
+            <summary>
+            Base tile notification content interface.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.ITileNotificationContent.CreateNotification">
+            <summary>
+            Creates a WinRT TileNotification object based on the content.
+            </summary>
+            <returns>The WinRT TileNotification object</returns>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileNotificationContent.StrictValidation">
+            <summary>
+            Whether strict validation should be applied when the Xml or notification object is created,
+            and when some of the properties are assigned.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileNotificationContent.Lang">
+            <summary>
+            The language of the content being displayed.  The language should be specified using the
+            abbreviated language code as defined by BCP 47.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileNotificationContent.BaseUri">
+            <summary>
+            The BaseUri that should be used for image locations.  Relative image locations use this
+            field as their base Uri.  The BaseUri must begin with http://, https://, ms-appx:///, or
+            ms-appdata:///local/.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileNotificationContent.Branding">
+            <summary>
+            Determines the application branding when tile notification content is displayed on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileNotificationContent.AddImageQuery">
+            <summary>
+            Controls if query strings that denote the client configuration of contrast, scale, and language setting should be appended to the Src
+            If true, Windows will append query strings onto images that exist in this template
+            If false (the default), Windows will not append query strings onto images that exist in this template
+            Query string details:
+            Parameter: ms-contrast
+                Values: standard, black, white
+            Parameter: ms-scale
+                Values: 80, 100, 140, 180
+            Parameter: ms-lang
+                Values: The BCP 47 language tag set in the notification xml, or if omitted, the current preferred language of the user
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileNotificationContent.ContentId">
+            <summary>
+            Used by the system to do semantic deduplication of content with the same contentId.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ISquare71x71TileNotificationContent">
+            <summary>
+            Base small tile notification content interface.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ISquare150x150TileNotificationContent">
+            <summary>
+            Base square tile notification content interface.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ISquare150x150TileNotificationContent.Square71x71Content">
+            <summary>
+            Corresponding small tile notification content can be a part of every square tile notification.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ISquare150x150TileNotificationContent.RequireSquare71x71Content">
+            <summary>
+            Whether small tile notification content needs to be added to pass
+            validation.  Square71x71 content is not required by default.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.IWide310x150TileNotificationContent">
+            <summary>
+            Base wide tile notification content interface.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.IWide310x150TileNotificationContent.Square150x150Content">
+            <summary>
+            Corresponding square tile notification content should be a part of every wide tile notification.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.IWide310x150TileNotificationContent.RequireSquare150x150Content">
+            <summary>
+            Whether square tile notification content needs to be added to pass
+            validation.  Square150x150 content is required by default.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ISquare310x310TileNotificationContent">
+            <summary>
+            Base large tile notification content interface.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ISquare310x310TileNotificationContent.Wide310x150Content">
+            <summary>
+            Corresponding wide tile notification content should be a part of every large tile notification.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ISquare310x310TileNotificationContent.RequireWide310x150Content">
+            <summary>
+            Whether wide tile notification content needs to be added to pass
+            validation.  Wide310x150 content is required by default.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150Block">
+            <summary>
+            A square tile template that displays two text captions.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Block.TextBlock">
+            <summary>
+            A large block text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Block.TextSubBlock">
+            <summary>
+            The description under the large block text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150Image">
+            <summary>
+            A square tile template that displays an image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Image.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText01">
+            <summary>
+            A square tile template that displays an image, then transitions to show
+            four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText01.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText01.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText01.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText01.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText02">
+            <summary>
+            A square tile template that displays an image, then transitions to show
+            two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText02.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText03">
+            <summary>
+            A square tile template that displays an image, then transitions to show
+            four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText03.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText03.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText03.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText03.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText03.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText04">
+            <summary>
+            A square tile template that displays an image, then transitions to
+            show a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText04.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150PeekImageAndText04.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150Text01">
+            <summary>
+            A square tile template that displays four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text01.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text01.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text01.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text01.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150Text02">
+            <summary>
+            A square tile template that displays two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text02.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150Text03">
+            <summary>
+            A square tile template that displays four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text03.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text03.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text03.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text03.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150Text04">
+            <summary>
+            A square tile template that displays a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150Text04.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01">
+            <summary>
+            A square tile template that displays six text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01.TextBlock">
+            <summary>
+            A large block text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText01.TextSubBlock">
+            <summary>
+            The description under the large block text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText02">
+            <summary>
+            A square tile template that displays three text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText02.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText02.TextBlock">
+            <summary>
+            A large block text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150BlockAndText02.TextSubBlock">
+            <summary>
+            The description under the large block text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Image">
+            <summary>
+            A wide tile template that displays an image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Image.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText01">
+            <summary>
+            A wide tile template that displays an image and a text caption.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText01.TextCaptionWrap">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText02">
+            <summary>
+            A wide tile template that displays an image and two text captions.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText02.TextCaption1">
+            <summary>
+            The first caption for the image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageAndText02.TextCaption2">
+            <summary>
+            The second caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150ImageCollection">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageCollection.ImageMain">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageCollection.ImageSmallColumn1Row1">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageCollection.ImageSmallColumn2Row1">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageCollection.ImageSmallColumn1Row2">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150ImageCollection.ImageSmallColumn2Row2">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImage01">
+            <summary>
+            A wide tile template that displays an image, then transitions to show
+            two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage01.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage01.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02">
+            <summary>
+            A wide tile template that displays an image, then transitions to show
+            five text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage02.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImage03">
+            <summary>
+            A wide tile template that displays an image, then transitions to show
+            a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage03.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage03.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImage04">
+            <summary>
+            A wide tile template that displays an image, then transitions to show
+            a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage04.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage04.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImage05">
+            <summary>
+            A wide tile template that displays an image, then transitions to show
+            another image and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage05.ImageMain">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage05.ImageSecondary">
+            <summary>
+            The secondary image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage05.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage05.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImage06">
+            <summary>
+            A wide tile template that displays an image, then transitions to show
+            another image and a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage06.ImageMain">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage06.ImageSecondary">
+            <summary>
+            The secondary image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImage06.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText01">
+            <summary>
+            A wide tile template that displays an image and a portion of a text field,
+            then transitions to show all of the text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText01.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02">
+            <summary>
+            A wide tile template that displays an image and a text field,
+            then transitions to show the text field and four other text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageAndText02.TextBody5">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection01">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid, then transitions to show two
+            text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection01.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection01.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection02">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid, then transitions to show five
+            text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection02.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection02.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection02.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection02.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection03">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid, then transitions to show a
+            text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection03.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection04">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid, then transitions to show a
+            text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection04.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection05">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid, then transitions to show an image
+            and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection05.ImageSecondary">
+            <summary>
+            The secondary image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection05.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection05.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection06">
+            <summary>
+            A wide tile template that displays five images - one main image,
+            and four square images in a grid, then transitions to show an image
+            and a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection06.ImageSecondary">
+            <summary>
+            The secondary image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150PeekImageCollection06.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText01">
+            <summary>
+            A wide tile template that displays an image and a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText01.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02">
+            <summary>
+            A wide tile template that displays an image and 5 text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText02.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText03">
+            <summary>
+            A wide tile template that displays an image and a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText03.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText03.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText04">
+            <summary>
+            A wide tile template that displays an image and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText04.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText04.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText04.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText05">
+            <summary>
+            A wide tile template that displays a poster image and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText05.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText05.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150SmallImageAndText05.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text01">
+            <summary>
+            A wide tile template that displays five text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text01.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text01.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text01.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text01.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text01.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text02">
+            <summary>
+            A wide tile template that displays nine text fields - a heading and two columns
+            of four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text02.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text03">
+            <summary>
+            A wide tile template that displays a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text03.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text04">
+            <summary>
+            A wide tile template that displays a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text04.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text05">
+            <summary>
+            A wide tile template that displays five text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text05.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text05.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text05.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text05.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text05.TextBody5">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text06">
+            <summary>
+            A wide tile template that displays ten text fields - two columns
+            of five text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn1Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text06.TextColumn2Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text07">
+            <summary>
+            A wide tile template that displays nine text fields - a heading and two columns
+            of four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextShortColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextShortColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextShortColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextShortColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text07.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text08">
+            <summary>
+            A wide tile template that displays ten text fields - two columns
+            of five text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextShortColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextShortColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextShortColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextShortColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextShortColumn1Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text08.TextColumn2Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text09">
+            <summary>
+            A wide tile template that displays two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text09.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text09.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text10">
+            <summary>
+            A wide tile template that displays nine text fields - a heading and two columns
+            of four text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextPrefixColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextPrefixColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextPrefixColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextPrefixColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text10.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150Text11">
+            <summary>
+            A wide tile template that displays ten text fields - two columns
+            of five text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextPrefixColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextPrefixColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextPrefixColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextPrefixColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextPrefixColumn1Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150Text11.TextColumn2Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01">
+            <summary>
+            A large tile template that displays a heading,
+            six text fields grouped into three units,
+            and two more text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBody5">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBody6">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextBlock">
+            <summary>
+            A large block text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText01.TextSubBlock">
+            <summary>
+            The description under the large block text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02">
+            <summary>
+            A large tile template that displays seven text fields with one background image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.Image">
+            <summary>
+            The background image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextBlock">
+            <summary>
+            A large block text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextHeading1">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextHeading2">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310BlockAndText02.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Image">
+            <summary>
+            A large square tile template that displays an image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Image.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText01">
+            <summary>
+            A large square tile template that displays an image and a text caption.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText01.TextCaptionWrap">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText02">
+            <summary>
+            A large square tile template that displays an image and two text captions.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText02.TextCaption1">
+            <summary>
+            The first caption for the image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndText02.TextCaption2">
+            <summary>
+            The second caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay01">
+            <summary>
+            A large square tile template that displays a heading with a background image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay01.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay01.TextHeadingWrap">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay02">
+            <summary>
+            A large square tile template that displays a heading and a text field with a background image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay02.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay02.TextHeadingWrap">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay02.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay03">
+            <summary>
+            A large square tile template that displays a heading and three text fields with a background image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay03.Image">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay03.TextHeadingWrap">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay03.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay03.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageAndTextOverlay03.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollection">
+            <summary>
+            A large square tile template that displays five images - one main image,
+            and four smaller images in a row across the top.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollection.ImageMain">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollection.ImageSmall1">
+            <summary>
+            A small image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollection.ImageSmall2">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollection.ImageSmall3">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollection.ImageSmall4">
+            <summary>
+            A small image on the tile.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01">
+            <summary>
+            A large square tile template that displays five images - one main image,
+            four smaller images in a row across the top, and a text caption.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01.ImageMain">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01.ImageSmall1">
+            <summary>
+            A small image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01.ImageSmall2">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01.ImageSmall3">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01.ImageSmall4">
+            <summary>
+            A small image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText01.TextCaptionWrap">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02">
+            <summary>
+            A large square tile template that displays five images - one main image,
+            four smaller images in a row across the top, and two text captions.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.ImageMain">
+            <summary>
+            The main image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.ImageSmall1">
+            <summary>
+            A small image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.ImageSmall2">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.ImageSmall3">
+            <summary>
+            A small square image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.ImageSmall4">
+            <summary>
+            A small image on the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.TextCaption1">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310ImageCollectionAndText02.TextCaption2">
+            <summary>
+            A caption for the image.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310SmallImageAndText01">
+            <summary>
+            A large square tile template that displays an image, a headline, a text field that can wrap to two lines,
+            and a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImageAndText01.Image">
+            <summary>
+            The image at the top of the tile.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImageAndText01.TextHeading">
+            <summary>
+            The headline text.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImageAndText01.TextBodyWrap">
+            <summary>
+            The middle text field that wraps to two lines.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImageAndText01.TextBody">
+            <summary>
+            The lower text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01">
+            <summary>
+            A large square tile template that displays a list of three groups, each group having an image,
+            a heading, and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.Image1">
+            <summary>
+            The image for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextHeading1">
+            <summary>
+            The heading for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextBodyGroup1Field1">
+            <summary>
+            The first text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextBodyGroup1Field2">
+            <summary>
+            The second text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.Image2">
+            <summary>
+            The image for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextHeading2">
+            <summary>
+            The heading for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextBodyGroup2Field1">
+            <summary>
+            The first text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextBodyGroup2Field2">
+            <summary>
+            The second text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.Image3">
+            <summary>
+            The image for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextHeading3">
+            <summary>
+            The heading for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextBodyGroup3Field1">
+            <summary>
+            The first text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList01.TextBodyGroup3Field2">
+            <summary>
+            The second text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02">
+            <summary>
+            A large square tile template that displays a list of three groups, each group having an image,
+            and a text field that can wrap to a total of three lines.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02.Image1">
+            <summary>
+            The image for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02.TextWrap1">
+            <summary>
+            The text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02.Image2">
+            <summary>
+            The image for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02.TextWrap2">
+            <summary>
+            The text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02.Image3">
+            <summary>
+            The image for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList02.TextWrap3">
+            <summary>
+            The  text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03">
+            <summary>
+            A large square tile template that displays a list of three groups, each group having an image,
+            a heading, and one text field, which wraps to two lines.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.Image1">
+            <summary>
+            The image for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.TextHeading1">
+            <summary>
+            The heading for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.TextWrap1">
+            <summary>
+            The first text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.Image2">
+            <summary>
+            The image for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.TextHeading2">
+            <summary>
+            The heading for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.TextWrap2">
+            <summary>
+            The first text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.Image3">
+            <summary>
+            The image for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.TextHeading3">
+            <summary>
+            The heading for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList03.TextWrap3">
+            <summary>
+            The first text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04">
+            <summary>
+            A large square tile template that displays a list of three groups, each group having
+            a heading, and one text field, which wraps to two lines followed by an image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.Image1">
+            <summary>
+            The image for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.TextHeading1">
+            <summary>
+            The heading for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.TextWrap1">
+            <summary>
+            The first text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.Image2">
+            <summary>
+            The image for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.TextHeading2">
+            <summary>
+            The heading for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.TextWrap2">
+            <summary>
+            The first text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.Image3">
+            <summary>
+            The image for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.TextHeading3">
+            <summary>
+            The heading for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList04.TextWrap3">
+            <summary>
+            The first text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05">
+            <summary>
+            A large square tile template that displays a headline and a list of three groups, each group having
+            an image and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextHeading">
+            <summary>
+            The headline text.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.Image1">
+            <summary>
+            The image for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextGroup1Field1">
+            <summary>
+            The first text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextGroup1Field2">
+            <summary>
+            The second text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.Image2">
+            <summary>
+            The image for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextGroup2Field1">
+            <summary>
+            The first text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextGroup2Field2">
+            <summary>
+            The second text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.Image3">
+            <summary>
+            The image for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextGroup3Field1">
+            <summary>
+            The first text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310SmallImagesAndTextList05.TextGroup3Field2">
+            <summary>
+            The second text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text01">
+            <summary>
+            A large square tile template that displays a heading and nine text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody5">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody6">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody7">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody8">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text01.TextBody9">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text02">
+            <summary>
+            A wide tile template that displays nineteen text fields - a heading and two columns
+            of nine text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row6">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row6">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row7">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row7">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row8">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row8">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn1Row9">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text02.TextColumn2Row9">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text03">
+            <summary>
+            A large square tile template that displays eleven text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody3">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody4">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody5">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody6">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody7">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody8">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody9">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody10">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text03.TextBody11">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text04">
+            <summary>
+            A wide tile template that displays 22 text fields - two columns
+            of 11 text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row1">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row2">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row3">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row4">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row5">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row6">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row6">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row7">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row7">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row8">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row8">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row9">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row9">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row10">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row10">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn1Row11">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text04.TextColumn2Row11">
+            <summary>
+            A text field displayed in a column and row.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text05">
+            <summary>
+            A wide tile template that displays nineteen text fields - a heading and two columns
+            of nine text fields. Column 1 is narrower than column 2.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text06">
+            <summary>
+            A wide tile template that displays 22 text fields - two columns
+            of eleven text fields. Column 1 is narrower than column 2.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text07">
+            <summary>
+            A wide tile template that displays nineteen text fields - a heading and two columns
+            of nine text fields. Column 1 is very narrow.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text08">
+            <summary>
+            A wide tile template that displays 22 text fields - two columns
+            of eleven text fields. Column 1 is very narrow.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310Text09">
+            <summary>
+            A large square tile template that displays a heading which wraps to two lines,
+            two more heading-sized text fields, and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text09.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text09.TextHeading1">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text09.TextHeading2">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text09.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310Text09.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310TextList01">
+            <summary>
+            A large square tile template that displays a list of three groups, each group having
+            a heading, and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextHeading1">
+            <summary>
+            The heading for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextBodyGroup1Field1">
+            <summary>
+            The first text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextBodyGroup1Field2">
+            <summary>
+            The second text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextHeading2">
+            <summary>
+            The heading for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextBodyGroup2Field1">
+            <summary>
+            The first text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextBodyGroup2Field2">
+            <summary>
+            The second text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextHeading3">
+            <summary>
+            The heading for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextBodyGroup3Field1">
+            <summary>
+            The first text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList01.TextBodyGroup3Field2">
+            <summary>
+            The second text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310TextList02">
+            <summary>
+            A large square tile template that displays a list of three text fields that can wrap to a total of three lines.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList02.TextWrap1">
+            <summary>
+            The text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList02.TextWrap2">
+            <summary>
+            The text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList02.TextWrap3">
+            <summary>
+            The  text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare310x310TextList03">
+            <summary>
+            A large square tile template that displays a list of three groups, each group having
+            a heading, and one text field, which wraps to two lines.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList03.TextHeading1">
+            <summary>
+            The heading for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList03.TextWrap1">
+            <summary>
+            The first text field for the first group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList03.TextHeading2">
+            <summary>
+            The heading for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList03.TextWrap2">
+            <summary>
+            The first text field for the second group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList03.TextHeading3">
+            <summary>
+            The heading for the third group in the list.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare310x310TextList03.TextWrap3">
+            <summary>
+            The first text field for the third group in the list.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare71x71IconWithBadge">
+            <summary>
+            A small tile template that displays a monochrome icon with a badge.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare71x71IconWithBadge.ImageIcon">
+            <summary>
+            The image for the icon.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare150x150IconWithBadge">
+            <summary>
+            A Windows Phone medium tile template that displays a monochrome icon with a badge.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare150x150IconWithBadge.ImageIcon">
+            <summary>
+            The image for the icon.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileWide310x150IconWithBadgeAndText">
+            <summary>
+            A Windows Phone large tile template that displays a monochrome icon with a badge and three lines of text.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150IconWithBadgeAndText.ImageIcon">
+            <summary>
+            The image for the icon.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150IconWithBadgeAndText.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150IconWithBadgeAndText.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileWide310x150IconWithBadgeAndText.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.ITileSquare71x71Image">
+            <summary>
+            A small tile template that displays an image.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.TileContent.ITileSquare71x71Image.Image">
+            <summary>
+            The image for the icon.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.TileBranding">
+            <summary>
+            The types of behavior that can be used for application branding when
+            tile notification content is displayed on the tile.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.TileContent.TileBranding.None">
+            <summary>
+            No application branding will be displayed on the tile content.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.TileContent.TileBranding.Logo">
+            <summary>
+            The application logo will be displayed with the tile content.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.TileContent.TileBranding.Name">
+            <summary>
+            The application name will be displayed with the tile content.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastAudio">
+            <summary>
+            Type representing the toast notification audio properties which is contained within
+            a toast notification content object.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastAudio.Content">
+            <summary>
+            The audio content that should be played when the toast is shown.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastAudio.Loop">
+            <summary>
+            Whether the audio should loop.  If this property is set to true, the toast audio content
+            must be a looping sound.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IIncomingCallCommands">
+            <summary>
+            Type representing the incoming call command properties which is contained within
+            a toast notification content object.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IIncomingCallCommands.ShowVideoCommand">
+            <summary>
+            Whether the toast shows the video button.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IIncomingCallCommands.VideoArgument">
+            <summary>
+            The argument passed to the app when the video command is invoked.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IIncomingCallCommands.ShowVoiceCommand">
+            <summary>
+            Whether the toast shows the voice button.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IIncomingCallCommands.VoiceArgument">
+            <summary>
+            The argument passed to the app when the voice command is invoked.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IIncomingCallCommands.ShowDeclineCommand">
+            <summary>
+            Whether the toast shows the decline button.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IIncomingCallCommands.DeclineArgument">
+            <summary>
+            The argument passed to the app when the decline command is invoked.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IAlarmCommands">
+            <summary>
+            Type representing the alarm command properties which is contained within
+            a toast notification content object.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IAlarmCommands.ShowSnoozeCommand">
+            <summary>
+            Whether the toast shows the snooze button.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IAlarmCommands.SnoozeArgument">
+            <summary>
+            The argument passed to the app when the snooze command is invoked.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IAlarmCommands.ShowDismissCommand">
+            <summary>
+            Whether the toast shows the dismiss button.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IAlarmCommands.DismissArgument">
+            <summary>
+            The argument passed to the app when the dismiss command is invoked.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastNotificationContent">
+            <summary>
+            Base toast notification content interface.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.IToastNotificationContent.CreateNotification">
+            <summary>
+            Creates a WinRT ToastNotification object based on the content.
+            </summary>
+            <returns>A WinRT ToastNotification object based on the content.</returns>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.StrictValidation">
+            <summary>
+            Whether strict validation should be applied when the Xml or notification object is created,
+            and when some of the properties are assigned.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.Lang">
+            <summary>
+            The language of the content being displayed.  The language should be specified using the
+            abbreviated language code as defined by BCP 47.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.BaseUri">
+            <summary>
+            The BaseUri that should be used for image locations.  Relative image locations use this
+            field as their base Uri.  The BaseUri must begin with http://, https://, ms-appx:///, or
+            ms-appdata:///local/.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.AddImageQuery">
+            <summary>
+            Controls if query strings that denote the client configuration of contrast, scale, and language setting should be appended to the Src
+            If true, Windows will append query strings onto images that exist in this template
+            If false (the default, Windows will not append query strings onto images that exist in this template
+            Query string details:
+            Parameter: ms-contrast
+                Values: standard, black, white
+            Parameter: ms-scale
+                Values: 80, 100, 140, 180
+            Parameter: ms-lang
+                Values: The BCP 47 language tag set in the notification xml, or if omitted, the current preferred language of the user
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.Launch">
+            <summary>
+            The launch parameter passed into the Windows Store app when the toast is activated.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.Audio">
+            <summary>
+            The audio that should be played when the toast is displayed.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.Duration">
+            <summary>
+            The length that the toast should be displayed on screen.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.IncomingCallCommands">
+            <summary>
+            IncomingCall action buttons will be displayed on the toast if one of the option flags (ShowVideoCommand/ShowVoiceCommand/ShowDeclineCommand) is set to true.
+            To enable IncomingCall toasts for an app, ensure that the Lock Screen Call extension is enabled in the application manifest.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastNotificationContent.AlarmCommands">
+            <summary>
+            Alarm action buttons will be displayed on the toast if one of the option flags (ShowSnoozeCommand/ShowDismissCommand) is set to true.
+            To enable Alarm toasts for an app, ensure the app declares itself as Alarm capable.
+            The app needs to be set as the Primary Alarm on the PC Settings page (only one app can exist as the alarm app at a given time).
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.ToastAudioContent">
+            <summary>
+            The audio options that can be played while the toast is on screen.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.Default">
+            <summary>
+            The default toast audio sound.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.Mail">
+            <summary>
+            Audio that corresponds to new mail arriving.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.SMS">
+            <summary>
+            Audio that corresponds to a new SMS message arriving.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.IM">
+            <summary>
+            Audio that corresponds to a new IM arriving.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.Reminder">
+            <summary>
+            Audio that corresponds to a reminder.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall">
+            <summary>
+            The default looping sound.  Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall2">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall3">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall4">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall5">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall6">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall7">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall8">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall9">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingCall10">
+            <summary>
+            Audio that corresponds to a call.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm2">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm3">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm4">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm5">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm6">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm7">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm8">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm9">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.LoopingAlarm10">
+            <summary>
+            Audio that corresponds to an alarm.
+            Only valid for toasts that are have the duration set to "Long".
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastAudioContent.Silent">
+            <summary>
+            No audio should be played when the toast is displayed.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.ToastDuration">
+            <summary>
+            The duration the toast should be displayed on screen.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastDuration.Short">
+            <summary>
+            Default behavior.  The toast will be on screen for a short amount of time.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.ToastContent.ToastDuration.Long">
+            <summary>
+            The toast will be on screen for a longer amount of time.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastImageAndText01">
+            <summary>
+            A toast template that displays an image and a text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText01.Image">
+            <summary>
+            The main image on the toast.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText01.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastImageAndText02">
+            <summary>
+            A toast template that displays an image and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText02.Image">
+            <summary>
+            The main image on the toast.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText02.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastImageAndText03">
+            <summary>
+            A toast template that displays an image and two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText03.Image">
+            <summary>
+            The main image on the toast.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText03.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText03.TextBody">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastImageAndText04">
+            <summary>
+            A toast template that displays an image and three text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText04.Image">
+            <summary>
+            The main image on the toast.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText04.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText04.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastImageAndText04.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastText01">
+            <summary>
+            A toast template that displays a text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText01.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastText02">
+            <summary>
+            A toast template that displays two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText02.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText02.TextBodyWrap">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastText03">
+            <summary>
+            A toast template that displays two text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText03.TextHeadingWrap">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText03.TextBody">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.IToastText04">
+            <summary>
+            A toast template that displays three text fields.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText04.TextHeading">
+            <summary>
+            A heading text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText04.TextBody1">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="P:NotificationsExtensions.ToastContent.IToastText04.TextBody2">
+            <summary>
+            A body text field.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.BadgeContent.GlyphValue">
+            <summary>
+            The types of glyphs that can be placed on a badge.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.None">
+            <summary>
+            No glyph.  If there is a numeric badge, or a glyph currently on the badge,
+            it will be removed.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Activity">
+            <summary>
+            A glyph representing application activity.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Alert">
+            <summary>
+            A glyph representing an alert.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Available">
+            <summary>
+            A glyph representing availability status.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Away">
+            <summary>
+            A glyph representing away status
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Busy">
+            <summary>
+            A glyph representing busy status.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.NewMessage">
+            <summary>
+            A glyph representing that a new message is available.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Paused">
+            <summary>
+            A glyph representing that media is paused.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Playing">
+            <summary>
+            A glyph representing that media is playing.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Unavailable">
+            <summary>
+            A glyph representing unavailable status.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Error">
+            <summary>
+            A glyph representing an error.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Attention">
+            <summary>
+            A glyph representing attention status.
+            </summary>
+        </member>
+        <member name="F:NotificationsExtensions.BadgeContent.GlyphValue.Alarm">
+            <summary>
+            A glyph representing an alarm.
+            </summary>
+        </member>
+        <member name="T:NotificationsExtensions.TileContent.TileContentFactory">
+            <summary>
+            A factory which creates tile content objects for all of the toast template types.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150Block">
+            <summary>
+            Creates a tile content object for the TileSquare150x150Block template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150Block template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150Image">
+            <summary>
+            Creates a tile content object for the TileSquare150x150Image template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150Image template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150PeekImageAndText01">
+            <summary>
+            Creates a tile content object for the TileSquare150x150PeekImageAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150PeekImageAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150PeekImageAndText02">
+            <summary>
+            Creates a tile content object for the TileSquare150x150PeekImageAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150PeekImageAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150PeekImageAndText03">
+            <summary>
+            Creates a tile content object for the TileSquare150x150PeekImageAndText03 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150PeekImageAndText03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150PeekImageAndText04">
+            <summary>
+            Creates a tile content object for the TileSquare150x150PeekImageAndText04 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150PeekImageAndText04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150Text01">
+            <summary>
+            Creates a tile content object for the TileSquare150x150Text01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150Text01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150Text02">
+            <summary>
+            Creates a tile content object for the TileSquare150x150Text02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150Text02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150Text03">
+            <summary>
+            Creates a tile content object for the TileSquare150x150Text03 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150Text03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150Text04">
+            <summary>
+            Creates a tile content object for the TileSquare150x150Text04 template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150Text04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150BlockAndText01">
+            <summary>
+            Creates a tile content object for the TileWide310x150BlockAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150BlockAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150BlockAndText02">
+            <summary>
+            Creates a tile content object for the TileWide310x150BlockAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150BlockAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Image">
+            <summary>
+            Creates a tile content object for the TileWide310x150Image template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Image template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150ImageAndText01">
+            <summary>
+            Creates a tile content object for the TileWide310x150ImageAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150ImageAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150ImageAndText02">
+            <summary>
+            Creates a tile content object for the TileWide310x150ImageAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150ImageAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150ImageCollection">
+            <summary>
+            Creates a tile content object for the TileWide310x150ImageCollection template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150ImageCollection template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImage01">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImage01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImage01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImage02">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImage02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImage02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImage03">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImage03 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImage03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImage04">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImage04 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImage04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImage05">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImage05 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImage05 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImage06">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImage06 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImage06 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageAndText01">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageAndText02">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageCollection01">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageCollection01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageCollection01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageCollection02">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageCollection02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageCollection02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageCollection03">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageCollection03 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageCollection03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageCollection04">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageCollection04 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageCollection04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageCollection05">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageCollection05 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageCollection05 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150PeekImageCollection06">
+            <summary>
+            Creates a tile content object for the TileWide310x150PeekImageCollection06 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150PeekImageCollection06 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150SmallImageAndText01">
+            <summary>
+            Creates a tile content object for the TileWide310x150SmallImageAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150SmallImageAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150SmallImageAndText02">
+            <summary>
+            Creates a tile content object for the TileWide310x150SmallImageAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150SmallImageAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150SmallImageAndText03">
+            <summary>
+            Creates a tile content object for the TileWide310x150SmallImageAndText03 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150SmallImageAndText03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150SmallImageAndText04">
+            <summary>
+            Creates a tile content object for the TileWide310x150SmallImageAndText04 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150SmallImageAndText04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150SmallImageAndText05">
+            <summary>
+            Creates a tile content object for the TileWide310x150SmallImageAndText05 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150SmallImageAndText05 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text01">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text01 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text02">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text02 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text03">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text03 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text04">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text04 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text05">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text05 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text05 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text06">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text06 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text06 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text07">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text07 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text07 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text08">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text08 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text08 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text09">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text09 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text09 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text10">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text10 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text10 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150Text11">
+            <summary>
+            Creates a tile content object for the TileWide310x150Text11 template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150Text11 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310BlockAndText01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310BlockAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310BlockAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310BlockAndText02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310BlockAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310BlockAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Image">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Image template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Image template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageAndText01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageAndText02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageAndTextOverlay01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageAndTextOverlay01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageAndTextOverlay01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageAndTextOverlay02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageAndTextOverlay02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageAndTextOverlay02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageAndTextOverlay03">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageAndTextOverlay03 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageAndTextOverlay03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageCollection">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageCollection template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageCollection template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageCollectionAndText01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageCollectionAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageCollectionAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310ImageCollectionAndText02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310ImageCollectionAndText02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310ImageCollectionAndText02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310SmallImageAndText01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310SmallImageAndText01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310SmallImageAndText01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310SmallImagesAndTextList01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310SmallImagesAndTextList01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310SmallImagesAndTextList01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310SmallImagesAndTextList02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310SmallImagesAndTextList02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310SmallImagesAndTextList02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310SmallImagesAndTextList03">
+            <summary>
+            Creates a tile content object for the TileSquare310x310SmallImagesAndTextList03 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310SmallImagesAndTextList03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310SmallImagesAndTextList04">
+            <summary>
+            Creates a tile content object for the TileSquare310x310SmallImagesAndTextList04 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310SmallImagesAndTextList04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310SmallImagesAndTextList05">
+            <summary>
+            Creates a tile content object for the TileSquare310x310SmallImagesAndTextList05 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310SmallImagesAndTextList05 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text03">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text03 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text04">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text04 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text04 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text05">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text05 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text05 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text06">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text06 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text06 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text07">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text07 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text07 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text08">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text08 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text08 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310Text09">
+            <summary>
+            Creates a tile content object for the TileSquare310x310Text09 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310Text09 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310TextList01">
+            <summary>
+            Creates a tile content object for the TileSquare310x310TextList01 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310TextList01 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310TextList02">
+            <summary>
+            Creates a tile content object for the TileSquare310x310TextList02 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310TextList02 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare310x310TextList03">
+            <summary>
+            Creates a tile content object for the TileSquare310x310TextList03 template.
+            </summary>
+            <returns>A tile content object for the TileSquare310x310TextList03 template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare71x71IconWithBadge">
+            <summary>
+            Creates a tile content object for the TileSquare71x71IconWithBadge template.
+            </summary>
+            <returns>A tile content object for the TileSquare71x71IconWithBadge template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare150x150IconWithBadge">
+            <summary>
+            Creates a tile content object for the TileSquare150x150IconWithBadge template.
+            </summary>
+            <returns>A tile content object for the TileSquare150x150IconWithBadge template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileWide310x150IconWithBadgeAndText">
+            <summary>
+            Creates a tile content object for the TileWide310x150IconWithBadgeAndText template.
+            </summary>
+            <returns>A tile content object for the TileWide310x150IconWithBadgeAndText template.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.TileContent.TileContentFactory.CreateTileSquare71x71Image">
+            <summary>
+            Creates a tile content object for the TileSquare71x71Image template.
+            </summary>
+            <returns>A tile content object for the TileSquare71x71Image template.</returns>
+        </member>
+        <member name="T:NotificationsExtensions.ToastContent.ToastContentFactory">
+            <summary>
+            A factory which creates toast content objects for all of the toast template types.
+            </summary>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastImageAndText01">
+            <summary>
+            Creates a ToastImageAndText01 template content object.
+            </summary>
+            <returns>A ToastImageAndText01 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastImageAndText02">
+            <summary>
+            Creates a ToastImageAndText02 template content object.
+            </summary>
+            <returns>A ToastImageAndText02 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastImageAndText03">
+            <summary>
+            Creates a ToastImageAndText03 template content object.
+            </summary>
+            <returns>A ToastImageAndText03 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastImageAndText04">
+            <summary>
+            Creates a ToastImageAndText04 template content object.
+            </summary>
+            <returns>A ToastImageAndText04 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastText01">
+            <summary>
+            Creates a ToastText01 template content object.
+            </summary>
+            <returns>A ToastText01 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastText02">
+            <summary>
+            Creates a ToastText02 template content object.
+            </summary>
+            <returns>A ToastText02 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastText03">
+            <summary>
+            Creates a ToastText03 template content object.
+            </summary>
+            <returns>A ToastText03 template content object.</returns>
+        </member>
+        <member name="M:NotificationsExtensions.ToastContent.ToastContentFactory.CreateToastText04">
+            <summary>
+            Creates a ToastText04 template content object.
+            </summary>
+            <returns>A ToastText04 template content object.</returns>
+        </member>
+    </members>
+</doc>

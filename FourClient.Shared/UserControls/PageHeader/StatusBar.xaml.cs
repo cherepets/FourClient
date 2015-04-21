@@ -1,0 +1,54 @@
+﻿using FourClient.Extensions;
+using System;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+
+namespace FourClient.UserControls
+{
+    public sealed partial class StatusBar : PageHeaderBase
+    {
+        public override bool IsProgressRunning
+        {
+            get { return StatusProgressBar.Visibility == Visibility.Visible; }
+            set { StatusProgressBar.Visibility = value ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+        public override string InitialText
+        {
+            get { return StatusBox.Text; }
+            set
+            {
+                if (value == null) return;
+                StatusBox.Text = value;
+            }
+        }
+
+        public StatusBar()
+        {
+            this.InitializeComponent();
+        }
+
+        public override async void SetTitle(string title)
+        {
+            await HideStatusBoxBoard.PlayAsync();
+            StatusBox.Text = title;
+            await ShowStatusBoxBoard.PlayAsync();
+        }
+
+        private async void TimerStart()
+        {
+            while (true)
+            {
+                TimeBox.Text = DateTime.Now.ToString("H:mm");
+                await Task.Delay(10000);
+            }
+        }
+
+        private async void UserControl_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            TimerStart();
+        }
+
+    }
+}

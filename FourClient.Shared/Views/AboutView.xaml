@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="FourClient.Views.AboutView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FourClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource PhoneBackgroundBrush}" >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="Black" Margin="20,20,0,-20"  />
+            <ScrollViewer Grid.Row="1">
+                <StackPanel Margin="20">
+                    <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
+                    </StackPanel>
+                    <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
+                        <TextBlock Text="v.3.5" FontSize="24" FontWeight="Bold"  />
+                        <TextBlock Text="- Редизайн" FontSize="16" />
+                        <TextBlock Text="- Использование VK.IntegrationKit" FontSize="16" />
+                    </StackPanel>
+                    <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
+                        <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"  />
+                        <StackPanel Orientation="Horizontal">
+                            <AppBarButton Icon="Mail" IsCompact="True" VerticalAlignment="Center" Tapped="Email_Tapped" Margin="0,-8,0,0" />
+                            <TextBlock Text="cherepets@live.ru" FontSize="18" Tapped="Email_Tapped" VerticalAlignment="Center" Margin="8" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <AppBarButton Icon="Favorite" IsCompact="True" VerticalAlignment="Center" Tapped="StoreBlock_Tapped" Margin="0,-8,0,0" />
+                            <TextBlock Text="оценить приложение" FontSize="18" Tapped="StoreBlock_Tapped" VerticalAlignment="Center" Margin="8" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <AppBarButton IsCompact="True" VerticalAlignment="Center" Tapped="VkBlock_Tapped" Margin="0,-8,0,0" FontFamily="Global User Interface" >
+                                <AppBarButton.Icon>
+                                    <FontIcon Glyph="VK"/>
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                            <TextBlock Text="вконтакте" FontSize="18" Tapped="VkBlock_Tapped" VerticalAlignment="Center" Margin="8" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+            <TextBlock Text="by FourTeam" FontSize="16" Grid.Row="2" HorizontalAlignment="Right" Margin="20" FontWeight="Thin" FontStyle="Italic"  />
+        </Grid>
+    </Grid>
+</UserControl>
