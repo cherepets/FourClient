@@ -13,3 +13,5 @@ Client app for popular russian tech news sites:
 - Upgrade
 
 [Download for Windows Phone](http://www.windowsphone.com/en-us/store/app/fourclient-paid/4c456504-64b5-4084-99fa-2af2c3e71b41 "Download for Windows Phone")
+
+See also: [FourClientWebServer](https://github.com/cherepets/FourClientWebServer "FourClientWebServer")
