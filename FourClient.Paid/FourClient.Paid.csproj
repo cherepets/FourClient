@@ -112,9 +112,9 @@
       <Project>{ee990419-9c69-4e1c-b908-c50ee40844f4}</Project>
       <Name>FourAPI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebXsltClient\WebXsltClient.csproj">
+    <ProjectReference Include="..\WebXsltClient\WebServiceClient.csproj">
       <Project>{260a984e-1276-4282-ac52-9712b611c528}</Project>
-      <Name>WebXsltClient</Name>
+      <Name>WebServiceClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="..\FourClient.Shared\FourClient.Shared.projitems" Label="Shared" />

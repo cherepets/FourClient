@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WebXslt
+namespace WebServiceClient
 {
     /// <summary>
     /// Exception that represents exception on the server-side

@@ -1,4 +1,5 @@
-﻿using FourAPI.Types;
+﻿using FourAPI;
+using FourAPI.Types;
 using FourClient.Extensions;
 using NotificationsExtensions.TileContent;
 using System;
@@ -130,7 +131,7 @@ namespace FourClient.Views
         {
             try
             {
-                var task = FourItem.GetTopAsync(TOP);
+                var task = Methods.GetTopAsync(TOP);
                 await LoadCachedTop();
                 if (task.Status != TaskStatus.RanToCompletion)
                     TopView.ItemsSource = TopList;
@@ -198,7 +199,7 @@ namespace FourClient.Views
         {
             try
             {
-                var task = FourSource.GetSourcesAsync(SOURCES);
+                var task = Methods.GetSourcesAsync(SOURCES);
                 await LoadCachedSource();
                 var cachedList = new List<FourSource>();
                 if (task.Status != TaskStatus.RanToCompletion)
@@ -313,7 +314,7 @@ namespace FourClient.Views
         private async void PageList_ServiceExceptionThrown(Exception ex)
         {
             FeedRing.IsActive = false;
-            var dialog = new MessageDialog(ex.Message, "WebXslt.ServiceException");
+            var dialog = new MessageDialog(ex.Message, "WebServiceClient.ServiceException");
             await dialog.ShowAsync();
         }
 

@@ -6,7 +6,7 @@
     public static class Settings
     {
         /// <summary>
-        /// Serive url
+        /// Service url
         /// </summary>
         public static string Url { get; set; }
     }

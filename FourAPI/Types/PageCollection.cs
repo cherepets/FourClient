@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using WebXslt;
+using WebServiceClient;
 using Windows.Foundation;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -78,7 +78,7 @@ namespace FourAPI.Types
                        });
                     var newPages = SearchMode ?
                         await Source.SearchPageAsync(SearchQuery, _pageNumber) :
-                        await Source.GetPageAsync(NewsType, _pageNumber);
+                        await Source.GetItemsAsync(NewsType, _pageNumber);
                     _pageNumber++;
                     if (newPages.Count == 0) throw new Exception("No items");
                     coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,

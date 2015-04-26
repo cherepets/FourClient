@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourClient.Paid", "FourClie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourAPI", "FourAPI\FourAPI.csproj", "{EE990419-9C69-4E1C-B908-C50EE40844F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebXsltClient", "WebXsltClient\WebXsltClient.csproj", "{260A984E-1276-4282-AC52-9712B611C528}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceClient", "WebXsltClient\WebServiceClient.csproj", "{260A984E-1276-4282-AC52-9712B611C528}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourClient.Free", "FourClient.Free\FourClient.Free.csproj", "{36953FED-DF72-47FE-BEFB-0F9271E2E1E9}"
 EndProject
@@ -18,31 +18,6 @@ Global
 		FourClient.Shared\FourClient.Shared.projitems*{36953fed-df72-47fe-befb-0f9271e2e1e9}*SharedItemsImports = 4
 		FourClient.Shared\FourClient.Shared.projitems*{7613b010-c918-426a-9052-4bd4e2607059}*SharedItemsImports = 4
 		FourClient.Shared\FourClient.Shared.projitems*{208ef5ab-20d6-4dd2-b387-50cf674ce944}*SharedItemsImports = 13
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 7
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://cherepets.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = FourAPI\\FourAPI.csproj
-		SccProjectName1 = FourAPI
-		SccLocalPath1 = FourAPI
-		SccProjectUniqueName2 = FourClient.Free\\FourClient.Free.csproj
-		SccProjectName2 = FourClient.Free
-		SccLocalPath2 = FourClient.Free
-		SccProjectUniqueName3 = FourClient.Paid\\FourClient.Paid.csproj
-		SccProjectName3 = FourClient.Paid
-		SccLocalPath3 = FourClient.Paid
-		SccProjectUniqueName4 = FourClient.Shared\\FourClient.Shared.projitems
-		SccProjectTopLevelParentUniqueName4 = FourClient.Shared\\FourClient.Shared.shproj
-		SccProjectName4 = FourClient.Shared
-		SccLocalPath4 = FourClient.Shared
-		SccProjectUniqueName5 = FourClient.Shared\\FourClient.Shared.shproj
-		SccProjectName5 = FourClient.Shared
-		SccLocalPath5 = FourClient.Shared
-		SccProjectUniqueName6 = WebXsltClient\\WebXsltClient.csproj
-		SccProjectName6 = WebXsltClient
-		SccLocalPath6 = WebXsltClient
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

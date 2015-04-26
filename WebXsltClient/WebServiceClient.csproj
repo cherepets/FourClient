@@ -9,8 +9,8 @@
     <ProjectGuid>{260A984E-1276-4282-AC52-9712B611C528}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WebXsltClient</RootNamespace>
-    <AssemblyName>WebXsltClient</AssemblyName>
+    <RootNamespace>WebServiceClient</RootNamespace>
+    <AssemblyName>WebServiceClient</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

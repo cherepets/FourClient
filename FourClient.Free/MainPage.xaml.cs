@@ -26,7 +26,7 @@ namespace FourClient
 
         public MainPage()
         {
-            FourAPI.Settings.Url = "http://cherrywebxslt.azurewebsites.net/TransformationService.asmx";
+            FourAPI.Settings.Url = "http://cherryWebServiceClient.azurewebsites.net/TransformationService.asmx";
             this.InitializeComponent();
             Singleton = this;
             RebuildUI();

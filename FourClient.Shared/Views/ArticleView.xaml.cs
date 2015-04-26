@@ -1,4 +1,5 @@
-﻿using FourAPI.Types;
+﻿using FourAPI;
+using FourAPI.Types;
 using FourClient.Extensions;
 using System;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using WebXslt;
+using WebServiceClient;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Popups;
@@ -86,7 +87,7 @@ namespace FourClient.Views
             }
             catch (ServiceException se)
             {
-                var dialog = new MessageDialog(se.Message, "WebXslt.ServiceException");
+                var dialog = new MessageDialog(se.Message, "WebServiceClient.ServiceException");
                 dialog.ShowAsync();
                 BackPressed();
             }
@@ -107,7 +108,7 @@ namespace FourClient.Views
         private async Task<FourArticle> LoadFromService(string prefix, string link)
         {
             MainPage.StatusProgress(true);
-            var article = await FourSource.GetArticleAsync(prefix, link);
+            var article = await Methods.GetArticleAsync(prefix, link);
             await SaveToTemp(article);
             MainPage.StatusProgress(false);
             return article;
