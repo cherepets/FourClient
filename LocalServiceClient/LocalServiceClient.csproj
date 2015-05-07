@@ -4,25 +4,20 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7613B010-C918-426A-9052-4BD4E2607059}</ProjectGuid>
-    <OutputType>AppContainerExe</OutputType>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0EBFD69B-B0D1-413D-BC8E-8042F69EB41F}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FourClient</RootNamespace>
-    <AssemblyName>FourClient</AssemblyName>
-    <DefaultLanguage>ru-RU</DefaultLanguage>
+    <RootNamespace>LocalServiceClient</RootNamespace>
+    <AssemblyName>LocalServiceClient</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
-    <AppxBundlePlatforms>neutral</AppxBundlePlatforms>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -32,7 +27,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -85,43 +79,52 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MainPage.xaml.cs" />
-    <Compile Include="Views\NewsFeed.cs" />
+    <Compile Include="Const.cs" />
+    <Compile Include="Extensions\HttpClientExt.cs" />
+    <Compile Include="Extensions\ObjectExt.cs" />
+    <Compile Include="Extensions\StreamExt.cs" />
+    <Compile Include="Extensions\StringExt.cs" />
+    <Compile Include="Extensions\XContainerExt.cs" />
+    <Compile Include="HttpUtility.cs" />
+    <Compile Include="LocalServiceClient.cs" />
+    <Compile Include="Normalizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transformation\4PDA\PDA_GetArticle.cs" />
+    <Compile Include="Transformation\4PDA\PDA_GetPage.cs" />
+    <Compile Include="Transformation\ITransformation.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AppxManifest Include="Package.appxmanifest">
-      <SubType>Designer</SubType>
-    </AppxManifest>
+    <Folder Include="Transformation\AllNokia\" />
+    <Folder Include="Transformation\FourFeed\" />
+    <Folder Include="Transformation\FourVK\" />
+    <Folder Include="Transformation\GeekTimes\" />
+    <Folder Include="Transformation\Habrahabr\" />
+    <Folder Include="Transformation\iGuides\" />
+    <Folder Include="Transformation\Megamozg\" />
+    <Folder Include="Transformation\Microsoft Ecosystem\" />
+    <Folder Include="Transformation\MostViewed\" />
+    <Folder Include="Transformation\Sources\" />
+    <Folder Include="Transformation\Upgrade\" />
+    <Folder Include="Transformation\Vkontakte\" />
+    <Folder Include="Transformation\W7Phone\" />
+    <Folder Include="Transformation\WP-Seven\" />
+    <Folder Include="Transformation\WP7forum\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Package.StoreAssociation.xml" />
+    <Reference Include="CenterCLR.SgmlReader, Version=2014.12.7.3, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
+      <HintPath>..\packages\CenterCLR.SgmlReader.2014.12.7.3\lib\portable-net403+sl50+win+WindowsPhoneApp81+wp80\CenterCLR.SgmlReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="NotificationsExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\NotificationsExtensions.winmd</HintPath>
-    </Reference>
-    <Reference Include="VK.IntegrationKit">
-      <HintPath>..\packages\VK.IntegrationKit.1.0.0\lib\wpa81\VK.IntegrationKit.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FourAPI\FourAPI.csproj">
-      <Project>{ee990419-9c69-4e1c-b908-c50ee40844f4}</Project>
-      <Name>FourAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LocalServiceClient\LocalServiceClient.csproj">
-      <Project>{0ebfd69b-b0d1-413d-bc8e-8042f69eb41f}</Project>
-      <Name>LocalServiceClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WebXsltClient\WebServiceClient.csproj">
       <Project>{260a984e-1276-4282-ac52-9712b611c528}</Project>
       <Name>WebServiceClient</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\FourClient.Shared\FourClient.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

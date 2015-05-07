@@ -13,7 +13,7 @@ namespace WebServiceClient
     /// <summary>
     /// Client for web xslt service
     /// </summary>
-    public class Client
+    public class WebServiceClient
     {
         
         private static TimeSpan ConstTimeout = TimeSpan.FromSeconds(180);
@@ -24,7 +24,7 @@ namespace WebServiceClient
         /// .ctor
         /// </summary>
         /// <param name="Url">Serive url</param>
-        public Client(string Url)
+        public WebServiceClient(string Url)
         {
             _url = Url;
         }
