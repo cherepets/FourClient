@@ -84,10 +84,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\LocalServiceClient\LocalServiceClient.csproj">
-      <Project>{0ebfd69b-b0d1-413d-bc8e-8042f69eb41f}</Project>
-      <Name>LocalServiceClient</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WebXsltClient\WebServiceClient.csproj">
       <Project>{260a984e-1276-4282-ac52-9712b611c528}</Project>
       <Name>WebServiceClient</Name>
@@ -95,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Methods.cs" />
-    <Compile Include="ServiceInterop.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\FourArticle.cs" />

@@ -7,7 +7,7 @@ namespace WebServiceClient
     /// </summary>
     public class ServiceException : Exception
     {
-        public ServiceException (string message)
+        internal ServiceException (string message)
             : base(message) { }
     }
 }

@@ -22,7 +22,7 @@ namespace FourAPI
         /// <returns>Collection of articles</returns>
         public static async Task<ObservableCollection<FourItem>> GetTopAsync(string cachePath)
         {
-            var client = new ServiceInterop();
+            var client = new WebServiceClient.Client(Settings.Url);
             var collection = await client.CallAsync<FourItem>("MVW_GetPage");
             // Save cache
             if (cachePath != null)
@@ -59,7 +59,7 @@ namespace FourAPI
         /// <returns>Collection of sources</returns>
         public static async Task<ObservableCollection<FourSource>> GetSourcesAsync(string cachePath = null)
         {
-            var client = new ServiceInterop();
+            var client = new WebServiceClient.Client(Settings.Url);
             var collection = await client.CallAsync<FourSource>("SRC_GetList");
             // Save cache
             if (cachePath != null)
@@ -97,7 +97,7 @@ namespace FourAPI
         /// <returns>Preprocessed web page</returns>
         public static async Task<FourArticle> GetArticleAsync(string prefix, string link)
         {
-            var client = new ServiceInterop();
+            var client = new WebServiceClient.Client(Settings.Url);
             var collection = await client.CallAsync<FourArticle>(prefix + "_GetArticle", new string[] { link });
             var article = collection.First();
             var bytes = Convert.FromBase64String(article.HTML);
@@ -114,7 +114,7 @@ namespace FourAPI
         /// <returns>Collection of articles</returns>
         public static async Task<ObservableCollection<FourItem>> GetItemsAsync(FourSource source, string newsType, int pageNumber)
         {
-            var client = new ServiceInterop();
+            var client = new WebServiceClient.Client(Settings.Url);
             var selectedType = source.NewsTypes[newsType] == "?" ? source.MySources : source.NewsTypes[newsType];
             var collection = await client.CallAsync<FourItem>(source.Prefix + "_GetPage", new string[] 
             {
@@ -133,7 +133,7 @@ namespace FourAPI
         /// <returns>Collection of articles</returns>
         public static async Task<ObservableCollection<FourItem>> SearchPageAsync(string prefix, string searchQuery, int pageNumber)
         {
-            var client = new ServiceInterop();
+            var client = new WebServiceClient.Client(Settings.Url);
             var collection = await client.CallAsync<FourItem>(prefix + "_GetPage", new string[] 
             {
                 "search",
