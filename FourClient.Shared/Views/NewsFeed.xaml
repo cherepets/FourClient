@@ -371,7 +371,7 @@
                 </Grid>
             </Grid>
             <Grid x:Name="FeedAppBarBottom" Grid.Row="1" Visibility="Visible" Background="{ThemeResource PhoneChromeBrush}" >
-                <StackPanel x:Name="AppBarMenu" Margin="0,16">
+                <StackPanel x:Name="AppBarMenu" Margin="0,16" Visibility="Collapsed">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>

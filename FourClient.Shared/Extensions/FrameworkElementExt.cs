@@ -1,6 +1,5 @@
 ﻿using System;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace FourClient.Extensions
@@ -20,7 +19,7 @@ namespace FourClient.Extensions
             });
             anim.KeyFrames.Add(new EasingDoubleKeyFrame
             {
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(1)),
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5)),
                 Value = 1
             });
             storyboard.Children.Add(anim);

@@ -1,5 +1,4 @@
-﻿using FourClient.Views;
-using System;
+﻿using System;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -8,8 +7,6 @@ using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
 
 namespace FourClient
 {
@@ -17,10 +14,10 @@ namespace FourClient
     {
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            this.Resuming += OnResuming;
-            Application.Current.UnhandledException += Current_UnhandledException;
+            InitializeComponent();
+            Suspending += OnSuspending;
+            Resuming += OnResuming;
+            Current.UnhandledException += Current_UnhandledException;
         }
 
         private async void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)
