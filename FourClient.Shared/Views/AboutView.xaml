@@ -20,9 +20,10 @@
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="v.3.5" FontSize="24" FontWeight="Bold"  />
-                        <TextBlock Text="- Редизайн" FontSize="16" />
-                        <TextBlock Text="- Использование VK.IntegrationKit" FontSize="16" />
+                        <TextBlock Text="v.3.6" FontSize="24" FontWeight="Bold"  />
+                        <TextBlock Text="- Изменено выравнивание" FontSize="16" />
+                        <TextBlock Text="- Объединен сервер" FontSize="16" />
+                        <TextBlock Text="- Смена протокола (SOAP -> REST)" FontSize="16" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                         <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"  />

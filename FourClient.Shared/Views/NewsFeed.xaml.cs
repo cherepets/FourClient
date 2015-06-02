@@ -849,6 +849,7 @@ namespace FourClient.Views
         {
             SetColumns(sender, SourceView, SettingsService.IsPhablet ? 4 : 3);
         }
+
         private void Hidden_Loaded(object sender, RoutedEventArgs e)
         {
             SetColumns(sender, HiddenView, SettingsService.IsPhablet ? 4 : 3);
@@ -857,27 +858,32 @@ namespace FourClient.Views
         private void Feed_Loaded(object sender, RoutedEventArgs e)
         {
             SetColumns(sender, FeedView, 1, true);
+            var grid = sender as FrameworkElement;
+            grid.Animate();
         }
 
         private void Collection_Loaded(object sender, RoutedEventArgs e)
         {
             SetColumns(sender, CollectionView, SettingsService.IsPhablet ? 3 : 2);
+            var grid = sender as FrameworkElement;
+            grid.Animate();
         }
 
         private void Top_Loaded(object sender, RoutedEventArgs e)
         {
-            var offset = SettingsService.IsPhablet ? 4 : 6;
             var grid = sender as FrameworkElement;
-            grid.Width = InterestingTab.ActualWidth - offset;
-            grid.Height = InterestingTab.ActualHeight / 2 - (offset * 2);
+            var offset = grid.Margin.Top + grid.Margin.Bottom;
+            grid.Width = TopView.ActualWidth;
+            grid.Height = InterestingTab.ActualHeight / 2 - offset;
+            grid.Animate();
         }
 
         private void SetColumns(object sender, FrameworkElement parent, int columns, bool ignoreHeight = false)
         {
-            var offset = SettingsService.IsPhablet ? 4 : 6;
             var grid = sender as FrameworkElement;
-            var fullWidth = parent.ActualWidth;
-            var size = fullWidth / columns - offset * columns;
+            var offset = grid.Margin.Left + grid.Margin.Right;
+            var fullWidth = parent.ActualWidth - columns * offset;
+            var size = Math.Floor(fullWidth / columns);
             grid.Width = size;
             if (!ignoreHeight)
                 grid.Height = size;

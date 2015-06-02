@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Net.Http;
+using System.Net;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
@@ -16,8 +16,6 @@ namespace WebServiceClient
     public class Client
     {
         
-        private static TimeSpan ConstTimeout = TimeSpan.FromSeconds(180);
-
         private string _url;
 
         /// <summary>
@@ -59,32 +57,31 @@ namespace WebServiceClient
 
         private async Task<List<Dictionary<string, string>>> GetPlaneObjects(string method, string[] args = null)
         {
-	        using (var http = new HttpClient { Timeout = ConstTimeout } )
-	        {
-	            var action = args == null ? "Call" : "CallWithParameters";
-	            var argsXml = args == null ? String.Empty : BuildString(args);
-	            var soapXml = String.Format(XML, action, method, argsXml);
-	            http.DefaultRequestHeaders.Add("SOAPAction", "http://tempuri.org/" + action);
-                var content = new StringContent(soapXml, Encoding.UTF8, "text/xml");
-                var url = new Uri(_url);
-                using (var response = await http.PostAsync(url, content))
-	            {
-	                var soapResponse = await response.Content.ReadAsStringAsync();
-                    if (String.IsNullOrEmpty(soapResponse))
-                        throw new ConnectionException();
-	                return ParseSoapResponse(soapResponse);
-	            }
-	        }
+            var url = String.Format("{0}?method={1}", _url, WebUtility.UrlEncode(method));
+            if (args != null)
+                for (int i = 0; i < args.Length; i++)
+                {
+                    url += String.Format("&a{0}={1}", i + 1, WebUtility.UrlEncode(args[i]));
+                }
+            var http = (HttpWebRequest)WebRequest.Create(url);
+            try
+            {
+                var response = await http.GetResponseAsync();
+                if (response == null) throw new ConnectionException();
+                var responseStream = response.GetResponseStream();
+                if (responseStream == null) throw new ConnectionException();
+                var content = new StreamReader(responseStream).ReadToEnd();
+                return ParseContent(content);
+            }
+            catch (TimeoutException)
+            {
+                throw new ConnectionException();
+            }
         }
 
-        private List<Dictionary<string, string>> ParseSoapResponse(string soapResponse)
+        private List<Dictionary<string, string>> ParseContent(string content)
         {
-            var xsoap = XDocument.Parse(soapResponse);
-            var body = xsoap.Descendants().First(d => d.Name.LocalName.Contains("Result")).Value;
-            var decoded = body
-                .Replace("&lt;", "<")
-                .Replace("&gt;", ">");
-            var xdoc = XDocument.Parse(decoded);
+            var xdoc = XDocument.Parse(content);
             var error = xdoc.Descendants().Where(d => d.Name.LocalName == "Error");
             if (error.Any())
             {
@@ -105,29 +102,5 @@ namespace WebServiceClient
             }
             return pclass;
         }
-
-        private string BuildString(string[] args)
-        {
-            var builder = new StringBuilder();
-            builder.Append("<args>");
-            foreach (var a in args)
-            {
-                var formatted = String.Format("<string>{0}</string>", a);
-                builder.Append(formatted);                
-            }
-            builder.Append("</args>");
-            return builder.ToString();
-        }
-
-        private const string XML = 
-@"<?xml version=""1.0"" encoding=""utf-8""?>
-<soap:Envelope xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:soap=""http://schemas.xmlsoap.org/soap/envelope/"">
-  <soap:Body>
-    <{0} xmlns=""http://tempuri.org/"">
-      <method>{1}</method>
-      {2}
-    </{0}>
-  </soap:Body>
-</soap:Envelope>";
     }
 }

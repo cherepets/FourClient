@@ -101,7 +101,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Pivot x:Name="PivotControl" SelectionChanged="PivotControl_SelectionChanged" Margin="-20,-32,-25,0">
+            <Pivot x:Name="PivotControl" SelectionChanged="PivotControl_SelectionChanged" Margin="-19,-32,-19,0">
                 <PivotItem x:Name="InterestingTab">
                     <PivotItem.Header>
                         <TextBlock Text="ИНТЕРЕСНОЕ" FontSize="16" FontFamily="Segoe WP" FontWeight="Bold" Margin="20,8,-16,-24"/>
@@ -113,7 +113,7 @@
                                 <AppBarButton IsCompact="True" Icon="Tag" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,8" />
                                 <TextBlock Text="FourClient [paid]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8" FontSize="18" />
                             </StackPanel>
-                            <ListView x:Name="TopView" Grid.Row="1">
+                            <ListView x:Name="TopView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                                 <ListView.ItemContainerTransitions>
                                     <TransitionCollection>
                                         <EdgeUIThemeTransition Edge="Bottom"/>
@@ -163,7 +163,7 @@
                             <RowDefinition/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <GridView x:Name="SourceView" Margin="12,12,0,0">
+                        <GridView x:Name="SourceView" Margin="12,0,12,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4" Tapped="Source_Tapped" Holding="Source_Holding" Loaded="Source_Loaded" IsHitTestVisible="{Binding Enabled}">
@@ -197,7 +197,7 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Rectangle Grid.ColumnSpan="2" Fill="{ThemeResource PhoneAccentBrush}" Height="16" Margin="-20,0" Visibility="Visible" />
-                            <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5" Grid.Row="1" Margin="12,12,0,0">
+                            <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="12,12,12,0">
                                 <GridView.ItemTemplate>
                                     <DataTemplate>
                                         <Grid Margin="4" Loaded="Hidden_Loaded" Tapped="Hidden_Tapped" Holding="Hidden_Holding" IsHitTestVisible="{Binding Enabled}">
@@ -239,7 +239,7 @@
                     <Grid>
                         <ProgressRing x:Name="FeedRing" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource PhoneForegroundBrush}"/>
                         <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="24" Foreground="{ThemeResource PhoneLowBrush}" Margin="16,8"/>
-                        <ListView x:Name="FeedView">
+                        <ListView x:Name="FeedView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <ListView.ItemContainerTransitions>
                                 <TransitionCollection>
                                     <EdgeUIThemeTransition Edge="Bottom"/>
@@ -283,7 +283,7 @@
                     </PivotItem.Header>
                     <Grid>
                         <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="24" Foreground="{ThemeResource PhoneLowBrush}" Margin="16,8"/>
-                        <GridView x:Name="CollectionView" Margin="12,0">
+                        <GridView x:Name="CollectionView" Margin="12,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid Margin="4" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" Loaded="Collection_Loaded">
