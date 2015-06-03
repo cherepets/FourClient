@@ -64,10 +64,7 @@ namespace FourClient
             StatusText = Singleton.PageHeader.InitialText;
             SetTitle(name);
             CurrentPage = Singleton.ArticleView;
-            //    await Singleton.AnimateFromNews.PlayAsync();
-            //    await Singleton.AnimateToArticle.PlayAsync();
             Singleton.ArticleView.Load(prefix, link, fullLink, commentLink);
-            //    Singleton.NewsFeed.Visibility = Visibility.Collapsed;
             Singleton.UpdateVisualState();
         }
 
@@ -84,10 +81,8 @@ namespace FourClient
         public static async Task GoToNews()
         {
             var text = !String.IsNullOrEmpty(StatusText) ? StatusText : "FourClient";
-            //     Singleton.NewsFeed.Visibility = Visibility.Visible;
             SetTitle(text);
             CurrentPage = Singleton.NewsFeed;
-            //     await Singleton.AnimateToNews.PlayAsync();
             Singleton.UpdateVisualState();
         }
 
