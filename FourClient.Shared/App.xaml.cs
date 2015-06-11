@@ -65,10 +65,10 @@ namespace FourClient
                     switch (args.Count())
                     {
                         case 1:
-                            await MainPage.GoToNewsFeed(args[0]);
+                            MainPage.GoToNewsFeed(args[0]);
                             break;
                         case 2:
-                            await MainPage.GoToArticle(args[0], title, args[1], null, null);
+                            MainPage.GoToArticle(args[0], title, args[1], null, null);
                             break;
                     }
                 }
@@ -92,30 +92,19 @@ namespace FourClient
             }
         }
 
-        private async void OnResuming(object sender, object e)
+        private void OnResuming(object sender, object e)
         {
             try
             {
-                if (MainPage.CurrentView != "NewsFeed") return;
-                var pageName = (string)ApplicationData.Current.LocalSettings.Values["SuspendedPage"];
-                switch (pageName)
+                var article = (string)ApplicationData.Current.LocalSettings.Values["SuspendedArticle"];
+                if (article != null)
                 {
-                    case "AboutView":
-                        MainPage.GoToAbout();
-                        break;
-                    case "SettingsView":
-                        MainPage.GoToSettings();
-                        break;
-                    case "ArticleView":
-                        var article = (string)ApplicationData.Current.LocalSettings.Values["SuspendedArticle"];
-                        var args = article.Split(';');
-                        var title = (string)ApplicationData.Current.LocalSettings.Values["SuspendedTitle"];
-                        await MainPage.GoToArticle(args[0], title, args[1], null, null);
-                        break;
-                    case "NewsFeed":
-                        await MainPage.GoToNews();
-                        break;
+                    var args = article.Split(';');
+                    var title = (string)ApplicationData.Current.LocalSettings.Values["SuspendedTitle"];
+                    MainPage.GoToArticle(args[0], title, args[1], null, null);
                 }
+                else
+                    MainPage.GoToNews();
             }
             catch
             {

@@ -53,6 +53,20 @@ namespace FourClient.Views
             this.InitializeComponent();
             _loader = Load();
         }
+        
+        public void InvalidateBindings()
+        {
+            CollectionView.ItemsSource = null;
+            FeedView.ItemsSource = null;
+            SourceView.ItemsSource = null;
+            HiddenView.ItemsSource = null;
+            TopView.ItemsSource = null;
+            CollectionView.ItemsSource = PageList;
+            FeedView.ItemsSource = PageCollection;
+            SourceView.ItemsSource = SourceList;
+            HiddenView.ItemsSource = HiddenList;
+            TopView.ItemsSource = TopList;
+        }
 
         #region Load
         private async Task Load()
@@ -395,10 +409,10 @@ namespace FourClient.Views
             Storyboard.SetTargetProperty(animation, "(UIElement.Projection).(PlaneProjection.RotationX)");
             AddToHistory(_source.Prefix, page);
             await Task.Delay(250);
-            await MainPage.GoToArticle(_source.Prefix, page.Title, page.Link, page.FullLink, page.CommentLink);
+            MainPage.GoToArticle(_source.Prefix, page.Title, page.Link, page.FullLink, page.CommentLink);
         }
 
-        private async void CollectionGrid_Tapped(object sender, TappedRoutedEventArgs e)
+        private void CollectionGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var grid = sender as Grid;
             _dataContext = (FourItem)grid.DataContext;
@@ -411,7 +425,7 @@ namespace FourClient.Views
                 args.Remove(args[2]);
             }
             AddToHistory(args[0], page);
-            await MainPage.GoToArticle(args[0], page.Title, args[1], page.FullLink, page.CommentLink);
+            MainPage.GoToArticle(args[0], page.Title, args[1], page.FullLink, page.CommentLink);
         }
 
         private async void AddToHistory(string prefix, FourItem page)
@@ -1061,11 +1075,11 @@ namespace FourClient.Views
                     Content = h.Title,
                     Tag = h
                 };
-                item.Tapped += async (s, t) =>
+                item.Tapped += (s, t) =>
                 {
                     flyout.Hide();
                     var page = (FourItem)item.Tag;
-                    await MainPage.GoToArticle("NEW", page.Title, page.Link, null, null);
+                    MainPage.GoToArticle("NEW", page.Title, page.Link, null, null);
                 };
                 listbox.Items.Add(item);
             }

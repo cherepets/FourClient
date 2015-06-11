@@ -10,7 +10,13 @@ namespace FourClient
 {
     public static class SettingsService
     {
-        public static bool IsPhablet { get { return DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel > 2; } }
+        public static bool IsPhablet
+        {
+            get
+            {
+                return Window.Current.Bounds.Width > 360;
+            }
+        }
         public static ElementTheme MainTheme { get; private set; }
         public static ElementTheme ArticleTheme { get; private set; }
         public static bool FirstRun { get; private set; }

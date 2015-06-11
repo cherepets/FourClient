@@ -15,12 +15,14 @@ namespace FourClient
 {
     public sealed partial class MainPage : Page
     {
-        public static string CurrentView { get { return CurrentPage.GetType().Name; } }
         public bool Alive { get; private set; }
 
         private static MainPage Singleton;
         private static IBackButton CurrentPage;
         private static string StatusText;
+        private static string PrevVisualState;
+
+        private static bool _articleOpened;
 
         public PageHeaderBase PageHeader;
 
@@ -51,6 +53,10 @@ namespace FourClient
             PageHeader = new StatusBar();
             PageHeaderGrid.Children.Clear();
             PageHeaderGrid.Children.Add(PageHeader);
+
+            DisplayInformation.AutoRotationPreferences = SettingsService.IsPhablet ?
+                DisplayOrientations.LandscapeFlipped | DisplayOrientations.Portrait | DisplayOrientations.Landscape :
+                DisplayOrientations.Portrait;
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
@@ -59,8 +65,9 @@ namespace FourClient
             e.Handled = true;
         }
 
-        public static async Task GoToArticle(string prefix, string name, string link, string fullLink, string commentLink)
+        public static void GoToArticle(string prefix, string name, string link, string fullLink, string commentLink)
         {
+            _articleOpened = true;
             StatusText = Singleton.PageHeader.InitialText;
             SetTitle(name);
             CurrentPage = Singleton.ArticleView;
@@ -78,17 +85,18 @@ namespace FourClient
             Singleton.Frame.Navigate(typeof(SettingsPage));
         }
 
-        public static async Task GoToNews()
+        public static void GoToNews()
         {
+            _articleOpened = false;
             var text = !String.IsNullOrEmpty(StatusText) ? StatusText : "FourClient";
             SetTitle(text);
             CurrentPage = Singleton.NewsFeed;
             Singleton.UpdateVisualState();
         }
 
-        public static async Task GoToNewsFeed(string prefix)
+        public static void GoToNewsFeed(string prefix)
         {
-            await GoToNews();
+            GoToNews();
             Singleton.NewsFeed.GoToSource(prefix);
         }
 
@@ -115,8 +123,7 @@ namespace FourClient
 
         public static void SaveState()
         {
-            ApplicationData.Current.LocalSettings.Values["SuspendedPage"] = MainPage.CurrentView;
-            if (MainPage.CurrentView == "ArticleView")
+            if (_articleOpened)
             {
                 ApplicationData.Current.LocalSettings.Values["SuspendedArticle"] = Singleton.ArticleView.CurrentArticle;
                 ApplicationData.Current.LocalSettings.Values["SuspendedTitle"] = Singleton.PageHeader.InitialText;
@@ -134,10 +141,17 @@ namespace FourClient
         {
             var state = ActualWidth > ActualHeight ?
                 "TwoPanes" :
-                MainPage.CurrentView == "ArticleView" ?
+                _articleOpened ?
                 "RightPane" :
                 "LeftPane";
+            if (state == PrevVisualState) return;
             VisualStateManager.GoToState(this, state, false);
+            if ((state == "TwoPanes" && PrevVisualState != "TwoPanes") 
+                || (state != "TwoPanes" && PrevVisualState == "TwoPanes"))
+            {
+                NewsFeed.InvalidateBindings();
+            }
+            PrevVisualState = state;
         }
     }
 }

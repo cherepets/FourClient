@@ -32,7 +32,6 @@ namespace FourClient.Views
         private string _fullLink;
         private string _commentLink;
         private string _html;
-        private bool _goingBack;
 
         public async void Load(string prefix, string link, string fullLink, string commentLink)
         {
@@ -177,10 +176,8 @@ Details:
             if (_webView != null) _loaded = true;
         }
         
-        public async void BackPressed()
+        public void BackPressed()
         {
-            if (_goingBack) return;
-            _goingBack = true;
             if (_webView == null) return;
             if (_webView.CanGoBack)
             {
@@ -193,8 +190,7 @@ Details:
             }
             WebContent.Children.Clear();
             _webView = null;
-            await MainPage.GoToNews();
-            _goingBack = false;
+            MainPage.GoToNews();
         }
         
         private async void Globe_Tapped(object sender, TappedRoutedEventArgs e)
