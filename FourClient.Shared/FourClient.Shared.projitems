@@ -26,7 +26,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-240.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StoreLogo.scale-240.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\WideLogo.scale-240.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Libs\NotificationsExtensions.pdb" />
     <Content Include="$(MSBuildThisFileDirectory)Libs\NotificationsExtensions.xml" />
   </ItemGroup>
   <ItemGroup>
