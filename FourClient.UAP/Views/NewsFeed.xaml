@@ -42,36 +42,9 @@
             <DoubleAnimation Duration="0:0:0.1" To="-180" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="HiddenToggleButton" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.1" To="-12" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="HiddenToggleButton" d:IsOptimized="True"/>
         </Storyboard>
-        <Storyboard x:Name="RefreshAnimation">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="bitmapIcon">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="360"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Name="SearchAnimation">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleX)" Storyboard.TargetName="bitmapIcon1">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1.5"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="bitmapIcon1">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1.5"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="bitmapIcon1">
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="-80"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Name="HamburgerAnimation">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.ScaleY)" Storyboard.TargetName="bitmapIcon2">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1.5"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
+        <Storyboard x:Name="RefreshAnimation"/>
+        <Storyboard x:Name="SearchAnimation"/>
+        <Storyboard x:Name="HamburgerAnimation"/>
         <Storyboard x:Name="RaiseButtons">
             <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
@@ -101,12 +74,12 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Pivot x:Name="PivotControl" SelectionChanged="PivotControl_SelectionChanged" Margin="-19,-32,-19,0">
+            <Pivot x:Name="PivotControl" SelectionChanged="PivotControl_SelectionChanged" Margin="0,-4,0,0">
                 <PivotItem x:Name="InterestingTab">
                     <PivotItem.Header>
-                        <TextBlock Text="ИНТЕРЕСНОЕ" FontSize="16" FontFamily="Segoe WP" FontWeight="Bold" Margin="20,8,-16,-24"/>
+                        <TextBlock Text="ИНТЕРЕСНОЕ" FontSize="16" FontFamily="Segoe" FontWeight="Bold" />
                     </PivotItem.Header>
-                    <ScrollViewer Margin="0">
+                    <ScrollViewer VerticalScrollBarVisibility="Hidden">
                         <StackPanel>
                             <StackPanel x:Name="AdGrid"/>
                             <StackPanel x:Name="PaidGrid" Orientation="Horizontal" Tapped="PaidGrid_Tapped" Visibility="Collapsed">
@@ -121,7 +94,7 @@
                                 </ListView.ItemContainerTransitions>
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <Grid Height="300" Margin="0,6" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" Loaded="Top_Loaded">
+                                        <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" Loaded="Top_Loaded">
                                             <Grid>
                                                 <Grid.RowDefinitions>
                                                     <RowDefinition/>
@@ -135,7 +108,7 @@
                                                         </Image.Source>
                                                     </Image>
                                                 </Viewbox>
-                                                <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
+                                                <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Grid.RowSpan="2">
                                                     <Ellipse.Fill>
                                                         <ImageBrush ImageSource="{Binding Avatar}" />
                                                     </Ellipse.Fill>
@@ -156,7 +129,7 @@
                 </PivotItem>
                 <PivotItem x:Name="SourceTab">
                     <PivotItem.Header>
-                        <TextBlock Text="ИСТОЧНИКИ" FontSize="16" FontFamily="Segoe WP" FontWeight="Bold" Margin="20,8,-16,-24"/>
+                        <TextBlock Text="ИСТОЧНИКИ" FontSize="16" FontFamily="Segoe" FontWeight="Bold" />
                     </PivotItem.Header>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -220,7 +193,7 @@
                                     </DataTemplate>
                                 </GridView.ItemTemplate>
                             </GridView>
-                            <TextBlock Text="ОТКЛЮЧЕННЫЕ" FontSize="16" FontFamily="Segoe WP" FontWeight="Bold" Grid.Row="2" VerticalAlignment="Center" Margin="16,0" />
+                            <TextBlock Text="ОТКЛЮЧЕННЫЕ" FontSize="16" FontFamily="Segoe" FontWeight="Bold" Grid.Row="2" VerticalAlignment="Center" Margin="16,0" />
                             <AppBarToggleButton x:Name="HiddenToggleButton" VerticalAlignment="Center" Margin="-12,-8,-12,-18" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Checked="AppBarToggleButton_Checked" Unchecked="HiddenToggleButton_Unchecked" >
                                 <AppBarToggleButton.RenderTransform>
                                     <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
@@ -232,9 +205,9 @@
                         </Grid>
                     </Grid>
                 </PivotItem>
-                <PivotItem x:Name="FeedTab">
+                <PivotItem x:Name="FeedTab" Margin="-8,0">
                     <PivotItem.Header>
-                        <TextBlock Text="ЛЕНТА" FontSize="16" FontFamily="Segoe WP" FontWeight="Bold" Margin="20,8,-16,-24"/>
+                        <TextBlock Text="ЛЕНТА" FontSize="16" FontFamily="Segoe" FontWeight="Bold" />
                     </PivotItem.Header>
                     <Grid>
                         <ProgressRing x:Name="FeedRing" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}" />
@@ -247,7 +220,7 @@
                             </ListView.ItemContainerTransitions>
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Height="160" Margin="0,8" Tapped="Grid_Tapped" Holding="Grid_Holding" Loaded="Feed_Loaded">
+                                    <Grid Height="160" Margin="-8,8" Tapped="Grid_Tapped" Holding="Grid_Holding" Loaded="Feed_Loaded">
                                         <Grid.Projection>
                                             <PlaneProjection/>
                                         </Grid.Projection>
@@ -279,7 +252,7 @@
                 </PivotItem>
                 <PivotItem x:Name="CollectionTab">
                     <PivotItem.Header>
-                        <TextBlock Text="КОЛЛЕКЦИЯ" FontSize="16" FontFamily="Segoe WP" FontWeight="Bold"  Margin="20,8,-16,-24"/>
+                        <TextBlock Text="КОЛЛЕКЦИЯ" FontSize="16" FontFamily="Segoe" FontWeight="Bold"  />
                     </PivotItem.Header>
                     <Grid>
                         <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="24" Foreground="{ThemeResource SystemControlForegroundBaseLowBrush}" Margin="16,8"/>
@@ -320,64 +293,41 @@
             </Grid.RowDefinitions>
             <Grid x:Name="FeedAppBarTop" ManipulationDelta="GridTitle_ManipulationDelta" ManipulationMode="TranslateY" RequestedTheme="Dark">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="7" />
-                <AppBarButton x:Name="appBarButtonRefresh" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="RefreshButton_Tapped" Grid.Column="2" RenderTransformOrigin="0.5,0.5" IsEnabled="False" >
-                    <AppBarButton.RenderTransform>
-                        <CompositeTransform/>
-                    </AppBarButton.RenderTransform>
-                    <AppBarButton.Icon>
-                        <BitmapIcon x:Name="bitmapIcon" UriSource="ms-appx:///Assets/refresh.png" RenderTransformOrigin="0.5,0.5">
-                            <BitmapIcon.RenderTransform>
-                                <CompositeTransform/>
-                            </BitmapIcon.RenderTransform>
-                        </BitmapIcon>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Name="appBarButtonSearch" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="SearchButton_Tapped" Grid.Column="3" RenderTransformOrigin="0.5,0.5" IsEnabled="False" >
-                    <AppBarButton.RenderTransform>
-                        <CompositeTransform/>
-                    </AppBarButton.RenderTransform>
-                    <AppBarButton.Icon>
-                        <BitmapIcon x:Name="bitmapIcon1" UriSource="ms-appx:///Assets/search.png" RenderTransformOrigin="0.5,0.5">
-                            <BitmapIcon.RenderTransform>
-                                <CompositeTransform/>
-                            </BitmapIcon.RenderTransform>
-                        </BitmapIcon>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Name="appBarButtonHamburger" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="HamburgerButton_Tapped" Grid.Column="4" FontFamily="Global User Interface" IsEnabled="False" RenderTransformOrigin="0.5,0.5" >
-                    <AppBarButton.RenderTransform>
-                        <CompositeTransform/>
-                    </AppBarButton.RenderTransform>
-                    <AppBarButton.Icon>
-                        <BitmapIcon x:Name="bitmapIcon2" UriSource="ms-appx:///Assets/hamburger.png" RenderTransformOrigin="0.5,0.5">
-                            <BitmapIcon.RenderTransform>
-                                <CompositeTransform/>
-                            </BitmapIcon.RenderTransform>
-                        </BitmapIcon>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="5" Grid.ColumnSpan="2" Tapped="AppBar_ToggleState" Margin="-16">
-                    <Rectangle Fill="#00000000" />
-                    <TextBlock Text="..." FontSize="30" Margin="16,0,20,16" />
-                </Grid>
+                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="2" />
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <AppBarButton x:Name="appBarButtonRefresh" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="RefreshButton_Tapped" IsEnabled="False" Icon="Refresh" >
+                        <AppBarButton.RenderTransform>
+                            <CompositeTransform/>
+                        </AppBarButton.RenderTransform>
+                    </AppBarButton>
+                    <AppBarButton x:Name="appBarButtonSearch" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="SearchButton_Tapped" IsEnabled="False" Icon="Find" >
+                        <AppBarButton.RenderTransform>
+                            <CompositeTransform/>
+                        </AppBarButton.RenderTransform>
+                    </AppBarButton>
+                    <AppBarButton x:Name="appBarButtonHamburger" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="HamburgerButton_Tapped" IsEnabled="False" RenderTransformOrigin="0.5,0.5" Icon="Bookmarks" >
+                        <AppBarButton.RenderTransform>
+                            <CompositeTransform/>
+                        </AppBarButton.RenderTransform>
+                    </AppBarButton>
+                    <AppBarButton x:Name="appBarButtonDots" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="AppBar_ToggleState" RenderTransformOrigin="0.5,0.5" Icon="More" >
+                        <AppBarButton.RenderTransform>
+                            <CompositeTransform/>
+                        </AppBarButton.RenderTransform>
+                    </AppBarButton>
+                </StackPanel>
             </Grid>
             <Grid x:Name="FeedAppBarBottom" Grid.Row="1" Visibility="Visible" Background="{ThemeResource SystemControlBackgroundChromeMediumBrush}" >
                 <StackPanel x:Name="AppBarMenu" Margin="0,16" Visibility="Collapsed">
                     <StackPanel.RenderTransform>
                         <CompositeTransform/>
                     </StackPanel.RenderTransform>
-                    <TextBlock Text="история" Tapped="HistoryButton_Tapped" FontSize="24" Margin="16,8"/>
-                    <TextBlock Text="настройки" Tapped="SettingsButton_Tapped" FontSize="24" Margin="16,8"/>
-                    <TextBlock Text="о программе" Tapped="HelpButton_Tapped" FontSize="24" Margin="16,8"/>
+                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontSize="24" Margin="16,8"/>
+                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontSize="24" Margin="16,8"/>
+                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontSize="24" Margin="16,8"/>
                 </StackPanel>
             </Grid>
         </Grid>

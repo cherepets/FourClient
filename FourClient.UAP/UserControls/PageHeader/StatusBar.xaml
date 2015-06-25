@@ -36,7 +36,7 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </local:PageHeaderBase.Resources>
-    <Grid x:Name="StatusBarGrid" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
+    <Grid x:Name="StatusBarGrid" Background="{ThemeResource SystemAccentColor}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="Auto"/>

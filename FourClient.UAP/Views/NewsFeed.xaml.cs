@@ -861,12 +861,12 @@ namespace FourClient.Views
 
         private void Source_Loaded(object sender, RoutedEventArgs e)
         {
-            SetColumns(sender, SourceView, SettingsService.IsPhablet ? 4 : 3);
+            SetColumns(sender, SourceView, SettingsService.LargeScreen ? 4 : 3);
         }
 
         private void Hidden_Loaded(object sender, RoutedEventArgs e)
         {
-            SetColumns(sender, HiddenView, SettingsService.IsPhablet ? 4 : 3);
+            SetColumns(sender, HiddenView, SettingsService.LargeScreen ? 4 : 3);
         }
 
         private void Feed_Loaded(object sender, RoutedEventArgs e)
@@ -878,7 +878,7 @@ namespace FourClient.Views
 
         private void Collection_Loaded(object sender, RoutedEventArgs e)
         {
-            SetColumns(sender, CollectionView, SettingsService.IsPhablet ? 3 : 2);
+            SetColumns(sender, CollectionView, SettingsService.LargeScreen ? 3 : 2);
             var grid = sender as FrameworkElement;
             grid.Animate();
         }
@@ -1048,7 +1048,7 @@ namespace FourClient.Views
             var header = new TextBlock
             {
                 Text = "История",
-                FontSize = 32,
+           //     FontSize = 32,
                 Margin = new Thickness(8)
             };
             var listbox = new ListView();
@@ -1070,7 +1070,7 @@ namespace FourClient.Views
             {
                 var item = new ListViewItem
                 {
-                    FontSize = 24,
+         //           FontSize = 24,
                     Margin = new Thickness(8),
                     Content = h.Title,
                     Tag = h

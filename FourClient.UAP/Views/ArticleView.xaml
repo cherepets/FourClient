@@ -13,26 +13,33 @@
             <ColumnDefinition Width="6"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="WebContent" Grid.RowSpan="2" Grid.Column="1"/>
+        <Grid x:Name="WebContent" Margin="-2,0" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"/>
         <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
-        <Grid x:Name="AppBarControl" Grid.Row="1" Background="{ThemeResource ContentDialogDimmingThemeBrush}" RequestedTheme="Dark" Grid.ColumnSpan="3" >
+        <TextBlock Margin="6,10" Grid.Column="1" x:Name="TitleBlock" FontSize="16" FontFamily="Segoe" FontWeight="Bold"/>
+        <Grid x:Name="AppBarControl" Grid.Row="2" Background="{ThemeResource ContentDialogDimmingThemeBrush}" RequestedTheme="Dark" Grid.ColumnSpan="3" >
             <Grid >
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="8" Opacity="0.5" />                
-                <AppBarButton x:Name="Globe" Icon="Globe" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Globe_Tapped" Grid.Column="3" />
-                <AppBarButton x:Name="Comment" Icon="Comment" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Comments_Tapped" Grid.Column="4" />
+                <Rectangle Grid.Column="0" Opacity="0.5" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{ThemeResource SystemAccentColor}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <Rectangle Grid.Column="1">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="{ThemeResource SystemAccentColor}"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <AppBarButton x:Name="Globe" Icon="Globe" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Globe_Tapped" />
+                    <AppBarButton x:Name="Comment" Icon="Comment" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Comments_Tapped" />
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

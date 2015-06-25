@@ -33,10 +33,14 @@ namespace FourClient.Views
         private string _commentLink;
         private string _html;
 
-        public async void Load(string prefix, string link, string fullLink, string commentLink)
+        public async void Load(string prefix, string title, string link, string fullLink, string commentLink)
         {
             try
             {
+                if (SettingsService.IsPhone)
+                    TitleBlock.Visibility = Visibility.Collapsed;
+                else
+                    TitleBlock.Text = title.ToUpper();
                 if (fullLink != null)
                 {
                     Globe.Visibility = Visibility.Visible;

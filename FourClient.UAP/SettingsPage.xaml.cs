@@ -1,6 +1,7 @@
 ﻿using FourClient.UserControls;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 
 namespace FourClient
@@ -22,7 +23,7 @@ namespace FourClient
             PageHeaderGrid.Children.Add(PageHeader);
             PageHeader.SetTitle("Настройки");
 
-            DisplayInformation.AutoRotationPreferences = SettingsService.IsPhablet ?
+            DisplayInformation.AutoRotationPreferences = SettingsService.LargeScreen ?
                 DisplayOrientations.LandscapeFlipped | DisplayOrientations.Portrait | DisplayOrientations.Landscape :
                 DisplayOrientations.Portrait;
         }
@@ -30,20 +31,22 @@ namespace FourClient
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-   //         HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            SystemNavigationManager.GetForCurrentView().BackRequested += SettingsPage_BackRequested;
             RequestedTheme = SettingsService.MainTheme;
+        }
+
+        private void SettingsPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            e.Handled = true;
+            this.Frame.GoBack();
         }
 
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-     //       HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            SystemNavigationManager.GetForCurrentView().BackRequested -= SettingsPage_BackRequested;
         }
-
-        //private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        //{
-        //    e.Handled = true;
-        //    this.Frame.GoBack();
-        //}
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Storage;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;

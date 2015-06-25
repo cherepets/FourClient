@@ -17,7 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourClient.UAP", "FourClien
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		FourClient.Shared\FourClient.Shared.projitems*{9c9916c0-6b44-4648-be66-7633db8ca568}*SharedItemsImports = 4
 		FourClient.Shared\FourClient.Shared.projitems*{36953fed-df72-47fe-befb-0f9271e2e1e9}*SharedItemsImports = 4
 		FourClient.Shared\FourClient.Shared.projitems*{7613b010-c918-426a-9052-4bd4e2607059}*SharedItemsImports = 4
 		FourClient.Shared\FourClient.Shared.projitems*{208ef5ab-20d6-4dd2-b387-50cf674ce944}*SharedItemsImports = 13

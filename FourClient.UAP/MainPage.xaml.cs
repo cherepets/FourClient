@@ -1,13 +1,10 @@
-﻿using FourClient.Extensions;
-using FourClient.UserControls;
+﻿using FourClient.UserControls;
 using FourClient.Views;
 using System;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Graphics.Display;
-using Windows.Phone.UI.Input;
 using Windows.Storage;
-using Windows.UI.Notifications;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -37,15 +34,9 @@ namespace FourClient
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-      //      HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
             RequestedTheme = SettingsService.MainTheme;
             ArticleView.RequestedTheme = SettingsService.ArticleTheme;
-        }
-
-        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
-        {
-            base.OnNavigatedFrom(e);
-  //          HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
 
         private void RebuildUI()
@@ -54,16 +45,10 @@ namespace FourClient
             PageHeaderGrid.Children.Clear();
             PageHeaderGrid.Children.Add(PageHeader);
 
-            DisplayInformation.AutoRotationPreferences = SettingsService.IsPhablet ?
+            DisplayInformation.AutoRotationPreferences = SettingsService.LargeScreen ?
                 DisplayOrientations.LandscapeFlipped | DisplayOrientations.Portrait | DisplayOrientations.Landscape :
                 DisplayOrientations.Portrait;
         }
-
-        //private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
-        //{
-        //    CurrentPage.BackPressed();
-        //    e.Handled = true;
-        //}
 
         public static void GoToArticle(string prefix, string name, string link, string fullLink, string commentLink)
         {
@@ -71,8 +56,8 @@ namespace FourClient
             StatusText = Singleton.PageHeader.InitialText;
             SetTitle(name);
             CurrentPage = Singleton.ArticleView;
-            Singleton.ArticleView.Load(prefix, link, fullLink, commentLink);
-            Singleton.UpdateVisualState();
+            Singleton.ArticleView.Load(prefix, name, link, fullLink, commentLink);
+            Singleton.UpdateVisualState(true);
         }
 
         public static void GoToAbout()
@@ -91,7 +76,7 @@ namespace FourClient
             var text = !String.IsNullOrEmpty(StatusText) ? StatusText : "FourClient";
             SetTitle(text);
             CurrentPage = Singleton.NewsFeed;
-            Singleton.UpdateVisualState();
+            Singleton.UpdateVisualState(true);
         }
 
         public static void GoToNewsFeed(string prefix)
@@ -137,21 +122,35 @@ namespace FourClient
             UpdateVisualState();
         }
 
-        private void UpdateVisualState()
+        private void UpdateVisualState(bool skipBindingsInvalidation = false)
         {
             var state = ActualWidth > ActualHeight ?
                 "TwoPanes" :
                 _articleOpened ?
                 "RightPane" :
                 "LeftPane";
-            if (state == PrevVisualState) return;
             VisualStateManager.GoToState(this, state, false);
-            if ((state == "TwoPanes" && PrevVisualState != "TwoPanes") 
-                || (state != "TwoPanes" && PrevVisualState == "TwoPanes"))
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                _articleOpened && state != "TwoPanes" ?
+                AppViewBackButtonVisibility.Visible :
+                AppViewBackButtonVisibility.Collapsed;
+            if (!skipBindingsInvalidation && (state != "TwoPanes" || PrevVisualState != "TwoPanes")) 
             {
                 NewsFeed.InvalidateBindings();
             }
             PrevVisualState = state;
+        }
+        
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            CurrentPage.BackPressed();
+            e.Handled = true;
+        }
+
+        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
         }
     }
 }
