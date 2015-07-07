@@ -8,7 +8,7 @@ namespace FourClient.Views
 {
     public sealed partial class NewsFeed : UserControl, IBackButton
     {
-        private const string SHOWN = "Shown300";
+        private const string SHOWN = "Shown370";
 
         private async void AfterLoad()
         {
@@ -22,17 +22,9 @@ namespace FourClient.Views
                     content:
 @"Привет! Спасибо за поддержку FourClient!
 
-Немного об интересностях новой версии:
+Хочу вам сообщить, что эта версия (3.7) - предположительно последняя для Windows Phone 8.1 и в следующий раз мы увидимся уже на Windows 10 (и настольной тоже ☺ ).
 
-- Обработка новостей теперь осуществляется двумя сервисами - один для платной версии, один для бесплатной
-
-- Много визуальных изменений: нижняя панель с анимированными значками, например :)
-
-- Сохранение истории чтения и локальный кэш
-
-- Можно закрыть статью жестом (от левой рамки)
-
-- Поправлены некоторые ошибки"
+Еще хочу напомнить что FourClient - приложение с полностью открытым исходным кодом, доступным на GitHub, в разработке которого может принять участие любой желающий."
                     );
                 ApplicationData.Current.LocalSettings.Values[SHOWN] = true;
                 await dialog.ShowAsync();

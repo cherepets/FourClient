@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Windows.Graphics.Display;
-using Windows.Storage;
+﻿using Windows.Storage;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 
@@ -14,7 +10,7 @@ namespace FourClient
         {
             get
             {
-                return Window.Current.Bounds.Width > 360;
+                return Window.Current.Bounds.Width > 800;
             }
         }
         public static ElementTheme MainTheme { get; private set; }
