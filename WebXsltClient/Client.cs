@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -34,9 +34,9 @@ namespace WebServiceClient
         /// <param name="method">Method name</param>
         /// <param name="args">Method parameters</param>
         /// <returns>Collection of T</returns>
-        public async Task<ObservableCollection<T>> CallAsync<T>(string method, string[] args = null) where T : new()
+        public async Task<List<T>> CallAsync<T>(string method, string[] args = null) where T : new()
         {
-            var list = new ObservableCollection<T>();
+            var list = new List<T>();
             var plist = await GetPlaneObjects(method, args);
             foreach (var pclass in plist)
             {
@@ -63,15 +63,12 @@ namespace WebServiceClient
                 {
                     url += String.Format("&a{0}={1}", i + 1, WebUtility.UrlEncode(args[i]));
                 }
-            var http = (HttpWebRequest)WebRequest.Create(url);
+            var http = new HttpClient();
             try
             {
-                var response = await http.GetResponseAsync();
-                if (response == null) throw new ConnectionException();
-                var responseStream = response.GetResponseStream();
-                if (responseStream == null) throw new ConnectionException();
-                var content = new StreamReader(responseStream).ReadToEnd();
-                return ParseContent(content);
+                var response = await http.GetStringAsync(url);
+                if (string.IsNullOrEmpty(response)) throw new ConnectionException();
+                return ParseContent(response);
             }
             catch (TimeoutException)
             {
