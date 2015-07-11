@@ -2,7 +2,6 @@
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace FourClient.UserControls
 {
@@ -45,7 +44,7 @@ namespace FourClient.UserControls
             }
         }
 
-        private async void UserControl_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
             TimerStart();
         }

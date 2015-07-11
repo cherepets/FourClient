@@ -108,7 +108,7 @@ namespace FourAPI.Types
         /// <param name="newsType">News type</param>
         /// <param name="pageNumber">Number of the page</param>
         /// <returns>Collection of articles</returns>
-        public async Task<ObservableCollection<FourItem>> GetItemsAsync(string newsType, int pageNumber)
+        public async Task<List<FourItem>> GetItemsAsync(string newsType, int pageNumber)
         {
             return await Methods.GetItemsAsync(this, newsType, pageNumber);
         }
@@ -119,7 +119,7 @@ namespace FourAPI.Types
         /// <param name="searchQuery">Search query</param>
         /// <param name="pageNumber">Number of the page</param>
         /// <returns>Collection of articles</returns>
-        public async Task<ObservableCollection<FourItem>> SearchPageAsync(string searchQuery, int pageNumber)
+        public async Task<List<FourItem>> SearchPageAsync(string searchQuery, int pageNumber)
         {
             return await Methods.SearchPageAsync(Prefix, searchQuery, pageNumber);
         }

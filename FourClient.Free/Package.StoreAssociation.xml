@@ -206,10 +206,12 @@
     <MainPackageIdentityName>5864cherepets.WavvyBird</MainPackageIdentityName>
   </AccountPackageIdentityNames>
   <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=92b3b98b-d2d3-492f-9b3b-e09914ceec37">
-    <PackageInfo>
-      <OsMinVersion>6.3.0.0</OsMinVersion>
-      <PackageArchitecture>neutral</PackageArchitecture>
-      <PackageMaxArchitectureVersion>3.5.0.0</PackageMaxArchitectureVersion>
-    </PackageInfo>
+    <BundleInfo>
+      <PackageInfo>
+        <OsMinVersion>6.3.0.0</OsMinVersion>
+        <PackageArchitecture>neutral</PackageArchitecture>
+        <PackageMaxArchitectureVersion>3.7.0.1</PackageMaxArchitectureVersion>
+      </PackageInfo>
+    </BundleInfo>
   </PackageInfoList>
 </StoreAssociation>

@@ -1,5 +1,6 @@
 ﻿using FourAPI.Types;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace FourAPI
         /// </summary>
         /// <param name="cachePath">Where to save cache</param>
         /// <returns>Collection of articles</returns>
-        public static async Task<ObservableCollection<FourItem>> GetTopAsync(string cachePath)
+        public static async Task<List<FourItem>> GetTopAsync(string cachePath)
         {
             var client = new WebServiceClient.Client(Url);
             var collection = await client.CallAsync<FourItem>("MVW_GetPage");
@@ -47,7 +48,8 @@ namespace FourAPI
                 var file = await fileCreate;
                 using (var stream = await file.OpenStreamForWriteAsync())
                 {
-                    xdoc.Save(stream);
+                    var bytes = Encoding.UTF8.GetBytes(xdoc.ToString());
+                    await stream.WriteAsync(bytes, 0, bytes.Length);
                 }
             }
             return collection;
@@ -58,7 +60,7 @@ namespace FourAPI
         /// </summary>
         /// <param name="cachePath">Where to save cache</param>
         /// <returns>Collection of sources</returns>
-        public static async Task<ObservableCollection<FourSource>> GetSourcesAsync(string cachePath = null)
+        public static async Task<List<FourSource>> GetSourcesAsync(string cachePath = null)
         {
             var client = new WebServiceClient.Client(Url);
             var collection = await client.CallAsync<FourSource>("SRC_GetList");
@@ -84,7 +86,8 @@ namespace FourAPI
                 var file = await fileCreate;
                 using (var stream = await file.OpenStreamForWriteAsync())
                 {
-                    xdoc.Save(stream);
+                    var bytes = Encoding.UTF8.GetBytes(xdoc.ToString());
+                    await stream.WriteAsync(bytes, 0, bytes.Length);
                 }
             }
             return collection;
@@ -113,7 +116,7 @@ namespace FourAPI
         /// <param name="newsType">News type</param>
         /// <param name="pageNumber">Number of the page</param>
         /// <returns>Collection of articles</returns>
-        public static async Task<ObservableCollection<FourItem>> GetItemsAsync(FourSource source, string newsType, int pageNumber)
+        public static async Task<List<FourItem>> GetItemsAsync(FourSource source, string newsType, int pageNumber)
         {
             var client = new WebServiceClient.Client(Url);
             var selectedType = source.NewsTypes[newsType] == "?" ? source.MySources : source.NewsTypes[newsType];
@@ -132,7 +135,7 @@ namespace FourAPI
         /// <param name="searchQuery">Search query</param>
         /// <param name="pageNumber">Number of the page</param>
         /// <returns>Collection of articles</returns>
-        public static async Task<ObservableCollection<FourItem>> SearchPageAsync(string prefix, string searchQuery, int pageNumber)
+        public static async Task<List<FourItem>> SearchPageAsync(string prefix, string searchQuery, int pageNumber)
         {
             var client = new WebServiceClient.Client(Url);
             var collection = await client.CallAsync<FourItem>(prefix + "_GetPage", new string[] 

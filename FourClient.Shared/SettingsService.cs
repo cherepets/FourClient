@@ -10,14 +10,14 @@ namespace FourClient
         {
             get
             {
-                return Window.Current.Bounds.Width > 800;
+                return Window.Current.Bounds.Width >= 720;
             }
         }
         public static ElementTheme MainTheme { get; private set; }
         public static ElementTheme ArticleTheme { get; private set; }
         public static bool FirstRun { get; private set; }
         public static bool LiveTile { get; private set; }
-        public static new int FontSize { get; private set; }
+        public static int FontSize { get; private set; }
         public static string FontFace { get; private set; }
         public static string YouTube { get; private set; }
 

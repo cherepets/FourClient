@@ -9,22 +9,16 @@ namespace FourClient.Converters
 
         public object Convert(object value, Type type, object parameter, string language)
         {
-            var val = System.Convert.ToBoolean(value);
-            {
-                val = !val;
-            }
-
-            if (val)
-            {
-                return Visibility.Visible;
-            }
-
-            return Visibility.Collapsed;
+            if (!(value is bool)) return null;
+            var val = (bool)value;
+            return val 
+                ? Visibility.Collapsed 
+                : Visibility.Visible;
         }
         
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {
-            return (Visibility)value == Visibility.Visible;
+            throw new NotImplementedException();
         }
     }
 }

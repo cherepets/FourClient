@@ -67,47 +67,36 @@ namespace FourAPI.Types
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {
             var coreDispatcher = Window.Current.Dispatcher;
-            return Task.Run<LoadMoreItemsResult>(async () =>
+            return Task.Run(async () =>
             {
                 try
                 {
-                    coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                       () =>
-                       {
-                           if (LoadStarted != null) LoadStarted();
-                       });
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => LoadStarted?.Invoke());
                     var newPages = SearchMode ?
                         await Source.SearchPageAsync(SearchQuery, _pageNumber) :
                         await Source.GetItemsAsync(NewsType, _pageNumber);
                     _pageNumber++;
                     if (newPages.Count == 0) throw new Exception("No items");
-                    coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                        () =>
-                        {
-                            foreach (var page in newPages)
-                            {
-                                if (!this.Any(p => p.Link == page.Link)) Add(page);
-                            }
-                        });
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () =>
+                    {
+                        foreach (var page in newPages)
+                            if (!this.Any(p => p.Link == page.Link)) Add(page);
+                    });
                     return new LoadMoreItemsResult() { Count = (uint)newPages.Count };
                 }
                 catch (ServiceException se)
                 {
-                    coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                       () =>
-                       {
-                           if (ServiceExceptionThrown != null) ServiceExceptionThrown(se);
-                       });
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => ServiceExceptionThrown?.Invoke(se));
                     _hasMoreItems = false;
                     return new LoadMoreItemsResult() { Count = 0 };
                 }
                 catch (ConnectionException se)
                 {
-                    coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                       () =>
-                       {
-                           if (ConnectionExceptionThrown != null) ConnectionExceptionThrown(se);
-                       });
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => ConnectionExceptionThrown?.Invoke(se));
                     _hasMoreItems = false;
                     return new LoadMoreItemsResult() { Count = 0 };
                 }
@@ -115,24 +104,18 @@ namespace FourAPI.Types
                 {
                     if (Count == 0)
                     {
-                        coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                           () =>
-                           {
-                               if (LoadFailed != null) LoadFailed();
-                           });
+                        await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                        () => LoadFailed?.Invoke());
                     }
                     _hasMoreItems = false;
                     return new LoadMoreItemsResult() { Count = 0 };
                 }
                 finally
                 {
-                    coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                       () =>
-                       {
-                           if (LoadCompleted != null) LoadCompleted();
-                       });
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => LoadCompleted?.Invoke());
                 }
-            }).AsAsyncOperation<LoadMoreItemsResult>();
+            }).AsAsyncOperation();
         }
     }
 }

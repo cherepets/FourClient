@@ -37,6 +37,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleadnToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ColorExt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\FrameworkElementExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\ListBoxExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\StoryboardExt.cs" />

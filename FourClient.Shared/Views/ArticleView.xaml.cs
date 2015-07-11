@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebServiceClient;
@@ -87,19 +88,19 @@ namespace FourClient.Views
             catch (ServiceException se)
             {
                 var dialog = new MessageDialog(se.Message, "WebServiceClient.ServiceException");
-                dialog.ShowAsync();
+                await dialog.ShowAsync();
                 BackPressed();
             }
             catch (ConnectionException se)
             {
                 var dialog = new MessageDialog(se.Message, "ConnectionException");
-                dialog.ShowAsync();
+                await dialog.ShowAsync();
                 BackPressed();
             }
             catch (Exception ex)
             {
                 var dialog = new MessageDialog(ex.Message, "FourClient.WebViewException");
-                dialog.ShowAsync();
+                await dialog.ShowAsync();
                 BackPressed();
             }
         }
@@ -165,7 +166,8 @@ Details:
                 var file = await appData.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
                 using (var stream = await file.OpenStreamForWriteAsync())
                 {
-                    xml.Save(stream);
+                    var bytes = Encoding.UTF8.GetBytes(xml.ToString());
+                    await stream.WriteAsync(bytes, 0, bytes.Length);
                 }
             }
             catch { }

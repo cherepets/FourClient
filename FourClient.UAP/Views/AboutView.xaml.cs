@@ -25,9 +25,9 @@ namespace FourClient.Views
             await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
         }
 
-        private void VkBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void VkBlock_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            VK.IntegrationKit.VKAppNavigation.GoToGroup(84993950);
+            await Launcher.LaunchUriAsync(new Uri("http://m.vk.com/fourvk"));
         }
     }
 }

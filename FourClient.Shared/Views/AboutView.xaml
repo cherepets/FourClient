@@ -20,7 +20,7 @@
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="v.3.7" FontSize="24" FontWeight="Bold"  />
+                        <TextBlock Text="v.3.8" FontSize="24" FontWeight="Bold"  />
                         <TextBlock Text="- Исправление ошибок" FontSize="16" />
                         <TextBlock Text="- Ландшафтный режим для фаблетов" FontSize="16" />
                     </StackPanel>

@@ -166,7 +166,7 @@ namespace FourClient.Views
                     // Renew if not equal
                     if (!equal && newTop.Any())
                     {
-                        TopList = newTop;
+                        TopList = newTop.ToObservable();
                         TopView.ItemsSource = TopList;
                         if (SettingsService.LiveTile)
                             ChangeTile(TopList);
@@ -177,7 +177,7 @@ namespace FourClient.Views
             catch (Exception ex)
             {
                 var dialog = new MessageDialog(ex.Message);
-                dialog.ShowAsync();
+                await dialog.ShowAsync();
             }
         }
 
@@ -242,7 +242,7 @@ namespace FourClient.Views
                     // Renew if not equal
                     if (!equal && newSourceList.Any())
                     {
-                        SourceList = newSourceList;
+                        SourceList = newSourceList.ToObservable();
                         await LoadHiddenSource();
                         SourceView.ItemsSource = SourceList;
                         HiddenView.ItemsSource = HiddenList;
@@ -265,7 +265,7 @@ namespace FourClient.Views
                     ex.Message,
                     ex.StackTrace);
                 var dialog = new MessageDialog(text, "Возникла ошибка");
-                dialog.ShowAsync();
+                await dialog.ShowAsync();
             }
         }
 
@@ -458,7 +458,8 @@ namespace FourClient.Views
             var file = await fileCreate;
             using (var stream = await file.OpenStreamForWriteAsync())
             {
-                xdoc.Save(stream);
+                var bytes = Encoding.UTF8.GetBytes(xdoc.ToString());
+                await stream.WriteAsync(bytes, 0, bytes.Length);
             }
         }
 
@@ -620,7 +621,8 @@ namespace FourClient.Views
             var file = await fileCreate;
             using (var stream = await file.OpenStreamForWriteAsync())
             {
-                xdoc.Save(stream);
+                var bytes = Encoding.UTF8.GetBytes(xdoc.ToString());
+                await stream.WriteAsync(bytes, 0, bytes.Length);
             }
             HiddenGrid.Opacity = HiddenList.Any() ? 1 : 0.25;
             HiddenGrid.IsHitTestVisible = HiddenList.Any() ? true : false;
@@ -645,7 +647,8 @@ namespace FourClient.Views
             var file = await fileCreate;
             using (var stream = await file.OpenStreamForWriteAsync())
             {
-                xdoc.Save(stream);
+                var bytes = Encoding.UTF8.GetBytes(xdoc.ToString());
+                await stream.WriteAsync(bytes, 0, bytes.Length);
             }
             if (!HiddenList.Any())
             {
@@ -764,7 +767,8 @@ namespace FourClient.Views
             var file = await appData.CreateFileAsync(COLLECTION, CreationCollisionOption.ReplaceExisting);
             using (var stream = await file.OpenStreamForWriteAsync())
             {
-                xdoc.Save(stream);
+                var bytes = Encoding.UTF8.GetBytes(xdoc.ToString());
+                await stream.WriteAsync(bytes, 0, bytes.Length);
             }
         }
 
@@ -1020,7 +1024,7 @@ namespace FourClient.Views
             flyout.ShowAt(FeedAppBarTop);
         }
 
-        private async void HelpButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void HelpButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
             if (AppBarMenu.Visibility == Visibility.Visible)
@@ -1028,7 +1032,7 @@ namespace FourClient.Views
             MainPage.GoToAbout();
         }
 
-        private async void SettingsButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void SettingsButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             e.Handled = true;
             if (AppBarMenu.Visibility == Visibility.Visible)

@@ -129,11 +129,7 @@
                                                 </Grid.RowDefinitions>
                                                 <Rectangle Fill="{ThemeResource PhoneAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
                                                 <Viewbox Stretch="UniformToFill">
-                                                    <Image>
-                                                        <Image.Source>
-                                                            <BitmapImage UriSource="{Binding Image}" />
-                                                        </Image.Source>
-                                                    </Image>
+                                                    <Image Source="{Binding Image}" />
                                                 </Viewbox>
                                                 <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
                                                     <Ellipse.Fill>
@@ -169,11 +165,7 @@
                                     <Grid Margin="4" Tapped="Source_Tapped" Holding="Source_Holding" Loaded="Source_Loaded" IsHitTestVisible="{Binding Enabled}">
                                         <Rectangle Fill="{ThemeResource PhoneAccentBrush}" />
                                         <Viewbox Stretch="UniformToFill">
-                                            <Image>
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="{Binding ImageUrl}" />
-                                                </Image.Source>
-                                            </Image>
+                                            <Image Source="{Binding ImageUrl}" />
                                         </Viewbox>
                                         <TextBlock 
             							Text="{Binding Name}" 
@@ -203,11 +195,7 @@
                                         <Grid Margin="4" Loaded="Hidden_Loaded" Tapped="Hidden_Tapped" Holding="Hidden_Holding" IsHitTestVisible="{Binding Enabled}">
                                             <Rectangle Fill="{ThemeResource PhoneAccentBrush}" />
                                             <Viewbox Stretch="UniformToFill">
-                                                <Image>
-                                                    <Image.Source>
-                                                        <BitmapImage UriSource="{Binding ImageUrl}" />
-                                                    </Image.Source>
-                                                </Image>
+                                                <Image Source="{Binding ImageUrl}" />
                                             </Viewbox>
                                             <TextBlock 
             						        Text="{Binding Name}" 
@@ -253,11 +241,7 @@
                                         </Grid.Projection>
                                         <Rectangle Fill="{ThemeResource PhoneAccentBrush}" />
                                         <Viewbox Stretch="UniformToFill">
-                                            <Image>
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="{Binding Image}" />
-                                                </Image.Source>
-                                            </Image>
+                                            <Image Source="{Binding Image}" />
                                         </Viewbox>
                                         <Rectangle Opacity="0.4" Fill="Black" />
                                         <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16">
@@ -289,11 +273,7 @@
                                     <Grid Margin="4" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" Loaded="Collection_Loaded">
                                         <Rectangle Fill="{ThemeResource PhoneAccentBrush}" />
                                         <Viewbox Stretch="UniformToFill">
-                                            <Image>
-                                                <Image.Source>
-                                                    <BitmapImage UriSource="{Binding Image}" />
-                                                </Image.Source>
-                                            </Image>
+                                            <Image Source="{Binding Image}" />
                                         </Viewbox>
                                         <Rectangle Opacity="0.4" Fill="Black" />
                                         <TextBlock 
