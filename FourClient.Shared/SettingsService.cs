@@ -10,7 +10,7 @@ namespace FourClient
         {
             get
             {
-                return Window.Current.Bounds.Width >= 720;
+                return Window.Current.Bounds.Width >= 720 || Window.Current.Bounds.Height >= 720;
             }
         }
         public static ElementTheme MainTheme { get; private set; }
