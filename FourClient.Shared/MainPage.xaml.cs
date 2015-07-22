@@ -53,10 +53,6 @@ namespace FourClient
             PageHeader = new StatusBar();
             PageHeaderGrid.Children.Clear();
             PageHeaderGrid.Children.Add(PageHeader);
-
-            DisplayInformation.AutoRotationPreferences = SettingsService.IsPhablet ?
-                DisplayOrientations.LandscapeFlipped | DisplayOrientations.Portrait | DisplayOrientations.Landscape :
-                DisplayOrientations.Portrait;
         }
 
         private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
