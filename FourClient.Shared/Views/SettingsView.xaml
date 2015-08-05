@@ -52,6 +52,13 @@
                     <ComboBoxItem Content="Times New Roman"/>
                     <ComboBoxItem Content="Veranda"/>
                 </ComboBox>
+                <TextBlock TextWrapping="Wrap" Text="Выравнивание" FontSize="18" Margin="16,10,16,0"/>
+                <ComboBox x:Name="AlignBox" Margin="16,0,16,10" SelectionChanged="AlignBox_SelectionChanged">
+                    <ComboBoxItem Content="left"/>
+                    <ComboBoxItem Content="right"/>
+                    <ComboBoxItem Content="center"/>
+                    <ComboBoxItem Content="justify"/>
+                </ComboBox>
                 <TextBlock TextWrapping="Wrap" Text="Размер шрифта" FontSize="18" Margin="16,10,16,0"/>
                 <Slider x:Name="Slider" Margin="16,10" LargeChange="1" Maximum="7" Minimum="1" TickFrequency="1" ValueChanged="Slider_ValueChanged" />
             </StackPanel>
