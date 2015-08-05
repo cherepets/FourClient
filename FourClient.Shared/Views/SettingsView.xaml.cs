@@ -81,6 +81,12 @@ namespace FourClient.Views
             SettingsService.SetFontFace(((ComboBoxItem)FontBox.SelectedItem).Content as string);
         }
 
+        private void AlignBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_loaded) return;
+            SettingsService.SetAlign(((ComboBoxItem)AlignBox.SelectedItem).Content as string);
+        }
+
         private void YouTubeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!_loaded) return;
