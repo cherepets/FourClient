@@ -73,7 +73,8 @@ namespace FourClient.Views
                     .Replace("{1}", front)
                     .Replace("{2}", SettingsService.FontSize.ToString())
                     .Replace("{3}", SettingsService.FontFace)
-                    .Replace("{4}", SettingsService.YouTube);
+                    .Replace("{4}", SettingsService.YouTube)
+                    .Replace("{5}", SettingsService.Align);
                 _loaded = false;
                 _html = html;
                 if (_webView == null) return;
