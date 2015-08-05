@@ -206,6 +206,30 @@ Details:
             var uri = new Uri(_commentLink);
             await Launcher.LaunchUriAsync(uri);
         }
+        
+        private void Share_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dataTransferManager = DataTransferManager.GetForCurrentView();
+            dataTransferManager.DataRequested += ShareDataRequested;
+            DataTransferManager.ShowShareUI();
+        }
+
+        private void ShareDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            DataRequest request = args.Request;
+            DataRequestDeferral deferral = request.GetDeferral();
+            request.Data.Properties.Title = MainPage.GetTitle();
+            request.Data.Properties.Description = "Отправлено из FourClient для Windows";
+            try
+            {
+                var uri = new Uri(_fullLink);
+                request.Data.SetWebLink(uri);
+            }
+            finally
+            {
+                deferral.Complete();
+            }
+        }
 
         private void Rectangle_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
