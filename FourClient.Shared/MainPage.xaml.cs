@@ -106,6 +106,11 @@ namespace FourClient
             Singleton.PageHeader.IsProgressRunning = val;
         }
 
+        public static string GetTitle()
+        {
+            return Singleton.PageHeader.InitialText;
+        }
+
         public static void SetTitle(string title)
         {
             Singleton.PageHeader.SetTitle(title);
