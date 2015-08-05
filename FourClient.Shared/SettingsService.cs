@@ -19,6 +19,7 @@ namespace FourClient
         public static bool LiveTile { get; private set; }
         public static int FontSize { get; private set; }
         public static string FontFace { get; private set; }
+        public static string Align { get; private set; }
         public static string YouTube { get; private set; }
 
         static SettingsService()
@@ -65,6 +66,12 @@ namespace FourClient
         {
             FontFace = fontFace;
             ApplicationData.Current.LocalSettings.Values["FontFace"] = fontFace;
+        }
+
+        public static void SetAlign(string align)
+        {
+            Align = align;
+            ApplicationData.Current.LocalSettings.Values["Align"] = align;
         }
 
         public static void SetYouTube(string youtube)
