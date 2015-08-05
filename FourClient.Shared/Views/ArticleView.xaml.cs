@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using WebServiceClient;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using Windows.System;
 using Windows.UI.Popups;

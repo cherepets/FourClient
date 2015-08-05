@@ -22,6 +22,8 @@ namespace FourClient.Views
             Slider.Value = SettingsService.FontSize;
             var face = FontBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.FontFace);
             FontBox.SelectedItem = face;
+            var align = AlignBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.Align);
+            AlignBox.SelectedItem = align;
             var youtube = YouTubeBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.YouTube);
             YouTubeBox.SelectedValue = youtube;
             _loaded = true;

@@ -100,10 +100,13 @@ namespace FourClient
             FontSize = fontSize != null ? (int)fontSize : (IsPhablet ? 2 : 3);
             //Font Face
             var fontFace = ApplicationData.Current.LocalSettings.Values["FontFace"];
-            FontFace = fontFace != null ? (string)fontFace : FontFace = "Segoe UI";
+            FontFace = fontFace != null ? (string)fontFace : "Segoe UI";
+            //Align
+            var align = ApplicationData.Current.LocalSettings.Values["Align"];
+            Align = align != null ? (string)align : "left";
             //YouTube
             var youtube = ApplicationData.Current.LocalSettings.Values["YouTube"];
-            YouTube = youtube != null ? (string)youtube : YouTube = "vnd.youtube:";
+            YouTube = youtube != null ? (string)youtube : "vnd.youtube:";
         }
     }
 }

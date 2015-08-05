@@ -4,7 +4,6 @@ using Windows.System;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-
 namespace FourClient.Views
 {
     public sealed partial class AboutView : UserControl
