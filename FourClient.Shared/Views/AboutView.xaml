@@ -20,9 +20,10 @@
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="v.3.8" FontSize="24" FontWeight="Bold"  />
-                        <TextBlock Text="- Исправление ошибок" FontSize="16" />
-                        <TextBlock Text="- Ландшафтный режим для фаблетов" FontSize="16" />
+                        <TextBlock Text="v.3.9" FontSize="24" FontWeight="Bold"  />
+                        <TextBlock Text="- Убрал ландшафт" FontSize="16" />
+                        <TextBlock Text="- Добавил кнопку 'поделиться' в меню под статьей" FontSize="16" />
+                        <TextBlock Text="- Добавил выбор выравнивания" FontSize="16" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                         <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"  />
