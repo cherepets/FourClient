@@ -140,19 +140,11 @@ namespace FourClient
 
         private void UpdateVisualState()
         {
-            var state = ActualWidth > ActualHeight ?
-                "TwoPanes" :
-                _articleOpened ?
+            var state = _articleOpened ?
                 "RightPane" :
                 "LeftPane";
             if (state == PrevVisualState) return;
             VisualStateManager.GoToState(this, state, false);
-            if ((state == "TwoPanes" && PrevVisualState != "TwoPanes") 
-                || (state != "TwoPanes" && PrevVisualState == "TwoPanes"))
-            {
-                NewsFeed.InvalidateBindings();
-            }
-            PrevVisualState = state;
         }
     }
 }
