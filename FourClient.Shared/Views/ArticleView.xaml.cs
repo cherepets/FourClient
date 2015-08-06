@@ -39,20 +39,20 @@ namespace FourClient.Views
         {
             try
             {
-                if (fullLink != null)
+                if (fullLink != null && commentLink != null)
                 {
+                    Share.Visibility = Visibility.Visible;
                     Globe.Visibility = Visibility.Visible;
-                    _fullLink = fullLink;
-                }
-                else
-                    Globe.Visibility = Visibility.Collapsed;
-                if (commentLink != null)
-                {
                     Comment.Visibility = Visibility.Visible;
+                    _fullLink = fullLink;
                     _commentLink = commentLink;
                 }
                 else
+                {
+                    Share.Visibility = Visibility.Collapsed;
+                    Globe.Visibility = Visibility.Collapsed;
                     Comment.Visibility = Visibility.Collapsed;
+                }
                 CurrentArticle = prefix + ';' + link;
                 _webView = new WebView();
                 _webView.DefaultBackgroundColor = (this.Background as SolidColorBrush).Color;
