@@ -8,7 +8,7 @@ namespace FourClient.Views
 {
     public sealed partial class NewsFeed : UserControl, IBackButton
     {
-        private const string SHOWN = "Shown370";
+        private const string SHOWN = "Shown399";
 
         private async void AfterLoad()
         {
