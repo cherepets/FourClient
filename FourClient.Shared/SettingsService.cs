@@ -6,13 +6,8 @@ namespace FourClient
 {
     public static class SettingsService
     {
-        public static bool IsPhablet
-        {
-            get
-            {
-                return Window.Current.Bounds.Width >= 720 || Window.Current.Bounds.Height >= 720;
-            }
-        }
+        public static bool IsPhablet => Window.Current.Bounds.Width >= 720 || Window.Current.Bounds.Height >= 720;
+
         public static ElementTheme MainTheme { get; private set; }
         public static ElementTheme ArticleTheme { get; private set; }
         public static bool FirstRun { get; private set; }

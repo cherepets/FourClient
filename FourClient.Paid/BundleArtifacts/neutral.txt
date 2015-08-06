@@ -1,1 +1,2 @@
-MainPackage=C:\Users\Boris\Documents\GitHub\FourClient\FourClient.Paid\bin\Release\FourClient.Paid_3.8.0.0_AnyCPU.appx
+MainPackage=C:\Users\cherepets\Documents\GitHub\FourClient\FourClient.Paid\bin\Release\FourClient.Paid_3.9.9.0_AnyCPU.appx
+SymbolPackage=C:\Users\cherepets\Documents\GitHub\FourClient\FourClient.Paid\AppPackages\FourClient.Paid_3.9.9.0_Test\FourClient.Paid_3.9.9.0_AnyCPU.appxsym

@@ -1,13 +1,9 @@
-﻿using FourClient.Extensions;
-using FourClient.UserControls;
+﻿using FourClient.UserControls;
 using FourClient.Views;
 using System;
-using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
-using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 

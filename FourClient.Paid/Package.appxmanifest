@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="5864cherepets.FourClientpaid" Publisher="CN=3D126052-B82F-49A4-9FBC-A221882D2A9E" Version="3.8.0.0" />
+  <Identity Name="5864cherepets.FourClientpaid" Publisher="CN=3D126052-B82F-49A4-9FBC-A221882D2A9E" Version="3.9.9.0" />
   <mp:PhoneIdentity PhoneProductId="efa50090-51f5-41d2-ae9a-d8d01f5d0754" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>FourClient [paid]</DisplayName>
@@ -22,8 +22,6 @@
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
         <m3:InitialRotationPreference>
           <m3:Rotation Preference="portrait" />
-          <m3:Rotation Preference="landscape" />
-          <m3:Rotation Preference="landscapeFlipped" />
         </m3:InitialRotationPreference>
       </m3:VisualElements>
     </Application>

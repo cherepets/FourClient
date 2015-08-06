@@ -1,5 +1,4 @@
 ﻿using FourClient.UserControls;
-using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI.Xaml.Controls;
 
@@ -21,10 +20,6 @@ namespace FourClient
             PageHeaderGrid.Children.Clear();
             PageHeaderGrid.Children.Add(PageHeader);
             PageHeader.SetTitle("О приложении");
-
-            DisplayInformation.AutoRotationPreferences = SettingsService.IsPhablet ?
-                DisplayOrientations.LandscapeFlipped | DisplayOrientations.Portrait | DisplayOrientations.Landscape :
-                DisplayOrientations.Portrait;
         }
 
         protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
