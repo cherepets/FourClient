@@ -26,15 +26,13 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="0.5*"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle Fill="{ThemeResource PhoneAccentBrush}" Grid.ColumnSpan="9" Opacity="0.5" />                
-                <AppBarButton x:Name="Globe" Icon="Globe" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Globe_Tapped" Grid.Column="3" />
-                <AppBarButton x:Name="Comment" Icon="Comment" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Comments_Tapped" Grid.Column="4" />
-                <AppBarButton x:Name="Share" Icon="Send" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Share_Tapped" Grid.Column="5" />
+                <AppBarButton x:Name="Globe" Icon="Globe" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Globe_Tapped" Grid.Column="2" />
+                <AppBarButton x:Name="Comment" Icon="Comment" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Comments_Tapped" Grid.Column="3" />
+                <AppBarButton x:Name="Share" Icon="Send" HorizontalAlignment="Center" Margin="0,-4,0,-20" Tapped="Share_Tapped" Grid.Column="4" />
             </Grid>
         </Grid>
     </Grid>
