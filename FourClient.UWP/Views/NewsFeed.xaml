@@ -1,0 +1,311 @@
+﻿<UserControl 
+    x:Class="FourClient.Views.NewsFeed"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FourClient.Views"
+    xmlns:uc="using:FourClient.UserControls"
+    xmlns:converters="using:FourClient.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+        <Storyboard x:Name="RaiseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="FeedAppBarFlyout">
+                <EasingDoubleKeyFrame KeyTime="0" x:Name="RaiseHeight" Value="400"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="HideMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="FeedAppBarFlyout">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" x:Name="HideHeight" Value="400"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="Blink">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rectangle">
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="RefreshAnimation">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.Rotation)" Storyboard.TargetName="appBarButtonRefresh">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="360"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Name="RaiseButtons">
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.15" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.15" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
+        </Storyboard>
+        <Storyboard x:Name="HideButtons">
+            <DoubleAnimation Duration="0:0:0.1" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
+            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
+        </Storyboard>
+    </UserControl.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Pivot x:Name="PivotControl" SelectionChanged="PivotControl_SelectionChanged">
+                <PivotItem x:Name="InterestingTab">
+                    <PivotItem.Header>
+                        <TextBlock Text="ИНТЕРЕСНОЕ" />
+                    </PivotItem.Header>
+                    <ScrollViewer>
+                        <StackPanel>
+                            <StackPanel x:Name="AdGrid"/>
+                            <StackPanel x:Name="PaidGrid" Orientation="Horizontal" Tapped="PaidGrid_Tapped" Visibility="Collapsed">
+                                <AppBarButton IsCompact="True" Icon="Tag" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,8" />
+                                <TextBlock Text="FourClient [paid]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8" FontSize="18" />
+                            </StackPanel>
+                            <GridView x:Name="TopView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                                <GridView.ItemContainerStyle>
+                                    <Style TargetType="GridViewItem">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                    </Style>
+                                </GridView.ItemContainerStyle>
+                                <GridView.ItemContainerTransitions>
+                                    <TransitionCollection>
+                                        <EdgeUIThemeTransition Edge="Bottom"/>
+                                    </TransitionCollection>
+                                </GridView.ItemContainerTransitions>
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right">
+                                            <Grid>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition Height="Auto"/>
+                                                </Grid.RowDefinitions>
+                                                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
+                                                <Viewbox Stretch="UniformToFill">
+                                                    <Image Source="{Binding Image}" />
+                                                </Viewbox>
+                                                <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
+                                                    <Ellipse.Fill>
+                                                        <ImageBrush ImageSource="{Binding Avatar}" />
+                                                    </Ellipse.Fill>
+                                                </Ellipse>
+                                                <Rectangle Grid.Row="1" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                                <TextBlock 
+                                    Text="{Binding Title}" 
+                                    Margin="16,8" FontSize="18"
+                                    Foreground="White" 
+                                    TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
+                                            </Grid>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                        </StackPanel>
+                    </ScrollViewer>
+                </PivotItem>
+                <PivotItem x:Name="SourceTab">
+                    <PivotItem.Header>
+                        <TextBlock Text="ИСТОЧНИКИ" />
+                    </PivotItem.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <GridView x:Name="SourceView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="120" Height="120" Tapped="Source_Tapped" Holding="Source_Holding" RightTapped="Source_Right" IsHitTestVisible="{Binding Enabled}">
+                                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                        <Viewbox Stretch="UniformToFill">
+                                            <Image Source="{Binding ImageUrl}" />
+                                        </Viewbox>
+                                        <TextBlock 
+            							Text="{Binding Name}" 
+            							Margin="8,4" FontSize="16"
+            							Foreground="White" 
+            							VerticalAlignment="Bottom" 
+            							TextWrapping="WrapWholeWords" />
+                                        <Rectangle Opacity="0.5" Fill="Black" Visibility="{Binding Enabled, Converter={StaticResource VisibilityConverter}}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <Grid x:Name="HiddenGrid" Grid.Row="1" Margin="0,0,0,10" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Rectangle Grid.ColumnSpan="2" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Height="16" Margin="-20,0" Visibility="Visible" />
+                            <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="0,12,0,0">
+                                <GridView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="120" Height="120" Tapped="Hidden_Tapped" RightTapped="Hidden_Right" Holding="Hidden_Holding" IsHitTestVisible="{Binding Enabled}">
+                                            <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                            <Viewbox Stretch="UniformToFill">
+                                                <Image Source="{Binding ImageUrl}" />
+                                            </Viewbox>
+                                            <TextBlock 
+            						        Text="{Binding Name}" 
+            						        Margin="8,4" FontSize="16"
+            						        Foreground="White" 
+            						        VerticalAlignment="Bottom" 
+            						        TextWrapping="WrapWholeWords" />
+                                            <Rectangle Opacity="0.5" Fill="Black" Visibility="{Binding Enabled, Converter={StaticResource VisibilityConverter}}"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </GridView.ItemTemplate>
+                            </GridView>
+                            <TextBlock Text="ОТКЛЮЧЕННЫЕ" FontSize="24" Grid.Row="2" VerticalAlignment="Center" Margin="16,0" />
+                            <AppBarToggleButton x:Name="HiddenToggleButton" VerticalAlignment="Center" Margin="-12,-8,-12,-18" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Checked="AppBarToggleButton_Checked" Unchecked="HiddenToggleButton_Unchecked" Icon="Go" >
+                                <AppBarToggleButton.RenderTransform>
+                                    <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
+                                </AppBarToggleButton.RenderTransform>
+                            </AppBarToggleButton>
+                        </Grid>
+                    </Grid>
+                </PivotItem>
+                <PivotItem x:Name="FeedTab">
+                    <PivotItem.Header>
+                        <TextBlock Text="ЛЕНТА" />
+                    </PivotItem.Header>
+                    <Grid>
+                        <ProgressRing x:Name="FeedRing" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
+                        <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}"/>
+                        <GridView x:Name="FeedView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+                            <GridView.ItemContainerTransitions>
+                                <TransitionCollection>
+                                    <EdgeUIThemeTransition Edge="Bottom"/>
+                                </TransitionCollection>
+                            </GridView.ItemContainerTransitions>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="160" Tapped="Grid_Tapped" Holding="Grid_Holding" RightTapped="Grid_Right" >
+                                        <Grid.Projection>
+                                            <PlaneProjection/>
+                                        </Grid.Projection>
+                                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                        <Viewbox Stretch="UniformToFill">
+                                            <Image Source="{Binding Image}" />
+                                        </Viewbox>
+                                        <Rectangle Opacity="0.4" Fill="Black" />
+                                        <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding Avatar}" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <TextBlock 
+                                        Text="{Binding Title}" 
+                                        Margin="16,8" FontSize="18"
+                                        Foreground="White" 
+                                        VerticalAlignment="Bottom" 
+                                        TextWrapping="WrapWholeWords" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </Grid>
+                </PivotItem>
+                <PivotItem x:Name="CollectionTab" Header="КОЛЛЕКЦИЯ">
+                    <Grid>
+                        <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}"/>
+                        <GridView x:Name="CollectionView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="240" Height="240" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" RightTapped="CollectionGrid_Right">
+                                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                        <Viewbox Stretch="UniformToFill">
+                                            <Image Source="{Binding Image}" />
+                                        </Viewbox>
+                                        <Rectangle Opacity="0.4" Fill="Black" />
+                                        <TextBlock 
+                                        Text="{Binding Title}" 
+                                        Margin="8,4" FontSize="18"
+                                        Foreground="White" 
+                                        VerticalAlignment="Top" 
+                                        TextWrapping="WrapWholeWords" />
+                                    </Grid>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+            <Rectangle x:Name="OffsetRectangle" Grid.Row="1" Height="20" />
+        </Grid>
+        <Rectangle x:Name="BlinderRectangle" Grid.RowSpan="2" Fill="#7F000000" Visibility="Collapsed" Tapped="AppBar_ToggleState" />
+
+        <Grid x:Name="AppBar" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="FeedAppBarFlyout" Visibility="Visible" Background="{ThemeResource AppBarBackgroundThemeBrush}" >
+                <Grid.RenderTransform>
+                    <CompositeTransform/>
+                </Grid.RenderTransform>
+                <StackPanel x:Name="AppBarMenu" Margin="0,16" Visibility="Collapsed">
+                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontSize="20" Margin="16,8"/>
+                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontSize="20" Margin="16,8"/>
+                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontSize="20" Margin="16,8"/>
+                </StackPanel>
+            </Grid>
+            <Grid x:Name="FeedAppBarTop" Grid.Row="1" ManipulationDelta="GridTitle_ManipulationDelta" ManipulationMode="TranslateY" RequestedTheme="Dark">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="5" />
+                <AppBarButton x:Name="appBarButtonRefresh" Icon="Refresh" HorizontalAlignment="Center" IsCompact="True" Tapped="RefreshButton_Tapped" Grid.Column="1" IsEnabled="False" RenderTransformOrigin="0.5,0.5" >
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="appBarButtonSearch" Icon="Find" HorizontalAlignment="Center" IsCompact="True" Tapped="SearchButton_Tapped" Grid.Column="2" IsEnabled="False" >
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="appBarButtonTopics" Icon="Filter" HorizontalAlignment="Center" IsCompact="True" Tapped="TopicsButton_Tapped" Grid.Column="3" IsEnabled="False" >
+                    <AppBarButton.RenderTransform>
+                        <CompositeTransform/>
+                    </AppBarButton.RenderTransform>
+                </AppBarButton>
+                <AppBarButton x:Name="appBarButtonOptions" Icon="More" HorizontalAlignment="Center" IsCompact="True" Margin="0,-10" Tapped="AppBar_ToggleState" Grid.Column="4" VerticalAlignment="Center" />
+            </Grid>
+        </Grid>
+
+        <Rectangle x:Name="rectangle" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Opacity="0" Visibility="Collapsed" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+        <Grid x:Name="searchPopup" Background="{ThemeResource ContentDialogDimmingThemeBrush}" Grid.RowSpan="2" Visibility="Collapsed">
+            <TextBox x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="поиск" Margin="16" KeyUp="searchBox_KeyUp" LostFocus="searchBox_LostFocus"/>
+        </Grid>
+
+    </Grid>
+</UserControl>

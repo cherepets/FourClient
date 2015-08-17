@@ -1,0 +1,36 @@
+﻿<UserControl
+    x:Class="FourClient.Views.ArticleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FourClient.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="6"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid x:Name="WebContent" Grid.RowSpan="2" Grid.Column="1"/>
+        <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
+        <Grid x:Name="AppBarControl" Grid.Row="1" Background="{ThemeResource ContentDialogDimmingThemeBrush}" RequestedTheme="Dark" Grid.ColumnSpan="3" >
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="9" Opacity="0.5" />                
+                <AppBarButton x:Name="Globe" Icon="Globe" HorizontalAlignment="Center" IsCompact="True" Tapped="Globe_Tapped" Grid.Column="1" />
+                <AppBarButton x:Name="Comment" Icon="Comment" HorizontalAlignment="Center" IsCompact="True" Tapped="Comments_Tapped" Grid.Column="2" />
+                <AppBarButton x:Name="Share" Icon="Send" HorizontalAlignment="Center" IsCompact="True" Tapped="Share_Tapped" Grid.Column="3" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
