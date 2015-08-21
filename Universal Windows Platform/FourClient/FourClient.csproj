@@ -18,6 +18,8 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>FourClient_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -137,7 +139,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Logo.scale-200.png" />
+    <Content Include="Assets\SmallLogo.scale-200.png" />
+    <Content Include="Assets\SmallLogo.targetsize-24.png" />
     <Content Include="Libs\NotificationsExtensions.xml" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -186,11 +192,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FourApi.UWP\FourApi.UWP.csproj">
+    <ProjectReference Include="..\FourApi\FourApi.csproj">
       <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
       <Name>FourApi.UWP</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebServiceClient.UWP\WebServiceClient.UWP.csproj">
+    <ProjectReference Include="..\WebServiceClient\WebServiceClient.csproj">
       <Project>{e5cafe52-240c-46ed-885c-7b118d3bb9b0}</Project>
       <Name>WebServiceClient.UWP</Name>
     </ProjectReference>

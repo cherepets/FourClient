@@ -163,6 +163,8 @@ namespace FourClient
             e.Handled = true;
         }
 
+        private void BackButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) => CurrentPage.BackPressed();
+
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);

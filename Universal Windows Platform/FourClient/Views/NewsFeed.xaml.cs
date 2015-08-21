@@ -952,23 +952,15 @@ namespace FourClient.Views
             var header = new TextBlock
             {
                 Text = "Разделы",
-                FontSize = 32,
+                FontSize = 24,
                 Margin = new Thickness(8)
             };
-            var listbox = new GridView();
+            var listbox = new ListView();
             menuView.Children.Add(header);
             menuView.Children.Add(listbox);
             var flyout = new Flyout
             {
-                Content = new Rectangle
-                {
-                    Height = this.ActualHeight
-                }
-            };
-            flyout.Opened += async (s, t) =>
-            {
-                await Task.Delay(400);
-                flyout.Content = menuView;
+                Content = menuView
             };
             foreach (var n in _source.NewsTypes.Keys)
             {
@@ -986,7 +978,7 @@ namespace FourClient.Views
                 };
                 listbox.Items.Add(item);
             }
-            flyout.ShowAt(FeedAppBarTop);
+            flyout.ShowAt(this);
         }
 
         private void HelpButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -1032,7 +1024,8 @@ namespace FourClient.Views
                 {
                     FontSize = 18,
                     Content = h.Title,
-                    Tag = h
+                    Tag = h,
+                    Width = 200
                 };
                 item.Tapped += (s, t) =>
                 {

@@ -32,9 +32,10 @@
             <Grid.RenderTransform>
                 <CompositeTransform />
             </Grid.RenderTransform>
-            <ScrollViewer Margin="8">
-                <TextBlock FontSize="24" x:Name="HeaderBlock" />
-            </ScrollViewer>
+            <StackPanel Orientation="Horizontal">
+                <AppBarButton Icon="Back" x:Name="BackButton" IsCompact="True" Visibility="Collapsed" Tapped="BackButton_Tapped" />
+                <TextBlock Margin="8" FontSize="24" x:Name="HeaderBlock" />
+            </StackPanel>
             <views:ArticleView Grid.Row="1"/>
         </Grid>
         <Grid x:Name="PageHeaderGrid" Background="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="2" />
@@ -89,6 +90,9 @@
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="NewsFeed" Storyboard.TargetProperty="Visibility">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="BackButton" Storyboard.TargetProperty="Visibility">
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
                         </ObjectAnimationUsingKeyFrames>
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ArticleView">
                             <EasingDoubleKeyFrame KeyTime="0" Value="1000"/>

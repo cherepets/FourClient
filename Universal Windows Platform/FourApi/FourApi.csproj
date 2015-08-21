@@ -109,10 +109,6 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="project.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Types\FourArticle.cs" />
@@ -122,10 +118,13 @@
     <Content Include="Properties\FourApi.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WebServiceClient.UWP\WebServiceClient.UWP.csproj">
+    <ProjectReference Include="..\WebServiceClient\WebServiceClient.csproj">
       <Project>{e5cafe52-240c-46ed-885c-7b118d3bb9b0}</Project>
       <Name>WebServiceClient.UWP</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="project.json" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

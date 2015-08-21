@@ -6,7 +6,7 @@ namespace FourClient
 {
     public static class SettingsService
     {
-        public static bool LargeScreen => Window.Current.Bounds.Width >= 720;
+        public static bool LargeScreen => Window.Current.Bounds.Width >= 720 || Window.Current.Bounds.Height >= 720;
         public static bool IsPhone
         {
             get

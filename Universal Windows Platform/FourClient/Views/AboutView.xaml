@@ -14,33 +14,27 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="Black" Margin="20,20,0,-20"  />
+            <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="ExtraLight" Margin="20,20,0,-20"  />
             <ScrollViewer Grid.Row="1">
                 <StackPanel Margin="20">
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="v.3.6" FontSize="24" FontWeight="Bold"  />
-                        <TextBlock Text="- Изменено выравнивание" FontSize="16" />
-                        <TextBlock Text="- Объединен сервер" FontSize="16" />
-                        <TextBlock Text="- Смена протокола (SOAP -> REST)" FontSize="16" />
+                        <TextBlock Text="v.4.0" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />
+                        <TextBlock Text="- Universal Windows Platform (Windows 10)" FontSize="16" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"  />
+                        <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />
                         <StackPanel Orientation="Horizontal">
-                            <AppBarButton Icon="Mail" IsCompact="True" VerticalAlignment="Center" Tapped="Email_Tapped" Margin="0,-8,0,0" />
+                            <SymbolIcon Symbol="Read" Tapped="Email_Tapped" />
                             <TextBlock Text="cherepets@live.ru" FontSize="18" Tapped="Email_Tapped" VerticalAlignment="Center" Margin="8" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <AppBarButton Icon="Favorite" IsCompact="True" VerticalAlignment="Center" Tapped="StoreBlock_Tapped" Margin="0,-8,0,0" />
+                            <SymbolIcon Symbol="Favorite" Tapped="StoreBlock_Tapped" />
                             <TextBlock Text="оценить приложение" FontSize="18" Tapped="StoreBlock_Tapped" VerticalAlignment="Center" Margin="8" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <AppBarButton IsCompact="True" VerticalAlignment="Center" Tapped="VkBlock_Tapped" Margin="0,-8,0,0" FontFamily="Global User Interface" >
-                                <AppBarButton.Icon>
-                                    <FontIcon Glyph="VK"/>
-                                </AppBarButton.Icon>
-                            </AppBarButton>
+                            <FontIcon Glyph="vk" FontFamily="MV Boli" Tapped="VkBlock_Tapped" FontWeight="Bold"/>
                             <TextBlock Text="вконтакте" FontSize="18" Tapped="VkBlock_Tapped" VerticalAlignment="Center" Margin="8" />
                         </StackPanel>
                     </StackPanel>

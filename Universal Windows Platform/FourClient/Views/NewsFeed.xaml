@@ -236,7 +236,7 @@
                         <GridView x:Name="CollectionView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="240" Height="240" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" RightTapped="CollectionGrid_Right">
+                                    <Grid Width="184" Height="184" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" RightTapped="CollectionGrid_Right">
                                         <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                                         <Viewbox Stretch="UniformToFill">
                                             <Image Source="{Binding Image}" />
@@ -264,7 +264,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="FeedAppBarFlyout" Visibility="Visible" Background="{ThemeResource AppBarBackgroundThemeBrush}" >
+            <Grid x:Name="FeedAppBarFlyout" Visibility="Visible" Background="{ThemeResource SystemControlDisabledChromeMediumLowBrush}" >
                 <Grid.RenderTransform>
                     <CompositeTransform/>
                 </Grid.RenderTransform>
