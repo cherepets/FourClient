@@ -11,7 +11,7 @@ namespace FourClient
         {
             get
             {
-                return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone");
+                return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons");
             }
         }
 

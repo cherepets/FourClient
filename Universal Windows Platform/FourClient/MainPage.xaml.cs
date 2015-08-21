@@ -1,12 +1,14 @@
 ﻿using FourClient.UserControls;
 using FourClient.Views;
-using System;
 using Windows.Foundation;
 using Windows.Graphics.Display;
+using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace FourClient
 {
@@ -31,14 +33,19 @@ namespace FourClient
             GoToNews();
         }
 
-        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
             RequestedTheme = SettingsService.MainTheme;
             ArticleView.RequestedTheme = SettingsService.ArticleTheme;
+            if (SettingsService.IsPhone)
+            {
+                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView()?.HideAsync();
+            }
         }
-
+        
         private void RebuildUI()
         {
             if (SettingsService.IsPhone)
@@ -74,7 +81,7 @@ namespace FourClient
         public static void GoToNews()
         {
             _articleOpened = false;
-            var text = !String.IsNullOrEmpty(StatusText) ? StatusText : "FourClient";
+            var text = !string.IsNullOrEmpty(StatusText) ? StatusText : "FourClient";
             SetTitle(text);
             CurrentPage = Singleton.NewsFeed;
             Singleton.UpdateVisualState(true);
@@ -117,7 +124,7 @@ namespace FourClient
 
         public static void SetTitle(string title, params object[] args)
         {
-            var formated = String.Format(title, args);
+            var formated = string.Format(title, args);
             SetTitle(formated);
         }
 
@@ -163,9 +170,11 @@ namespace FourClient
             e.Handled = true;
         }
 
-        private void BackButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e) => CurrentPage.BackPressed();
+        private void BackButton_Tapped(object sender, TappedRoutedEventArgs e) => CurrentPage.BackPressed();
 
-        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e) => CurrentPage.BackPressed();
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
