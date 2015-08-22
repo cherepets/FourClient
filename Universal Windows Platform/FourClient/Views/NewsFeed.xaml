@@ -259,7 +259,7 @@
         </Grid>
         <Rectangle x:Name="BlinderRectangle" Grid.RowSpan="2" Fill="#7F000000" Visibility="Collapsed" Tapped="AppBar_ToggleState" />
 
-        <Grid x:Name="AppBar" Grid.Row="1">
+        <Grid x:Name="AppBar" Grid.Row="1" ManipulationDelta="AppBar_ManipulationDelta" ManipulationMode="TranslateY">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
@@ -274,7 +274,7 @@
                     <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontSize="20" Margin="16,8"/>
                 </StackPanel>
             </Grid>
-            <Grid x:Name="FeedAppBarTop" Grid.Row="1" ManipulationDelta="GridTitle_ManipulationDelta" ManipulationMode="TranslateY" RequestedTheme="Dark">
+            <Grid x:Name="FeedAppBarTop" Grid.Row="1" RequestedTheme="Dark">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>

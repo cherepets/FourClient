@@ -27,7 +27,7 @@ namespace FourClient
 
         public MainPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Singleton = this;
             RebuildUI();
             GoToNews();
@@ -153,14 +153,12 @@ namespace FourClient
                 "RightPane" :
                 "LeftPane";
             VisualStateManager.GoToState(this, state, false);
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                _articleOpened && state != "TwoPanes" ?
-                AppViewBackButtonVisibility.Visible :
-                AppViewBackButtonVisibility.Collapsed;
             if (!skipBindingsInvalidation && (state != "TwoPanes" || PrevVisualState != "TwoPanes")) 
             {
                 NewsFeed.InvalidateBindings();
             }
+            if (SettingsService.IsPhone)
+                BackButton.Visibility = Visibility.Collapsed;
             PrevVisualState = state;
         }
         

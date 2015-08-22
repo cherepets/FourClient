@@ -1,12 +1,17 @@
-﻿using System;
+﻿using FourClient.Extensions;
+using System;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Popups;
 using Windows.UI.StartScreen;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
 
 namespace FourClient
 {
@@ -29,10 +34,25 @@ namespace FourClient
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            //await Windows.UI.ViewManagement
-            //    .StatusBar
-            //    .GetForCurrentView()
-            //    .HideAsync();
+            if (!SettingsService.IsPhone)
+            {
+                var accent = (Resources["SystemControlBackgroundAccentBrush"] as SolidColorBrush).Color;
+                var light = accent.Lighten();
+                var dark = accent.Darken();
+                var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+                titleBar.BackgroundColor = accent;
+                titleBar.ForegroundColor = Colors.White;
+                titleBar.ButtonBackgroundColor = accent;
+                titleBar.ButtonForegroundColor = Colors.White;
+                titleBar.ButtonHoverBackgroundColor = dark;
+                titleBar.ButtonHoverForegroundColor = Colors.White;
+                titleBar.ButtonPressedBackgroundColor = light;
+                titleBar.ButtonPressedForegroundColor = Colors.Black;
+                titleBar.ButtonInactiveBackgroundColor = accent;
+                titleBar.ButtonInactiveForegroundColor = Colors.White;
+                titleBar.InactiveBackgroundColor = dark;
+                titleBar.InactiveForegroundColor = Colors.White;
+            }
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
             {

@@ -99,7 +99,7 @@ namespace FourClient
             LiveTile = liveTile != null ? (bool)liveTile : true;
             //Font Size
             var fontSize = ApplicationData.Current.LocalSettings.Values["FontSize"];
-            FontSize = fontSize != null ? (int)fontSize : (LargeScreen ? 2 : 3);
+            FontSize = fontSize != null ? (int)fontSize : (IsPhone && LargeScreen ? 2 : 3);
             //Font Face
             var fontFace = ApplicationData.Current.LocalSettings.Values["FontFace"];
             FontFace = fontFace != null ? (string)fontFace : "Segoe UI";

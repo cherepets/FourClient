@@ -502,7 +502,7 @@ namespace FourClient.Views
             }
         }
 
-        private void GridTitle_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
+        private void AppBar_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
             var threshold = 5;
             if (e.Delta.Translation.Y < -threshold && AppBarMenu.Visibility == Visibility.Collapsed)
