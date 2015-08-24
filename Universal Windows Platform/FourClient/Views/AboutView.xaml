@@ -20,8 +20,8 @@
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="v.4.0" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />
-                        <TextBlock Text="- Universal Windows Platform (Windows 10)" FontSize="16" />
+                        <TextBlock Text="v.4.0.1" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />
+                        <TextBlock Text="- Начат редизайн под стиль Windows 10" FontSize="16" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                         <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />

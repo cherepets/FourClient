@@ -58,13 +58,15 @@ namespace FourClient.Views
             PivotControl.Style = Application.Current.Resources["HeaderlessPivotStyle"] as Style;
             if (SettingsService.UpperMenu)
             {
+                UpperView.Visibility = Visibility.Visible;
                 LeftView.Visibility = Visibility.Collapsed;
-                PivotHeader.Visibility = Visibility.Collapsed;
+                LeftPivotHeader.Visibility = Visibility.Collapsed;
             }
             else
             {
+                UpperView.Visibility = Visibility.Collapsed;
                 LeftView.Visibility = Visibility.Visible;
-                PivotHeader.Visibility = Visibility.Visible;
+                LeftPivotHeader.Visibility = Visibility.Visible;
             }
 
 
@@ -918,24 +920,29 @@ namespace FourClient.Views
             SplitCollectionButton.IsChecked = false;
             if (PivotControl.SelectedItem == InterestingTab)
             {
-                PivotHeader.Text = "Интересное";
+                LeftPivotHeader.Text = "Интересное";
                 SplitInterestingButton.IsChecked = true;
             }
             if (PivotControl.SelectedItem == SourceTab)
             {
-                PivotHeader.Text = "Источники";
+                LeftPivotHeader.Text = "Источники";
                 SplitSourceButton.IsChecked = true;
             }
             if (PivotControl.SelectedItem == FeedTab)
             {
-                PivotHeader.Text = "Лента";
+                LeftPivotHeader.Text = "Лента";
                 SplitFeedButton.IsChecked = true;
             }
             if (PivotControl.SelectedItem == CollectionTab)
             {
-                PivotHeader.Text = "Коллекция";
+                LeftPivotHeader.Text = "Коллекция";
                 SplitCollectionButton.IsChecked = true;
             }
+            UpperPivotHeader.Text = LeftPivotHeader.Text.ToUpper();
+            UpperInterestingButton.IsChecked = SplitInterestingButton.IsChecked;
+            UpperSourceButton.IsChecked = SplitSourceButton.IsChecked;
+            UpperFeedButton.IsChecked = SplitFeedButton.IsChecked;
+            UpperCollectionButton.IsChecked = SplitCollectionButton.IsChecked;
         }
 
         #region AppBar
@@ -1106,8 +1113,7 @@ namespace FourClient.Views
 
         private async void SplitViewButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var dialog = new MessageDialog("Зачем этой штуке вообще выезжать, если в ней всё равно нет никаких дополнительных опций?");
-            await dialog.ShowAsync();
+            await Launcher.LaunchUriAsync(new Uri("https://windowsphone.uservoice.com/forums/101801-feature-suggestions/suggestions/6623043-stick-to-modern-don-t-copy-android"));
         }
 
         private void InterestingButton_Tapped(object sender, TappedRoutedEventArgs e)

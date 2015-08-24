@@ -19,6 +19,7 @@ namespace FourClient.Views
         private void Load()
         {
             LiveTileBox.IsChecked = SettingsService.LiveTile;
+            UpperMenuBox.IsOn = SettingsService.UpperMenu;
             Slider.Value = SettingsService.FontSize;
             var face = FontBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.FontFace);
             FontBox.SelectedItem = face;

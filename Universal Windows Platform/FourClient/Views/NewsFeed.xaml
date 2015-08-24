@@ -69,32 +69,37 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Vertical">
-                <AppBarButton IsCompact="True" x:Name="SplitViewButton" Width="50" Height="50" Tapped="SplitViewButton_Tapped" >
+                <AppBarButton IsCompact="True" x:Name="SplitViewButton" Width="50" Height="50" Tapped="SplitViewButton_Tapped" RequestedTheme="Dark" >
                     <AppBarButton.Icon>
                         <FontIcon Glyph="&#xE700;"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <!-- Switches -->
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Tapped="InterestingButton_Tapped">
-                    <AppBarToggleButton x:Name="SplitInterestingButton" IsCompact="True" Icon="Home" Width="50" Height="50" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Tapped="SourceButtonButton_Tapped">
-                    <AppBarToggleButton x:Name="SplitSourceButton" IsCompact="True" Icon="ViewAll" Width="50" Height="50" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Tapped="FeedButton_Tapped">
-                    <AppBarToggleButton x:Name="SplitFeedButton" IsCompact="True" Icon="AlignCenter" Width="50" Height="50" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Grid.Row="1" Tapped="CollectionButton_Tapped">
-                    <AppBarToggleButton x:Name="SplitCollectionButton" IsCompact="True" Icon="OutlineStar" Width="50" Height="50" />
-                </StackPanel>
+                <AppBarToggleButton x:Name="SplitInterestingButton" IsCompact="True" Icon="Home" Width="50" Height="50" Grid.Row="1" Tapped="InterestingButton_Tapped" RequestedTheme="Dark" />
+                <AppBarToggleButton x:Name="SplitSourceButton" IsCompact="True" Icon="ViewAll" Width="50" Height="50" Grid.Row="1" Tapped="SourceButtonButton_Tapped" RequestedTheme="Dark" />
+                <AppBarToggleButton x:Name="SplitFeedButton" IsCompact="True" Icon="AlignCenter" Width="50" Height="50" Grid.Row="1" Tapped="FeedButton_Tapped" RequestedTheme="Dark" />
+                <AppBarToggleButton x:Name="SplitCollectionButton" IsCompact="True" Icon="OutlineStar" Width="50" Height="50" Grid.Row="1" Tapped="CollectionButton_Tapped" RequestedTheme="Dark" />
                 <!-- Switches -->
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Tapped="SettingsButton_Tapped">
-                <AppBarButton IsCompact="True" Icon="Setting" Width="50" Height="50" />
+                <AppBarButton IsCompact="True" Icon="Setting" Width="50" Height="50" RequestedTheme="Dark" />
             </StackPanel>
         </Grid>
+        <TextBlock x:Name="LeftPivotHeader" Text="Интересное" FontSize="24" Margin="10,6" Grid.Column="1" />
         <!-- Left View -->
-        <TextBlock x:Name="PivotHeader" Text="Интересное" FontSize="24" Margin="10,6" Grid.Column="1" />
+        <!-- Upper View -->
+        <StackPanel x:Name="UpperView" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <!-- Switches -->
+                <AppBarToggleButton x:Name="UpperInterestingButton" IsCompact="True" Icon="Home" Width="50" Height="46" Grid.Row="1" Tapped="InterestingButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
+                <AppBarToggleButton x:Name="UpperSourceButton" IsCompact="True" Icon="ViewAll" Width="50" Height="46" Grid.Row="1" Tapped="SourceButtonButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
+                <AppBarToggleButton x:Name="UpperFeedButton" IsCompact="True" Icon="AlignCenter" Width="50" Height="46" Grid.Row="1" Tapped="FeedButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
+                <AppBarToggleButton x:Name="UpperCollectionButton" IsCompact="True" Icon="OutlineStar" Width="50" Height="46" Grid.Row="1" Tapped="CollectionButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
+                <!-- Switches -->
+            </StackPanel>
+            <TextBlock x:Name="UpperPivotHeader" Text="ИНТЕРЕСНОЕ" FontSize="16" FontWeight="Bold" Margin="12,6" />
+        </StackPanel>
+        <!-- Upper View -->
         <Pivot x:Name="PivotControl" Grid.Column="1" Grid.Row="1" SelectionChanged="PivotControl_SelectionChanged">
             <PivotItem x:Name="InterestingTab">
                 <ScrollViewer>
@@ -213,7 +218,7 @@
             <PivotItem x:Name="FeedTab">
                 <Grid>
                     <ProgressRing x:Name="FeedRing" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
-                    <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}"/>
+                    <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
                     <GridView x:Name="FeedView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
@@ -255,7 +260,7 @@
             </PivotItem>
             <PivotItem x:Name="CollectionTab">
                 <Grid>
-                    <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}"/>
+                    <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
                     <GridView x:Name="CollectionView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <GridView.ItemTemplate>
                             <DataTemplate>
