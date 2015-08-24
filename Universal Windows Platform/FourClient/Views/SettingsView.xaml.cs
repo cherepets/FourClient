@@ -100,5 +100,11 @@ namespace FourClient.Views
             if (!_loaded) return;
             SettingsService.SetLiveTile(LiveTileBox.IsChecked.Value);
         }
+
+        private void UpperMenuBox_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (!_loaded) return;
+            SettingsService.SetUpperMenu(UpperMenuBox.IsOn);
+        }
     }
 }

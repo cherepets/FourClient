@@ -21,7 +21,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Shapes;
 
 namespace FourClient.Views
 {
@@ -50,12 +49,25 @@ namespace FourClient.Views
 
         public NewsFeed()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             _loader = Load();
         }
-        
-        public void InvalidateBindings()
+
+        public void RebuildUI()
         {
+            PivotControl.Style = Application.Current.Resources["HeaderlessPivotStyle"] as Style;
+            if (SettingsService.UpperMenu)
+            {
+                LeftView.Visibility = Visibility.Collapsed;
+                PivotHeader.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                LeftView.Visibility = Visibility.Visible;
+                PivotHeader.Visibility = Visibility.Visible;
+            }
+
+
             CollectionView.ItemsSource = null;
             FeedView.ItemsSource = null;
             SourceView.ItemsSource = null;
@@ -79,7 +91,6 @@ namespace FourClient.Views
             await sourceTask;
             await topTask;
             await historyTask;
-            //AfterLoad();
         }
 
         private void LoadPage(string newsType = null)
@@ -894,8 +905,37 @@ namespace FourClient.Views
                 appBarButtonSearch.Visibility = Visibility.Collapsed;
                 appBarButtonTopics.Visibility = Visibility.Collapsed;
             }
+            UpdatePivotControls();
             await awaiter;
             AppBarMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void UpdatePivotControls()
+        {
+            SplitInterestingButton.IsChecked = false;
+            SplitSourceButton.IsChecked = false;
+            SplitFeedButton.IsChecked = false;
+            SplitCollectionButton.IsChecked = false;
+            if (PivotControl.SelectedItem == InterestingTab)
+            {
+                PivotHeader.Text = "Интересное";
+                SplitInterestingButton.IsChecked = true;
+            }
+            if (PivotControl.SelectedItem == SourceTab)
+            {
+                PivotHeader.Text = "Источники";
+                SplitSourceButton.IsChecked = true;
+            }
+            if (PivotControl.SelectedItem == FeedTab)
+            {
+                PivotHeader.Text = "Лента";
+                SplitFeedButton.IsChecked = true;
+            }
+            if (PivotControl.SelectedItem == CollectionTab)
+            {
+                PivotHeader.Text = "Коллекция";
+                SplitCollectionButton.IsChecked = true;
+            }
         }
 
         #region AppBar
@@ -1062,6 +1102,36 @@ namespace FourClient.Views
         private async void PaidGrid_Tapped(object sender, TappedRoutedEventArgs e)
         {
             await Launcher.LaunchUriAsync(new Uri("ms-windows-store:navigate?appid=4c456504-64b5-4084-99fa-2af2c3e71b41"));
+        }
+
+        private async void SplitViewButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var dialog = new MessageDialog("Зачем этой штуке вообще выезжать, если в ней всё равно нет никаких дополнительных опций?");
+            await dialog.ShowAsync();
+        }
+
+        private void InterestingButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PivotControl.SelectedItem = InterestingTab;
+            e.Handled = true;
+        }
+
+        private void SourceButtonButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PivotControl.SelectedItem = SourceTab;
+            e.Handled = true;
+        }
+
+        private void FeedButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PivotControl.SelectedItem = FeedTab;
+            e.Handled = true;
+        }
+
+        private void CollectionButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            PivotControl.SelectedItem = CollectionTab;
+            e.Handled = true;
         }
     }
 }

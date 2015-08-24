@@ -37,6 +37,7 @@
                     <Rectangle Fill="White" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Grid.Column="2" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" StrokeThickness="2" Tapped="Rectangle6_Tapped"/>
                     <TextBlock Text="Light" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Foreground="Black" Grid.Column="2" />
                 </Grid>
+                <ToggleSwitch x:Name="UpperMenuBox" Margin="16,0,16,10" Header="Расположение меню" OffContent="Слева" OnContent="Сверху" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Toggled="UpperMenuBox_Toggled" />
                 <CheckBox x:Name="LiveTileBox" Margin="16,0,16,10" Content="Живая плитка" FontSize="18" IsChecked="False" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Tapped="LiveTileBox_Tapped" />
                 <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="18" Margin="16,10,16,0"/>
                 <ComboBox x:Name="YouTubeBox" Margin="16,0,16,10" SelectionChanged="YouTubeBox_SelectionChanged">

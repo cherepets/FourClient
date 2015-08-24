@@ -19,6 +19,7 @@ namespace FourClient
         public static ElementTheme ArticleTheme { get; private set; }
         public static bool FirstRun { get; private set; }
         public static bool LiveTile { get; private set; }
+        public static bool UpperMenu { get; private set; }
         public static int FontSize { get; private set; }
         public static string FontFace { get; private set; }
         public static string Align { get; private set; }
@@ -56,6 +57,13 @@ namespace FourClient
                 updater.Clear();
                 updater.EnableNotificationQueue(false);
             }
+        }
+
+        public static void SetUpperMenu(bool upperMenu)
+        {
+            UpperMenu = upperMenu;
+            ApplicationData.Current.LocalSettings.Values["UpperMenu"] = upperMenu;
+            MainPage.RebuildNewsFeedUI();
         }
 
         public static void SetFontSize(int fontSize)
@@ -97,6 +105,9 @@ namespace FourClient
             //LiveTile
             var liveTile = ApplicationData.Current.LocalSettings.Values["LiveTile"];
             LiveTile = liveTile != null ? (bool)liveTile : true;
+            //UpperMenu
+            var upperMenu = ApplicationData.Current.LocalSettings.Values["UpperMenu"];
+            UpperMenu = upperMenu != null ? (bool)upperMenu : IsPhone;
             //Font Size
             var fontSize = ApplicationData.Current.LocalSettings.Values["FontSize"];
             FontSize = fontSize != null ? (int)fontSize : (IsPhone && LargeScreen ? 2 : 3);

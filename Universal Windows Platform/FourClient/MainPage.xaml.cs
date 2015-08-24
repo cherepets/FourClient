@@ -57,6 +57,8 @@ namespace FourClient
             }
         }
 
+        public static void RebuildNewsFeedUI() => Singleton.NewsFeed?.RebuildUI();
+
         public static void GoToArticle(string prefix, string name, string link, string fullLink, string commentLink)
         {
             _articleOpened = true;
@@ -155,7 +157,7 @@ namespace FourClient
             VisualStateManager.GoToState(this, state, false);
             if (!skipBindingsInvalidation && (state != "TwoPanes" || PrevVisualState != "TwoPanes")) 
             {
-                NewsFeed.InvalidateBindings();
+                NewsFeed.RebuildUI();
             }
             if (SettingsService.IsPhone)
                 BackButton.Visibility = Visibility.Collapsed;
