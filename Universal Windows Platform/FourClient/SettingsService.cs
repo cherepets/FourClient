@@ -119,7 +119,7 @@ namespace FourClient
             Align = align != null ? (string)align : "left";
             //YouTube
             var youtube = ApplicationData.Current.LocalSettings.Values["YouTube"];
-            YouTube = youtube != null ? (string)youtube : "vnd.youtube:";
+            YouTube = youtube != null ? (string)youtube : (IsPhone ? "vnd.youtube:" : "http://www.youtube.com/watch?v=");
         }
     }
 }
