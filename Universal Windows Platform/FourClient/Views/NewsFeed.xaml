@@ -71,18 +71,38 @@
             <StackPanel Orientation="Vertical">
                 <AppBarButton IsCompact="True" x:Name="SplitViewButton" Width="50" Height="50" Tapped="SplitViewButton_Tapped" RequestedTheme="Dark" >
                     <AppBarButton.Icon>
-                        <FontIcon Glyph="&#xE700;"/>
+                        <FontIcon Glyph="&#xE700;" FontSize="16"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <!-- Switches -->
-                <AppBarToggleButton x:Name="SplitInterestingButton" IsCompact="True" Icon="Home" Width="50" Height="50" Grid.Row="1" Tapped="InterestingButton_Tapped" RequestedTheme="Dark" />
-                <AppBarToggleButton x:Name="SplitSourceButton" IsCompact="True" Icon="ViewAll" Width="50" Height="50" Grid.Row="1" Tapped="SourceButtonButton_Tapped" RequestedTheme="Dark" />
-                <AppBarToggleButton x:Name="SplitFeedButton" IsCompact="True" Icon="AlignCenter" Width="50" Height="50" Grid.Row="1" Tapped="FeedButton_Tapped" RequestedTheme="Dark" />
-                <AppBarToggleButton x:Name="SplitCollectionButton" IsCompact="True" Icon="OutlineStar" Width="50" Height="50" Grid.Row="1" Tapped="CollectionButton_Tapped" RequestedTheme="Dark" />
+                <AppBarToggleButton x:Name="SplitInterestingButton" IsCompact="True" Width="50" Height="50" Grid.Row="1" Tapped="InterestingButton_Tapped" RequestedTheme="Dark" Style="{StaticResource SideAppBarToggleStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="SplitSourceButton" IsCompact="True" Width="50" Height="50" Grid.Row="1" Tapped="SourceButtonButton_Tapped" RequestedTheme="Dark" Style="{StaticResource SideAppBarToggleStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="SplitFeedButton" IsCompact="True" Width="50" Height="50" Grid.Row="1" Tapped="FeedButton_Tapped" RequestedTheme="Dark" Style="{StaticResource SideAppBarToggleStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="SplitCollectionButton" IsCompact="True" Width="50" Height="50" Grid.Row="1" Tapped="CollectionButton_Tapped" RequestedTheme="Dark" Style="{StaticResource SideAppBarToggleStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
                 <!-- Switches -->
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="1" Tapped="SettingsButton_Tapped">
-                <AppBarButton IsCompact="True" Icon="Setting" Width="50" Height="50" RequestedTheme="Dark" />
+                <AppBarButton IsCompact="True" Width="50" Height="50" RequestedTheme="Dark">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </StackPanel>
         </Grid>
         <TextBlock x:Name="LeftPivotHeader" Text="Интересное" FontSize="24" Margin="10,6" Grid.Column="1" />
@@ -91,30 +111,45 @@
         <StackPanel x:Name="UpperView" Grid.Column="1">
             <StackPanel Orientation="Horizontal">
                 <!-- Switches -->
-                <AppBarToggleButton x:Name="UpperInterestingButton" IsCompact="True" Icon="Home" Width="50" Height="46" Grid.Row="1" Tapped="InterestingButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
-                <AppBarToggleButton x:Name="UpperSourceButton" IsCompact="True" Icon="ViewAll" Width="50" Height="46" Grid.Row="1" Tapped="SourceButtonButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
-                <AppBarToggleButton x:Name="UpperFeedButton" IsCompact="True" Icon="AlignCenter" Width="50" Height="46" Grid.Row="1" Tapped="FeedButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
-                <AppBarToggleButton x:Name="UpperCollectionButton" IsCompact="True" Icon="OutlineStar" Width="50" Height="46" Grid.Row="1" Tapped="CollectionButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" />
+                <AppBarToggleButton x:Name="UpperInterestingButton" IsCompact="True" Width="50" Height="46" Grid.Row="1" Tapped="InterestingButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="UpperSourceButton" IsCompact="True" Width="50" Height="46" Grid.Row="1" Tapped="SourceButtonButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}">
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="UpperFeedButton" IsCompact="True" Width="50" Height="46" Grid.Row="1" Tapped="FeedButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}">
+                <AppBarToggleButton.Icon>
+                    <FontIcon Glyph="" FontSize="16"/>
+                </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
+                <AppBarToggleButton x:Name="UpperCollectionButton" IsCompact="True" Width="50" Height="46" Grid.Row="1" Tapped="CollectionButton_Tapped" Style="{StaticResource UnderlinedAppBarToggleStyle}" >
+                    <AppBarToggleButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarToggleButton.Icon>
+                </AppBarToggleButton>
                 <!-- Switches -->
             </StackPanel>
-            <TextBlock x:Name="UpperPivotHeader" Text="ИНТЕРЕСНОЕ" FontSize="16" FontWeight="Bold" Margin="12,6" />
+            <TextBlock x:Name="UpperPivotHeader" FontSize="16" Margin="12,6" />
         </StackPanel>
         <!-- Upper View -->
         <Pivot x:Name="PivotControl" Grid.Column="1" Grid.Row="1" SelectionChanged="PivotControl_SelectionChanged">
             <PivotItem x:Name="InterestingTab">
-                <ScrollViewer>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="-12,0,-16,0">
                     <StackPanel>
                         <StackPanel x:Name="AdGrid"/>
                         <StackPanel x:Name="PaidGrid" Orientation="Horizontal" Tapped="PaidGrid_Tapped" Visibility="Collapsed">
-                            <AppBarButton IsCompact="True" Icon="Tag" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,8" />
-                            <TextBlock Text="FourClient [paid]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8" FontSize="18" />
+                            <AppBarButton IsCompact="True" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="16,0,0,8" >
+                                <AppBarButton.Icon>
+                                    <FontIcon Glyph="" FontSize="16"/>
+                                </AppBarButton.Icon>
+                            </AppBarButton>
+                            <TextBlock Text="FourClient [paid]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8" FontSize="16" />
                         </StackPanel>
                         <GridView x:Name="TopView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                            <GridView.ItemContainerStyle>
-                                <Style TargetType="GridViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                </Style>
-                            </GridView.ItemContainerStyle>
                             <GridView.ItemContainerTransitions>
                                 <TransitionCollection>
                                     <EdgeUIThemeTransition Edge="Bottom"/>
@@ -122,7 +157,7 @@
                             </GridView.ItemContainerTransitions>
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right">
+                                    <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right" Loaded="Top_Loaded">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
@@ -130,7 +165,10 @@
                                             </Grid.RowDefinitions>
                                             <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
                                             <Viewbox Stretch="UniformToFill">
-                                                <Image Source="{Binding Image}" />
+                                                <Grid>
+                                                    <Image Source="ms-appx:///Assets/empty.png" />
+                                                    <Image Source="{Binding Image}" />
+                                                </Grid>
                                             </Viewbox>
                                             <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
                                                 <Ellipse.Fill>
@@ -139,10 +177,10 @@
                                             </Ellipse>
                                             <Rectangle Grid.Row="1" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                                             <TextBlock 
-                                Text="{Binding Title}" 
-                                Margin="16,8" FontSize="18"
-                                Foreground="White" 
-                                TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
+                                                Text="{Binding Title}" 
+                                                Margin="12,8" FontSize="16"
+                                                Foreground="White" 
+                                                TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
@@ -206,7 +244,8 @@
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
-                        <TextBlock Text="Отключенные" FontSize="24" Grid.Row="2" VerticalAlignment="Center" />
+                        <TextBlock x:Name="LeftHiddenBlock" Text="Отключенные" FontSize="24" Grid.Row="2" VerticalAlignment="Center" />
+                        <TextBlock x:Name="UpperHiddenBlock" Text="ОТКЛЮЧЕННЫЕ" FontSize="16" Grid.Row="2" VerticalAlignment="Center" />
                         <AppBarToggleButton x:Name="HiddenToggleButton" VerticalAlignment="Center" Margin="-12,-8,-12,-18" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Checked="AppBarToggleButton_Checked" Unchecked="HiddenToggleButton_Unchecked" Icon="Go" >
                             <AppBarToggleButton.RenderTransform>
                                 <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
@@ -218,7 +257,7 @@
             <PivotItem x:Name="FeedTab">
                 <Grid>
                     <ProgressRing x:Name="FeedRing" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
-                    <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
+                    <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="16" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
                     <GridView x:Name="FeedView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
@@ -248,7 +287,7 @@
                                     </Ellipse>
                                     <TextBlock 
                                     Text="{Binding Title}" 
-                                    Margin="16,8" FontSize="18"
+                                    Margin="12,8" FontSize="16"
                                     Foreground="White" 
                                     VerticalAlignment="Bottom" 
                                     TextWrapping="WrapWholeWords" />
@@ -260,7 +299,7 @@
             </PivotItem>
             <PivotItem x:Name="CollectionTab">
                 <Grid>
-                    <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="24" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
+                    <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="16" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
                     <GridView x:Name="CollectionView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                         <GridView.ItemTemplate>
                             <DataTemplate>
@@ -272,7 +311,7 @@
                                     <Rectangle Opacity="0.4" Fill="Black" />
                                     <TextBlock 
                                     Text="{Binding Title}" 
-                                    Margin="8,4" FontSize="18"
+                                    Margin="8,4" FontSize="16"
                                     Foreground="White" 
                                     VerticalAlignment="Top" 
                                     TextWrapping="WrapWholeWords" />
@@ -296,9 +335,9 @@
                     <CompositeTransform/>
                 </Grid.RenderTransform>
                 <StackPanel x:Name="AppBarMenu" Margin="0,16" Visibility="Collapsed">
-                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontSize="20" Margin="16,8"/>
-                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontSize="20" Margin="16,8"/>
-                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontSize="20" Margin="16,8"/>
+                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontWeight="Light" FontSize="20" Margin="16,8"/>
+                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontWeight="Light" FontSize="20" Margin="16,8"/>
+                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontWeight="Light" FontSize="20" Margin="16,8"/>
                 </StackPanel>
             </Grid>
             <Grid x:Name="FeedAppBarTop" Grid.Row="1" RequestedTheme="Dark">
@@ -325,7 +364,11 @@
                         <CompositeTransform/>
                     </AppBarButton.RenderTransform>
                 </AppBarButton>
-                <AppBarButton x:Name="appBarButtonOptions" Icon="More" HorizontalAlignment="Center" IsCompact="True" Margin="0,-10" Tapped="AppBar_ToggleState" Grid.Column="4" VerticalAlignment="Center" />
+                <AppBarButton x:Name="appBarButtonOptions" HorizontalAlignment="Center" IsCompact="True" Margin="0,-12" Tapped="AppBar_ToggleState" Grid.Column="4" VerticalAlignment="Center">
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </Grid>
         </Grid>
 

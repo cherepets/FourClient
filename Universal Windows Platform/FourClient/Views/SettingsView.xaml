@@ -9,7 +9,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
         <ScrollViewer>
             <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <TextBlock TextWrapping="Wrap" Text="Тема приложения" FontSize="18" Margin="16,20,16,0"/>
+                <TextBlock TextWrapping="Wrap" Text="Тема приложения" FontSize="16" Margin="16,20,16,0"/>
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -17,13 +17,13 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" StrokeThickness="2" Tapped="Rectangle1_Tapped"/>
-                    <TextBlock Text="Default" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Foreground="White" />
+                    <TextBlock Text="Default" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="ExtraLight" IsHitTestVisible="False" Foreground="White" />
                     <Rectangle HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Grid.Column="1" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" Fill="Black" StrokeThickness="2" Tapped="Rectangle2_Tapped"/>
-                    <TextBlock Text="Dark" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Grid.Column="1" Foreground="White" />
+                    <TextBlock Text="Dark" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="ExtraLight" IsHitTestVisible="False" Grid.Column="1" Foreground="White" />
                     <Rectangle Fill="White" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Grid.Column="2" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" StrokeThickness="2" Tapped="Rectangle3_Tapped"/>
-                    <TextBlock Text="Light" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Foreground="Black" Grid.Column="2" />
+                    <TextBlock Text="Light" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="ExtraLight" IsHitTestVisible="False" Foreground="Black" Grid.Column="2" />
                 </Grid>
-                <TextBlock TextWrapping="Wrap" Text="Тема при чтении" FontSize="18" Margin="20,20,20,0"/>
+                <TextBlock TextWrapping="Wrap" Text="Тема при чтении" FontSize="16" Margin="20,20,20,0"/>
                 <Grid Margin="0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -31,21 +31,21 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" StrokeThickness="2" Tapped="Rectangle4_Tapped"/>
-                    <TextBlock Text="Default" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Foreground="White" />
+                    <TextBlock Text="Default" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="ExtraLight" IsHitTestVisible="False" Foreground="White" />
                     <Rectangle HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Grid.Column="1" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" Fill="Black" StrokeThickness="2" Tapped="Rectangle5_Tapped"/>
-                    <TextBlock Text="Dark" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Grid.Column="1" Foreground="White" />
+                    <TextBlock Text="Dark" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="ExtraLight" IsHitTestVisible="False" Grid.Column="1" Foreground="White" />
                     <Rectangle Fill="White" HorizontalAlignment="Center" Width="100" Height="100" VerticalAlignment="Center" Grid.Column="2" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}" StrokeThickness="2" Tapped="Rectangle6_Tapped"/>
-                    <TextBlock Text="Light" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="Bold" IsHitTestVisible="False" Foreground="Black" Grid.Column="2" />
+                    <TextBlock Text="Light" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" FontWeight="ExtraLight" IsHitTestVisible="False" Foreground="Black" Grid.Column="2" />
                 </Grid>
                 <ToggleSwitch x:Name="UpperMenuBox" Margin="16,0,16,10" Header="Расположение меню" OffContent="Слева" OnContent="Сверху" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Toggled="UpperMenuBox_Toggled" />
-                <CheckBox x:Name="LiveTileBox" Margin="16,0,16,10" Content="Живая плитка" FontSize="18" IsChecked="False" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Tapped="LiveTileBox_Tapped" />
-                <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="18" Margin="16,10,16,0"/>
+                <CheckBox x:Name="LiveTileBox" Margin="16,0,16,10" Content="Живая плитка" FontSize="16" IsChecked="False" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Tapped="LiveTileBox_Tapped" />
+                <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" Margin="16,10,16,0"/>
                 <ComboBox x:Name="YouTubeBox" Margin="16,0,16,10" SelectionChanged="YouTubeBox_SelectionChanged">
                     <ComboBoxItem Content="vnd.youtube:"/>
                     <ComboBoxItem Content="metrotube:VideoPage?VideoID="/>
                     <ComboBoxItem Content="http://www.youtube.com/watch?v="/>
                 </ComboBox>
-                <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="18" Margin="16,10,16,0"/>
+                <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="16" Margin="16,10,16,0"/>
                 <ComboBox x:Name="FontBox" Margin="16,0,16,10" SelectionChanged="FontBox_SelectionChanged">
                     <ComboBoxItem Content="Segoe UI"/>
                     <ComboBoxItem Content="Arial"/>
@@ -53,14 +53,14 @@
                     <ComboBoxItem Content="Times New Roman"/>
                     <ComboBoxItem Content="Veranda"/>
                 </ComboBox>
-                <TextBlock TextWrapping="Wrap" Text="Выравнивание" FontSize="18" Margin="16,10,16,0"/>
+                <TextBlock TextWrapping="Wrap" Text="Выравнивание" FontSize="16" Margin="16,10,16,0"/>
                 <ComboBox x:Name="AlignBox" Margin="16,0,16,10" SelectionChanged="AlignBox_SelectionChanged">
                     <ComboBoxItem Content="left"/>
                     <ComboBoxItem Content="right"/>
                     <ComboBoxItem Content="center"/>
                     <ComboBoxItem Content="justify"/>
                 </ComboBox>
-                <TextBlock TextWrapping="Wrap" Text="Размер шрифта" FontSize="18" Margin="16,10,16,0"/>
+                <TextBlock TextWrapping="Wrap" Text="Размер шрифта" FontSize="16" Margin="16,10,16,0"/>
                 <Slider x:Name="Slider" Margin="16,10" LargeChange="1" Maximum="7" Minimum="1" TickFrequency="1" ValueChanged="Slider_ValueChanged" />
             </StackPanel>
         </ScrollViewer>

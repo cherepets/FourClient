@@ -58,12 +58,16 @@ namespace FourClient.Views
             PivotControl.Style = Application.Current.Resources["HeaderlessPivotStyle"] as Style;
             if (SettingsService.UpperMenu)
             {
+                UpperHiddenBlock.Visibility = Visibility.Visible;
+                LeftHiddenBlock.Visibility = Visibility.Collapsed;
                 UpperView.Visibility = Visibility.Visible;
                 LeftView.Visibility = Visibility.Collapsed;
                 LeftPivotHeader.Visibility = Visibility.Collapsed;
             }
             else
             {
+                UpperHiddenBlock.Visibility = Visibility.Collapsed;
+                LeftHiddenBlock.Visibility = Visibility.Visible;
                 UpperView.Visibility = Visibility.Collapsed;
                 LeftView.Visibility = Visibility.Visible;
                 LeftPivotHeader.Visibility = Visibility.Visible;
@@ -1138,6 +1142,12 @@ namespace FourClient.Views
         {
             PivotControl.SelectedItem = CollectionTab;
             e.Handled = true;
+        }
+
+        private void Top_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            grid.Width = TopView.Width - 20;
         }
     }
 }
