@@ -33,7 +33,11 @@
                 <CompositeTransform />
             </Grid.RenderTransform>
             <StackPanel Orientation="Horizontal">
-                <AppBarButton Icon="Back" x:Name="BackButton" IsCompact="True" Visibility="Collapsed" Tapped="BackButton_Tapped" />
+                <AppBarButton x:Name="BackButton" Width="50" Height="50" IsCompact="True" Visibility="Collapsed" Tapped="BackButton_Tapped" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <TextBlock Margin="8" FontSize="24" x:Name="HeaderBlock" />
             </StackPanel>
             <views:ArticleView Grid.Row="1"/>

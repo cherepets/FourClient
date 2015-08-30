@@ -40,10 +40,7 @@ namespace FourClient
             RequestedTheme = SettingsService.MainTheme;
             ArticleView.RequestedTheme = SettingsService.ArticleTheme;
             if (SettingsService.IsPhone)
-            {
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-                Windows.UI.ViewManagement.StatusBar.GetForCurrentView()?.HideAsync();
-            }
         }
         
         private void RebuildUI()
@@ -159,8 +156,9 @@ namespace FourClient
             {
                 NewsFeed.RebuildUI();
             }
-            if (SettingsService.IsPhone)
-                BackButton.Visibility = Visibility.Collapsed;
+            BackButton.Visibility = !SettingsService.IsPhone && state == "RightPane"
+                ? Visibility.Visible 
+                : Visibility.Collapsed;
             PrevVisualState = state;
         }
         
@@ -170,14 +168,24 @@ namespace FourClient
             e.Handled = true;
         }
 
-        private void BackButton_Tapped(object sender, TappedRoutedEventArgs e) => CurrentPage.BackPressed();
+        private void BackButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            CurrentPage.BackPressed();
+            e.Handled = true;
+        }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e) => CurrentPage.BackPressed();
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            CurrentPage.BackPressed();
+            e.Handled = true;
+        }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
             SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
+            if (SettingsService.IsPhone)
+                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
     }
 }

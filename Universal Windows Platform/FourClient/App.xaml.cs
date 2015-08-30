@@ -53,6 +53,10 @@ namespace FourClient
                 titleBar.InactiveBackgroundColor = dark;
                 titleBar.InactiveForegroundColor = Colors.White;
             }
+            else
+            {
+                StatusBar.GetForCurrentView()?.HideAsync();
+            }
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
             {

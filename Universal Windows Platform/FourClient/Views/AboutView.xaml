@@ -15,13 +15,14 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="ExtraLight" Margin="20,20,0,-20"  />
-            <ScrollViewer Grid.Row="1">
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
                 <StackPanel Margin="20">
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
-                        <TextBlock Text="v.4.0.4" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />
-                        <TextBlock Text="- Начат редизайн под стиль Windows 10" FontSize="16" />
+                        <TextBlock Text="v.4.1" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />
+                        <TextBlock Text="- Редизайн под стиль Windows 10" FontSize="16" />
+                        <TextBlock Text="- Первый билд для Windows 10 Mobile" FontSize="16" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,20">
                         <TextBlock Text="КОНТАКТЫ" FontSize="24" FontWeight="ExtraLight" Margin="0,0,0,10" />

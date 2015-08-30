@@ -75,15 +75,11 @@ namespace FourClient.Views
 
 
             CollectionView.ItemsSource = null;
-            FeedView.ItemsSource = null;
             SourceView.ItemsSource = null;
             HiddenView.ItemsSource = null;
-            TopView.ItemsSource = null;
             CollectionView.ItemsSource = PageList;
-            FeedView.ItemsSource = PageCollection;
             SourceView.ItemsSource = SourceList;
             HiddenView.ItemsSource = HiddenList;
-            TopView.ItemsSource = TopList;
         }
 
         #region Load
@@ -103,8 +99,8 @@ namespace FourClient.Views
         {
             if (_source == null) return;
             appBarButtonRefresh.IsEnabled = true;
-            appBarButtonSearch.IsEnabled = _source.Searchable;
             appBarButtonTopics.IsEnabled = _source.NewsTypes.Count > 1;
+            LeftButtonSearch.IsEnabled = _source.Searchable;
             FeedRing.IsActive = true;
             if (newsType == null && _source != null)
                 newsType = _source.NewsTypes.First().Key;
@@ -897,7 +893,7 @@ namespace FourClient.Views
             if (PivotControl.SelectedItem == FeedTab)
             {
                 appBarButtonRefresh.Visibility = Visibility.Visible;
-                appBarButtonSearch.Visibility = Visibility.Visible;
+                LeftButtonSearch.Visibility = Visibility.Visible;
                 appBarButtonTopics.Visibility = Visibility.Visible;
                 await Task.Delay(1);
                 OffsetRectangle.Height = FeedAppBarTop.ActualHeight;
@@ -908,7 +904,7 @@ namespace FourClient.Views
                 OffsetRectangle.Height = 20;
                 await HideButtons.PlayAsync();
                 appBarButtonRefresh.Visibility = Visibility.Collapsed;
-                appBarButtonSearch.Visibility = Visibility.Collapsed;
+                LeftButtonSearch.Visibility = Visibility.Collapsed;
                 appBarButtonTopics.Visibility = Visibility.Collapsed;
             }
             UpdatePivotControls();
@@ -975,6 +971,8 @@ namespace FourClient.Views
 
         private void searchBox_KeyUp(object sender, KeyRoutedEventArgs e)
         {
+            if (e.Key == VirtualKey.Escape)
+                searchBox_LostFocus(sender, e);
             if (e.Key != VirtualKey.Enter) return;
             PageCollection.Clear();
             LoadSearch(searchBox.Text);
@@ -1142,12 +1140,6 @@ namespace FourClient.Views
         {
             PivotControl.SelectedItem = CollectionTab;
             e.Handled = true;
-        }
-
-        private void Top_Loaded(object sender, RoutedEventArgs e)
-        {
-            var grid = sender as Grid;
-            grid.Width = TopView.Width - 20;
         }
     }
 }

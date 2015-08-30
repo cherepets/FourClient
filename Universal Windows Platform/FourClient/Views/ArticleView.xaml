@@ -26,10 +26,22 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="9" Opacity="0.5" />                
-                <AppBarButton x:Name="Globe" Icon="Globe" HorizontalAlignment="Center" IsCompact="True" Tapped="Globe_Tapped" Grid.Column="1" />
-                <AppBarButton x:Name="Comment" Icon="Comment" HorizontalAlignment="Center" IsCompact="True" Tapped="Comments_Tapped" Grid.Column="2" />
-                <AppBarButton x:Name="Share" Icon="Send" HorizontalAlignment="Center" IsCompact="True" Tapped="Share_Tapped" Grid.Column="3" />
+                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="9" Opacity="0.5" />
+                <AppBarButton x:Name="Globe" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Globe_Tapped" Grid.Column="1" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="Comment" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Comments_Tapped" Grid.Column="2" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="Share" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Share_Tapped" Grid.Column="3" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </Grid>
         </Grid>
     </Grid>

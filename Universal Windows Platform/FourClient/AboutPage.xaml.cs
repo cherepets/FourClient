@@ -35,10 +35,7 @@ namespace FourClient
             SystemNavigationManager.GetForCurrentView().BackRequested += AboutPage_BackRequested;
             RequestedTheme = SettingsService.MainTheme;
             if (SettingsService.IsPhone)
-            {
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-                Windows.UI.ViewManagement.StatusBar.GetForCurrentView()?.HideAsync();
-            }
         }
 
         private void AboutPage_BackRequested(object sender, BackRequestedEventArgs e)
@@ -47,13 +44,19 @@ namespace FourClient
             Frame.GoBack();
         }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e) => Frame.GoBack();
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            e.Handled = true;
+            Frame.GoBack();
+        }
 
         protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             SystemNavigationManager.GetForCurrentView().BackRequested -= AboutPage_BackRequested;
+            if (SettingsService.IsPhone)
+                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
         }
     }
 }

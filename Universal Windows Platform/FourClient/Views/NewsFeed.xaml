@@ -37,16 +37,12 @@
         <Storyboard x:Name="RaiseButtons">
             <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
-            <DoubleAnimation Duration="0:0:0.15" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
-            <DoubleAnimation Duration="0:0:0.15" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.2" To="0" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.2" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
         </Storyboard>
         <Storyboard x:Name="HideButtons">
             <DoubleAnimation Duration="0:0:0.1" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonRefresh" d:IsOptimized="True"/>
-            <DoubleAnimation Duration="0:0:0.1" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
-            <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonSearch" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.1" To="100" Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateY)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
             <DoubleAnimation Duration="0:0:0.1" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="appBarButtonTopics" d:IsOptimized="True"/>
         </Storyboard>
@@ -106,6 +102,14 @@
             </StackPanel>
         </Grid>
         <TextBlock x:Name="LeftPivotHeader" Text="Интересное" FontSize="24" Margin="10,6" Grid.Column="1" />
+        <AppBarButton x:Name="LeftButtonSearch" Width="50" HorizontalAlignment="Right" VerticalAlignment="Top" IsCompact="True" Tapped="SearchButton_Tapped" Grid.Column="1" IsEnabled="False" >
+            <AppBarButton.Icon>
+                <FontIcon Glyph="" FontSize="16"/>
+            </AppBarButton.Icon>
+            <AppBarButton.RenderTransform>
+                <CompositeTransform/>
+            </AppBarButton.RenderTransform>
+        </AppBarButton>
         <!-- Left View -->
         <!-- Upper View -->
         <StackPanel x:Name="UpperView" Grid.Column="1">
@@ -150,6 +154,11 @@
                             <TextBlock Text="FourClient [paid]" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="8" FontSize="16" />
                         </StackPanel>
                         <GridView x:Name="TopView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
                             <GridView.ItemContainerTransitions>
                                 <TransitionCollection>
                                     <EdgeUIThemeTransition Edge="Bottom"/>
@@ -157,7 +166,7 @@
                             </GridView.ItemContainerTransitions>
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right" Loaded="Top_Loaded">
+                                    <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right">
                                         <Grid>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
@@ -258,7 +267,7 @@
                 <Grid>
                     <ProgressRing x:Name="FeedRing" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
                     <TextBlock x:Name="FeedCaption" TextWrapping="Wrap" Text="Выберите источник чтобы загрузить ленту." FontSize="16" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
-                    <GridView x:Name="FeedView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <GridView x:Name="FeedView" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="-12,0,-16,0">
                         <GridView.ItemContainerStyle>
                             <Style TargetType="GridViewItem">
                                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -323,7 +332,7 @@
             </PivotItem>
         </Pivot>
         <Rectangle x:Name="OffsetRectangle" Grid.Column="1" Grid.Row="2" Height="20" />
-        <Rectangle x:Name="BlinderRectangle" Grid.Column="1" Grid.RowSpan="3" Fill="#7F000000" Visibility="Collapsed" Tapped="AppBar_ToggleState" />
+        <Rectangle x:Name="BlinderRectangle" Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="{ThemeResource ThumbPressedBackgroundThemeBrush}" Visibility="Collapsed" Tapped="AppBar_ToggleState" />
 
         <Grid x:Name="AppBar" Grid.ColumnSpan="2" Grid.Row="2" ManipulationDelta="AppBar_ManipulationDelta" ManipulationMode="TranslateY">
             <Grid.RowDefinitions>
@@ -349,22 +358,23 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="5" />
-                <AppBarButton x:Name="appBarButtonRefresh" Icon="Refresh" HorizontalAlignment="Center" IsCompact="True" Tapped="RefreshButton_Tapped" Grid.Column="1" IsEnabled="False" RenderTransformOrigin="0.5,0.5" >
+                <AppBarButton x:Name="appBarButtonRefresh" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="RefreshButton_Tapped" Grid.Column="1" IsEnabled="False" RenderTransformOrigin="0.5,0.5" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
                     <AppBarButton.RenderTransform>
                         <CompositeTransform/>
                     </AppBarButton.RenderTransform>
                 </AppBarButton>
-                <AppBarButton x:Name="appBarButtonSearch" Icon="Find" HorizontalAlignment="Center" IsCompact="True" Tapped="SearchButton_Tapped" Grid.Column="2" IsEnabled="False" >
+                <AppBarButton x:Name="appBarButtonTopics" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="TopicsButton_Tapped" Grid.Column="3" IsEnabled="False" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
                     <AppBarButton.RenderTransform>
                         <CompositeTransform/>
                     </AppBarButton.RenderTransform>
                 </AppBarButton>
-                <AppBarButton x:Name="appBarButtonTopics" Icon="Filter" HorizontalAlignment="Center" IsCompact="True" Tapped="TopicsButton_Tapped" Grid.Column="3" IsEnabled="False" >
-                    <AppBarButton.RenderTransform>
-                        <CompositeTransform/>
-                    </AppBarButton.RenderTransform>
-                </AppBarButton>
-                <AppBarButton x:Name="appBarButtonOptions" HorizontalAlignment="Center" IsCompact="True" Margin="0,-12" Tapped="AppBar_ToggleState" Grid.Column="4" VerticalAlignment="Center">
+                <AppBarButton x:Name="appBarButtonOptions" Width="50" HorizontalAlignment="Center" IsCompact="True" Margin="0,-12" Tapped="AppBar_ToggleState" Grid.Column="4" VerticalAlignment="Center">
                     <AppBarButton.Icon>
                         <FontIcon Glyph="" FontSize="16"/>
                     </AppBarButton.Icon>
@@ -372,9 +382,11 @@
             </Grid>
         </Grid>
 
-        <Rectangle x:Name="rectangle" Grid.RowSpan="2" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Opacity="0" Visibility="Collapsed" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}"/>
-        <Grid x:Name="searchPopup" Background="{ThemeResource ContentDialogDimmingThemeBrush}" Grid.Column="1" Grid.RowSpan="3" Visibility="Collapsed">
-            <TextBox x:Name="searchBox" Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" PlaceholderText="поиск" Margin="16" KeyUp="searchBox_KeyUp" LostFocus="searchBox_LostFocus"/>
+        <Rectangle x:Name="rectangle" Grid.ColumnSpan="2" Grid.RowSpan="2" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Opacity="0" Visibility="Collapsed" Stroke="{ThemeResource SystemControlBackgroundAccentBrush}"/>
+        <Grid x:Name="searchPopup" Background="{ThemeResource ThumbPressedBackgroundThemeBrush}" Grid.ColumnSpan="2" Grid.RowSpan="3" Visibility="Collapsed">
+            <Grid Background="White" Height="50" VerticalAlignment="Top">
+                <TextBox x:Name="searchBox" TextWrapping="Wrap" VerticalAlignment="Center" PlaceholderText="поиск" KeyUp="searchBox_KeyUp" LostFocus="searchBox_LostFocus" Style="{StaticResource BorderlessTextBox}"/>
+            </Grid>
         </Grid>
 
     </Grid>
