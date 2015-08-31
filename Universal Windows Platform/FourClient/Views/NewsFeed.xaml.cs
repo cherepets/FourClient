@@ -517,7 +517,7 @@ namespace FourClient.Views
 
         private void AppBar_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            var threshold = 5;
+            var threshold = 3;
             if (e.Delta.Translation.Y < -threshold && AppBarMenu.Visibility == Visibility.Collapsed)
                 AppBar_ToggleState();
             if (e.Delta.Translation.Y > threshold && AppBarMenu.Visibility == Visibility.Visible)
