@@ -343,10 +343,10 @@
                 <Grid.RenderTransform>
                     <CompositeTransform/>
                 </Grid.RenderTransform>
-                <StackPanel x:Name="AppBarMenu" Margin="0,16" Visibility="Collapsed">
-                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontWeight="Light" FontSize="20" Margin="16,8"/>
-                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontWeight="Light" FontSize="20" Margin="16,8"/>
-                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontWeight="Light" FontSize="20" Margin="16,8"/>
+                <StackPanel x:Name="AppBarMenu" Margin="0,12" Visibility="Collapsed">
+                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontWeight="Light" FontSize="16" Margin="16,8"/>
+                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontWeight="Light" FontSize="16" Margin="16,8"/>
+                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontWeight="Light" FontSize="16" Margin="16,8"/>
                 </StackPanel>
             </Grid>
             <Grid x:Name="FeedAppBarTop" Grid.Row="1" RequestedTheme="Dark">
