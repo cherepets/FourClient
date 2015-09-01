@@ -16,7 +16,7 @@
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="WebContent" Grid.RowSpan="2" Grid.Column="1"/>
+        <Grid x:Name="WebContent" Grid.RowSpan="2" Grid.Column="1" Margin="-4,0,0,0" />
         <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
         <Grid x:Name="AppBarControl" Grid.Row="1" Background="{ThemeResource ContentDialogDimmingThemeBrush}" RequestedTheme="Dark" Grid.ColumnSpan="3" >
             <Grid >
