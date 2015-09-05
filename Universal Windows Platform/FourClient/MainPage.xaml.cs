@@ -159,6 +159,9 @@ namespace FourClient
             BackButton.Visibility = !SettingsService.IsPhone && state == "RightPane"
                 ? Visibility.Visible 
                 : Visibility.Collapsed;
+            HeaderBlock.Visibility = !SettingsService.IsPhone && (state == "RightPane" || state == "TwoPanes")
+                ? Visibility.Visible
+                : Visibility.Collapsed;
             PrevVisualState = state;
         }
         

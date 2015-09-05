@@ -204,10 +204,10 @@
                         <RowDefinition/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <GridView x:Name="SourceView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <GridView x:Name="SourceView" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,-4,0">
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="120" Height="120" Tapped="Source_Tapped" Holding="Source_Holding" RightTapped="Source_Right" IsHitTestVisible="{Binding Enabled}">
+                                <Grid Tapped="Source_Tapped" Holding="Source_Holding" RightTapped="Source_Right" Loaded="Source_Loaded" IsHitTestVisible="{Binding Enabled}">
                                     <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                                     <Viewbox Stretch="UniformToFill">
                                         <Image Source="{Binding ImageUrl}" />
@@ -223,7 +223,7 @@
                             </DataTemplate>
                         </GridView.ItemTemplate>
                     </GridView>
-                    <Grid x:Name="HiddenGrid" Grid.Row="1" Margin="0,0,0,10" >
+                    <Grid x:Name="HiddenGrid" Grid.Row="1" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="Auto"/>
@@ -234,10 +234,10 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Rectangle Grid.ColumnSpan="2" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Height="16" Margin="-20,0" Visibility="Visible" />
-                        <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="0,12,0,0">
+                        <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="0,12,-4,0">
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Width="120" Height="120" Tapped="Hidden_Tapped" RightTapped="Hidden_Right" Holding="Hidden_Holding" IsHitTestVisible="{Binding Enabled}">
+                                    <Grid Tapped="Hidden_Tapped" RightTapped="Hidden_Right" Holding="Hidden_Holding" Loaded="Source_Loaded" IsHitTestVisible="{Binding Enabled}">
                                         <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                                         <Viewbox Stretch="UniformToFill">
                                             <Image Source="{Binding ImageUrl}" />
@@ -255,10 +255,10 @@
                         </GridView>
                         <TextBlock x:Name="LeftHiddenBlock" Text="Отключенные" FontSize="24" Grid.Row="2" VerticalAlignment="Center" />
                         <TextBlock x:Name="UpperHiddenBlock" Text="ОТКЛЮЧЕННЫЕ" FontSize="16" Grid.Row="2" VerticalAlignment="Center" />
-                        <AppBarToggleButton x:Name="HiddenToggleButton" VerticalAlignment="Center" Margin="-12,-8,-12,-18" Grid.Row="2" Grid.Column="1" RenderTransformOrigin="0.5,0.5" Checked="AppBarToggleButton_Checked" Unchecked="HiddenToggleButton_Unchecked" Icon="Go" >
-                            <AppBarToggleButton.RenderTransform>
-                                <CompositeTransform ScaleX="0.75" ScaleY="0.75"/>
-                            </AppBarToggleButton.RenderTransform>
+                        <AppBarToggleButton x:Name="HiddenToggleButton" IsCompact="True" Width="50" Height="50" Grid.Row="2" Grid.Column="1" Checked="HiddenToggleButton_Checked" Unchecked="HiddenToggleButton_Unchecked" Margin="0,0,-16,0">
+                            <AppBarToggleButton.Icon>
+                                <FontIcon Glyph="" FontSize="16"/>
+                            </AppBarToggleButton.Icon>
                         </AppBarToggleButton>
                     </Grid>
                 </Grid>
@@ -309,10 +309,10 @@
             <PivotItem x:Name="CollectionTab">
                 <Grid>
                     <TextBlock x:Name="CollectionCaption" TextWrapping="Wrap" Text="Ваша коллекция пуста. Сохраняйте новости из ленты, чтобы заполнить её." FontSize="16" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" Margin="-2,0"/>
-                    <GridView x:Name="CollectionView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                    <GridView x:Name="CollectionView" ScrollViewer.VerticalScrollBarVisibility="Hidden" Margin="0,0,-4,0">
                         <GridView.ItemTemplate>
                             <DataTemplate>
-                                <Grid Width="184" Height="184" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" RightTapped="CollectionGrid_Right">
+                                <Grid Width="184" Height="184" Tapped="CollectionGrid_Tapped" Holding="CollectionGrid_Holding" Loaded="CollectionGrid_Loaded" RightTapped="CollectionGrid_Right">
                                     <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                                     <Viewbox Stretch="UniformToFill">
                                         <Image Source="{Binding Image}" />
@@ -331,7 +331,6 @@
                 </Grid>
             </PivotItem>
         </Pivot>
-        <Rectangle x:Name="OffsetRectangle" Grid.Column="1" Grid.Row="2" Height="20" />
         <Rectangle x:Name="BlinderRectangle" Grid.ColumnSpan="2" Grid.RowSpan="3" Fill="{ThemeResource ThumbPressedBackgroundThemeBrush}" Visibility="Collapsed" Tapped="AppBar_ToggleState" />
 
         <Grid x:Name="AppBar" Grid.ColumnSpan="2" Grid.Row="2" ManipulationDelta="AppBar_ManipulationDelta" ManipulationMode="TranslateY">
@@ -344,9 +343,9 @@
                     <CompositeTransform/>
                 </Grid.RenderTransform>
                 <StackPanel x:Name="AppBarMenu" Margin="0,12" Visibility="Collapsed">
-                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontWeight="Light" FontSize="16" Margin="16,8"/>
-                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontWeight="Light" FontSize="16" Margin="16,8"/>
-                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontWeight="Light" FontSize="16" Margin="16,8"/>
+                    <TextBlock Text="История" Tapped="HistoryButton_Tapped" FontSize="16" Margin="12,8"/>
+                    <TextBlock Text="Настройки" Tapped="SettingsButton_Tapped" FontSize="16" Margin="12,8"/>
+                    <TextBlock Text="О программе" Tapped="HelpButton_Tapped" FontSize="16" Margin="12,8"/>
                 </StackPanel>
             </Grid>
             <Grid x:Name="FeedAppBarTop" Grid.Row="1" RequestedTheme="Dark">

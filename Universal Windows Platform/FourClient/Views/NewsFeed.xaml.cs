@@ -896,12 +896,10 @@ namespace FourClient.Views
                 LeftButtonSearch.Visibility = Visibility.Visible;
                 appBarButtonTopics.Visibility = Visibility.Visible;
                 await Task.Delay(1);
-                OffsetRectangle.Height = FeedAppBarTop.ActualHeight;
                 await RaiseButtons.PlayAsync();
             }
             else
             {
-                OffsetRectangle.Height = 20;
                 await HideButtons.PlayAsync();
                 appBarButtonRefresh.Visibility = Visibility.Collapsed;
                 LeftButtonSearch.Visibility = Visibility.Collapsed;
@@ -1098,7 +1096,7 @@ namespace FourClient.Views
             Source_Tapped(this, new TappedRoutedEventArgs());
         }
 
-        private void AppBarToggleButton_Checked(object sender, RoutedEventArgs e)
+        private void HiddenToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             HiddenView.Visibility = Visibility.Visible;
         }
@@ -1140,6 +1138,28 @@ namespace FourClient.Views
         {
             PivotControl.SelectedItem = CollectionTab;
             e.Handled = true;
+        }
+
+        private void Source_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            var container = SourceView;
+            var maxSize = container.ActualWidth - 12;
+            var columns = Math.Floor(maxSize / 95);
+            var desiredSize = Math.Floor(maxSize / columns);
+            grid.Width = desiredSize;
+            grid.Height = desiredSize;
+        }
+
+        private void CollectionGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            var container = CollectionView;
+            var maxSize = container.ActualWidth - 12;
+            var columns = Math.Floor(maxSize / 140);
+            var desiredSize = Math.Floor(maxSize / columns);
+            grid.Width = desiredSize;
+            grid.Height = desiredSize;
         }
     }
 }
