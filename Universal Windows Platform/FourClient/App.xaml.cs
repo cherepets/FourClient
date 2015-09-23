@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using Windows.UI;
 using Windows.UI.Popups;
@@ -25,9 +24,12 @@ namespace FourClient
             Current.UnhandledException += Current_UnhandledException;
         }
 
+        public static new App Current => Application.Current as App;
+
         private async void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
+            if (e.Message == "Unspecified error\r\n") return;
             var dialog = new MessageDialog(e.Message);
             await dialog.ShowAsync();
         }
@@ -92,7 +94,7 @@ namespace FourClient
                             MainPage.GoToNewsFeed(args[0]);
                             break;
                         case 2:
-                            MainPage.GoToArticle(args[0], title, args[1], null, null);
+                            MainPage.GoToArticle(args[0], title, args[1], null, null, null);
                             break;
                     }
                 }
@@ -123,9 +125,14 @@ namespace FourClient
                 var article = (string)ApplicationData.Current.LocalSettings.Values["SuspendedArticle"];
                 if (article != null)
                 {
-                    var args = article.Split(';');
+                    var args = article.Split(';').ToList();
+                    while (args.Count() > 2)
+                    {
+                        args[1] += ';' + args[2];
+                        args.Remove(args[2]);
+                    }
                     var title = (string)ApplicationData.Current.LocalSettings.Values["SuspendedTitle"];
-                    MainPage.GoToArticle(args[0], title, args[1], null, null);
+                    MainPage.GoToArticle(args[0], title, args[1], null, null, null);
                 }
                 else
                     MainPage.GoToNews();

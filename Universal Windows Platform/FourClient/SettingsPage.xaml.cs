@@ -1,4 +1,5 @@
-﻿using FourClient.UserControls;
+﻿using FourClient.Extensions;
+using FourClient.UserControls;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
@@ -37,6 +38,7 @@ namespace FourClient
             RequestedTheme = SettingsService.MainTheme;
             if (SettingsService.IsPhone)
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            View.Animate();
         }
 
         private void SettingsPage_BackRequested(object sender, BackRequestedEventArgs e)

@@ -25,7 +25,7 @@ namespace FourClient.UserControls
 
         public MobileHeader()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public override async void SetTitle(string title)

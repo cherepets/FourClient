@@ -1,8 +1,10 @@
-﻿using FourClient.UserControls;
+﻿using FourClient.Extensions;
+using FourClient.UserControls;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace FourClient
 {
@@ -28,7 +30,7 @@ namespace FourClient
             }
         }
 
-        protected override void OnNavigatedTo(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
@@ -36,6 +38,7 @@ namespace FourClient
             RequestedTheme = SettingsService.MainTheme;
             if (SettingsService.IsPhone)
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            View.Animate();
         }
 
         private void AboutPage_BackRequested(object sender, BackRequestedEventArgs e)
@@ -50,7 +53,7 @@ namespace FourClient
             Frame.GoBack();
         }
 
-        protected override void OnNavigatedFrom(Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;

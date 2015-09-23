@@ -1,4 +1,5 @@
-﻿using Windows.Storage;
+﻿using Windows.Foundation.Metadata;
+using Windows.Storage;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 
@@ -7,13 +8,8 @@ namespace FourClient
     public static class SettingsService
     {
         public static bool LargeScreen => Window.Current.Bounds.Width >= 720 || Window.Current.Bounds.Height >= 720;
-        public static bool IsPhone
-        {
-            get
-            {
-                return Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons");
-            }
-        }
+        public static bool IsPhone => ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons");
+        public static string ShareTemplate => "http://fourclient.azurewebsites.net/index.aspx?page=article&prefix={0}&link={1}&title={2}";
 
         public static ElementTheme MainTheme { get; private set; }
         public static ElementTheme ArticleTheme { get; private set; }

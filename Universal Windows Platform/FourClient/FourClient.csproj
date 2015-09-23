@@ -113,6 +113,7 @@
     <Compile Include="Extensions\ColorExt.cs" />
     <Compile Include="Extensions\EnumerableExt.cs" />
     <Compile Include="Extensions\FrameworkElementExt.cs" />
+    <Compile Include="Extensions\ListViewExt.cs" />
     <Compile Include="Extensions\ListBoxExt.cs" />
     <Compile Include="Extensions\StoryboardExt.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -123,6 +124,9 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsService.cs" />
+    <Compile Include="UserControls\HoverListView.xaml.cs">
+      <DependentUpon>HoverListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\PageHeaderBase.cs" />
     <Compile Include="UserControls\PageHeader\MobileHeader.xaml.cs">
       <DependentUpon>MobileHeader.xaml</DependentUpon>
@@ -173,6 +177,10 @@
     <Page Include="SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserControls\HoverListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\PageHeader\MobileHeader.xaml">
       <Generator>MSBuild:Compile</Generator>

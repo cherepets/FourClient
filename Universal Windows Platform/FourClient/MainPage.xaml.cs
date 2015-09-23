@@ -56,14 +56,14 @@ namespace FourClient
 
         public static void RebuildNewsFeedUI() => Singleton.NewsFeed?.RebuildUI();
 
-        public static void GoToArticle(string prefix, string name, string link, string fullLink, string commentLink)
+        public static void GoToArticle(string prefix, string name, string link, string fullLink, string commentLink, string title)
         {
             _articleOpened = true;
             StatusText = GetTitle();
             SetTitle(name);
             var view = Singleton.ArticleView.Children[1] as ArticleView;
             CurrentPage = view;
-            view.Load(prefix, link, fullLink, commentLink);
+            view.Load(prefix, link, fullLink, commentLink, title);
             Singleton.UpdateVisualState(true);
         }
 
@@ -116,9 +116,7 @@ namespace FourClient
             if (SettingsService.IsPhone)
                 Singleton.PageHeader?.SetTitle(title);
             else
-            {
-                    Singleton.HeaderBlock.Text = _articleOpened ? title : string.Empty;
-            }
+                Singleton.HeaderBlock.Text = _articleOpened ? title : string.Empty;
         }
 
         public static void SetTitle(string title, params object[] args)

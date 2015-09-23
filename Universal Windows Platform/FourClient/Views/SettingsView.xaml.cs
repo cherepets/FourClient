@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using Windows.Foundation;
+using Windows.Storage;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -7,10 +12,9 @@ namespace FourClient.Views
 {
     public sealed partial class SettingsView : UserControl
     {
-        public SettingsView(
-            )
+        public SettingsView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             Load();
         }
 
@@ -106,6 +110,27 @@ namespace FourClient.Views
         {
             if (!_loaded) return;
             SettingsService.SetUpperMenu(UpperMenuBox.IsOn);
+        }
+
+        private void CacheButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var appData = ApplicationData.Current.TemporaryFolder;
+            var operation = appData.DeleteAsync(StorageDeleteOption.PermanentDelete);
+            operation.Completed += Operation_Completed;
+        }
+
+        private async void Operation_Completed(IAsyncAction asyncInfo, AsyncStatus asyncStatus)
+        {
+            try
+            {
+                var coreDispatcher = Window.Current.Dispatcher;
+                var dialog = new MessageDialog("Удаление завершено", "Всё готово!");
+                await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal, async () => await dialog.ShowAsync());
+            }
+            catch
+            {
+                // ok
+            }
         }
     }
 }

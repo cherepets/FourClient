@@ -23,18 +23,21 @@ namespace FourClient.Views
     {
         public ArticleView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         public string CurrentArticle { get; private set; }
 
         private bool _loaded;
         private WebView _webView;
+        private string _prefix;
+        private string _link;
         private string _fullLink;
         private string _commentLink;
+        private string _title;
         private string _html;
 
-        public async void Load(string prefix, string link, string fullLink, string commentLink)
+        public async void Load(string prefix, string link, string fullLink, string commentLink, string title)
         {
             try
             {
@@ -43,8 +46,11 @@ namespace FourClient.Views
                     Share.Visibility = Visibility.Visible;
                     Globe.Visibility = Visibility.Visible;
                     Comment.Visibility = Visibility.Visible;
+                    _prefix = prefix;
+                    _link = link;
                     _fullLink = fullLink;
                     _commentLink = commentLink;
+                    _title = title;
                 }
                 else
                 {
@@ -57,9 +63,9 @@ namespace FourClient.Views
                 _webView.DefaultBackgroundColor = (this.Background as SolidColorBrush).Color;
                 WebContent.Children.Clear();
                 WebContent.Children.Add(_webView);
-                var back = (this.Background as SolidColorBrush).Color.ToRGBString();
-                var front = (this.Foreground as SolidColorBrush).Color.ToRGBString();
-                var emptyView = String.Format("<html><body bgcolor='{0}' /></html>", back);
+                var back = (Background as SolidColorBrush).Color.ToRGBString();
+                var front = (Foreground as SolidColorBrush).Color.ToRGBString();
+                var emptyView = string.Format("<html><body bgcolor='{0}' /></html>", back);
                 _webView.NavigateToString(emptyView);
                 var appData = ApplicationData.Current.LocalFolder;
                 var tempData = ApplicationData.Current.TemporaryFolder;
@@ -147,7 +153,7 @@ namespace FourClient.Views
             }
             catch (Exception ex)
             {
-                throw new Exception(String.Format(
+                throw new Exception(string.Format(
 @"Проблема при попытке загрузить данные из кэша.
 
 Details:
@@ -223,10 +229,10 @@ Details:
             DataRequest request = args.Request;
             DataRequestDeferral deferral = request.GetDeferral();
             request.Data.Properties.Title = MainPage.GetTitle();
-            request.Data.Properties.Description = "Отправлено из FourClient для Windows";
+            request.Data.Properties.Description = "Отправлено из FourClient для Windows 10";
             try
             {
-                var uri = new Uri(_fullLink);
+                var uri = new Uri(string.Format(SettingsService.ShareTemplate, _prefix, _link, _title));
                 request.Data.SetWebLink(uri);
             }
             finally
@@ -237,7 +243,7 @@ Details:
 
         private void Rectangle_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (e.Delta.Translation.X > 10) BackPressed();
+            if (e.Delta.Translation.X > 6) BackPressed();
         }
     }
 }

@@ -14,17 +14,19 @@
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="ExtraLight" Margin="12,12,0,-12"  />
+            <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="ExtraLight" Margin="5,0,0,0"  />
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-                <StackPanel Margin="12">
+                <StackPanel Margin="12,0">
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
-                        <TextBlock Text="v.4.1.1" FontSize="16" Margin="0,0,0,12" />
-                        <TextBlock Text="- Макс, смотри, всё стало ровно" FontSize="14" />
+                        <TextBlock Text="v.4.2" FontSize="16" Margin="0,0,0,12" />
+                        <TextBlock Text="- Исправления ошибок" FontSize="14" />
+                        <TextBlock Text="- Улучшение дизайна" FontSize="14" />
+                        <TextBlock Text="- Анимации :)" FontSize="14" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
-                        <TextBlock Text="КОНТАКТЫ" FontSize="16" Margin="0,0,0,12" />
+                        <TextBlock Text="КОНТАКТЫ" FontSize="16" Margin="0,12,0,12" />
                         <StackPanel Orientation="Horizontal">
                             <SymbolIcon Symbol="Read" Tapped="Email_Tapped" />
                             <TextBlock Text="cherepets@live.ru" FontSize="16" Tapped="Email_Tapped" VerticalAlignment="Center" Margin="8" />
@@ -40,7 +42,7 @@
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
-            <TextBlock Text="by FourTeam" FontSize="16" Grid.Row="2" HorizontalAlignment="Right" Margin="20" FontWeight="Thin" FontStyle="Italic"  />
+            <TextBlock Text="by FourTeam" FontSize="16" Grid.Row="2" HorizontalAlignment="Right" Margin="12" FontWeight="Thin" FontStyle="Italic"  />
         </Grid>
     </Grid>
 </UserControl>

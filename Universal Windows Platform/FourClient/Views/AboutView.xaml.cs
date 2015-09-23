@@ -10,7 +10,7 @@ namespace FourClient.Views
     {
         public AboutView()
         {
-            this.InitializeComponent();
+            InitializeComponent();
         }
 
         private async void Email_Tapped(object sender, TappedRoutedEventArgs e)

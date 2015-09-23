@@ -6,7 +6,6 @@
     xmlns:views="using:FourClient.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Disabled">
     <Grid>
@@ -15,6 +14,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="PageHeaderGrid" Background="{ThemeResource SystemControlBackgroundAccentBrush}" />
-        <views:SettingsView Grid.Row="1"/>
+        <views:SettingsView x:Name="View" Grid.Row="1"/>
     </Grid>
 </Page>

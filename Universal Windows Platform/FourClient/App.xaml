@@ -24,7 +24,7 @@
                             <Grid.Resources>
                                 <Style x:Key="ProgressBarRectangleStyle" TargetType="Rectangle">
                                     <Setter Property="Width" Value="{ThemeResource ProgressBarIndeterminateRectagleThemeSize}"/>
-                                    <Setter Property="Height" Value="{ThemeResource ProgressBarIndeterminateRectagleThemeSize}"/>
+                                    <Setter Property="Height" Value="1"/>
                                 </Style>
                             </Grid.Resources>
                             <VisualStateManager.VisualStateGroups>

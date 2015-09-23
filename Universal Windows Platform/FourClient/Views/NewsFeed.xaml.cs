@@ -1,6 +1,7 @@
 ﻿using FourApi;
 using FourApi.Types;
 using FourClient.Extensions;
+using FourClient.UserControls;
 using NotificationsExtensions.TileContent;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Xml.Linq;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using Windows.System;
+using Windows.UI;
 using Windows.UI.Input;
 using Windows.UI.Notifications;
 using Windows.UI.Popups;
@@ -20,13 +22,14 @@ using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace FourClient.Views
 {
     public sealed partial class NewsFeed : UserControl, IBackButton
     {
-
+        private bool _sliding;
         private bool _flyoutOpened;
         private FourItem _dataContext;
         private FourItem _shareContext;
@@ -46,6 +49,11 @@ namespace FourClient.Views
         private const string HIDDEN = "Hidden220.xml";
         private const string TOP = "Top260.xml";
         private const string HISTORY = "History300";
+
+        private List<Grid> _feedItems = new List<Grid>();
+        private List<Grid> _topItems = new List<Grid>();
+        
+        private Dictionary<ScrollViewer, double> _oldScroll = new Dictionary<ScrollViewer, double>();
 
         public NewsFeed()
         {
@@ -85,6 +93,7 @@ namespace FourClient.Views
         #region Load
         private async Task Load()
         {
+            await FullInit();
             var collectionTask = LoadCollection();
             var sourceTask = LoadSource();
             var topTask = LoadTop();
@@ -95,12 +104,20 @@ namespace FourClient.Views
             await historyTask;
         }
 
+        private async Task FullInit()
+        {
+            while (TopView.ActualWidth == 0)
+            {
+                await Task.Delay(1);
+            }
+        }
+
         private void LoadPage(string newsType = null)
         {
             if (_source == null) return;
-            appBarButtonRefresh.IsEnabled = true;
-            appBarButtonTopics.IsEnabled = _source.NewsTypes.Count > 1;
-            LeftButtonSearch.IsEnabled = _source.Searchable;
+            AppBarButtonRefresh.IsEnabled = true;
+            AppBarButtonTopics.IsEnabled = _source.NewsTypes.Count > 1;
+            SearchButton.IsEnabled = _source.Searchable;
             FeedRing.IsActive = true;
             if (newsType == null && _source != null)
                 newsType = _source.NewsTypes.First().Key;
@@ -367,10 +384,24 @@ namespace FourClient.Views
             FeedView.ItemsSource = PageCollection;
         }
 
-        void PageList_LoadFailed()
+        private async void PageList_LoadFailed()
         {
             FeedCaption.Visibility = Visibility.Collapsed;
             FeedRing.IsActive = false;
+            var dialog = new MessageDialog("Попробовать еще раз?", "Проблемы с сетью");
+            dialog.Commands.Add(new UICommand("Да", new UICommandInvokedHandler(YesHandler)));
+            dialog.Commands.Add(new UICommand("Нет", new UICommandInvokedHandler(NoHandler)));
+            dialog.DefaultCommandIndex = 0;
+            dialog.CancelCommandIndex = 1;
+            await dialog.ShowAsync();
+        }
+        private async void YesHandler(IUICommand command)
+        {
+            PageCollection.HasMoreItems = true;
+            await PageCollection.LoadMoreItemsAsync(0);
+        }
+        private void NoHandler(IUICommand command)
+        {
             FeedView.ItemsSource = new ObservableCollection<FourItem>();
             PivotControl.SelectedItem = CollectionTab;
         }
@@ -422,7 +453,7 @@ namespace FourClient.Views
             Storyboard.SetTargetProperty(animation, "(UIElement.Projection).(PlaneProjection.RotationX)");
             AddToHistory(_source.Prefix, page);
             await Task.Delay(250);
-            MainPage.GoToArticle(_source.Prefix, page.Title, page.Link, page.FullLink, page.CommentLink);
+            MainPage.GoToArticle(_source.Prefix, page.Title, page.Link, page.FullLink, page.CommentLink, page.Title);
         }
 
         private void CollectionGrid_Tapped(object sender, TappedRoutedEventArgs e)
@@ -438,7 +469,7 @@ namespace FourClient.Views
                 args.Remove(args[2]);
             }
             AddToHistory(args[0], page);
-            MainPage.GoToArticle(args[0], page.Title, args[1], page.FullLink, page.CommentLink);
+            MainPage.GoToArticle(args[0], page.Title, args[1], page.FullLink, page.CommentLink, page.Title);
         }
 
         private async void AddToHistory(string prefix, FourItem page)
@@ -478,16 +509,24 @@ namespace FourClient.Views
 
         public void BackPressed()
         {
-            if (AppBarMenu.Visibility == Visibility.Visible)
-                AppBar_ToggleState();
-            else
+            if (Flyout.Visibility == Visibility.Visible)
             {
-                if (PivotControl.SelectedItem != SourceTab)
-                    PivotControl.SelectedItem = SourceTab;
-                else
-                    App.Current.Exit();
+                HideFlyout();
+                return;
             }
+            if (AppBarMenu.Visibility == Visibility.Visible)
+            {
+                AppBar_ToggleState();
+                return;
+            }
+            if (PivotControl.SelectedItem != SourceTab)
+            {
+                PivotControl.SelectedItem = SourceTab;
+                return;
+            }
+            App.Current.Exit();
         }
+
         private async void BlinkAsync()
         {
             rectangle.Visibility = Visibility.Visible;
@@ -498,6 +537,8 @@ namespace FourClient.Views
         #region AppBar
         private async void AppBar_ToggleState(object sender = null, TappedRoutedEventArgs e = null)
         {
+            if (_sliding) return;
+            _sliding = true;
             var height = AppBarMenu.ActualHeight;
             if (AppBarMenu.Visibility == Visibility.Visible)
             {
@@ -513,6 +554,7 @@ namespace FourClient.Views
                 RaiseHeight.Value = height;
                 RaiseMenu.Begin();
             }
+            _sliding = false;
         }
 
         private void AppBar_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
@@ -748,10 +790,11 @@ namespace FourClient.Views
             DataRequest request = args.Request;
             DataRequestDeferral deferral = request.GetDeferral();
             request.Data.Properties.Title = _shareContext.Title;
+            var item = _shareContext;
             request.Data.Properties.Description = "Отправлено из FourClient для Windows Phone";
             try
             {
-                var uri = new Uri(_shareContext.FullLink);
+                var uri = new Uri(string.Format(SettingsService.ShareTemplate, _source?.Prefix ?? "NEW", item.Link, item.Title));
                 request.Data.SetWebLink(uri);
             }
             finally
@@ -787,7 +830,7 @@ namespace FourClient.Views
 
         private void CollectionGrid_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Completed) return;
+            if (e?.HoldingState == HoldingState.Started) return;
             _dataContext = (FourItem)(sender as Grid).DataContext;
             var flyout = new MenuFlyout();
             var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
@@ -806,7 +849,7 @@ namespace FourClient.Views
 
         private void Top_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Completed) return;
+            if (e?.HoldingState == HoldingState.Started) return;
             _dataContext = (FourItem)(sender as Grid).DataContext;
             var flyout = new MenuFlyout();
             var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
@@ -822,7 +865,7 @@ namespace FourClient.Views
 
         private void Grid_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Completed) return;
+            if (e?.HoldingState == HoldingState.Started) return;
             _dataContext = (FourItem)(sender as Grid).DataContext;
             var flyout = new MenuFlyout();
             var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
@@ -841,7 +884,7 @@ namespace FourClient.Views
 
         private void Source_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Completed) return;
+            if (e?.HoldingState == HoldingState.Started) return;
             _sourceContext = (FourSource)(sender as Grid).DataContext;
             var flyout = new MenuFlyout();
             var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
@@ -857,7 +900,7 @@ namespace FourClient.Views
 
         private void Hidden_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Completed) return;
+            if (e?.HoldingState == HoldingState.Started) return;
             _sourceContext = (FourSource)(sender as Grid).DataContext;
             var flyout = new MenuFlyout();
             var unhide = new MenuFlyoutItem() { Text = "Включить" };
@@ -889,29 +932,95 @@ namespace FourClient.Views
 
         private async void PivotControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var awaiter = HideMenu.PlayAsync();
+            var animationTask = HideMenu.PlayAsync();
             if (PivotControl.SelectedItem == FeedTab)
             {
-                appBarButtonRefresh.Visibility = Visibility.Visible;
-                LeftButtonSearch.Visibility = Visibility.Visible;
-                appBarButtonTopics.Visibility = Visibility.Visible;
+                AppBarButtonRefresh.Visibility = Visibility.Visible;
+                SearchButton.Visibility = Visibility.Visible;
+                AppBarButtonTopics.Visibility = Visibility.Visible;
                 await Task.Delay(1);
                 await RaiseButtons.PlayAsync();
             }
             else
             {
                 await HideButtons.PlayAsync();
-                appBarButtonRefresh.Visibility = Visibility.Collapsed;
-                LeftButtonSearch.Visibility = Visibility.Collapsed;
-                appBarButtonTopics.Visibility = Visibility.Collapsed;
+                AppBarButtonRefresh.Visibility = Visibility.Collapsed;
+                SearchButton.Visibility = Visibility.Collapsed;
+                AppBarButtonTopics.Visibility = Visibility.Collapsed;
             }
             UpdatePivotControls();
-            await awaiter;
+            await animationTask;
             AppBarMenu.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddScrollListener(ListViewBase view)
+        {
+            try
+            {
+                var scrollViewer = view.GetScrollViewer();
+                if (scrollViewer == null) return;
+                scrollViewer.ViewChanged += scrollViewer_ViewChanged;
+            }
+            catch
+            {
+                //ok
+            }
+        }
+
+        private void RemoveScrollListener(ListViewBase view)
+        {
+            try
+            {
+                var scrollViewer = view.GetScrollViewer();
+                if (scrollViewer == null) return;
+                scrollViewer.ViewChanged -= scrollViewer_ViewChanged;
+            }
+            catch
+            {
+                //ok
+            }
+        }
+
+        private void scrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+            var newScroll = scrollViewer.VerticalOffset;
+            if (!_oldScroll.ContainsKey(scrollViewer))
+            {
+                _oldScroll.Add(scrollViewer, newScroll);
+                return;
+            }
+            var oldScroll = _oldScroll[scrollViewer];
+            _oldScroll[scrollViewer] = newScroll;
+            var diff = newScroll - oldScroll;
+            if (SettingsService.UpperMenu)
+            {
+                if (diff > 10)
+                    UpperPivotHeader.Visibility = Visibility.Collapsed;
+                if (diff < -10)
+                    UpperPivotHeader.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if (diff > 10)
+                {
+                    LeftPivotHeader.Visibility = Visibility.Collapsed;
+                    SearchButton.Visibility = Visibility.Collapsed;
+                }
+                if (diff < -10)
+                { 
+                    LeftPivotHeader.Visibility = Visibility.Visible;
+                    SearchButton.Visibility = Visibility.Visible;
+                }
+            }
         }
 
         private void UpdatePivotControls()
         {
+            RemoveScrollListener(TopView);
+            RemoveScrollListener(SourceView);
+            RemoveScrollListener(FeedView);
+            RemoveScrollListener(CollectionView);
             SplitInterestingButton.IsChecked = false;
             SplitSourceButton.IsChecked = false;
             SplitFeedButton.IsChecked = false;
@@ -920,27 +1029,35 @@ namespace FourClient.Views
             {
                 LeftPivotHeader.Text = "Интересное";
                 SplitInterestingButton.IsChecked = true;
+                AddScrollListener(TopView);
             }
             if (PivotControl.SelectedItem == SourceTab)
             {
                 LeftPivotHeader.Text = "Источники";
                 SplitSourceButton.IsChecked = true;
+                AddScrollListener(SourceView);
             }
             if (PivotControl.SelectedItem == FeedTab)
             {
                 LeftPivotHeader.Text = "Лента";
                 SplitFeedButton.IsChecked = true;
+                AddScrollListener(FeedView);
             }
             if (PivotControl.SelectedItem == CollectionTab)
             {
                 LeftPivotHeader.Text = "Коллекция";
                 SplitCollectionButton.IsChecked = true;
+                AddScrollListener(CollectionView);
             }
             UpperPivotHeader.Text = LeftPivotHeader.Text.ToUpper();
             UpperInterestingButton.IsChecked = SplitInterestingButton.IsChecked;
             UpperSourceButton.IsChecked = SplitSourceButton.IsChecked;
             UpperFeedButton.IsChecked = SplitFeedButton.IsChecked;
             UpperCollectionButton.IsChecked = SplitCollectionButton.IsChecked;
+            if (!SettingsService.UpperMenu)
+                LeftPivotHeader.Visibility = Visibility.Visible;
+            else
+                UpperPivotHeader.Visibility = Visibility.Visible;
         }
 
         #region AppBar
@@ -961,10 +1078,11 @@ namespace FourClient.Views
             e.Handled = true;
             if (_source == null) return;
             searchPopup.Visibility = Visibility.Visible;
-            await Task.Delay(1);
+            var animationTask = ShowSearch.PlayAsync();
             searchBox.Focus(FocusState.Programmatic);
             if (AppBarMenu.Visibility == Visibility.Visible)
                 AppBar_ToggleState();
+            await animationTask;
         }
 
         private void searchBox_KeyUp(object sender, KeyRoutedEventArgs e)
@@ -977,9 +1095,10 @@ namespace FourClient.Views
             searchBox_LostFocus(sender, e);
         }
 
-        private void searchBox_LostFocus(object sender, RoutedEventArgs e)
+        private async void searchBox_LostFocus(object sender, RoutedEventArgs e)
         {
-            searchBox.Text = String.Empty;
+            await HideSearch.PlayAsync();
+            searchBox.Text = string.Empty;
             searchPopup.Visibility = Visibility.Collapsed;
         }
         #endregion
@@ -992,40 +1111,50 @@ namespace FourClient.Views
                 return;
             if (AppBarMenu.Visibility == Visibility.Visible)
                 AppBar_ToggleState();
-            var menuView = new StackPanel
+            var menuView = new StackPanel();
+            var header = new StackPanel { Orientation = Orientation.Horizontal };
+            if (!SettingsService.IsPhone)
             {
-                Margin = new Thickness(8, 0, 0, 0)
-            };
-            var header = new TextBlock
+                var back = new AppBarButton
+                {
+                    Width = 50,
+                    Height = 50,
+                    IsCompact = true,
+                    Icon = new FontIcon
+                    {
+                        Glyph = "",
+                        FontSize = 16
+                    }
+                };
+                back.Tapped += (s, ev) => HideFlyout();
+                header.Children.Add(back);
+            }
+            var headerText = new TextBlock
             {
                 Text = "Разделы",
                 FontSize = 24,
                 Margin = new Thickness(8)
             };
+            header.Children.Add(headerText);
             var listbox = new ListView();
             menuView.Children.Add(header);
             menuView.Children.Add(listbox);
-            var flyout = new Flyout
-            {
-                Content = menuView
-            };
             foreach (var n in _source.NewsTypes.Keys)
             {
-                var item = new GridViewItem
+                var item = new ListViewItem
                 {
-                    FontSize = 24,
-                    Margin = new Thickness(8),
+                    FontSize = 16,
                     Content = n.ToLower(),
                     Tag = n
                 };
                 item.Tapped += (s, t) =>
                 {
-                    flyout.Hide();
+                    HideFlyout();
                     LoadPage((s as FrameworkElement).Tag as string);
                 };
                 listbox.Items.Add(item);
             }
-            flyout.ShowAt(this);
+            ShowFlyout(menuView);
         }
 
         private void HelpButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -1048,41 +1177,71 @@ namespace FourClient.Views
         {
             if (AppBarMenu.Visibility == Visibility.Visible)
                 AppBar_ToggleState();
-            var menuView = new StackPanel
+            var menuView = new StackPanel();
+            var header = new StackPanel { Orientation = Orientation.Horizontal };
+            if (!SettingsService.IsPhone)
             {
-                Margin = new Thickness(8, 0, 0, 0)
-            };
-            var header = new TextBlock
+                var back = new AppBarButton
+                {
+                    Width = 50,
+                    Height = 50,
+                    IsCompact = true,
+                    Icon = new FontIcon
+                    {
+                        Glyph = "",
+                        FontSize = 16
+                    }
+                };
+                back.Tapped += (s, ev) => HideFlyout();
+                header.Children.Add(back);
+            }
+            var headerText = new TextBlock
             {
                 Text = "История",
                 FontSize = 24,
                 Margin = new Thickness(8)
             };
+            header.Children.Add(headerText);
             var listbox = new ListView();
             menuView.Children.Add(header);
             menuView.Children.Add(listbox);
-            var flyout = new Flyout
-            {
-                Content = menuView
-            };
             foreach (var h in HistoryList)
             {
-                var item = new GridViewItem
+                var item = new ListViewItem
                 {
-                    FontSize = 18,
+                    FontSize = 16,
                     Content = h.Title,
-                    Tag = h,
-                    Width = 200
+                    Tag = h
                 };
                 item.Tapped += (s, t) =>
                 {
-                    flyout.Hide();
+                    HideFlyout();
                     var page = (FourItem)item.Tag;
-                    MainPage.GoToArticle("NEW", page.Title, page.Link, null, null);
+                    MainPage.GoToArticle("NEW", page.Title, page.Link, null, null, null);
                 };
                 listbox.Items.Add(item);
             }
-            flyout.ShowAt(this);
+            ShowFlyout(menuView);
+        }
+
+        private void ShowFlyout(UIElement element)
+        {
+            Flyout.Children.Add(element);
+            Flyout.Visibility = Visibility.Visible;
+            Flyout.Animate();
+        }
+
+        private void ShowHoverListView(List<ListViewItem> items)
+        {
+            var hover = new HoverListView();
+            items.ForEach(hover.Items.Add);
+
+        }
+
+        private void HideFlyout()
+        {
+            Flyout.Children.Clear();
+            Flyout.Visibility = Visibility.Collapsed;
         }
         #endregion
 
@@ -1120,24 +1279,28 @@ namespace FourClient.Views
         {
             PivotControl.SelectedItem = InterestingTab;
             e.Handled = true;
+            UpdatePivotControls();
         }
 
         private void SourceButtonButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PivotControl.SelectedItem = SourceTab;
             e.Handled = true;
+            UpdatePivotControls();
         }
 
         private void FeedButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PivotControl.SelectedItem = FeedTab;
             e.Handled = true;
+            UpdatePivotControls();
         }
 
         private void CollectionButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PivotControl.SelectedItem = CollectionTab;
             e.Handled = true;
+            UpdatePivotControls();
         }
 
         private void Source_Loaded(object sender, RoutedEventArgs e)
@@ -1146,7 +1309,7 @@ namespace FourClient.Views
             var container = SourceView;
             var maxSize = container.ActualWidth - 12;
             var columns = Math.Floor(maxSize / 95);
-            var desiredSize = Math.Floor(maxSize / columns);
+            var desiredSize = Math.Floor(maxSize / columns) - 1;
             grid.Width = desiredSize;
             grid.Height = desiredSize;
         }
@@ -1157,9 +1320,57 @@ namespace FourClient.Views
             var container = CollectionView;
             var maxSize = container.ActualWidth - 12;
             var columns = Math.Floor(maxSize / 140);
-            var desiredSize = Math.Floor(maxSize / columns);
+            var desiredSize = Math.Floor(maxSize / columns) - 1;
             grid.Width = desiredSize;
             grid.Height = desiredSize;
         }
+
+        private void FeedGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            FeedChangeGridSize(grid);
+            _feedItems.Add(grid);
+        }
+
+        private void FeedGrid_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            _feedItems.Remove(grid);
+        }
+
+        private void FeedView_SizeChanged(object sender, SizeChangedEventArgs e) => _feedItems.ForEach(FeedChangeGridSize);
+
+        private void FeedChangeGridSize(Grid grid)
+        {
+            var container = FeedView;
+            var maxSize = container.ActualWidth - 4;
+            if (maxSize <= 0) return;
+            grid.Width = maxSize;
+        }
+
+        private void TopGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            TopChangeGridSize(grid);
+            _topItems.Add(grid);
+        }
+
+        private void TopGrid_Unloaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            _topItems.Remove(grid);
+        }
+
+        private void TopView_SizeChanged(object sender, SizeChangedEventArgs e) => _topItems.ForEach(TopChangeGridSize);
+
+        private void TopChangeGridSize(Grid grid)
+        {
+            var container = TopView;
+            var maxSize = container.ActualWidth - 4;
+            if (maxSize <= 0) return;
+            grid.Width = maxSize;
+        }
+
+        private void FeedAppBarTop_SizeChanged(object sender, SizeChangedEventArgs e) => PivotControl.Padding = new Thickness(0, 0, 0, e.NewSize.Height);
     }
 }

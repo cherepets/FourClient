@@ -47,6 +47,6 @@
             </TextBlock.RenderTransform>
         </TextBlock>
         <TextBlock Grid.Column="1" x:Name="TimeBox" TextWrapping="NoWrap" Text="00:00" Foreground="White" Margin="8,0,12,2" FontSize="14" />
-        <ProgressBar x:Name="StatusProgressBar" IsIndeterminate="True" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed" Style="{StaticResource WhiteProgressBar}" />
+        <ProgressBar x:Name="StatusProgressBar" IsIndeterminate="True" VerticalAlignment="Top" Grid.ColumnSpan="2" Visibility="Collapsed" Margin="0,-1,0,0" Style="{StaticResource WhiteProgressBar}" />
     </Grid>
 </local:PageHeaderBase>

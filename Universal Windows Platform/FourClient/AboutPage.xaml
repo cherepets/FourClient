@@ -15,6 +15,6 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid x:Name="PageHeaderGrid" Background="{ThemeResource SystemControlBackgroundAccentBrush}" />
-        <views:AboutView Grid.Row="1"/>
+        <views:AboutView x:Name="View" Grid.Row="1"/>
     </Grid>
 </Page>
