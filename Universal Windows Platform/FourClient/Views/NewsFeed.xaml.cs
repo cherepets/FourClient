@@ -514,6 +514,11 @@ namespace FourClient.Views
                 HideFlyout();
                 return;
             }
+            if (HoverGrid.Visibility == Visibility.Visible)
+            {
+                HideHoverListView();
+                return;
+            }
             if (AppBarMenu.Visibility == Visibility.Visible)
             {
                 AppBar_ToggleState();
@@ -623,6 +628,7 @@ namespace FourClient.Views
 
         private async void pin_Tapped(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             if (_source == null) return;
             var page = _dataContext;
             var tileID = page.Title.GetHashCode().ToString();
@@ -640,6 +646,7 @@ namespace FourClient.Views
 
         private async void pin_SourceTapped(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             if (_sourceContext == null) return;
             var source = _sourceContext;
             var tileID = source.Prefix.GetHashCode().ToString();
@@ -659,6 +666,7 @@ namespace FourClient.Views
 
         private async void hide_Click(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             var inSource = _sourceContext;
             SourceList.Remove(inSource);
             HiddenList.Add(inSource);
@@ -685,6 +693,7 @@ namespace FourClient.Views
 
         private async void unhide_Click(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             var inSource = _sourceContext;
             SourceList.Add(inSource);
             HiddenList.Remove(inSource);
@@ -715,6 +724,7 @@ namespace FourClient.Views
 
         private async void pinCollection_Tapped(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             var page = _dataContext;
             var tileID = page.Title.GetHashCode().ToString();
             var imageUri = new Uri("ms-appx:///Assets/Logo.scale-240.png");
@@ -731,6 +741,7 @@ namespace FourClient.Views
 
         private async void save_Tapped(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             if (_source == null) return;
             MainPage.StatusProgress(true);
             var page = new FourItem
@@ -769,6 +780,7 @@ namespace FourClient.Views
 
         private async void delete_Tapped(object sender, RoutedEventArgs e)
         {
+            HideHoverListView();
             PageList.Remove(_dataContext);
             if (!PageList.Any())
                 CollectionCaption.Visibility = Visibility.Visible;
@@ -830,83 +842,83 @@ namespace FourClient.Views
 
         private void CollectionGrid_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Started) return;
+            if (e?.HoldingState == HoldingState.Completed) return;
             _dataContext = (FourItem)(sender as Grid).DataContext;
-            var flyout = new MenuFlyout();
-            var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
-            pin.Click += pinCollection_Tapped;
-            flyout.Items.Add(pin);
-            var remove = new MenuFlyoutItem() { Text = "Удалить" };
-            remove.Click += delete_Tapped;
-            flyout.Items.Add(remove);
-            var share = new MenuFlyoutItem() { Text = "Поделиться" };
-            share.Click += share_Tapped;
-            flyout.Items.Add(share);
-            flyout.ShowAt(sender as FrameworkElement);
+            var list = new List<ListViewItem>();
+            var pin = new ListViewItem() { Content = "На рабочий стол" };
+            pin.Tapped += pinCollection_Tapped;
+            list.Add(pin);
+            var remove = new ListViewItem() { Content = "Удалить" };
+            remove.Tapped += delete_Tapped;
+            list.Add(remove);
+            var share = new ListViewItem() { Content = "Поделиться" };
+            share.Tapped += share_Tapped;
+            list.Add(share);
+            ShowHoverListView(list, sender as FrameworkElement);
         }
 
         private void CollectionGrid_Right(object sender, RightTappedRoutedEventArgs e) => CollectionGrid_Holding(sender, null);
 
         private void Top_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Started) return;
+            if (e?.HoldingState == HoldingState.Completed) return;
             _dataContext = (FourItem)(sender as Grid).DataContext;
-            var flyout = new MenuFlyout();
-            var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
-            pin.Click += pinCollection_Tapped;
-            flyout.Items.Add(pin);
-            var share = new MenuFlyoutItem() { Text = "Поделиться" };
-            share.Click += share_Tapped;
-            flyout.Items.Add(share);
-            flyout.ShowAt(sender as FrameworkElement);
+            var list = new List<ListViewItem>();
+            var pin = new ListViewItem() { Content = "На рабочий стол" };
+            pin.Tapped += pinCollection_Tapped;
+            list.Add(pin);
+            var share = new ListViewItem() { Content = "Поделиться" };
+            share.Tapped += share_Tapped;
+            list.Add(share);
+            ShowHoverListView(list, sender as FrameworkElement);
         }
 
         private void Top_Right(object sender, RightTappedRoutedEventArgs e) => Top_Holding(sender, null);
 
         private void Grid_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Started) return;
+            if (e?.HoldingState == HoldingState.Completed) return;
             _dataContext = (FourItem)(sender as Grid).DataContext;
-            var flyout = new MenuFlyout();
-            var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
-            pin.Click += pin_Tapped;
-            flyout.Items.Add(pin);
-            var save = new MenuFlyoutItem() { Text = "Сохранить" };
-            save.Click += save_Tapped;
-            flyout.Items.Add(save);
-            var share = new MenuFlyoutItem() { Text = "Поделиться" };
-            share.Click += share_Tapped;
-            flyout.Items.Add(share);
-            flyout.ShowAt(sender as FrameworkElement);
+            var list = new List<ListViewItem>();
+            var pin = new ListViewItem() { Content = "На рабочий стол" };
+            pin.Tapped += pin_Tapped;
+            list.Add(pin);
+            var save = new ListViewItem() { Content = "Сохранить" };
+            save.Tapped += save_Tapped;
+            list.Add(save);
+            var share = new ListViewItem() { Content = "Поделиться" };
+            share.Tapped += share_Tapped;
+            list.Add(share);
+            ShowHoverListView(list, sender as FrameworkElement);
         }
 
         private void Grid_Right(object sender, RightTappedRoutedEventArgs e) => Grid_Holding(sender, null);
 
         private void Source_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Started) return;
+            if (e?.HoldingState == HoldingState.Completed) return;
             _sourceContext = (FourSource)(sender as Grid).DataContext;
-            var flyout = new MenuFlyout();
-            var pin = new MenuFlyoutItem() { Text = "На рабочий стол" };
-            pin.Click += pin_SourceTapped;
-            flyout.Items.Add(pin);
-            var hide = new MenuFlyoutItem() { Text = "Отключить источник" };
-            hide.Click += hide_Click;
-            flyout.Items.Add(hide);
-            flyout.ShowAt(sender as FrameworkElement);
+            var list = new List<ListViewItem>();
+            var pin = new ListViewItem() { Content = "На рабочий стол" };
+            pin.Tapped += pin_SourceTapped;
+            list.Add(pin);
+            var hide = new ListViewItem() { Content = "Отключить источник" };
+            hide.Tapped += hide_Click;
+            list.Add(hide);
+            ShowHoverListView(list, sender as FrameworkElement);
         }
 
         private void Source_Right(object sender, RightTappedRoutedEventArgs e) => Source_Holding(sender, null);
 
         private void Hidden_Holding(object sender, HoldingRoutedEventArgs e)
         {
-            if (e?.HoldingState == HoldingState.Started) return;
+            if (e?.HoldingState == HoldingState.Completed) return;
             _sourceContext = (FourSource)(sender as Grid).DataContext;
-            var flyout = new MenuFlyout();
-            var unhide = new MenuFlyoutItem() { Text = "Включить" };
-            unhide.Click += unhide_Click;
-            flyout.Items.Add(unhide);
-            flyout.ShowAt(sender as FrameworkElement);
+            var list = new List<ListViewItem>();
+            var unhide = new ListViewItem() { Content = "Включить" };
+            unhide.Tapped += unhide_Click;
+            list.Add(unhide);
+            ShowHoverListView(list, sender as FrameworkElement);
         }
 
         private void Hidden_Right(object sender, RightTappedRoutedEventArgs e) => Hidden_Holding(sender, null);
@@ -1226,22 +1238,40 @@ namespace FourClient.Views
 
         private void ShowFlyout(UIElement element)
         {
+            if (Flyout.Visibility == Visibility.Visible) return;
             Flyout.Children.Add(element);
             Flyout.Visibility = Visibility.Visible;
             Flyout.Animate();
-        }
-
-        private void ShowHoverListView(List<ListViewItem> items)
-        {
-            var hover = new HoverListView();
-            items.ForEach(hover.Items.Add);
-
         }
 
         private void HideFlyout()
         {
             Flyout.Children.Clear();
             Flyout.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowHoverListView(List<ListViewItem> items, FrameworkElement element)
+        {
+            if (HoverGrid.Visibility == Visibility.Visible) return;
+            var top = element.GetPosition().Y;
+            if (top < 0) top = 10;
+            if (top > ActualHeight - 200) top = ActualHeight - 200;
+            var hover = new HoverListView
+            {
+                HorizontalAlignment = SettingsService.IsPhone ? HorizontalAlignment.Stretch : HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0, top, 0, 0)
+            };
+            items.ForEach(hover.Items.Add);
+            HoverGrid.Children.Add(hover);
+            HoverGrid.Visibility = Visibility.Visible;
+            HoverGrid.Animate();
+        }
+
+        private void HideHoverListView()
+        {
+            HoverGrid.Children.Clear();
+            HoverGrid.Visibility = Visibility.Collapsed;
         }
         #endregion
 
@@ -1372,5 +1402,9 @@ namespace FourClient.Views
         }
 
         private void FeedAppBarTop_SizeChanged(object sender, SizeChangedEventArgs e) => PivotControl.Padding = new Thickness(0, 0, 0, e.NewSize.Height);
+
+        private void HoverGrid_Tapped(object sender, TappedRoutedEventArgs e) => HideHoverListView();
+
+        private void HoverGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) => HideHoverListView();
     }
 }

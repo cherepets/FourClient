@@ -3,25 +3,6 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -218,6 +199,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -1557,25 +1557,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -1815,6 +1796,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -3201,25 +3201,6 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -3445,6 +3426,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -4817,25 +4817,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -5080,6 +5061,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -6466,25 +6466,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -6710,6 +6691,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -8082,25 +8082,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -8345,6 +8326,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -9731,25 +9731,6 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
-      "Html2Xaml/1.0.0": {
-        "dependencies": {
-          "HtmlAgilityPack": "[1.4.9, )"
-        },
-        "compile": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        },
-        "runtime": {
-          "lib/portable-win81+wpa81/Html2Xaml.dll": {}
-        }
-      },
-      "HtmlAgilityPack/1.4.9": {
-        "compile": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        },
-        "runtime": {
-          "lib/NetCore45/HtmlAgilityPack.dll": {}
-        }
-      },
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Runtime": "[4.0.20, )",
@@ -9975,6 +9956,25 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "MyToolkit/2.4.2": {
+        "compile": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        },
+        "runtime": {
+          "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll": {}
+        }
+      },
+      "MyToolkit.Extended/2.4.2": {
+        "dependencies": {
+          "MyToolkit": "[2.4.2, )"
+        },
+        "compile": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
+        },
+        "runtime": {
+          "lib/uap10.0/MyToolkit.Extended.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -11348,58 +11348,6 @@
     }
   },
   "libraries": {
-    "Html2Xaml/1.0.0": {
-      "sha512": "FtU+mwt9hinzELOu8DqfqvJ1NpvpUZDyux1Tl3gZ1X9gawR0z9EneXNyEV1aLsCSHO3Ve1ZhjV2+cERmyZQBWw==",
-      "type": "Package",
-      "files": [
-        "_rels/.rels",
-        "Html2Xaml.nuspec",
-        "content/Readme/Html2Xaml.Readme.txt",
-        "lib/portable-win81+wpa81/Html2Xaml.dll",
-        "lib/portable-win81+wpa81/Html2Xaml.XML",
-        "package/services/metadata/core-properties/209286b11f11432cbbe0c95fef5b2b74.psmdcp",
-        "[Content_Types].xml"
-      ]
-    },
-    "HtmlAgilityPack/1.4.9": {
-      "sha512": "anZIsi7bbHZ35ZZzvCA+gVWC/mEXVhcJjJvxr3wzUEDsOE4uk0Fa0ZiaxVn83AZpVKVO4RHyqamPkzzJbMUgmQ==",
-      "type": "Package",
-      "files": [
-        "_rels/.rels",
-        "HtmlAgilityPack.nuspec",
-        "HAPIcon.png",
-        "readme.txt",
-        "lib/Net20/HtmlAgilityPack.dll",
-        "lib/Net20/HtmlAgilityPack.pdb",
-        "lib/Net20/HtmlAgilityPack.xml",
-        "lib/Net40/HtmlAgilityPack.dll",
-        "lib/Net40/HtmlAgilityPack.pdb",
-        "lib/Net40/HtmlAgilityPack.XML",
-        "lib/Net40-client/HtmlAgilityPack.dll",
-        "lib/Net40-client/HtmlAgilityPack.pdb",
-        "lib/Net40-client/HtmlAgilityPack.xml",
-        "lib/Net45/HtmlAgilityPack.dll",
-        "lib/Net45/HtmlAgilityPack.pdb",
-        "lib/Net45/HtmlAgilityPack.XML",
-        "lib/NetCore45/HtmlAgilityPack.dll",
-        "lib/NetCore45/HtmlAgilityPack.pdb",
-        "lib/NetCore45/HtmlAgilityPack.pri",
-        "lib/NetCore45/HtmlAgilityPack.xml",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
-        "lib/portable-net45+netcore45+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.dll",
-        "lib/portable-net45+netcore45+wpa81+wp8+MonoAndroid+MonoTouch/HtmlAgilityPack.pdb",
-        "lib/sl4/HtmlAgilityPack.dll",
-        "lib/sl4/HtmlAgilityPack.pdb",
-        "lib/sl4/HtmlAgilityPack.XML",
-        "lib/sl5/HtmlAgilityPack.dll",
-        "lib/sl5/HtmlAgilityPack.pdb",
-        "lib/sl5/HtmlAgilityPack.XML",
-        "lib/sl3-wp/_._",
-        "package/services/metadata/core-properties/43fdb80a5711487696f5a99b6d1418d0.psmdcp",
-        "[Content_Types].xml"
-      ]
-    },
     "Microsoft.CSharp/4.0.0": {
       "sha512": "oWqeKUxHXdK6dL2CFjgMcaBISbkk+AqEg+yvJHE4DElNzS4QaTsCflgkkqZwVlWby1Dg9zo9n+iCAMFefFdJ/A==",
       "type": "Package",
@@ -12050,6 +11998,60 @@
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "package/services/metadata/core-properties/1d4eb9d0228b48b88d2df3822fba2d86.psmdcp",
+        "[Content_Types].xml"
+      ]
+    },
+    "MyToolkit/2.4.2": {
+      "sha512": "cAzm2wgFl0g4hy3DwRrFA6Q005s+xovIDHVYwzKj9Zmfg4P4e4fhT3gNnPjUjE8hrxIq4Ebrn0MHsyq76QZ+Qw==",
+      "type": "Package",
+      "files": [
+        "_rels/.rels",
+        "MyToolkit.nuspec",
+        "lib/portable-net45+wp8+win8+wpa81/MyToolkit.dll",
+        "lib/portable-net45+wp8+win8+wpa81/MyToolkit.xml",
+        "lib/portable-net45+wp8+win8+wpa81/CodeContracts/MyToolkit.Contracts.dll",
+        "lib/portable-sl5+wp71/MyToolkit.dll",
+        "lib/portable-sl5+wp71/MyToolkit.xml",
+        "package/services/metadata/core-properties/375ecb6bbd0146ee86658d56f46f3116.psmdcp",
+        "[Content_Types].xml"
+      ]
+    },
+    "MyToolkit.Extended/2.4.2": {
+      "sha512": "EEp/Jzjql/3EwkvpnGZ8gPfXpnWywACc5+LUD1QYKkKqsOqb3KYK1UIO8t7XQrCvayUgciZdJE4q99mmIY5RcA==",
+      "type": "Package",
+      "files": [
+        "_rels/.rels",
+        "MyToolkit.Extended.nuspec",
+        "lib/net40/MyToolkit.Extended.dll",
+        "lib/net40/MyToolkit.Extended.xml",
+        "lib/net45/MyToolkit.Extended.dll",
+        "lib/net45/MyToolkit.Extended.xml",
+        "lib/portable-wpa81+win8/MyToolkit.Extended/Controls/DatePicker.xbf",
+        "lib/portable-wpa81+win8/MyToolkit.Extended/Controls/TimePicker.xbf",
+        "lib/portable-wpa81+win8/MyToolkit.Extended/Themes/Generic.xbf",
+        "lib/portable-wpa81+win8/MyToolkit.Extended/UI/Popups/ListPickerBox.xbf",
+        "lib/portable-wpa81+win8/MyToolkit.Extended/MyToolkit.Extended.xr.xml",
+        "lib/portable-wpa81+win8/MyToolkit.Extended/MyToolkit.Extended.pdb",
+        "lib/portable-wpa81+win8/MyToolkit.Extended.dll",
+        "lib/portable-wpa81+win8/MyToolkit.Extended.pri",
+        "lib/portable-wpa81+win8/MyToolkit.Extended.xml",
+        "lib/uap10.0/MyToolkit.Extended/Themes/Generic.xbf",
+        "lib/uap10.0/MyToolkit.Extended/MyToolkit.Extended.xr.xml",
+        "lib/uap10.0/MyToolkit.Extended/MyToolkit.Extended.pdb",
+        "lib/uap10.0/MyToolkit.Extended.dll",
+        "lib/uap10.0/MyToolkit.Extended.pri",
+        "lib/uap10.0/MyToolkit.Extended.xml",
+        "lib/sl4-wp71/de/MyToolkit.Extended.resources.dll",
+        "lib/sl4-wp71/fr/MyToolkit.Extended.resources.dll",
+        "lib/sl4-wp71/MyToolkit.Extended.dll",
+        "lib/sl4-wp71/MyToolkit.Extended.xml",
+        "lib/sl50/MyToolkit.Extended.dll",
+        "lib/sl50/MyToolkit.Extended.xml",
+        "lib/wp80/de/MyToolkit.Extended.resources.dll",
+        "lib/wp80/fr/MyToolkit.Extended.resources.dll",
+        "lib/wp80/MyToolkit.Extended.dll",
+        "lib/wp80/MyToolkit.Extended.xml",
+        "package/services/metadata/core-properties/e07e4b402cf04a4fb260f5699c8518aa.psmdcp",
         "[Content_Types].xml"
       ]
     },
@@ -14751,8 +14753,9 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "Html2Xaml >= 1.0.0",
-      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0"
+      "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
+      "MyToolkit >= 2.4.2",
+      "MyToolkit.Extended >= 2.4.2"
     ],
     "UAP,Version=v10.0": []
   }

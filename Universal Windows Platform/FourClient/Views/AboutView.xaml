@@ -20,10 +20,9 @@
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
-                        <TextBlock Text="v.4.2" FontSize="16" Margin="0,0,0,12" />
-                        <TextBlock Text="- Исправления ошибок" FontSize="14" />
+                        <TextBlock Text="v.4.2.7" FontSize="16" Margin="0,0,0,12" />
+                        <TextBlock Text="- Доработка движков" FontSize="14" />
                         <TextBlock Text="- Улучшение дизайна" FontSize="14" />
-                        <TextBlock Text="- Анимации :)" FontSize="14" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
                         <TextBlock Text="КОНТАКТЫ" FontSize="16" Margin="0,12,0,12" />

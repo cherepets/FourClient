@@ -20,6 +20,7 @@ namespace FourClient
         public static string FontFace { get; private set; }
         public static string Align { get; private set; }
         public static string YouTube { get; private set; }
+        public static string Render { get; private set; }
 
         static SettingsService()
         {
@@ -86,6 +87,12 @@ namespace FourClient
             ApplicationData.Current.LocalSettings.Values["YouTube"] = youtube;
         }
 
+        public static void SetRender(string render)
+        {
+            Render = render;
+            ApplicationData.Current.LocalSettings.Values["Render"] = render;
+        }
+
         private static void LoadSettings()
         {
             //First Run            
@@ -94,10 +101,10 @@ namespace FourClient
             ApplicationData.Current.LocalSettings.Values["FirstRun"] = false;
             //Main Theme
             var mainTheme = ApplicationData.Current.LocalSettings.Values["Theme"];
-            if (mainTheme != null) MainTheme = (ElementTheme)mainTheme;
+            MainTheme = mainTheme != null ? (ElementTheme)mainTheme : (IsPhone ? ElementTheme.Default : ElementTheme.Light);
             //Article Theme
             var articleTheme = ApplicationData.Current.LocalSettings.Values["ArticleTheme"];
-            if (articleTheme != null) ArticleTheme = (ElementTheme)articleTheme;
+            ArticleTheme = articleTheme != null ? (ElementTheme)articleTheme : (IsPhone ? ElementTheme.Default : ElementTheme.Light);
             //LiveTile
             var liveTile = ApplicationData.Current.LocalSettings.Values["LiveTile"];
             LiveTile = liveTile != null ? (bool)liveTile : true;
@@ -116,6 +123,9 @@ namespace FourClient
             //YouTube
             var youtube = ApplicationData.Current.LocalSettings.Values["YouTube"];
             YouTube = youtube != null ? (string)youtube : (IsPhone ? "vnd.youtube:" : "http://www.youtube.com/watch?v=");
+            //Render
+            var render = ApplicationData.Current.LocalSettings.Values["Render"];
+            Render = render != null ? (string)render : "EdgeHtml";
         }
     }
 }

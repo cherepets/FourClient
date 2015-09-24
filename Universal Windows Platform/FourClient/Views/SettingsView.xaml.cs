@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FourClient.HtmlRender;
+using System;
 using System.Linq;
 using Windows.Foundation;
 using Windows.Storage;
@@ -29,6 +30,10 @@ namespace FourClient.Views
             FontBox.SelectedItem = face;
             var align = AlignBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.Align);
             AlignBox.SelectedItem = align;
+            RenderBox.Items.Clear();
+            HtmlRenderFactory.Renders.ForEach(r => RenderBox.Items.Add(new ComboBoxItem { Content = r }));
+            var render = RenderBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.Render);
+            RenderBox.SelectedValue = render;
             var youtube = YouTubeBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.YouTube);
             YouTubeBox.SelectedValue = youtube;
             _loaded = true;
@@ -98,6 +103,12 @@ namespace FourClient.Views
         {
             if (!_loaded) return;
             SettingsService.SetYouTube(((ComboBoxItem)YouTubeBox.SelectedItem).Content as string);
+        }
+
+        private void RenderBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_loaded) return;
+            SettingsService.SetRender(((ComboBoxItem)RenderBox.SelectedItem).Content as string);
         }
 
         private void LiveTileBox_Tapped(object sender, TappedRoutedEventArgs e)

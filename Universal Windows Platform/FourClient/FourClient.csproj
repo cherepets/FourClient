@@ -116,6 +116,12 @@
     <Compile Include="Extensions\ListViewExt.cs" />
     <Compile Include="Extensions\ListBoxExt.cs" />
     <Compile Include="Extensions\StoryboardExt.cs" />
+    <Compile Include="HtmlRender\EdgeHtml.cs" />
+    <Compile Include="HtmlRender\Html2Xaml.cs" />
+    <Compile Include="HtmlRender\IHtmlRender.cs" />
+    <Compile Include="HtmlRender\NonVirtualizedMyToolkit.cs" />
+    <Compile Include="HtmlRender\MyToolkit.cs" />
+    <Compile Include="HtmlRender\HtmlRenderFactory.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -124,9 +130,7 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SettingsService.cs" />
-    <Compile Include="UserControls\HoverListView.xaml.cs">
-      <DependentUpon>HoverListView.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="UserControls\HoverListView.cs" />
     <Compile Include="UserControls\PageHeaderBase.cs" />
     <Compile Include="UserControls\PageHeader\MobileHeader.xaml.cs">
       <DependentUpon>MobileHeader.xaml</DependentUpon>
@@ -178,10 +182,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserControls\HoverListView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="UserControls\PageHeader\MobileHeader.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -207,6 +207,10 @@
     <ProjectReference Include="..\FourApi\FourApi.csproj">
       <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
       <Name>FourApi.UWP</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Html2Xaml\Html2Xaml.csproj">
+      <Project>{400e3191-5fe0-43c4-b01f-4b3815830d96}</Project>
+      <Name>Html2Xaml</Name>
     </ProjectReference>
     <ProjectReference Include="..\WebServiceClient\WebServiceClient.csproj">
       <Project>{e5cafe52-240c-46ed-885c-7b118d3bb9b0}</Project>

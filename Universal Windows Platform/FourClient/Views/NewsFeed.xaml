@@ -405,6 +405,7 @@
         </Grid>
 
         <Grid x:Name="Flyout" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.ColumnSpan="2" Grid.RowSpan="3" Visibility="Collapsed"/>
+        <Grid x:Name="HoverGrid" Background="{ThemeResource SystemControlForegroundChromeBlackMediumLowBrush}" Grid.ColumnSpan="2" Grid.RowSpan="3" Visibility="Collapsed" Tapped="HoverGrid_Tapped" RightTapped="HoverGrid_RightTapped"/>
 
     </Grid>
 </UserControl>

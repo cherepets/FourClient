@@ -24,7 +24,7 @@
             </views:NewsFeed.RenderTransform>
         </views:NewsFeed>
 
-        <Grid x:Name="ArticleView" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1" Visibility="Collapsed" >
+        <Grid x:Name="ArticleView" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1" Visibility="Collapsed" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>

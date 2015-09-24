@@ -20,7 +20,7 @@ namespace FourClient.Extensions
             });
             anim.KeyFrames.Add(new EasingDoubleKeyFrame
             {
-                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.5)),
+                KeyTime = KeyTime.FromTimeSpan(TimeSpan.FromSeconds(0.2)),
                 Value = 1
             });
             storyboard.Children.Add(anim);

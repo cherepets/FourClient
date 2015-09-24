@@ -20,28 +20,36 @@
         <Grid x:Name="AppBarControl" Grid.Row="1" Background="{ThemeResource ContentDialogDimmingThemeBrush}" RequestedTheme="Dark" Grid.ColumnSpan="3" >
             <Grid >
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="9" Opacity="0.5" />
-                <AppBarButton x:Name="Globe" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Globe_Tapped" Grid.Column="1" >
+                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="5" Opacity="0.5" />
+                <AppBarButton x:Name="Render" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Render_Tapped" Grid.Column="0" >
+                    <AppBarButton.Icon>
+                        <FontIcon Glyph="" FontSize="16"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Name="Globe" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Globe_Tapped" Grid.Column="2" >
                     <AppBarButton.Icon>
                         <FontIcon Glyph="" FontSize="16"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton x:Name="Comment" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Comments_Tapped" Grid.Column="2" >
+                <AppBarButton x:Name="Comment" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Comments_Tapped" Grid.Column="3" >
                     <AppBarButton.Icon>
                         <FontIcon Glyph="" FontSize="16"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton x:Name="Share" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Share_Tapped" Grid.Column="3" >
+                <AppBarButton x:Name="Share" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Share_Tapped" Grid.Column="4" >
                     <AppBarButton.Icon>
                         <FontIcon Glyph="" FontSize="16"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
             </Grid>
         </Grid>
+        <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
+        <Grid x:Name="HoverGrid" Background="{ThemeResource SystemControlForegroundChromeBlackMediumLowBrush}" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed" Tapped="HoverGrid_Tapped" RightTapped="HoverGrid_RightTapped"/>
     </Grid>
 </UserControl>

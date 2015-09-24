@@ -40,13 +40,15 @@
                 <ToggleSwitch x:Name="UpperMenuBox" Margin="12,0,12,10" Header="Расположение меню" OffContent="Слева" OnContent="Сверху" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Toggled="UpperMenuBox_Toggled" />
                 <CheckBox x:Name="LiveTileBox" Margin="12,0,12,10" Content="Живая плитка" FontSize="16" IsChecked="False" Foreground="{ThemeResource ApplicationForegroundThemeBrush}" Tapped="LiveTileBox_Tapped" />
                 <Button x:Name="CacheButton" Margin="12,10" Content="Очистить кэш" Tapped="CacheButton_Tapped" />
+                <TextBlock TextWrapping="Wrap" Text="Движок HTML" FontSize="16" Margin="12,10,12,0"/>
+                <ComboBox x:Name="RenderBox" Margin="12,0,12,10" SelectionChanged="RenderBox_SelectionChanged"/>
                 <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" Margin="12,10,12,0"/>
                 <ComboBox x:Name="YouTubeBox" Margin="12,0,12,10" SelectionChanged="YouTubeBox_SelectionChanged">
                     <ComboBoxItem Content="vnd.youtube:"/>
                     <ComboBoxItem Content="metrotube:VideoPage?VideoID="/>
                     <ComboBoxItem Content="http://www.youtube.com/watch?v="/>
                 </ComboBox>
-                <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="16" Margin="12,10,12,0"/>
+                    <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="16" Margin="12,10,12,0"/>
                 <ComboBox x:Name="FontBox" Margin="12,0,12,10" SelectionChanged="FontBox_SelectionChanged">
                     <ComboBoxItem Content="Segoe UI"/>
                     <ComboBoxItem Content="Arial"/>

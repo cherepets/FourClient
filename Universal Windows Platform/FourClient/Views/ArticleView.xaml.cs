@@ -1,7 +1,10 @@
 ﻿using FourApi;
 using FourApi.Types;
 using FourClient.Extensions;
+using FourClient.HtmlRender;
+using FourClient.UserControls;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -29,7 +32,7 @@ namespace FourClient.Views
         public string CurrentArticle { get; private set; }
 
         private bool _loaded;
-        private WebView _webView;
+        private IHtmlRender _render;
         private string _prefix;
         private string _link;
         private string _fullLink;
@@ -39,6 +42,8 @@ namespace FourClient.Views
 
         public async void Load(string prefix, string link, string fullLink, string commentLink, string title)
         {
+            ProgressRing.IsActive = true;
+            Render.Visibility = Visibility.Collapsed;
             try
             {
                 if (fullLink != null && commentLink != null)
@@ -59,14 +64,16 @@ namespace FourClient.Views
                     Comment.Visibility = Visibility.Collapsed;
                 }
                 CurrentArticle = prefix + ';' + link;
-                _webView = new WebView();
-                _webView.DefaultBackgroundColor = (this.Background as SolidColorBrush).Color;
+                _render = HtmlRenderFactory.GetRender();
+                _render.Background = (Background as SolidColorBrush).Color;
+                _render.Foreground = (Foreground as SolidColorBrush).Color;
+                _render.FontSize = SettingsService.FontSize;
                 WebContent.Children.Clear();
-                WebContent.Children.Add(_webView);
+                WebContent.Children.Add(_render.Implementation);
                 var back = (Background as SolidColorBrush).Color.ToRGBString();
                 var front = (Foreground as SolidColorBrush).Color.ToRGBString();
                 var emptyView = string.Format("<html><body bgcolor='{0}' /></html>", back);
-                _webView.NavigateToString(emptyView);
+                _render.Html = emptyView;
                 var appData = ApplicationData.Current.LocalFolder;
                 var tempData = ApplicationData.Current.TemporaryFolder;
                 var article = await CheckCache(appData) ?
@@ -83,14 +90,16 @@ namespace FourClient.Views
                     .Replace("{5}", SettingsService.Align);
                 _loaded = false;
                 _html = html;
-                if (_webView == null) return;
-                _webView.NavigateToString(_html);
-                if (_webView == null) return;
-                _webView.NavigationCompleted += webView_NavigationCompleted;
-                if (_webView == null) return;
+                if (fullLink != null && commentLink != null)
+                    Render.Visibility = Visibility.Visible;
+                if (_render == null) return;
+                _render.Completed += render_Completed;
+                if (_render == null) return;
+                _render.Html = _html;
+                if (_render == null) return;
                 while (!_loaded) await Task.Delay(100);
-                if (_webView == null) return;
-                _webView.NavigationCompleted -= webView_NavigationCompleted;
+                if (_render == null) return;
+                _render.Completed -= render_Completed;
             }
             catch (ServiceException se)
             {
@@ -180,25 +189,26 @@ Details:
             catch { }
         }
         
-        private void webView_NavigationCompleted(WebView sender, WebViewNavigationCompletedEventArgs args)
+        private void render_Completed(object sender, EventArgs args)
         {
-            if (_webView != null) _loaded = true;
+            ProgressRing.IsActive = false;
+            if (_render != null) _loaded = true;
         }
         
         public void BackPressed()
         {
-            if (_webView == null) return;
-            if (_webView.CanGoBack)
+            if (_render == null) return;
+            if (_render.CanGoBack)
             {
-                _webView = new WebView();
-                _webView.DefaultBackgroundColor = (this.Background as SolidColorBrush).Color;
+                _render = new EdgeHtml();
+                _render.Background = (Background as SolidColorBrush).Color;
                 WebContent.Children.Clear();
-                WebContent.Children.Add(_webView);
-                _webView.NavigateToString(_html);
+                WebContent.Children.Add(_render.Implementation);
+                _render.Html = _html;
                 return;
             }
             WebContent.Children.Clear();
-            _webView = null;
+            _render = null;
             MainPage.GoToNews();
         }
         
@@ -245,5 +255,58 @@ Details:
         {
             if (e.Delta.Translation.X > 6) BackPressed();
         }
+
+        private void Render_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var list = new List<ListViewItem>();
+            foreach (var renderName in HtmlRenderFactory.Renders)
+            {
+                var render = new ListViewItem() { Content = renderName, Tag = renderName };
+                render.Tapped += render_Tapped;
+                list.Add(render);
+            }
+            ShowHoverListView(list, Render);
+        }
+
+        private void render_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var render = (sender as ListViewItem).Tag as string;
+            HideHoverListView();
+            _render = HtmlRenderFactory.GetRender(render);
+            _render.Background = (Background as SolidColorBrush).Color;
+            _render.Foreground = (Foreground as SolidColorBrush).Color;
+            _render.FontSize = SettingsService.FontSize;
+            WebContent.Children.Clear();
+            WebContent.Children.Add(_render.Implementation);
+            _render.Html = _html;
+        }
+
+        private void ShowHoverListView(List<ListViewItem> items, FrameworkElement element)
+        {
+            if (HoverGrid.Visibility == Visibility.Visible) return;
+            var top = element.GetPosition().Y;
+            if (top < 0) top = 10;
+            if (top > ActualHeight - 200) top = ActualHeight - 200;
+            var hover = new HoverListView
+            {
+                HorizontalAlignment = SettingsService.IsPhone ? HorizontalAlignment.Stretch : HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Top,
+                Margin = new Thickness(0, top, 0, 0)
+            };
+            items.ForEach(hover.Items.Add);
+            HoverGrid.Children.Add(hover);
+            HoverGrid.Visibility = Visibility.Visible;
+            HoverGrid.Animate();
+        }
+
+        private void HideHoverListView()
+        {
+            HoverGrid.Children.Clear();
+            HoverGrid.Visibility = Visibility.Collapsed;
+        }
+
+        private void HoverGrid_Tapped(object sender, TappedRoutedEventArgs e) => HideHoverListView();
+
+        private void HoverGrid_RightTapped(object sender, RightTappedRoutedEventArgs e) => HideHoverListView();
     }
 }

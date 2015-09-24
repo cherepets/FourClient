@@ -1,0 +1,15 @@
+glob:*.user
+glob:*.suo
+glob:bin
+glob:Backup
+glob:obj
+glob:UpgradeLog.XML
+glob:_UpgradeReport_Files
+glob:*.docstates
+glob:*.msi
+glob:*.exe
+glob:*.orig
+glob:PrecompiledWeb
+syntax: glob
+SpellList.Base.old
+SpellList.Services
