@@ -1,2 +1,2 @@
-MainPackage=C:\Users\cherepets\Documents\GitHub\FourClient\FourClient.Paid\bin\Release\FourClient.Paid_3.9.9.0_AnyCPU.appx
-SymbolPackage=C:\Users\cherepets\Documents\GitHub\FourClient\FourClient.Paid\AppPackages\FourClient.Paid_3.9.9.0_Test\FourClient.Paid_3.9.9.0_AnyCPU.appxsym
+MainPackage=C:\Users\cherepets\Documents\GitHub\FourClient\Windows Phone\FourClient.Paid\bin\Release\FourClient.Paid_3.9.9.2_AnyCPU.appx
+SymbolPackage=C:\Users\cherepets\Documents\GitHub\FourClient\Windows Phone\FourClient.Paid\AppPackages\FourClient.Paid_3.9.9.2_Test\FourClient.Paid_3.9.9.2_AnyCPU.appxsym

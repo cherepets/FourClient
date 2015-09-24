@@ -51,7 +51,7 @@ namespace FourClient
             try
             {
                 var argString = e.Arguments;
-                if (!String.IsNullOrEmpty(argString))
+                if (!string.IsNullOrEmpty(argString))
                 {
                     var tiles = await SecondaryTile.FindAllForPackageAsync();
                     var tile = tiles.FirstOrDefault(t => t.TileId == e.TileId);
@@ -99,7 +99,12 @@ namespace FourClient
                 var article = (string)ApplicationData.Current.LocalSettings.Values["SuspendedArticle"];
                 if (article != null)
                 {
-                    var args = article.Split(';');
+                    var args = article.Split(';').ToList();
+                    while (args.Count() > 2)
+                    {
+                        args[1] += ';' + args[2];
+                        args.Remove(args[2]);
+                    }
                     var title = (string)ApplicationData.Current.LocalSettings.Values["SuspendedTitle"];
                     MainPage.GoToArticle(args[0], title, args[1], null, null);
                 }

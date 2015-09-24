@@ -16,7 +16,6 @@ namespace FourClient
         private static MainPage Singleton;
         private static IBackButton CurrentPage;
         private static string StatusText;
-        private static string PrevVisualState;
 
         private static bool _articleOpened;
 
@@ -139,7 +138,6 @@ namespace FourClient
             var state = _articleOpened ?
                 "RightPane" :
                 "LeftPane";
-            if (state == PrevVisualState) return;
             VisualStateManager.GoToState(this, state, false);
         }
     }

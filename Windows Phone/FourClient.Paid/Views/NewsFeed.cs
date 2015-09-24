@@ -8,7 +8,7 @@ namespace FourClient.Views
 {
     public sealed partial class NewsFeed : UserControl, IBackButton
     {
-        private const string SHOWN = "Shown399";
+        private const string SHOWN = "Shown400";
 
         private async void AfterLoad()
         {
@@ -22,13 +22,7 @@ namespace FourClient.Views
                     content:
 @"Привет! Спасибо за поддержку FourClient!
 
-Ну, теперь то точно последнее обновление для WP8.1.
-
-- Настройки выравнивания текста
-
-- Кнопка 'поделиться' внутри статьи
-
-До встречи на Windows 10 :)"
+Это обновление служит для переноса ряда исправлений уже реализованных в версии для Windows 10 в версию для Windows Phone 8.1."
                     );
                 ApplicationData.Current.LocalSettings.Values[SHOWN] = true;
                 await dialog.ShowAsync();

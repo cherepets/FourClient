@@ -60,6 +60,7 @@ namespace FourAPI.Types
         public bool HasMoreItems
         {
             get { return _hasMoreItems; }
+            set { _hasMoreItems = true; }
         }
 
         private bool _hasMoreItems = true;

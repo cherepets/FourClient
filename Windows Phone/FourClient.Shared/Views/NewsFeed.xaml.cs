@@ -354,10 +354,24 @@ namespace FourClient.Views
             FeedView.ItemsSource = PageCollection;
         }
 
-        void PageList_LoadFailed()
+        private async void PageList_LoadFailed()
         {
             FeedCaption.Visibility = Visibility.Collapsed;
             FeedRing.IsActive = false;
+            var dialog = new MessageDialog("Попробовать еще раз?", "Проблемы с сетью");
+            dialog.Commands.Add(new UICommand("Да", new UICommandInvokedHandler(YesHandler)));
+            dialog.Commands.Add(new UICommand("Нет", new UICommandInvokedHandler(NoHandler)));
+            dialog.DefaultCommandIndex = 0;
+            dialog.CancelCommandIndex = 1;
+            await dialog.ShowAsync();
+        }
+        private async void YesHandler(IUICommand command)
+        {
+            PageCollection.HasMoreItems = true;
+            await PageCollection.LoadMoreItemsAsync(0);
+        }
+        private void NoHandler(IUICommand command)
+        {
             FeedView.ItemsSource = new ObservableCollection<FourItem>();
             PivotControl.SelectedItem = CollectionTab;
         }
