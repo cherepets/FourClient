@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
@@ -16,7 +17,7 @@ namespace FourClient.UserControls
         {
             BorderBrush = Resources["SystemControlBackgroundAccentBrush"] as SolidColorBrush;
             BorderThickness = SettingsService.IsPhone ? new Thickness(0, 1, 0, 1) : new Thickness(1);
-            Background = Resources["ApplicationPageBackgroundThemeBrush"] as SolidColorBrush;
+            Background = new SolidColorBrush(Colors.LightGray);
         }
     }
 }
