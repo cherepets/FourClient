@@ -174,43 +174,62 @@
         <!-- Upper View -->
         <Pivot x:Name="PivotControl" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" SelectionChanged="PivotControl_SelectionChanged">
             <PivotItem x:Name="InterestingTab">
-                <GridView x:Name="TopView" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden" SizeChanged="TopView_SizeChanged" Margin="-12,0,-16,0">
-                    <GridView.ItemContainerTransitions>
-                        <TransitionCollection>
-                            <EdgeUIThemeTransition Edge="Bottom"/>
-                        </TransitionCollection>
-                    </GridView.ItemContainerTransitions>
-                    <GridView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right" Loaded="TopGrid_Loaded" Unloaded="TopGrid_Unloaded">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="Auto"/>
-                                    </Grid.RowDefinitions>
-                                    <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
-                                    <Viewbox Stretch="UniformToFill">
-                                        <Grid>
-                                            <Image Source="ms-appx:///Assets/empty.png" />
-                                            <Image Source="{Binding Image}" />
-                                        </Grid>
-                                    </Viewbox>
-                                    <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{Binding Avatar}" />
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-                                    <Rectangle Grid.Row="1" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                                    <TextBlock 
-                                            Text="{Binding Title}" 
-                                            Margin="12,8" FontSize="16"
-                                            Foreground="White" 
-                                            TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <GridView x:Name="TopView" ScrollViewer.VerticalScrollBarVisibility="Hidden" SizeChanged="TopView_SizeChanged" Margin="-12,0,-16,0">
+                        <GridView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EdgeUIThemeTransition Edge="Bottom"/>
+                            </TransitionCollection>
+                        </GridView.ItemContainerTransitions>
+                        <GridView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Height="300" Tapped="CollectionGrid_Tapped" Holding="Top_Holding" RightTapped="Top_Right" Loaded="TopGrid_Loaded" Unloaded="TopGrid_Unloaded">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+                                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
+                                        <Viewbox Stretch="UniformToFill">
+                                            <Grid>
+                                                <Image Source="ms-appx:///Assets/empty.png" />
+                                                <Image Source="{Binding Image}" />
+                                            </Grid>
+                                        </Viewbox>
+                                        <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding Avatar}" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <Rectangle Grid.Row="1" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                                        <TextBlock 
+                                                Text="{Binding Title}" 
+                                                Margin="12,8" FontSize="16"
+                                                Foreground="White" 
+                                                TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </GridView.ItemTemplate>
-                </GridView>
+                            </DataTemplate>
+                        </GridView.ItemTemplate>
+                    </GridView>
+                    <Grid Margin="-12,0,-16,0" Grid.Row="1" x:Name="PaidGrid" Tapped="PaidGrid_Tapped" Visibility="Collapsed">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <AppBarButton IsCompact="True" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <AppBarButton.Icon>
+                                <FontIcon Glyph="" FontSize="16"/>
+                            </AppBarButton.Icon>
+                        </AppBarButton>
+                        <TextBlock Text="FourClient [paid]" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16" />
+                    </Grid>
+                    <StackPanel Margin="-12,0,-16,0" Grid.Row="1" x:Name="AdGrid"/>
+                </Grid>
             </PivotItem>
             <PivotItem x:Name="SourceTab">
                 <Grid>

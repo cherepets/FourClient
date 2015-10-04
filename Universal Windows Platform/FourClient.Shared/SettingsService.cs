@@ -15,6 +15,7 @@ namespace FourClient
         public static ElementTheme ArticleTheme { get; private set; }
         public static bool FirstRun { get; private set; }
         public static bool LiveTile { get; private set; }
+        public static bool RenderSwitch { get; private set; }
         public static bool UpperMenu { get; private set; }
         public static int FontSize { get; private set; }
         public static string FontFace { get; private set; }
@@ -54,6 +55,12 @@ namespace FourClient
                 updater.Clear();
                 updater.EnableNotificationQueue(false);
             }
+        }
+
+        public static void SetRenderSwitch(bool renderSwitch)
+        {
+            RenderSwitch = renderSwitch;
+            ApplicationData.Current.LocalSettings.Values["RenderSwitch"] = renderSwitch;
         }
 
         public static void SetUpperMenu(bool upperMenu)
@@ -108,6 +115,9 @@ namespace FourClient
             //LiveTile
             var liveTile = ApplicationData.Current.LocalSettings.Values["LiveTile"];
             LiveTile = liveTile != null ? (bool)liveTile : true;
+            //RenderSwitch
+            var renderSwitch = ApplicationData.Current.LocalSettings.Values["RenderSwitch"];
+            RenderSwitch = renderSwitch != null ? (bool)renderSwitch : false;
             //UpperMenu
             var upperMenu = ApplicationData.Current.LocalSettings.Values["UpperMenu"];
             UpperMenu = upperMenu != null ? (bool)upperMenu : IsPhone;

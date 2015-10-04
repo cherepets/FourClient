@@ -1,38 +1,48 @@
-﻿using System;
+﻿using MyToolkit.Controls;
+using System;
 using Windows.UI;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Media;
 
 namespace FourClient.HtmlRender
 {
-    public class Html2Xaml : IHtmlRender
+    public class MyToolkit : IHtmlRender
     {
         public event EventHandler Completed;
 
-        private RichTextBlock _block;
+        private ScrollableHtmlView _view;
         private string _html;
 
-        public Html2Xaml()
+        public MyToolkit()
         {
-            _block = new RichTextBlock();
-            _block.Margin = new Thickness(8, 0, 16, 32);
+            _view = new ScrollableHtmlView();
+            _view.Margin = new Thickness(8, 0, 0, 0);
+            _view.Padding = new Thickness(0, 0, 0, 50);
         }
 
-        public FrameworkElement Implementation => new ScrollViewer { Content = _block };
+        public FrameworkElement Implementation => _view;
 
-        public Color Background { get; set; }
+        public Color Background
+        {
+            get
+            {
+                return (_view.Background as SolidColorBrush).Color;
+            }
+            set
+            {
+                _view.Background = new SolidColorBrush(value);
+            }
+        }
 
         public Color Foreground
         {
             get
             {
-                return (_block.Foreground as SolidColorBrush).Color;
+                return (_view.Foreground as SolidColorBrush).Color;
             }
             set
             {
-                _block.Foreground = new SolidColorBrush(value);
+                _view.Foreground = new SolidColorBrush(value);
             }
         }
 
@@ -40,11 +50,11 @@ namespace FourClient.HtmlRender
         {
             get
             {
-                return (int)(_block.FontSize / 6);
+                return (int)(_view.FontSize / 6);
             }
             set
             {
-                _block.FontSize = value * 6;
+                _view.FontSize = value * 6;
             }
         }
 
@@ -52,11 +62,11 @@ namespace FourClient.HtmlRender
         {
             get
             {
-                return _block.FontFamily.Source;
+                return _view.FontFamily.Source;
             }
             set
             {
-                _block.FontFamily = new FontFamily(value);
+                _view.FontFamily = new FontFamily(value);
             }
         }
 
@@ -72,9 +82,7 @@ namespace FourClient.HtmlRender
             {
                 _html = value;
                 var html = _html.Replace("body { word-wrap: break-word; text-align: left }", string.Empty);
-                _block.SetValue(global::Html2Xaml.Properties.HtmlProperty, html);
-                _block.Blocks.Add(new Paragraph());
-                _block.Blocks.Add(new Paragraph());
+                _view.Html = html;
                 Completed?.Invoke(this, null);
             }
         }

@@ -38,6 +38,8 @@ namespace FourClient
         {
             if (!SettingsService.IsPhone)
             {
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Windows.Foundation.Size(400, 400));
+
                 var accent = (Resources["SystemControlBackgroundAccentBrush"] as SolidColorBrush).Color;
                 var light = accent.Lighten();
                 var dark = accent.Darken();

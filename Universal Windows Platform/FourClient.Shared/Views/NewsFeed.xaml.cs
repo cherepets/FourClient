@@ -63,6 +63,8 @@ namespace FourClient.Views
 
         public void RebuildUI()
         {
+            AfterLoad();
+
             PivotControl.Style = Application.Current.Resources["HeaderlessPivotStyle"] as Style;
             if (SettingsService.UpperMenu)
             {
@@ -80,7 +82,6 @@ namespace FourClient.Views
                 LeftView.Visibility = Visibility.Visible;
                 LeftPivotHeader.Visibility = Visibility.Visible;
             }
-
 
             CollectionView.ItemsSource = null;
             SourceView.ItemsSource = null;

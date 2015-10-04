@@ -24,18 +24,23 @@ namespace FourClient.Views
         private void Load()
         {
             LiveTileBox.IsChecked = SettingsService.LiveTile;
+            RenderSwitchBox.IsChecked = SettingsService.RenderSwitch;
             UpperMenuBox.IsOn = SettingsService.UpperMenu;
             Slider.Value = SettingsService.FontSize;
-            var face = FontBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.FontFace);
-            FontBox.SelectedItem = face;
-            var align = AlignBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.Align);
-            AlignBox.SelectedItem = align;
+            var face = FontBox.Items.FirstOrDefault(c => ((ComboBoxItem)c).Content as string == SettingsService.FontFace);
+            if (face != null)
+                FontBox.SelectedItem = face;
+            var align = AlignBox.Items.FirstOrDefault(c => ((ComboBoxItem)c).Content as string == SettingsService.Align);
+            if (align != null)
+                AlignBox.SelectedItem = align;
             RenderBox.Items.Clear();
             HtmlRenderFactory.Renders.ForEach(r => RenderBox.Items.Add(new ComboBoxItem { Content = r }));
-            var render = RenderBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.Render);
-            RenderBox.SelectedValue = render;
-            var youtube = YouTubeBox.Items.First(c => ((ComboBoxItem)c).Content as string == SettingsService.YouTube);
-            YouTubeBox.SelectedValue = youtube;
+            var render = RenderBox.Items.FirstOrDefault(c => ((ComboBoxItem)c).Content as string == SettingsService.Render);
+            if (render != null)
+                RenderBox.SelectedValue = render;
+            var youtube = YouTubeBox.Items.FirstOrDefault(c => ((ComboBoxItem)c).Content as string == SettingsService.YouTube);
+            if (youtube != null)
+                YouTubeBox.SelectedValue = youtube;
             _loaded = true;
         }
 
@@ -115,6 +120,12 @@ namespace FourClient.Views
         {
             if (!_loaded) return;
             SettingsService.SetLiveTile(LiveTileBox.IsChecked.Value);
+        }
+
+        private void RenderSwitchBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!_loaded) return;
+            SettingsService.SetRenderSwitch(RenderSwitchBox.IsChecked.Value);
         }
 
         private void UpperMenuBox_Toggled(object sender, RoutedEventArgs e)

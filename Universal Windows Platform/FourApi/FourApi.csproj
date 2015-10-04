@@ -120,7 +120,7 @@
   <ItemGroup>
     <ProjectReference Include="..\WebServiceClient\WebServiceClient.csproj">
       <Project>{e5cafe52-240c-46ed-885c-7b118d3bb9b0}</Project>
-      <Name>WebServiceClient.UWP</Name>
+      <Name>WebServiceClient</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

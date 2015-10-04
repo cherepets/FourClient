@@ -90,7 +90,7 @@ namespace FourClient.Views
                     .Replace("{5}", SettingsService.Align);
                 _loaded = false;
                 _html = html;
-                if (fullLink != null && commentLink != null)
+                if (SettingsService.RenderSwitch && fullLink != null && commentLink != null)
                     Render.Visibility = Visibility.Visible;
                 if (_render == null) return;
                 _render.Completed += render_Completed;

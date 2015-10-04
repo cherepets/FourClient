@@ -17,7 +17,7 @@ namespace FourClient.HtmlRender
         public NonVirtualizedMyToolkit()
         {
             _view = new HtmlView();
-            _view.Margin = new Thickness(8, 0, 16, 16);
+            _view.Margin = new Thickness(8, 0, 16, 50);
         }
 
         public FrameworkElement Implementation => new ScrollViewer { Content = _view };

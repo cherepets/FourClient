@@ -20,8 +20,9 @@
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
-                        <TextBlock Text="v.4.2.8" FontSize="16" Margin="0,0,0,12" />
-                        <TextBlock Text="- Исправление цвета выпадающего меню" FontSize="14" />
+                        <TextBlock Text="v.4.3.0" FontSize="16" Margin="0,0,0,12" />
+                        <TextBlock Text="- Исправления ошибок" FontSize="14" />
+                        <TextBlock Text="- Платная версия для Windows 10" FontSize="14" />
                     </StackPanel>
                     <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
                         <TextBlock Text="КОНТАКТЫ" FontSize="16" Margin="0,12,0,12" />

@@ -6,8 +6,6 @@ namespace FourClient.Extensions
     internal static class ListViewExt
     {
         public static ScrollViewer GetScrollViewer(this ListViewBase input)
-        {
-            return (ScrollViewer)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(input, 0), 0);
-        }
+            => (ScrollViewer)VisualTreeHelper.GetChild(VisualTreeHelper.GetChild(input, 0), 0);
     }
 }
