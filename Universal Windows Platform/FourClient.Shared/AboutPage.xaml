@@ -2,8 +2,6 @@
     x:Class="FourClient.AboutPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FourClient"
-    xmlns:views="using:FourClient.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -14,7 +12,43 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid x:Name="PageHeaderGrid" Background="{ThemeResource SystemControlBackgroundAccentBrush}" />
-        <views:AboutView x:Name="View" Grid.Row="1"/>
+        <TextBlock Text="О ПРОГРАММЕ" FontSize="16" Margin="12,6"/>
+        <Grid x:Name="View" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="FOURCLIENT" FontSize="72" FontWeight="ExtraLight" Margin="5,0,0,0"  />
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+                    <StackPanel Margin="12,0">
+                        <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
+                        </StackPanel>
+                        <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
+                            <TextBlock Text="v.4.4.0" FontSize="16" Margin="0,0,0,12" />
+                            <TextBlock Text="- Доработка дизайна" FontSize="14" />
+                            <TextBlock Text="- Исправление ошибок" FontSize="14" />
+                        </StackPanel>
+                        <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
+                            <TextBlock Text="КОНТАКТЫ" FontSize="16" Margin="0,12,0,12" />
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Read" Tapped="Email_Tapped" />
+                                <TextBlock Text="cherepets@live.ru" FontSize="16" Tapped="Email_Tapped" VerticalAlignment="Center" Margin="8" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <SymbolIcon Symbol="Favorite" Tapped="StoreBlock_Tapped" />
+                                <TextBlock Text="оценить приложение" FontSize="16" Tapped="StoreBlock_Tapped" VerticalAlignment="Center" Margin="8" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <FontIcon Glyph="vk" FontFamily="MV Boli" Tapped="VkBlock_Tapped" FontWeight="Bold"/>
+                                <TextBlock Text="вконтакте" FontSize="16" Tapped="VkBlock_Tapped" VerticalAlignment="Center" Margin="8" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+                <TextBlock Text="by FourTeam" FontSize="16" Grid.Row="2" HorizontalAlignment="Right" Margin="12" FontWeight="Thin" FontStyle="Italic"  />
+            </Grid>
+        </Grid>
     </Grid>
 </Page>

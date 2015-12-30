@@ -1,10 +1,12 @@
 ﻿using FourClient.UserControls;
 using FourClient.Views;
+using System;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -14,7 +16,7 @@ namespace FourClient
 {
     public sealed partial class MainPage : Page
     {
-        public bool Alive { get; private set; }
+        public static bool Alive => CurrentPage != null;
 
         private static MainPage Singleton;
         private static IBackButton CurrentPage;
@@ -37,20 +39,23 @@ namespace FourClient
         {
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
-            RequestedTheme = SettingsService.MainTheme;
-            ArticleView.RequestedTheme = SettingsService.ArticleTheme;
+            RequestedTheme = SettingsService.GetMainTheme();
+            ArticleView.RequestedTheme = SettingsService.GetArticleTheme();
             if (SettingsService.IsPhone)
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+            RebuildUI();
         }
         
-        private void RebuildUI()
+        private async void RebuildUI()
         {
             if (SettingsService.IsPhone)
             {
                 PageHeader = new MobileHeader();
                 PageHeaderGrid.Children.Clear();
                 PageHeaderGrid.Children.Add(PageHeader);
+                SetTitle("FourClient");
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+                await StatusBar.GetForCurrentView().HideAsync();
             }
         }
 

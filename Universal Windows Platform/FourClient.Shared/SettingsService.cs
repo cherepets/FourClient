@@ -1,5 +1,7 @@
-﻿using Windows.Foundation.Metadata;
+﻿using Windows.ApplicationModel;
+using Windows.Foundation.Metadata;
 using Windows.Storage;
+using Windows.UI;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 
@@ -11,8 +13,14 @@ namespace FourClient
         public static bool IsPhone => ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons");
         public static string ShareTemplate => "http://fourclient.azurewebsites.net/index.aspx?page=article&prefix={0}&link={1}&title={2}";
 
-        public static ElementTheme MainTheme { get; private set; }
-        public static ElementTheme ArticleTheme { get; private set; }
+        public static string DisplayVersion => Package.Current.Id.Version.ToString();
+
+        public static ElementTheme GetMainTheme() => MainTheme ? ElementTheme.Light : ElementTheme.Dark;
+        public static ElementTheme GetArticleTheme() => ArticleTheme ? ElementTheme.Light : ElementTheme.Dark;
+        public static Color GetStatusForeground() => MainTheme ? Colors.Black : Colors.White;
+
+        public static bool MainTheme { get; private set; }
+        public static bool ArticleTheme { get; private set; }
         public static bool FirstRun { get; private set; }
         public static bool LiveTile { get; private set; }
         public static bool RenderSwitch { get; private set; }
@@ -27,16 +35,16 @@ namespace FourClient
         {
             LoadSettings();
         }
-        public static void SetMainTheme(ElementTheme theme)
+        public static void SetMainTheme(bool theme)
         {
             MainTheme = theme;
-            ApplicationData.Current.LocalSettings.Values["Theme"] = (int)theme;
+            ApplicationData.Current.LocalSettings.Values["MainTheme"] = theme;
         }
 
-        public static void SetArticleTheme(ElementTheme theme)
+        public static void SetArticleTheme(bool theme)
         {
             ArticleTheme = theme;
-            ApplicationData.Current.LocalSettings.Values["ArticleTheme"] = (int)theme;
+            ApplicationData.Current.LocalSettings.Values["ArticleTheme"] = theme;
         }
 
         public static void SetLiveTile(bool liveTile)
@@ -107,11 +115,11 @@ namespace FourClient
             FirstRun = firstRun != null ? (bool)firstRun : true;
             ApplicationData.Current.LocalSettings.Values["FirstRun"] = false;
             //Main Theme
-            var mainTheme = ApplicationData.Current.LocalSettings.Values["Theme"];
-            MainTheme = mainTheme != null ? (ElementTheme)mainTheme : (IsPhone ? ElementTheme.Default : ElementTheme.Light);
+            var mainTheme = ApplicationData.Current.LocalSettings.Values["MainTheme"];
+            MainTheme = mainTheme != null ? (bool)mainTheme : false;
             //Article Theme
             var articleTheme = ApplicationData.Current.LocalSettings.Values["ArticleTheme"];
-            ArticleTheme = articleTheme != null ? (ElementTheme)articleTheme : (IsPhone ? ElementTheme.Default : ElementTheme.Light);
+            ArticleTheme = articleTheme != null ? (bool)articleTheme : false;
             //LiveTile
             var liveTile = ApplicationData.Current.LocalSettings.Values["LiveTile"];
             LiveTile = liveTile != null ? (bool)liveTile : true;

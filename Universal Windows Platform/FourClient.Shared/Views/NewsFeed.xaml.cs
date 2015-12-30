@@ -1144,9 +1144,9 @@ namespace FourClient.Views
             }
             var headerText = new TextBlock
             {
-                Text = "Разделы",
-                FontSize = 24,
-                Margin = new Thickness(8)
+                Text = "РАЗДЕЛЫ",
+                FontSize = 16,
+                Margin = new Thickness(12)
             };
             header.Children.Add(headerText);
             var listbox = new ListView();
@@ -1210,9 +1210,9 @@ namespace FourClient.Views
             }
             var headerText = new TextBlock
             {
-                Text = "История",
-                FontSize = 24,
-                Margin = new Thickness(8)
+                Text = "ИСТОРИЯ",
+                FontSize = 16,
+                Margin = new Thickness(12)
             };
             header.Children.Add(headerText);
             var listbox = new ListView();
@@ -1310,28 +1310,24 @@ namespace FourClient.Views
         {
             PivotControl.SelectedItem = InterestingTab;
             e.Handled = true;
-            UpdatePivotControls();
         }
 
         private void SourceButtonButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PivotControl.SelectedItem = SourceTab;
             e.Handled = true;
-            UpdatePivotControls();
         }
 
         private void FeedButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PivotControl.SelectedItem = FeedTab;
             e.Handled = true;
-            UpdatePivotControls();
         }
 
         private void CollectionButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             PivotControl.SelectedItem = CollectionTab;
             e.Handled = true;
-            UpdatePivotControls();
         }
 
         private void Source_Loaded(object sender, RoutedEventArgs e)

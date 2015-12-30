@@ -1,14 +1,19 @@
-﻿using FourClient.Extensions;
+﻿using System;
+using Windows.ApplicationModel.Store;
 using FourClient.UserControls;
 using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
+using Windows.System;
 using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using FourClient.Extensions;
+using Windows.UI.ViewManagement;
+using Windows.UI.Xaml.Media;
 
 namespace FourClient
 {
-    public sealed partial class AboutPage : Page
+    public sealed partial class AboutPage
     {
         public PageHeaderBase PageHeader;
 
@@ -18,15 +23,13 @@ namespace FourClient
             RebuildUI();
         }
 
-        private void RebuildUI()
+        private async void RebuildUI()
         {
             if (SettingsService.IsPhone)
             {
-                PageHeader = new MobileHeader();
-                PageHeaderGrid.Children.Clear();
-                PageHeaderGrid.Children.Add(PageHeader);
-                PageHeader.SetTitle("О приложении");
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
+                StatusBar.GetForCurrentView().ForegroundColor = SettingsService.GetStatusForeground();
+                await StatusBar.GetForCurrentView().ShowAsync();
             }
         }
 
@@ -35,10 +38,26 @@ namespace FourClient
             base.OnNavigatedTo(e);
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             SystemNavigationManager.GetForCurrentView().BackRequested += AboutPage_BackRequested;
-            RequestedTheme = SettingsService.MainTheme;
+            RequestedTheme = SettingsService.GetMainTheme();
             if (SettingsService.IsPhone)
                 HardwareButtons.BackPressed += HardwareButtons_BackPressed;
             View.Animate();
+        }
+
+        private async void Email_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var mailto = new Uri("mailto:?to=cherepets@live.ru&subject=FourClient app");
+            await Launcher.LaunchUriAsync(mailto);
+        }
+
+        private async void StoreBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+        }
+
+        private async void VkBlock_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            await Launcher.LaunchUriAsync(new Uri("http://m.vk.com/fourvk"));
         }
 
         private void AboutPage_BackRequested(object sender, BackRequestedEventArgs e)

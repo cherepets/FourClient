@@ -2,10 +2,6 @@
     x:Class="FourClient.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:FourClient"
-    xmlns:views="using:FourClient.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     NavigationCacheMode="Disabled">
     <Grid>
@@ -13,7 +9,43 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid x:Name="PageHeaderGrid" Background="{ThemeResource SystemControlBackgroundAccentBrush}" />
-        <views:SettingsView x:Name="View" Grid.Row="1"/>
+        <TextBlock Text="НАСТРОЙКИ" FontSize="16" Margin="12,6"/>
+        <Grid x:Name="View" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" >
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ToggleSwitch x:Name="MainThemeToggle" Margin="12,0" Header="Тема приложения" OnContent="Белая" OffContent="Черная" Toggled="MainThemeToggle_Toggled"/>
+                    <ToggleSwitch x:Name="ArticleThemeToggle" Margin="12,0" Header="Тема при чтении" OnContent="Белая" OffContent="Черная" Toggled="ArticleThemeToggle_Toggled"/>
+                    <ToggleSwitch x:Name="UpperMenuBox" Margin="12,0" Header="Расположение меню" OnContent="Сверху" OffContent="Слева" Toggled="UpperMenuBox_Toggled" />
+                    <CheckBox x:Name="LiveTileBox" Margin="12,0,12,10" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" />
+                    <CheckBox x:Name="RenderSwitchBox" Margin="12,0,12,10" Content="Показывать переключатель движка" FontSize="16" IsChecked="False" Tapped="RenderSwitchBox_Tapped" />
+                    <Button x:Name="CacheButton" Margin="12,10" Content="Очистить кэш" Tapped="CacheButton_Tapped" />
+                    <TextBlock TextWrapping="Wrap" Text="Движок HTML" FontSize="16" Margin="12,10,12,0"/>
+                    <ComboBox x:Name="RenderBox" Margin="12,0,12,10" SelectionChanged="RenderBox_SelectionChanged"/>
+                    <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" Margin="12,10,12,0"/>
+                    <ComboBox x:Name="YouTubeBox" Margin="12,0,12,10" SelectionChanged="YouTubeBox_SelectionChanged">
+                        <ComboBoxItem Content="vnd.youtube:"/>
+                        <ComboBoxItem Content="metrotube:VideoPage?VideoID="/>
+                        <ComboBoxItem Content="http://www.youtube.com/watch?v="/>
+                    </ComboBox>
+                    <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="16" Margin="12,10,12,0"/>
+                    <ComboBox x:Name="FontBox" Margin="12,0,12,10" SelectionChanged="FontBox_SelectionChanged">
+                        <ComboBoxItem Content="Segoe UI"/>
+                        <ComboBoxItem Content="Arial"/>
+                        <ComboBoxItem Content="Georgia"/>
+                        <ComboBoxItem Content="Times New Roman"/>
+                        <ComboBoxItem Content="Veranda"/>
+                    </ComboBox>
+                    <TextBlock TextWrapping="Wrap" Text="Выравнивание" FontSize="16" Margin="12,10,12,0"/>
+                    <ComboBox x:Name="AlignBox" Margin="12,0,12,10" SelectionChanged="AlignBox_SelectionChanged">
+                        <ComboBoxItem Content="left"/>
+                        <ComboBoxItem Content="right"/>
+                        <ComboBoxItem Content="center"/>
+                        <ComboBoxItem Content="justify"/>
+                    </ComboBox>
+                    <TextBlock TextWrapping="Wrap" Text="Размер шрифта" FontSize="16" Margin="12,10,12,0"/>
+                    <Slider x:Name="Slider" Margin="16,10" LargeChange="1" Maximum="7" Minimum="1" TickFrequency="1" ValueChanged="Slider_ValueChanged" />
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </Page>

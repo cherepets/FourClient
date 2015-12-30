@@ -93,8 +93,6 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <None Include="FourClient_StoreKey.pfx" />
-    <None Include="FourClient_TemporaryKey.pfx" />
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>

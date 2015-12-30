@@ -1,4 +1,5 @@
 ﻿using FourClient.Extensions;
+using FourClient.Views;
 using System;
 using System.Linq;
 using Windows.ApplicationModel;
@@ -14,7 +15,7 @@ using Windows.UI.Xaml.Media;
 
 namespace FourClient
 {
-    public sealed partial class App : Application
+    public sealed partial class App
     {
         public App()
         {
@@ -56,10 +57,6 @@ namespace FourClient
                 titleBar.ButtonInactiveForegroundColor = Colors.White;
                 titleBar.InactiveBackgroundColor = dark;
                 titleBar.InactiveForegroundColor = Colors.White;
-            }
-            else
-            {
-                StatusBar.GetForCurrentView()?.HideAsync();
             }
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
@@ -122,6 +119,8 @@ namespace FourClient
 
         private void OnResuming(object sender, object e)
         {
+            if (MainPage.Alive)
+                return;
             try
             {
                 var article = (string)ApplicationData.Current.LocalSettings.Values["SuspendedArticle"];
