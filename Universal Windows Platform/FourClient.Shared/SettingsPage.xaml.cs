@@ -81,7 +81,8 @@ namespace FourClient
             if (!_loaded) return;
             SettingsService.SetMainTheme(MainThemeToggle.IsOn);
             RequestedTheme = SettingsService.GetMainTheme();
-            StatusBar.GetForCurrentView().ForegroundColor = SettingsService.GetStatusForeground();
+            if (SettingsService.IsPhone)
+                StatusBar.GetForCurrentView().ForegroundColor = SettingsService.GetStatusForeground();
         }
 
         private void ArticleThemeToggle_Toggled(object sender, RoutedEventArgs e)

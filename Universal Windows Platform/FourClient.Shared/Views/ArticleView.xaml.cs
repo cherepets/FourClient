@@ -44,6 +44,9 @@ namespace FourClient.Views
         {
             ProgressRing.IsActive = true;
             Render.Visibility = Visibility.Collapsed;
+            FourArticle article;
+            var back = string.Empty;
+            var front = string.Empty;
             try
             {
                 if (fullLink != null && commentLink != null)
@@ -70,36 +73,17 @@ namespace FourClient.Views
                 _render.FontSize = SettingsService.FontSize;
                 WebContent.Children.Clear();
                 WebContent.Children.Add(_render.Implementation);
-                var back = (Background as SolidColorBrush).Color.ToRGBString();
-                var front = (Foreground as SolidColorBrush).Color.ToRGBString();
+                back = (Background as SolidColorBrush).Color.ToRGBString();
+                front = (Foreground as SolidColorBrush).Color.ToRGBString();
                 var emptyView = string.Format("<html><body bgcolor='{0}' /></html>", back);
                 _render.Html = emptyView;
                 var appData = ApplicationData.Current.LocalFolder;
                 var tempData = ApplicationData.Current.TemporaryFolder;
-                var article = await CheckCache(appData) ?
+                article = await CheckCache(appData) ?
                     await LoadFromCache(appData) :
                     await CheckCache(tempData) ?
-                        await LoadFromCache(tempData) : 
+                        await LoadFromCache(tempData) :
                         await LoadFromService(prefix, link);
-                var html = article.HTML
-                    .Replace("{0}", back)
-                    .Replace("{1}", front)
-                    .Replace("{2}", SettingsService.FontSize.ToString())
-                    .Replace("{3}", SettingsService.FontFace)
-                    .Replace("{4}", SettingsService.YouTube)
-                    .Replace("{5}", SettingsService.Align);
-                _loaded = false;
-                _html = html;
-                if (SettingsService.RenderSwitch && fullLink != null && commentLink != null)
-                    Render.Visibility = Visibility.Visible;
-                if (_render == null) return;
-                _render.Completed += render_Completed;
-                if (_render == null) return;
-                _render.Html = _html;
-                if (_render == null) return;
-                while (!_loaded) await Task.Delay(100);
-                if (_render == null) return;
-                _render.Completed -= render_Completed;
             }
             catch (ServiceException se)
             {
@@ -118,6 +102,32 @@ namespace FourClient.Views
                 var dialog = new MessageDialog(ex.Message, "FourClient.WebViewException");
                 await dialog.ShowAsync();
                 BackPressed();
+            }
+            if (string.IsNullOrEmpty(article.HTML)) return;
+            try
+            {
+                var html = article.HTML
+                        .Replace("{0}", back)
+                        .Replace("{1}", front)
+                        .Replace("{2}", SettingsService.FontSize.ToString())
+                        .Replace("{3}", SettingsService.FontFace)
+                        .Replace("{4}", SettingsService.YouTube)
+                        .Replace("{5}", SettingsService.Align);
+                _loaded = false;
+                _html = html;
+                if (SettingsService.RenderSwitch && fullLink != null && commentLink != null)
+                    Render.Visibility = Visibility.Visible;
+                if (_render == null) return;
+                _render.Completed += render_Completed;
+                if (_render == null) return;
+                _render.Html = _html;
+                if (_render == null) return;
+                while (!_loaded) await Task.Delay(100);
+            }
+            finally
+            {
+                if (_render != null)
+                    _render.Completed -= render_Completed;
             }
         }
 

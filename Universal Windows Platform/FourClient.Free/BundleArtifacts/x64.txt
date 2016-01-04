@@ -1,0 +1,2 @@
+MainPackage=C:\Users\cherepets\Documents\GitHub\FourClient\Universal Windows Platform\FourClient.Free\bin\x64\Release\FourClient.Free_4.5.0.0_x64.appx
+SymbolPackage=C:\Users\cherepets\Documents\GitHub\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_4.5.0.0_Test\FourClient.Free_4.5.0.0_x64.appxsym

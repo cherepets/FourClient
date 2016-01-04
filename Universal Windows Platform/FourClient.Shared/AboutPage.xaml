@@ -26,7 +26,7 @@
                         <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
                         </StackPanel>
                         <StackPanel  Orientation="Vertical" Margin="0,0,0,12">
-                            <TextBlock Text="v.4.4.0" FontSize="16" Margin="0,0,0,12" />
+                            <TextBlock Text="v.4.5.0" FontSize="16" Margin="0,0,0,12" />
                             <TextBlock Text="- Доработка дизайна" FontSize="14" />
                             <TextBlock Text="- Исправление ошибок" FontSize="14" />
                         </StackPanel>
