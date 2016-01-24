@@ -1,8 +1,6 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "MyToolkit": "2.4.2",
-    "MyToolkit.Extended": "2.4.2",
     "SOMAW81_Package": "1.6.1"
   },
   "frameworks": {

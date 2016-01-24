@@ -1,0 +1,51 @@
+﻿<UserControl
+    x:Class="FourClient.Views.FeedView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FourToolkit.UI">
+    <Grid>
+        <GridView x:Name="GridView" Margin="-12,0,-16,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <GridView.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </GridView.ItemContainerStyle>
+            <GridView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Bottom"/>
+                </TransitionCollection>
+            </GridView.ItemContainerTransitions>
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="160" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped">
+                        <Grid.Projection>
+                            <PlaneProjection/>
+                        </Grid.Projection>
+                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <Viewbox Stretch="UniformToFill">
+                            <Image Source="{Binding Image}" />
+                        </Viewbox>
+                        <Rectangle Opacity="0.4" Fill="Black" />
+                        <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Avatar}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Title}" 
+                                   Margin="12,8" FontSize="16"
+                                   Foreground="White" 
+                                   VerticalAlignment="Bottom" 
+                                   TextWrapping="WrapWholeWords" />
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
+        <Grid x:Name="Placeholder">
+            <TextBlock Text="Выберите сначала источник" FontSize="16" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" />
+            <Button x:Name="SourcesButton" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
+                Foreground="White"
+                Content="Источники" Tapped="SourcesButton_Tapped" />
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,0 +1,69 @@
+﻿<UserControl
+    x:Class="FourClient.Views.MenuView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FourClient.Views"
+    xmlns:ui="using:FourToolkit.UI">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ui:HorizontalSelector x:Name="Selector" Grid.Row="0" Selected="HorizontalSelector_Selected">
+            <ui:HorizontalSelector.Buttons>
+                <ui:HorizontalSelectorButton Icon="Home"/>
+                <ui:HorizontalSelectorButton Icon="Squares"/>
+                <ui:HorizontalSelectorButton Icon="AlignCenter"/>
+                <ui:HorizontalSelectorButton Icon="Star"/>
+            </ui:HorizontalSelector.Buttons>
+        </ui:HorizontalSelector>
+        <ui:AppBarButton Grid.Row="0" Height="46" x:Name="SearchButton" Visibility="Collapsed" Icon="Search" HorizontalAlignment="Right" VerticalAlignment="Top" Tapped="SearchButton_Tapped"/>
+        <TextBlock Grid.Row="1" x:Name="PivotHeader" FontSize="16" Margin="12,6"/>
+        <Pivot x:Name="Pivot" Grid.Row="2" Style="{StaticResource HeaderlessPivotStyle}" SelectionChanged="Pivot_SelectionChanged">
+            <PivotItem x:Name="InterestingView" Header="Интересное">
+                <local:InterestingView/>
+            </PivotItem>
+            <PivotItem x:Name="SourcesView" Header="Источники">
+                <local:SourcesView/>
+            </PivotItem>
+            <PivotItem x:Name="FeedView" Header="Лента">
+                <local:FeedView/>
+            </PivotItem>
+            <PivotItem x:Name="CollectionView" Header="Коллекция">
+                <local:CollectionView/>
+            </PivotItem>
+        </Pivot>
+        <ui:MultiAppBar x:Name="MultiAppBar" Grid.RowSpan="3" VisibleHeightChanged="MultiAppBar_VisibleHeightChanged">
+            <ui:MultiAppBar.AppBars>
+                <ui:CompactAppBar>
+                    <ui:CompactAppBar.MenuItems>
+                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                    </ui:CompactAppBar.MenuItems>
+                </ui:CompactAppBar>
+                <ui:CompactAppBar>
+                    <ui:CompactAppBar.MenuItems>
+                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                    </ui:CompactAppBar.MenuItems>
+                </ui:CompactAppBar>
+                <ui:AppBar>
+                    <ui:AppBar.CentralControl>
+                        <Button x:Name="NewsTypeButton" Margin="50,0,0,0" HorizontalAlignment="Stretch" BorderBrush="{x:Null}"  
+                            Background="Transparent" VerticalAlignment="Stretch"
+                            Foreground="White"
+                            Tapped="NewsTypeButton_Tapped" />
+                    </ui:AppBar.CentralControl>
+                    <ui:AppBar.MenuItems>
+                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                    </ui:AppBar.MenuItems>
+                </ui:AppBar>
+                <ui:CompactAppBar>
+                    <ui:CompactAppBar.MenuItems>
+                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                    </ui:CompactAppBar.MenuItems>
+                </ui:CompactAppBar>
+            </ui:MultiAppBar.AppBars>
+        </ui:MultiAppBar>
+        <ui:Flyout Grid.Row="0" Grid.RowSpan="3" x:Name="Flyout"/>
+    </Grid>
+</UserControl>

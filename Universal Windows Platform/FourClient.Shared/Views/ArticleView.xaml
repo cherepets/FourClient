@@ -3,53 +3,30 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FourClient.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
+    xmlns:ui="using:FourToolkit.UI"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Foreground="{ThemeResource ApplicationForegroundThemeBrush}">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <Grid x:Name="WebContent" Grid.RowSpan="2" Grid.Column="1" />
-        <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
-        <Grid x:Name="AppBarControl" Grid.Row="1" Background="{ThemeResource ContentDialogDimmingThemeBrush}" RequestedTheme="Dark" Grid.ColumnSpan="3" >
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.ColumnSpan="5" Opacity="0.5" />
-                <AppBarButton x:Name="Render" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Render_Tapped" Grid.Column="0" >
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="" FontSize="16"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Name="Globe" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Globe_Tapped" Grid.Column="2" >
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="" FontSize="16"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Name="Comment" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Comments_Tapped" Grid.Column="3" >
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="" FontSize="16"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Name="Share" Width="50" Height="50" HorizontalAlignment="Center" IsCompact="True" Tapped="Share_Tapped" Grid.Column="4" >
-                    <AppBarButton.Icon>
-                        <FontIcon Glyph="" FontSize="16"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-            </Grid>
-        </Grid>
-        <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
-        <Grid x:Name="HoverGrid" Background="{ThemeResource SystemControlForegroundChromeBlackMediumLowBrush}" Grid.ColumnSpan="2" Grid.RowSpan="2" Visibility="Collapsed" Tapped="HoverGrid_Tapped" RightTapped="HoverGrid_RightTapped"/>
+        <ui:StatusBarController x:Name="StatusBar"/>
+        <TextBlock x:Name="TitleBlock" FontSize="24" Margin="12,6" Grid.ColumnSpan="3" TextWrapping="WrapWholeWords" Visibility="Collapsed" />
+        <Grid x:Name="WebContent" Grid.Row="1" Grid.Column="1"/>
+        <Rectangle Grid.Row="1" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
+        <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" />
+        <ui:AppBar x:Name="AppBar" Grid.Row="2" Grid.ColumnSpan="3" Visibility="Collapsed">
+            <ui:AppBar.Buttons>
+                <ui:AppBarButton Icon="Globe" Tapped="Globe_Tapped"/>
+                <ui:AppBarButton Icon="Comment" Tapped="Comments_Tapped"/>
+                <ui:AppBarButton Icon="Share" Tapped="Share_Tapped"/>
+            </ui:AppBar.Buttons>
+        </ui:AppBar>
     </Grid>
 </UserControl>

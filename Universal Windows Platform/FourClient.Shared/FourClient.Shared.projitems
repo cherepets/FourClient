@@ -30,42 +30,46 @@
     <Content Include="$(MSBuildThisFileDirectory)Libs\NotificationsExtensions.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Cache\Esent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Cache\TopCache.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Cache\SourceCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleadnToVisibilityConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ColorExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\EnumerableExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\FrameworkElementExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ListBoxExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\ListViewExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Extensions\StoryboardExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HtmlRender\EdgeHtml.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HtmlRender\HtmlRenderFactory.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HtmlRender\IHtmlRender.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HtmlRender\MyToolkit.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HtmlRender\NonVirtualizedMyToolkit.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)FilteredObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)HtmlRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IoC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)SettingsService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UserControls\HoverListView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UserControls\PageHeaderBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UserControls\PageHeader\MobileHeader.xaml.cs">
-      <DependentUpon>MobileHeader.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ArticleView.xaml.cs">
       <DependentUpon>ArticleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Views\IBackButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\NewsFeed.xaml.cs">
-      <DependentUpon>NewsFeed.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CollectionView.xaml.cs">
+      <DependentUpon>CollectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\FeedView.xaml.cs">
+      <DependentUpon>FeedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\InterestingView.xaml.cs">
+      <DependentUpon>InterestingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MenuView.xaml.cs">
+      <DependentUpon>MenuView.xaml</DependentUpon>
+    </Compile>
+    <Content Include="$(MSBuildThisFileDirectory)esent\FourClientCache.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="$(MSBuildThisFileDirectory)Views\MenuView.temp.xaml.cs">
+      <DependentUpon>MenuView.xaml.temp</DependentUpon>
+    </None>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SourcesView.xaml.cs">
+      <DependentUpon>SourcesView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -73,19 +77,7 @@
     <None Include="$(MSBuildThisFileDirectory)Libs\NotificationsExtensions.winmd" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)AboutPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SettingsPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)UserControls\PageHeader\MobileHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -93,7 +85,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Views\NewsFeed.xaml">
+    <None Include="$(MSBuildThisFileDirectory)Views\MenuView.xaml.temp">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <Page Include="$(MSBuildThisFileDirectory)Views\CollectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\FeedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\InterestingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\MenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\SourcesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

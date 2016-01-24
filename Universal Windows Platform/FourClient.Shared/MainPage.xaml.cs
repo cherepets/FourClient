@@ -1,197 +1,137 @@
-﻿using FourClient.UserControls;
-using FourClient.Views;
+﻿using FourClient.Cache;
+using FourClient.Data;
+using FourToolkit.UI;
+using FourToolkit.UI.Extensions;
 using System;
-using Windows.Foundation;
-using Windows.Graphics.Display;
+using System.ComponentModel;
+using System.Threading.Tasks;
 using Windows.Phone.UI.Input;
-using Windows.Storage;
 using Windows.UI.Core;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 
 namespace FourClient
 {
-    public sealed partial class MainPage : Page
+    public interface IMainPage
     {
-        public static bool Alive => CurrentPage != null;
+        Flyout Flyout { get; }
+        void ShowFlyout(UIElement element);
+        void HideFlyout();
+        CoreDispatcher Dispatcher { get; }
+    }
 
-        private static MainPage Singleton;
-        private static IBackButton CurrentPage;
-        private static string StatusText;
-        private static string PrevVisualState;
-
-        private static bool _articleOpened;
-
-        public PageHeaderBase PageHeader;
-
+    public sealed partial class MainPage : IMainPage
+    {
+        public delegate void PageEventHandler(IMainPage sender);
+        public static event PageEventHandler PageLoaded;
+                
         public MainPage()
         {
+            IoC.RegisterViews();
             InitializeComponent();
-            Singleton = this;
-            RebuildUI();
-            GoToNews();
-        }
+            Loaded += MainPage_Loaded;
+            PageLoaded?.Invoke(this);
+            IoC.ArticleView.StateChanged += ArticleView_StateChanged;
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
-            RequestedTheme = SettingsService.GetMainTheme();
-            ArticleView.RequestedTheme = SettingsService.GetArticleTheme();
-            if (SettingsService.IsPhone)
-                HardwareButtons.BackPressed += HardwareButtons_BackPressed;
-            RebuildUI();
-        }
-        
-        private async void RebuildUI()
-        {
-            if (SettingsService.IsPhone)
+            switch (Platform.Current)
             {
-                PageHeader = new MobileHeader();
-                PageHeaderGrid.Children.Clear();
-                PageHeaderGrid.Children.Add(PageHeader);
-                SetTitle("FourClient");
-                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-                await StatusBar.GetForCurrentView().HideAsync();
+                case Platform.Desktop:
+                    SystemNavigationManager.GetForCurrentView().BackRequested += (s, e) =>
+                    {
+                        if (!Flyout.IsOpen && _state != "RightPane")
+                        {
+                            if (MenuView.HandleBackButton())
+                                e.Handled = true;
+                        }
+                    };
+                    return;
+                case Platform.Mobile:
+                    HardwareButtons.BackPressed += (s, e) =>
+                    {
+                        if (!Flyout.IsOpen && _state != "RightPane")
+                        {
+                            if (MenuView.HandleBackButton())
+                                e.Handled = true;
+                        }
+                    };
+                    return;
             }
         }
 
-        public static void RebuildNewsFeedUI() => Singleton.NewsFeed?.RebuildUI();
+        private string _state;
+        private TimeSpan _animationLength = TimeSpan.FromSeconds(0.2);
 
-        public static void GoToArticle(string prefix, string name, string link, string fullLink, string commentLink, string title)
+        private void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
-            _articleOpened = true;
-            StatusText = GetTitle();
-            SetTitle(name);
-            var view = Singleton.ArticleView.Children[1] as ArticleView;
-            CurrentPage = view;
-            view.Load(prefix, link, fullLink, commentLink, title);
-            Singleton.UpdateVisualState(true);
+            RegisterDataDepedencies();
+            Settings.Current.LastVersion = Settings.Current.CurrentVersion;
+            Settings.Current.PropertyChanged += Settings_PropertyChanged;
+            ApplySettings(Settings.Current);
+            var top = Api.GetTop();
+            IoC.InterestingView.SetItemsSource(top);
+            var sources = Api.GetSources();
+            IoC.SourcesView.SetItemsSource(sources);
         }
 
-        public static void GoToAbout()
+        private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e) => ApplySettings(Settings.Current);
+
+        private void ApplySettings(Settings e)
         {
-            Singleton.Frame.Navigate(typeof(AboutPage));
+            RequestedTheme = e.AppTheme ? ElementTheme.Light : ElementTheme.Dark;
         }
 
-        public static void GoToSettings()
+        private static void RegisterDataDepedencies()
         {
-            Singleton.Frame.Navigate(typeof(SettingsPage));
+            var sourceCache = new SourceCache();
+            var topicCache = new TopCache();
+            Data.IoC.RegisterDependencies(sourceCache, topicCache);
         }
 
-        public static void GoToNews()
-        {
-            _articleOpened = false;
-            var text = !string.IsNullOrEmpty(StatusText) ? StatusText : "FourClient";
-            SetTitle(text);
-            CurrentPage = Singleton.NewsFeed;
-            Singleton.UpdateVisualState(true);
-        }
+        private void ArticleView_StateChanged(bool newState) => UpdateVisualState(newState);
 
-        public static void GoToNewsFeed(string prefix)
-        {
-            GoToNews();
-            Singleton.NewsFeed.GoToSource(prefix);
-        }
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e) => UpdateVisualState(IoC.ArticleView.Opened);
 
-        public static Point GetSize()
+        private void UpdateVisualState(bool paneOpened)
         {
-            return new Point(Singleton.ActualWidth, Singleton.ActualHeight);
-        }
-
-        public static void StatusProgress(bool val)
-        {
-            if (Singleton.PageHeader != null)
-                Singleton.PageHeader.IsProgressRunning = val;
-        }
-
-        public static string GetTitle()
-        {
-            if (SettingsService.IsPhone)
-                return Singleton.PageHeader?.InitialText;
-            else
-                return Singleton.HeaderBlock.Text;
-        }
-
-        public static void SetTitle(string title)
-        {
-            if (SettingsService.IsPhone)
-                Singleton.PageHeader?.SetTitle(title);
-            else
-                Singleton.HeaderBlock.Text = _articleOpened ? title : string.Empty;
-        }
-
-        public static void SetTitle(string title, params object[] args)
-        {
-            var formated = string.Format(title, args);
-            SetTitle(formated);
-        }
-
-        public static void SaveState()
-        {
-            if (_articleOpened)
-            {
-                var view = Singleton.ArticleView.Children[1] as ArticleView;
-                ApplicationData.Current.LocalSettings.Values["SuspendedArticle"] = view.CurrentArticle;
-                ApplicationData.Current.LocalSettings.Values["SuspendedTitle"] = GetTitle();
-            }
-            else
-                ApplicationData.Current.LocalSettings.Values["SuspendedArticle"] = null;
-        }
-
-        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            UpdateVisualState();
-        }
-
-        private void UpdateVisualState(bool skipBindingsInvalidation = false)
-        {
-            var state = ActualWidth > ActualHeight ?
+            _state = !Platform.IsMobile
+                && ActualWidth > 800
+                && ActualWidth > ActualHeight ?
                 "TwoPanes" :
-                _articleOpened ?
+                paneOpened ?
                 "RightPane" :
                 "LeftPane";
-            VisualStateManager.GoToState(this, state, false);
-            if (!skipBindingsInvalidation && (state != "TwoPanes" || PrevVisualState != "TwoPanes")) 
-            {
-                NewsFeed.RebuildUI();
-            }
-            BackButton.Visibility = !SettingsService.IsPhone && state == "RightPane"
-                ? Visibility.Visible 
-                : Visibility.Collapsed;
-            HeaderBlock.Visibility = !SettingsService.IsPhone && (state == "RightPane" || state == "TwoPanes")
-                ? Visibility.Visible
-                : Visibility.Collapsed;
-            PrevVisualState = state;
-        }
-        
-        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            CurrentPage.BackPressed();
-            e.Handled = true;
+            if (_state == "RightPane")
+                this.AttachBackHandler(Back);
+            else
+                if (!Flyout.IsOpen)
+                this.DetachBackHandler();
+            VisualStateManager.GoToState(this, _state, false);
         }
 
-        private void BackButton_Tapped(object sender, TappedRoutedEventArgs e)
+        Flyout IMainPage.Flyout => Flyout;
+        public void ShowFlyout(UIElement element)
         {
-            CurrentPage.BackPressed();
-            e.Handled = true;
+            this.AttachBackHandler(HideFlyout);
+            var animate = Flyout.CurrentContent == null;
+            Flyout.ShowFlyout(element);
+            if (animate)
+                element.AnimateFadeIn(_animationLength);
         }
 
-        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        public async void HideFlyout()
         {
-            CurrentPage.BackPressed();
-            e.Handled = true;
+            this.DetachBackHandler();
+            Flyout.CurrentContent.AnimateFadeOut(_animationLength);
+            await Task.Delay(_animationLength);
+            Flyout.HideFlyout();
         }
+
+        private static void Back() => IoC.ArticleView.Close();
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            SystemNavigationManager.GetForCurrentView().BackRequested -= MainPage_BackRequested;
-            if (SettingsService.IsPhone)
-                HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+            this.DetachBackHandler();
         }
     }
 }

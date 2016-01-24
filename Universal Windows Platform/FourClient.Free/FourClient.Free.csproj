@@ -103,20 +103,31 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\NewsFeed.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Package.StoreAssociation.xml" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FourApi\FourApi.csproj">
-      <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
-      <Name>FourApi</Name>
+    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Runtime\FourToolkit.Esent.Runtime.csproj">
+      <Project>{75366bf8-f569-4465-9dc4-11bde89d5466}</Project>
+      <Name>FourToolkit.Esent.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebServiceClient\WebServiceClient.csproj">
-      <Project>{e5cafe52-240c-46ed-885c-7b118d3bb9b0}</Project>
-      <Name>WebServiceClient</Name>
+    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Extensions.Runtime\FourToolkit.Extensions.Runtime.csproj">
+      <Project>{f8f6298a-2e47-4cac-b64f-d3bf13c296fc}</Project>
+      <Name>FourToolkit.Extensions.Runtime</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Settings\FourToolkit.Settings.csproj">
+      <Project>{00efbe32-88bb-49ca-aede-d7a7f195394d}</Project>
+      <Name>FourToolkit.Settings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.UI\FourToolkit.UI.csproj">
+      <Project>{f7d0206a-f4ff-48fc-9cbd-392edfe3b421}</Project>
+      <Name>FourToolkit.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FourClient.Data\FourClient.Data.csproj">
+      <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
+      <Name>FourClient.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
