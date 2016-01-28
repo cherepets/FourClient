@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourClient.Free", "FourClient.Free\FourClient.Free.csproj", "{05206252-4997-4FE2-99F0-C7E005E974BB}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourClient.Data", "FourClient.Data\FourClient.Data.csproj", "{720A56B9-DC15-45BE-A969-F13A62FE2525}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourToolkit.Esent.Runtime", "..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Runtime\FourToolkit.Esent.Runtime.csproj", "{75366BF8-F569-4465-9DC4-11BDE89D5466}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourToolkit.Extensions", "..\..\..\BitBucket\FourToolkit\FourToolkit.Extensions\FourToolkit.Extensions.csproj", "{9A45724E-0829-4DC5-A90B-4F33AD242FC3}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -156,6 +158,22 @@ Global
 		{75366BF8-F569-4465-9DC4-11BDE89D5466}.Release|x64.Build.0 = Release|Any CPU
 		{75366BF8-F569-4465-9DC4-11BDE89D5466}.Release|x86.ActiveCfg = Release|Any CPU
 		{75366BF8-F569-4465-9DC4-11BDE89D5466}.Release|x86.Build.0 = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|ARM.Build.0 = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|x64.Build.0 = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Debug|x86.Build.0 = Debug|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|ARM.ActiveCfg = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|ARM.Build.0 = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x64.ActiveCfg = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x64.Build.0 = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x86.ActiveCfg = Release|Any CPU
+		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,7 +2,8 @@
     x:Class="FourClient.Views.SourcesView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="using:FourClient.Converters">
+    xmlns:converters="using:FourClient.Converters"
+    xmlns:ui="using:FourToolkit.UI" SizeChanged="UserControl_SizeChanged">
     <UserControl.Resources>
         <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
     </UserControl.Resources>
@@ -45,7 +46,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Rectangle Grid.ColumnSpan="2" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Height="16" Margin="-20,0" Visibility="Visible" />
-            <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Margin="0,12,-6,0">
+            <GridView x:Name="HiddenView" Visibility="Collapsed" Grid.ColumnSpan="2" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Padding="0,12,-6,0">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid Tapped="Item_Tapped" RightTapped="Item_RightTapped" Holding="Item_Holding" Loaded="Item_Loaded" IsHitTestVisible="{Binding Enabled}">
@@ -63,12 +64,9 @@
                     </DataTemplate>
                 </GridView.ItemTemplate>
             </GridView>
+            <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" Grid.ColumnSpan="2"/>
             <TextBlock Text="ОТКЛЮЧЕННЫЕ" FontSize="16" Grid.Row="2" VerticalAlignment="Center" />
-            <AppBarToggleButton x:Name="HiddenToggleButton" IsCompact="True" Width="50" Height="50" Grid.Row="2" Grid.Column="1" Checked="HiddenToggleButton_Checked" Unchecked="HiddenToggleButton_Unchecked" Margin="0,0,-16,0">
-                <AppBarToggleButton.Icon>
-                    <FontIcon Glyph="" FontSize="16"/>
-                </AppBarToggleButton.Icon>
-            </AppBarToggleButton>
+            <ui:AppBarButton Icon="SmallUpArrow" Tapped="SmallUpArrow_Tapped" Grid.Row="2" Grid.Column="1"/>
         </Grid>
     </Grid>
 </UserControl>

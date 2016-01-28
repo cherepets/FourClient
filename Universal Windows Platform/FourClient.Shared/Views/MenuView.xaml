@@ -25,7 +25,7 @@
                 <local:InterestingView/>
             </PivotItem>
             <PivotItem x:Name="SourcesView" Header="Источники">
-                <local:SourcesView/>
+                <local:SourcesView Margin="0,0,0,20"/>
             </PivotItem>
             <PivotItem x:Name="FeedView" Header="Лента">
                 <local:FeedView/>
@@ -34,7 +34,7 @@
                 <local:CollectionView/>
             </PivotItem>
         </Pivot>
-        <ui:MultiAppBar x:Name="MultiAppBar" Grid.RowSpan="3" VisibleHeightChanged="MultiAppBar_VisibleHeightChanged">
+        <ui:MultiAppBar x:Name="MultiAppBar" Grid.RowSpan="3">
             <ui:MultiAppBar.AppBars>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>

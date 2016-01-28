@@ -1,4 +1,6 @@
 ﻿using FourToolkit.UI;
+using FourToolkit.UI.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -119,18 +121,7 @@ namespace FourClient.Views
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            MultiAppBar.CurrentIndex = Pivot.SelectedIndex;
             Selector.Select(Pivot.SelectedIndex);
-        }
-
-        private void MultiAppBar_VisibleHeightChanged(object sender, double e) => UpdatePadding(e);
-
-        private void UpdatePadding(double? value = null)
-        {
-            lock(_lock)
-            {
-                Pivot.Padding = new Thickness(0, 0, 0, value ?? MultiAppBar.VisibleHeight);
-            }
         }
         
         private void SettingsButton_Tapped(object sender, TappedRoutedEventArgs e)

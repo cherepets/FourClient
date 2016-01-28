@@ -87,9 +87,13 @@ namespace FourClient.Views
                     );
         }
 
-        private void HiddenToggleButton_Checked(object sender, RoutedEventArgs e) => ShowHiddenSources();
+        private bool HiddenShown => HiddenView.Visibility == Visibility.Visible;
 
-        private void HiddenToggleButton_Unchecked(object sender, RoutedEventArgs e) => HideHiddenSources();
+        private void SmallUpArrow_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (HiddenShown) HideHiddenSources();
+            else ShowHiddenSources();
+        }
 
         private async void ShowHiddenSources()
         {
@@ -104,5 +108,8 @@ namespace FourClient.Views
             await HiddenView.TranslateByYAsync(TimeSpan.FromMilliseconds(200), 0, HiddenView.ActualHeight);
             HiddenView.Visibility = Visibility.Collapsed;
         }
+
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+            => HiddenView.MaxHeight = ActualHeight > 128 ? ActualHeight - 128 : ActualHeight;
     }
 }
