@@ -45,7 +45,7 @@
             <GridView x:Name="HiddenView" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Padding="0,12,-6,0">
                 <GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Tapped="Item_Tapped" RightTapped="Item_RightTapped" Holding="Item_Holding" Loaded="Item_Loaded" IsHitTestVisible="{Binding Enabled}">
+                        <Grid Tapped="Item_Tapped" RightTapped="HiddenItem_RightTapped" Holding="HiddenItem_Holding" Loaded="Item_Loaded" IsHitTestVisible="{Binding Enabled}">
                             <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                             <Viewbox Stretch="UniformToFill">
                                 <Image Source="{Binding ImageUrl}" />

@@ -75,6 +75,16 @@ namespace FourClient.Views
 
         private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
 
+        private void HiddenItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
+        {
+
+        }
+
+        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e)
+        {
+
+        }
+
         private static void ShowMenuOn(object sender)
         {
             var panel = (Grid)sender;
