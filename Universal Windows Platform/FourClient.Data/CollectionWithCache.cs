@@ -41,6 +41,10 @@ namespace FourClient.Data
                         Insert(index, item);
                     }
                 }
+                for (int i = Count; i < data.Count; i++)
+                {
+                    RemoveAt(i);
+                }
                 Cache?.Put(data);
                 LoadCompleted?.Invoke(this, data);
             }

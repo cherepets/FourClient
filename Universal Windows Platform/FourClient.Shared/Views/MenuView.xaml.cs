@@ -121,6 +121,7 @@ namespace FourClient.Views
 
         private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            MultiAppBar.CurrentIndex = Pivot.SelectedIndex;
             Selector.Select(Pivot.SelectedIndex);
         }
         

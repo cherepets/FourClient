@@ -52,9 +52,14 @@ namespace FourClient.Views
         {
             InitializeComponent();
             ViewLoaded?.Invoke(this);
+            _uiUpdateTimer.Tick += (s, a) => UpdateUi();
         }
 
         public string CurrentArticle { get; private set; }
+
+        private DispatcherTimer _uiUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
+
+        private const int UiTimeout = 30;
 
         private bool _loaded;
         private HtmlRender _render;
@@ -64,7 +69,15 @@ namespace FourClient.Views
         private string _commentLink;
         private string _title;
         private string _html;
+        private int hideUiAfter;
         
+        private void UpdateUi()
+        {
+            if (hideUiAfter > 0)
+                hideUiAfter--;
+            if (hideUiAfter == 0) HideUi();
+        }
+
         public async void Open(string prefix, string link, string fullLink, string commentLink, string title)
         {
             Opened = true;
@@ -152,6 +165,7 @@ namespace FourClient.Views
             if (AppBar.Visibility == Visibility.Visible) return;
             AppBar.Visibility = Visibility.Visible;
             TitleBlock.Visibility = Visibility.Visible;
+            hideUiAfter = UiTimeout;
             await AppBar.ShowAsync();
         }
 
@@ -165,6 +179,7 @@ namespace FourClient.Views
 
         public void Close()
         {
+            if (_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Stop();
             Opened = false;
             StatusBar.Visibility = Visibility.Visible;
             //if (_render.CanGoBack)
@@ -254,6 +269,7 @@ Details:
             WebContent.Visibility = Visibility.Visible;
             ProgressRing.IsActive = false;
             if (_render != null) _loaded = true;
+            if (!_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Start();
         }
                 
         private async void Globe_Tapped(object sender, TappedRoutedEventArgs e)

@@ -64,23 +64,25 @@ namespace FourClient.Data
         public Dictionary<string, string> NewsTypes { get; set; }
 
         private string _base64types;
-        
+
         public override bool Equals(object obj)
         {
             var source = obj as Source;
             if (source == null) return false;
-            if (Name != source.Name) return false;
-            if (Prefix != source.Prefix) return false;
-            if (ImageUrl != source.ImageUrl) return false;
-            if (Base64Types != source.Base64Types) return false;
-            if (Availability != source.Availability) return false;
-            if (Searchability != source.Searchability) return false;
+            if (!SafeCompare(Name, source.Name)) return false;
+            if (!SafeCompare(Prefix, source.Prefix)) return false;
+            if (!SafeCompare(ImageUrl, source.ImageUrl)) return false;
+            if (!SafeCompare(Base64Types, source.Base64Types)) return false;
+            if (!SafeCompare(Availability, source.Availability)) return false;
+            if (!SafeCompare(Searchability, source.Searchability)) return false;
             return true;
         }
 
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
+        private bool SafeCompare(string s1, string s2)
+            => string.IsNullOrEmpty(s1) && string.IsNullOrEmpty(s2)
+                ? true
+                : s1 == s2;
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

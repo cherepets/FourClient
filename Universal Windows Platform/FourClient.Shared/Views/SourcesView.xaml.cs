@@ -31,11 +31,7 @@ namespace FourClient.Views
         {
             InitializeComponent();
             ViewLoaded?.Invoke(this);
-            Loaded += (s, e) => GridView.AttachScrollListener(OnScrollDown, OnScrollUp);
         }
-
-        public void OnScrollDown() => IoC.MenuView.HideBars();
-        public void OnScrollUp() => IoC.MenuView.ShowBars();
 
         public Source SelectedSource { get; private set; }
 
@@ -43,8 +39,14 @@ namespace FourClient.Views
         {
             var collection = source as ObservableCollection<Source>;
             if (collection == null) return;
-            var active = new FilteredObservableCollection<Source>(collection, s => s.Name?.StartsWith("W") ?? false);
-            var inactive = new FilteredObservableCollection<Source>(collection, s => !(s.Name?.StartsWith("W") ?? false));
+            var hiddenSources = Settings.Current.HiddenSources;
+            var active = new FilteredObservableCollection<Source>(collection, s => !hiddenSources.Any(p => p == s.Prefix));
+            var inactive = new FilteredObservableCollection<Source>(collection, s => hiddenSources.Any(p => p == s.Prefix));
+            hiddenSources.CollectionChanged += (s, a) =>
+            {
+                active.Recheck();
+                inactive.Recheck();
+            };
             GridView.ItemsSource = active;
             HiddenView.ItemsSource = inactive;
         }
@@ -79,10 +81,10 @@ namespace FourClient.Views
             var item = panel.DataContext as Source;
             if (item != null)
                 ContextMenu.Show(IoC.MainPage.Flyout, panel,
-                    new ContextMenuItem("Delete",
-                        async () =>
+                    new ContextMenuItem("Отключить",
+                        () =>
                         {
-  //                          await item.DeleteAsync();
+                            Settings.Current.HiddenSources.Add(item.Prefix);
                         })
                     );
         }

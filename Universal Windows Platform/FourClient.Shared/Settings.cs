@@ -6,6 +6,8 @@ using FourToolkit.Extensions.Runtime;
 using FourToolkit.Settings.SettingsProviders;
 using System;
 using FourToolkit.UI;
+using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace FourClient
 {
@@ -95,6 +97,25 @@ namespace FourClient
                 OnPropertyChanged();
             }
         }
+        public ObservableCollection<string> HiddenSources
+        {
+            get
+            {
+                if (_hiddenSources == null)
+                {
+                    _hiddenSources = new ObservableCollection<string>(GetProperty<string>().Split(','));
+                    _hiddenSources.CollectionChanged += (s, a) => HiddenSources = s as ObservableCollection<string>;
+                }
+                return _hiddenSources;
+            }
+            set
+            {
+                SetProperty(string.Join(",", value.ToArray()));
+                _hiddenSources = value;
+                OnPropertyChanged();
+            }
+        }
+        private ObservableCollection<string> _hiddenSources;
 
         Settings()
         {
@@ -108,6 +129,7 @@ namespace FourClient
                 {nameof(FontFace), "Segoe UI"},
                 {nameof(Align), "left"},
                 {nameof(YouTube), "vnd.youtube:"},
+                {nameof(HiddenSources), string.Empty},
             };
             DefaultsProvider = new DictionarySettingsProvider(defaults);
             SettingsProvider = new ApplicationDataSettingsProvider(ApplicationDataContainerType.Local);
