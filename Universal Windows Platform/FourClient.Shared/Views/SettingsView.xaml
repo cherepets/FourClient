@@ -12,30 +12,46 @@
         <StackPanel Margin="12,0" Grid.Row="1">
             <ToggleSwitch x:Name="AppThemeToggle" Header="Тема приложения" OnContent="Белая" OffContent="Черная" Toggled="AppThemeToggle_Toggled"/>
             <ToggleSwitch x:Name="ArticleThemeToggle" Header="Тема при чтении" OnContent="Белая" OffContent="Черная" Toggled="ArticleThemeToggle_Toggled"/>
-            <CheckBox x:Name="LiveTileBox" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" />
-            <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16"  />
-            <ComboBox x:Name="YouTubeBox" SelectionChanged="YouTubeBox_SelectionChanged">
+            <CheckBox x:Name="LiveTileBox" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" Margin="0,8" />
+            <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" />
+            <ComboBox x:Name="YouTubeBox" SelectionChanged="YouTubeBox_SelectionChanged" Margin="0,8">
                 <ComboBoxItem Content="vnd.youtube:"/>
                 <ComboBoxItem Content="metrotube:VideoPage?VideoID="/>
                 <ComboBoxItem Content="http://www.youtube.com/watch?v="/>
             </ComboBox>
-            <TextBlock TextWrapping="Wrap" Text="Выравнивание" FontSize="16"  />
-            <ComboBox x:Name="AlignBox" SelectionChanged="AlignBox_SelectionChanged">
+            <TextBlock TextWrapping="Wrap" Text="Выравнивание" FontSize="16" />
+            <ComboBox x:Name="AlignBox" SelectionChanged="AlignBox_SelectionChanged" Margin="0,8">
                 <ComboBoxItem Content="left"/>
                 <ComboBoxItem Content="right"/>
                 <ComboBoxItem Content="center"/>
                 <ComboBoxItem Content="justify"/>
             </ComboBox>
-            <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="16"  />
-            <ComboBox x:Name="FontBox" SelectionChanged="FontBox_SelectionChanged">
+            <TextBlock TextWrapping="Wrap" Text="Шрифт" FontSize="16" />
+            <ComboBox x:Name="FontBox" SelectionChanged="FontBox_SelectionChanged" Margin="0,8">
                 <ComboBoxItem Content="Segoe UI"/>
                 <ComboBoxItem Content="Arial"/>
                 <ComboBoxItem Content="Georgia"/>
                 <ComboBoxItem Content="Times New Roman"/>
                 <ComboBoxItem Content="Veranda"/>
             </ComboBox>
-            <TextBlock TextWrapping="Wrap" Text="Размер шрифта" FontSize="16"  />
-            <Slider x:Name="Slider" Margin="16,10" LargeChange="1" Maximum="7" Minimum="1" TickFrequency="1" ValueChanged="Slider_ValueChanged" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="Wrap" Text="Размер шрифта" FontSize="16" />
+                <TextBlock x:Name="FontSliderCap" Grid.Column="2" FontSize="16" />
+            </Grid>
+            <Slider x:Name="FontSlider" Margin="16,10" LargeChange="1" Maximum="7" Minimum="1" TickFrequency="1" ValueChanged="FontSlider_ValueChanged" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock TextWrapping="Wrap" Text="Ограничение кэша (в днях)" FontSize="16"  />
+                <TextBlock x:Name="CacheSliderCap" Grid.Column="2" FontSize="16" />
+            </Grid>
+            <Slider x:Name="CacheSlider" Margin="16,10" LargeChange="1" Maximum="30" Minimum="1" TickFrequency="1" ValueChanged="CacheSlider_ValueChanged" />
         </StackPanel>
         <TextBlock x:Name="VersionBlock" HorizontalAlignment="Right" Grid.Row="2" Margin="12"/>
     </Grid>

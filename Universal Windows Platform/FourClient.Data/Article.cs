@@ -1,6 +1,6 @@
 ﻿namespace FourClient.Data
 {
-    public struct Article
+    internal struct Article
     {
         public string HTML { get; set; }
     }

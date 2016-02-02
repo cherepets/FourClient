@@ -53,7 +53,17 @@ namespace FourClient.Views
                     args[1] += ';' + args[2];
                     args.Remove(args[2]);
                 }
-                IoC.ArticleView.Open(args[0], args[1], item.FullLink, item.CommentLink, item.Title);
+                var article = new Article
+                {
+                    Prefix = args[0],
+                    Title = item.Title,
+                    Image = item.Image,
+                    Link = args[1],
+                    Avatar = item.Avatar,
+                    FullLink = item.FullLink,
+                    CommentLink = item.CommentLink
+                };
+                IoC.ArticleView.Open(article);
             }
         }
 

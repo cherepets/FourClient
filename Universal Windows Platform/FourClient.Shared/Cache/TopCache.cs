@@ -20,15 +20,7 @@ namespace FourClient.Cache
                     using (var table = db.Tables[Table].Open())
                     {
                         var rows = table.Where(r => true);
-                        return rows?.Select(r => new FeedItem
-                        {
-                            Avatar = r["Avatar"].AsString,
-                            CommentLink = r["CommentLink"].AsString,
-                            FullLink = r["FullLink"].AsString,
-                            Image = r["Image"].AsString,
-                            Link = r["Link"].AsString,
-                            Title = r["Title"].AsString,
-                        }).ToList();
+                        return rows?.Select(r => EsentSerializer.Deserialize<FeedItem>(r)).ToList();
                     }
                 }
                 catch (Exception exception)
@@ -50,15 +42,7 @@ namespace FourClient.Cache
                         table.Delete(r => true);
                         foreach (var item in values)
                         {
-                            var cells = new[]
-                            {
-                                new EsentCell("Avatar", item.Avatar),
-                                new EsentCell("CommentLink", item.CommentLink),
-                                new EsentCell("FullLink", item.FullLink),
-                                new EsentCell("Image", item.Image),
-                                new EsentCell("Link", item.Link),
-                                new EsentCell("Title", item.Title),
-                            };
+                            EsentCell[] cells = EsentSerializer.Serialize(item, table);
                             table.Insert(cells);
                         }
                     }

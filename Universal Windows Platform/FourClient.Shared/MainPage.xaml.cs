@@ -61,7 +61,7 @@ namespace FourClient
         private string _state;
         private TimeSpan _animationLength = TimeSpan.FromSeconds(0.2);
 
-        private void MainPage_Loaded(object sender, RoutedEventArgs e)
+        private async void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
             RegisterDataDepedencies();
             Settings.Current.LastVersion = Settings.Current.CurrentVersion;
@@ -71,6 +71,11 @@ namespace FourClient
             IoC.InterestingView.SetItemsSource(top);
             var sources = Api.GetSources();
             IoC.SourcesView.SetItemsSource(sources);
+            await Task.Run(() =>
+                {
+                    IoC.ArticleCache.GetCollection();
+                    IoC.ArticleCache.RemoveOldEntites();
+                });
         }
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e) => ApplySettings(Settings.Current);
@@ -84,7 +89,7 @@ namespace FourClient
         {
             var sourceCache = new SourceCache();
             var topicCache = new TopCache();
-            Data.IoC.RegisterDependencies(sourceCache, topicCache);
+            Data.IoC.RegisterDependencies(IoC.SourcesView, sourceCache, topicCache);
         }
 
         private void ArticleView_StateChanged(bool newState) => UpdateVisualState(newState);

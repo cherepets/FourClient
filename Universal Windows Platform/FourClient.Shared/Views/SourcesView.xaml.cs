@@ -7,12 +7,13 @@ using FourClient.Data;
 using System.Collections.ObjectModel;
 using System;
 using System.Linq;
+using FourClient.Data.Interfaces;
 
 namespace FourClient.Views
 {
     public delegate void SourceChangedEventHandler(Source newSource);
 
-    public interface ISourcesView
+    public interface ISourcesView : ISourceSelector
     {
         Source SelectedSource { get; }
         void SetItemsSource(object source);
@@ -35,6 +36,8 @@ namespace FourClient.Views
 
         public Source SelectedSource { get; private set; }
 
+        public string Sources { get; private set; } = string.Empty;
+
         public void SetItemsSource(object source)
         {
             var collection = source as ObservableCollection<Source>;
@@ -49,6 +52,7 @@ namespace FourClient.Views
             };
             GridView.ItemsSource = active;
             HiddenView.ItemsSource = inactive;
+            Sources = string.Join(",", active.Select(s => s.Prefix));
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
@@ -64,7 +68,7 @@ namespace FourClient.Views
             SelectedSource = source;
             IoC.MenuView.OpenFeedTab();
             IoC.FeedView.SetItemsSource(source.MainFeed);
-            IoC.MenuView.NewsTypes = source.NewsTypes.Keys.ToList();
+            IoC.MenuView.NewsTypes = source.Topics.Keys.ToList();
             if (SelectedSource != null && SelectedSource.Searchable) IoC.MenuView.ShowSearchButton();
             else IoC.MenuView.HideSearchButton();
             SourceChanged?.Invoke(source);
@@ -75,15 +79,9 @@ namespace FourClient.Views
 
         private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
 
-        private void HiddenItem_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
+        private void HiddenItem_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOnHidden(sender);
 
-        }
-
-        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e)
-        {
-
-        }
+        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOnHidden(sender);
 
         private static void ShowMenuOn(object sender)
         {
@@ -94,7 +92,23 @@ namespace FourClient.Views
                     new ContextMenuItem("Отключить",
                         () =>
                         {
-                            Settings.Current.HiddenSources.Add(item.Prefix);
+                            if (!Settings.Current.HiddenSources.Contains(item.Prefix))
+                                Settings.Current.HiddenSources.Add(item.Prefix);
+                        })
+                    );
+        }
+
+        private static void ShowMenuOnHidden(object sender)
+        {
+            var panel = (Grid)sender;
+            var item = panel.DataContext as Source;
+            if (item != null)
+                ContextMenu.Show(IoC.MainPage.Flyout, panel,
+                    new ContextMenuItem("Включить",
+                        () =>
+                        {
+                            if (Settings.Current.HiddenSources.Contains(item.Prefix))
+                                Settings.Current.HiddenSources.Remove(item.Prefix);
                         })
                     );
         }

@@ -106,8 +106,8 @@ namespace FourClient.Views
             searchInput.InputCanceled += () => Flyout.HideFlyout();
             searchInput.InputCompleted += input =>
             {
-                //var feed = IoC.SourcesView.SelectedSource.SearchFeed[input];
-                //IoC.FeedView.SetItemsSource(feed);
+                var feed = IoC.SourcesView.SelectedSource.SearchFeed[input];
+                IoC.FeedView.SetItemsSource(feed);
                 IoC.MenuView.OpenFeedTab();
                 Flyout.HideFlyout();
             };
@@ -131,9 +131,24 @@ namespace FourClient.Views
             IoC.MainPage.ShowFlyout(settings);
         }
 
+        private void RefreshButton_Tapped(object sender, TappedRoutedEventArgs e)
+            => IoC.FeedView.Refresh();
+
         private void NewsTypeButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-
+            var button = (Button)sender;
+            var source = IoC.SourcesView.SelectedSource;
+            if (source != null)
+            {
+                var items = source.Topics.Select(t =>
+                new ContextMenuItem(t.Key,
+                    () =>
+                    {
+                        IoC.FeedView.SetItemsSource(source.TopicFeed[t.Value]);
+                        button.Content = t.Key;
+                    }));
+                ContextMenu.Show(IoC.MainPage.Flyout, button, items.ToArray());
+            }
         }
     }
 }

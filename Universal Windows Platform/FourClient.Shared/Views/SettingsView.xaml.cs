@@ -22,7 +22,10 @@ namespace FourClient.Views
             SetComboBoxValue(YouTubeBox, Settings.Current.YouTube);
             SetComboBoxValue(AlignBox, Settings.Current.Align);
             SetComboBoxValue(FontBox, Settings.Current.FontFace);
-            Slider.Value = Settings.Current.FontSize;
+            FontSlider.Value = Settings.Current.FontSize;
+            FontSliderCap.Text = FontSlider.Value.ToString();
+            CacheSlider.Value = Settings.Current.CacheDays;
+            CacheSliderCap.Text = CacheSlider.Value.ToString();
             VersionBlock.Text = $"v. {Settings.Current.DisplayVersion}";
             _init = true;
         }
@@ -64,10 +67,18 @@ namespace FourClient.Views
             Settings.Current.FontFace = GetComboBoxValue(FontBox);
         }
 
-        private void Slider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        private void FontSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
         {
             if (!_init) return;
-            Settings.Current.FontSize = (int)Slider.Value;
+            Settings.Current.FontSize = (int)FontSlider.Value;
+            FontSliderCap.Text = FontSlider.Value.ToString();
+        }
+
+        private void CacheSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            if (!_init) return;
+            Settings.Current.CacheDays = (int)CacheSlider.Value;
+            CacheSliderCap.Text = CacheSlider.Value.ToString();
         }
 
         private void SetComboBoxValue(ComboBox box, string value)

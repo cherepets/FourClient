@@ -111,7 +111,12 @@
   <ItemGroup>
     <Compile Include="Api.cs" />
     <Compile Include="CollectionWithCache.cs" />
+    <Compile Include="Feed\ClonedFeed.cs" />
+    <Compile Include="Feed\SearchFeed.cs" />
+    <Compile Include="Feed\TopicFeed.cs" />
+    <Compile Include="Feed\MainFeed.cs" />
     <Compile Include="Interfaces\ICache.cs" />
+    <Compile Include="Interfaces\ISourceSelector.cs" />
     <Compile Include="IoC.cs" />
     <Compile Include="WebServiceClient.cs" />
     <Compile Include="ConnectionException.cs" />
@@ -120,7 +125,7 @@
     <Compile Include="FeedItem.cs" />
     <Compile Include="WebServiceException.cs" />
     <Compile Include="Source.cs" />
-    <Compile Include="Feed.cs" />
+    <Compile Include="Feed\AbstractFeed.cs" />
     <Content Include="Properties\FourApi.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>

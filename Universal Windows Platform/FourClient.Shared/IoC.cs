@@ -1,4 +1,5 @@
-﻿using FourClient.Views;
+﻿using FourClient.Cache;
+using FourClient.Views;
 
 namespace FourClient
 {
@@ -10,6 +11,7 @@ namespace FourClient
         public static ISourcesView SourcesView;
         public static IFeedView FeedView;
         public static IArticleView ArticleView;
+        public static IArticleCache ArticleCache;
 
         private static bool _registred;
         private static readonly object Lock = new object();
@@ -25,6 +27,7 @@ namespace FourClient
                 Views.SourcesView.ViewLoaded += sender => SourcesView = sender;
                 Views.FeedView.ViewLoaded += sender => FeedView = sender;
                 Views.ArticleView.ViewLoaded += sender => ArticleView = sender;
+                ArticleCache = new ArticleCache();
                 _registred = true;
             }
         }

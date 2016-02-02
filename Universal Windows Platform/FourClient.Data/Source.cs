@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FourClient.Data.Feed;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,10 @@ namespace FourClient.Data
 {
     public class Source
     {
-        public Feed MainFeed => new Feed
-        {
-            NewsType = NewsTypes.First().Key,
-            SearchMode = false,
-            Source = this
-        };
-
-        public string MySources { get; set; }
+        public AbstractFeed MainFeed => new MainFeed { Source = this };
+        public TopicFeedAccessor TopicFeed => new TopicFeedAccessor(this);
+        public SearchFeedAccessor SearchFeed => new SearchFeedAccessor(this);
+        
         public string Name { get; set; }
         public string Prefix { get; set; }
         public string ImageUrl { get; set; }
@@ -31,10 +28,10 @@ namespace FourClient.Data
                     var decoded = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
                     var xml = XDocument.Parse(decoded);
                     var pairs = xml.Descendants().Where(d => d.Name.LocalName == "Pair");
-                    NewsTypes = new Dictionary<string, string>();
+                    Topics = new Dictionary<string, string>();
                     foreach (var pair in pairs)
                     {
-                        NewsTypes.Add(
+                        Topics.Add(
                             pair.Attribute("key").Value,
                             pair.Attribute("value").Value);
                         Base64Types = string.Empty;
@@ -61,7 +58,7 @@ namespace FourClient.Data
                 Searchable = value == "true";
             }
         }
-        public Dictionary<string, string> NewsTypes { get; set; }
+        public Dictionary<string, string> Topics { get; set; }
 
         private string _base64types;
 

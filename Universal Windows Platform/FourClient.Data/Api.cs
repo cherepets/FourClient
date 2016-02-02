@@ -25,23 +25,23 @@ namespace FourClient.Data
             return new CollectionWithCache<Source>(IoC.SourceCache, task);
         }
         
-        public static async Task<Article> GetArticleAsync(string prefix, string link)
+        public static async Task<string> GetArticleAsync(string prefix, string link)
         {
             var client = new WebServiceClient(Url);
             var collection = await client.CallAsync<Article>(prefix + "_GetArticle", new string[] { link });
             var article = collection.First();
             var bytes = Convert.FromBase64String(article.HTML);
-            article.HTML = Encoding.UTF8.GetString(bytes, 0, bytes.Length);
-            return article;
+            return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
         
-        public static async Task<List<FeedItem>> GetItemsAsync(Source source, string newsType, int pageNumber)
+        public static async Task<List<FeedItem>> GetItemsAsync(Source source, string topic, int pageNumber)
         {
             var client = new WebServiceClient(Url);
-            var selectedType = source.NewsTypes[newsType] == "?" ? source.MySources : source.NewsTypes[newsType];
+            var selectedTopic = topic;
+            if (topic == "?") selectedTopic = IoC.SourceSelector.Sources;
             var collection = await client.CallAsync<FeedItem>(source.Prefix + "_GetPage", new string[] 
             {
-                selectedType,
+                selectedTopic,
                 pageNumber.ToString()
             });
             return collection;

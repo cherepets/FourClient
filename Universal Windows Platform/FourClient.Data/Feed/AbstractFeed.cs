@@ -7,14 +7,14 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
-namespace FourClient.Data
+namespace FourClient.Data.Feed
 {
-    public class Feed : ObservableCollection<FeedItem>, ISupportIncrementalLoading
+    public class AbstractFeed : ObservableCollection<FeedItem>, ISupportIncrementalLoading
     {
         public Source Source { get; set; }
         public bool SearchMode { get; set; }
-        public string NewsType { get; set; }
-        public string SearchQuery { get; set; }
+        public string Topic { get; set; }
+        public string SearchTerm { get; set; }
 
         private int _pageNumber = 1;
 
@@ -47,8 +47,8 @@ namespace FourClient.Data
                     await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
                     () => LoadStarted?.Invoke());
                     var newPages = SearchMode
-                        ? await Api.SearchPageAsync(Source.Prefix, SearchQuery, _pageNumber)
-                        : await Api.GetItemsAsync(Source, NewsType, _pageNumber);
+                        ? await Api.SearchPageAsync(Source.Prefix, SearchTerm, _pageNumber)
+                        : await Api.GetItemsAsync(Source, Topic, _pageNumber);
                     _pageNumber++;
                     if (newPages.Count == 0) throw new Exception("No items");
                     await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
@@ -90,5 +90,7 @@ namespace FourClient.Data
                 }
             }).AsAsyncOperation();
         }
+
+        public AbstractFeed Clone() => new ClonedFeed(this);
     }
 }

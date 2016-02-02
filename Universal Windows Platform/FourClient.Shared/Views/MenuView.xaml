@@ -47,8 +47,11 @@
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>
                 <ui:AppBar>
+                    <ui:AppBar.LeftButtons>
+                        <ui:AppBarButton Icon="Refresh" Tapped="RefreshButton_Tapped"/>
+                    </ui:AppBar.LeftButtons>
                     <ui:AppBar.CentralControl>
-                        <Button x:Name="NewsTypeButton" Margin="50,0,0,0" HorizontalAlignment="Stretch" BorderBrush="{x:Null}"  
+                        <Button x:Name="NewsTypeButton" HorizontalAlignment="Stretch" BorderBrush="{x:Null}"  
                             Background="Transparent" VerticalAlignment="Stretch"
                             Foreground="White"
                             Tapped="NewsTypeButton_Tapped" />

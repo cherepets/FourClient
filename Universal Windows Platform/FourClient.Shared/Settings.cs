@@ -116,6 +116,15 @@ namespace FourClient
             }
         }
         private ObservableCollection<string> _hiddenSources;
+        public int CacheDays
+        {
+            get { return GetProperty<int>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
 
         Settings()
         {
@@ -130,6 +139,7 @@ namespace FourClient
                 {nameof(Align), "left"},
                 {nameof(YouTube), "vnd.youtube:"},
                 {nameof(HiddenSources), string.Empty},
+                {nameof(CacheDays), 3},
             };
             DefaultsProvider = new DictionarySettingsProvider(defaults);
             SettingsProvider = new ApplicationDataSettingsProvider(ApplicationDataContainerType.Local);

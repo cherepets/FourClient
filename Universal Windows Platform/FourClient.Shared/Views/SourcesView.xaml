@@ -15,7 +15,7 @@
         <GridView x:Name="GridView" ScrollViewer.VerticalScrollBarVisibility="Hidden" Padding="0,0,-6,0">
             <GridView.ItemContainerTransitions>
                 <TransitionCollection>
-                    <EdgeUIThemeTransition Edge="Bottom"/>
+                    <AddDeleteThemeTransition />
                 </TransitionCollection>
             </GridView.ItemContainerTransitions>
             <GridView.ItemTemplate>
@@ -43,6 +43,11 @@
             </Grid.RowDefinitions>
             <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Height="16" Margin="-12,0" Visibility="Visible" />
             <GridView x:Name="HiddenView" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Padding="0,12,-6,0">
+                <GridView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <AddDeleteThemeTransition />
+                    </TransitionCollection>
+                </GridView.ItemContainerTransitions>
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <Grid Tapped="Item_Tapped" RightTapped="HiddenItem_RightTapped" Holding="HiddenItem_Holding" Loaded="Item_Loaded" IsHitTestVisible="{Binding Enabled}">

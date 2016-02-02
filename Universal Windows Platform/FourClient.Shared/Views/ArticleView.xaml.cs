@@ -1,13 +1,8 @@
 ﻿using FourClient.Data;
 using FourToolkit.UI.Extensions;
 using System;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 using Windows.ApplicationModel.DataTransfer;
-using Windows.Storage;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -22,7 +17,7 @@ namespace FourClient.Views
     public interface IArticleView
     {
         bool Opened { get; }
-        void Open(string prefix, string link, string fullLink, string commentLink, string title);
+        void Open(Article article);
         void Close();
         event StateEventHandler StateChanged;
     }
@@ -48,6 +43,8 @@ namespace FourClient.Views
         }
         private bool _opened;
 
+        public Article Article { get; private set; }
+
         public ArticleView()
         {
             InitializeComponent();
@@ -55,20 +52,12 @@ namespace FourClient.Views
             _uiUpdateTimer.Tick += (s, a) => UpdateUi();
         }
 
-        public string CurrentArticle { get; private set; }
-
         private DispatcherTimer _uiUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
 
         private const int UiTimeout = 30;
 
         private bool _loaded;
         private HtmlRender _render;
-        private string _prefix;
-        private string _link;
-        private string _fullLink;
-        private string _commentLink;
-        private string _title;
-        private string _html;
         private int hideUiAfter;
         
         private void UpdateUi()
@@ -78,24 +67,19 @@ namespace FourClient.Views
             if (hideUiAfter == 0) HideUi();
         }
 
-        public async void Open(string prefix, string link, string fullLink, string commentLink, string title)
+        public async void Open(Article article)
         {
             Opened = true;
             StatusBar.Visibility = Visibility.Collapsed;
             HideUi();
             ProgressRing.IsActive = true;
             WebContent.Visibility = Visibility.Collapsed;
-            Article article;
+            Article = article;
             var back = string.Empty;
             var front = string.Empty;
             try
             {
-                _prefix = prefix;
-                _link = link;
-                _fullLink = fullLink;
-                _commentLink = commentLink;
-                TitleBlock.Text = _title = title;
-                CurrentArticle = prefix + ';' + link;
+                TitleBlock.Text = Article.Title;
                 _render = new HtmlRender();
                 _render.ScrollUp += (s, a) => ShowUi();
                 _render.ScrollDown += (s, a) => HideUi();
@@ -108,36 +92,22 @@ namespace FourClient.Views
                 front = (Foreground as SolidColorBrush).Color.ToRgbString();
                 var emptyView = string.Format("<html><body bgcolor='{0}' /></html>", back);
                 _render.Html = emptyView;
-                var appData = ApplicationData.Current.LocalFolder;
-                var tempData = ApplicationData.Current.TemporaryFolder;
-                article = await CheckCache(appData) ?
-                    await LoadFromCache(appData) :
-                    await CheckCache(tempData) ?
-                        await LoadFromCache(tempData) :
-                        await LoadFromService(prefix, link);
-            }
-            catch (WebServiceException se)
-            {
-                var dialog = new MessageDialog(se.Message, "WebServiceClient.ServiceException");
-                await dialog.ShowAsync();
-                Close();
-            }
-            catch (ConnectionException se)
-            {
-                var dialog = new MessageDialog(se.Message, "ConnectionException");
-                await dialog.ShowAsync();
-                Close();
+                if (string.IsNullOrEmpty(Article.Html))
+                    LoadFromCache();
+                if (string.IsNullOrEmpty(Article.Html))
+                    await LoadFromService();
+                if (string.IsNullOrEmpty(Article.Html))
+                    throw new ArgumentNullException("Article is null at unexpected time");
             }
             catch (Exception ex)
             {
-                var dialog = new MessageDialog(ex.Message, "FourClient.WebViewException");
+                var dialog = new MessageDialog(ex.Message, "FourClient.ArticleView");
                 await dialog.ShowAsync();
                 Close();
             }
-            if (string.IsNullOrEmpty(article.HTML)) return;
             try
             {
-                var html = article.HTML
+                var html = Article.Html
                         .Replace("{0}", back)
                         .Replace("{1}", front)
                         .Replace("{2}", Settings.Current.FontSize.ToString())
@@ -145,11 +115,10 @@ namespace FourClient.Views
                         .Replace("{4}", Settings.Current.YouTube)
                         .Replace("{5}", Settings.Current.Align);
                 _loaded = false;
-                _html = html;
                 if (_render == null) return;
                 _render.Completed += render_Completed;
                 if (_render == null) return;
-                _render.Html = _html;
+                _render.Html = html;
                 if (_render == null) return;
                 while (!_loaded) await Task.Delay(100);
             }
@@ -191,76 +160,42 @@ namespace FourClient.Views
             //    _render.Html = _html;
             //    return;
             //}
-            CurrentArticle = null;
+            Article = null;
             WebContent.Children.Clear();
             _render = null;
-            //       MainPage.GoToNews();
         }
 
-        private async Task<Article> LoadFromService(string prefix, string link)
-        {
-            var article = await Api.GetArticleAsync(prefix, link);
-            await SaveToTemp(article);
-            return article;
-        }
+        private void LoadFromCache() 
+            => Article.Html = IoC.ArticleCache.FindHtml(Article.Prefix, Article.Link);
 
-        private async Task<bool> CheckCache(StorageFolder folder)
+        private async Task LoadFromService()
         {
             try
             {
-                var files = await folder.GetFilesAsync();
-                var filename = CurrentArticle.GetHashCode().ToString() + ".html";
-                return files.Any(f => f.Name == filename);
+                Article.Html = await Api.GetArticleAsync(Article.Prefix, Article.Link);
             }
-            catch
+            catch (WebServiceException se)
             {
-                return false;
+                var dialog = new MessageDialog(se.Message, "WebServiceException");
+                await dialog.ShowAsync();
+                Close();
             }
+            catch (ConnectionException se)
+            {
+                var dialog = new MessageDialog(se.Message, "ConnectionException");
+                await dialog.ShowAsync();
+                Close();
+            }
+            SaveToTemp();
         }
 
-        private async Task<Article> LoadFromCache(StorageFolder folder)
+        private void SaveToTemp()
         {
-            try
+            if (!string.IsNullOrEmpty(Article.Html))
             {
-                var files = await folder.GetFilesAsync();
-                var filename = CurrentArticle.GetHashCode().ToString() + ".html";
-                using (var stream = await files.First(f => f.Name == filename).OpenStreamForReadAsync())
-                {
-                    var xml = XDocument.Load(stream);
-                    var article = new Article
-                    {
-                        HTML = xml.Element("HTML").Value
-                    };
-                    return article;
-                }
+                Article.CreatedOn = DateTime.Now;
+                IoC.ArticleCache.Put(Article);
             }
-            catch (Exception ex)
-            {
-                throw new Exception(string.Format(
-@"Проблема при попытке загрузить данные из кэша.
-
-Details:
-{0}
-{1}", ex.Message, ex.StackTrace));
-            }
-        }
-
-        private async Task SaveToTemp(Article article)
-        {
-            try
-            {
-                var xml = new XDocument();
-                xml.Add(new XElement("HTML", article.HTML));
-                var appData = ApplicationData.Current.TemporaryFolder;
-                var filename = CurrentArticle.GetHashCode().ToString() + ".html";
-                var file = await appData.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
-                using (var stream = await file.OpenStreamForWriteAsync())
-                {
-                    var bytes = Encoding.UTF8.GetBytes(xml.ToString());
-                    await stream.WriteAsync(bytes, 0, bytes.Length);
-                }
-            }
-            catch { }
         }
         
         private void render_Completed(object sender, EventArgs args)
@@ -274,21 +209,21 @@ Details:
                 
         private async void Globe_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (CurrentArticle == null) return;
-            var uri = new Uri(_fullLink);
+            if (Article == null) return;
+            var uri = new Uri(Article.FullLink);
             await Launcher.LaunchUriAsync(uri);
         }
 
         private async void Comments_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (CurrentArticle == null) return;
-            var uri = new Uri(_commentLink);
+            if (Article == null) return;
+            var uri = new Uri(Article.CommentLink);
             await Launcher.LaunchUriAsync(uri);
         }
         
         private void Share_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (CurrentArticle == null) return;
+            if (Article == null) return;
             var dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += ShareDataRequested;
             DataTransferManager.ShowShareUI();
@@ -298,7 +233,7 @@ Details:
         {
             DataRequest request = args.Request;
             DataRequestDeferral deferral = request.GetDeferral();
-            request.Data.Properties.Title = _title;
+            request.Data.Properties.Title = Article.Title;
             request.Data.Properties.Description = "Отправлено из FourClient для Windows 10";
             try
             {

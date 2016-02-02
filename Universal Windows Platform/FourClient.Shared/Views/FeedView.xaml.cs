@@ -1,17 +1,16 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
-using System;
-using System.Linq;
 using FourClient.Data;
+using FourClient.Data.Feed;
 
 namespace FourClient.Views
 {
     public interface IFeedView
     {
         void SetItemsSource(object source);
+        void Refresh();
     }
 
     public sealed partial class FeedView : IFeedView
@@ -30,10 +29,10 @@ namespace FourClient.Views
         public void OnScrollDown() => IoC.MenuView.HideBars();
         public void OnScrollUp() => IoC.MenuView.ShowBars();
 
-        public void SetItemsSource(object source)
+        public void SetItemsSource(object feed)
         {
             Placeholder.Visibility = Visibility.Collapsed;
-            GridView.ItemsSource = source;
+            GridView.ItemsSource = feed;
             IoC.MenuView.ShowBars();
         }
 
@@ -41,9 +40,17 @@ namespace FourClient.Views
         {
             var panel = (Grid)sender;
             var item = panel.DataContext as FeedItem;
-            if (item != null) IoC.ArticleView.Open(
-                IoC.SourcesView.SelectedSource.Prefix, 
-                item.Link, item.FullLink, item.CommentLink, item.Title);
+            var article = new Article
+            {
+                Prefix = IoC.SourcesView.SelectedSource.Prefix,
+                Title = item.Title,
+                Image = item.Image,
+                Link = item.Link,
+                Avatar = item.Avatar,
+                FullLink = item.FullLink,
+                CommentLink = item.CommentLink
+            };
+            if (item != null) IoC.ArticleView.Open(article);
         }
 
         private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
@@ -85,5 +92,12 @@ namespace FourClient.Views
 
         private void SourcesButton_Tapped(object sender, TappedRoutedEventArgs e)
             => IoC.MenuView.OpenSourcesTab();
+
+        public void Refresh()
+        {
+            var feed = GridView.ItemsSource as AbstractFeed;
+            if (feed != null)
+                GridView.ItemsSource = feed.Clone();
+        }
     }
 }

@@ -33,6 +33,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Article.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Cache\ArticleCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Cache\Esent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Cache\TopCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Cache\SourceCache.cs" />
