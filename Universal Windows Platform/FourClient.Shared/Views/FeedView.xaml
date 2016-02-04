@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="using:FourToolkit.UI">
     <Grid>
+        <ui:StatusBarController x:Name="StatusBar" />
         <GridView x:Name="GridView" Margin="-12,0,-16,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">

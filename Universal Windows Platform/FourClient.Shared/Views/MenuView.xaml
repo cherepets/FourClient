@@ -10,7 +10,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <ui:HorizontalSelector x:Name="Selector" Grid.Row="0" Selected="HorizontalSelector_Selected">
+        <ui:HorizontalSelector x:Name="Selector" Selected="HorizontalSelector_Selected">
             <ui:HorizontalSelector.Buttons>
                 <ui:HorizontalSelectorButton Icon="Home"/>
                 <ui:HorizontalSelectorButton Icon="Squares"/>

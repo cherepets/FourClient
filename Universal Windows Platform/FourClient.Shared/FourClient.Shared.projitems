@@ -64,9 +64,6 @@
     <Content Include="$(MSBuildThisFileDirectory)esent\FourClientCache.db">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="$(MSBuildThisFileDirectory)Views\MenuView.temp.xaml.cs">
-      <DependentUpon>MenuView.xaml.temp</DependentUpon>
-    </None>
     <Compile Include="$(MSBuildThisFileDirectory)Views\SettingsView.xaml.cs">
       <DependentUpon>SettingsView.xaml</DependentUpon>
     </Compile>
@@ -87,10 +84,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <None Include="$(MSBuildThisFileDirectory)Views\MenuView.xaml.temp">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </None>
     <Page Include="$(MSBuildThisFileDirectory)Views\CollectionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

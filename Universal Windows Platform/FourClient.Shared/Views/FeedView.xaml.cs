@@ -4,6 +4,9 @@ using Windows.UI.Xaml.Input;
 using FourToolkit.UI.Extensions;
 using FourClient.Data;
 using FourClient.Data.Feed;
+using Windows.UI.Popups;
+using System;
+using FourToolkit.UI;
 
 namespace FourClient.Views
 {
@@ -29,18 +32,98 @@ namespace FourClient.Views
         public void OnScrollDown() => IoC.MenuView.HideBars();
         public void OnScrollUp() => IoC.MenuView.ShowBars();
 
-        public void SetItemsSource(object feed)
+        public void SetItemsSource(object source)
         {
             Placeholder.Visibility = Visibility.Collapsed;
+            var feed = source as AbstractFeed;
+            if (feed == null) return;
+            feed.LoadStarted += Feed_LoadStarted;
+            feed.LoadCompleted += Feed_LoadCompleted;
+            feed.LoadFailed += Feed_LoadFailed;
+            feed.ConnectionExceptionThrown += Feed_ConnectionExceptionThrown;
+            feed.ServiceExceptionThrown += Feed_ServiceExceptionThrown;
             GridView.ItemsSource = feed;
             IoC.MenuView.ShowBars();
+        }
+
+        private void Feed_LoadStarted() => StatusBar.ProgressValue = -1;
+
+        private void Feed_LoadCompleted() => StatusBar.ProgressValue = null;
+
+        private void Feed_LoadFailed() => StatusBar.ProgressValue = null;
+
+        private void Feed_ServiceExceptionThrown(Exception exception) => App.HandleException(exception);
+
+        private async void Feed_ConnectionExceptionThrown(Exception exception)
+            => await new MessageDialog("Попробовать еще раз?", "Проблемы с сетью")
+                .WithCommand("Да", () => Reconnect())
+                .WithCommand("Нет")
+                .SetDefaultCommandIndex(0)
+                .SetCancelCommandIndex(1)
+                .ShowAsync();
+
+        private async void Reconnect()
+        {
+            var feed = GridView.ItemsSource as AbstractFeed;
+            if (feed == null) return;
+            feed.HasMoreItems = true;
+            await feed.LoadMoreItemsAsync(0);
         }
 
         private void Item_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var panel = (Grid)sender;
             var item = panel.DataContext as FeedItem;
-            var article = new Article
+            var article = BuildArticle(item);
+            if (article != null) IoC.ArticleView.Open(article);
+        }
+
+        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
+
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
+
+        private static void ShowMenuOn(object sender)
+        {
+            var panel = (Grid)sender;
+            var item = panel.DataContext as FeedItem;
+            var article = BuildArticle(item);
+            if (article != null)
+                ContextMenu.Show(IoC.MainPage.Flyout, panel,
+                    new ContextMenuItem("В коллекцию",
+                        async () =>
+                        {
+                            var existent = IoC.ArticleCache.FindInCollection(article.Prefix, article.Link)
+                                ?? IoC.ArticleCache.FindInCache(article.Prefix, article.Link);
+                            if (existent != null)
+                            {
+                                if (!existent.InCollection)
+                                {
+                                    existent.InCollection = true;
+                                    IoC.ArticleCache.UpdateCollectionState(existent);
+                                }
+                            }
+                            else
+                            {
+                                article.Html = await Api.GetArticleAsync(article.Prefix, article.Link);
+                                article.InCollection = true;
+                                IoC.ArticleCache.Put(article);
+                            }
+                        })
+                    );
+        }
+
+        private void SourcesButton_Tapped(object sender, TappedRoutedEventArgs e)
+            => IoC.MenuView.OpenSourcesTab();
+
+        public void Refresh()
+        {
+            var feed = GridView.ItemsSource as AbstractFeed;
+            if (feed == null) return;
+            GridView.ItemsSource = feed.Clone();
+        }
+
+        private static Article BuildArticle(FeedItem item)
+            => item == null ? null : new Article
             {
                 Prefix = IoC.SourcesView.SelectedSource.Prefix,
                 Title = item.Title,
@@ -50,54 +133,5 @@ namespace FourClient.Views
                 FullLink = item.FullLink,
                 CommentLink = item.CommentLink
             };
-            if (item != null) IoC.ArticleView.Open(article);
-        }
-
-        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
-
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
-
-        private static void ShowMenuOn(object sender)
-        {
-            //var panel = (Grid)sender;
-            //var item = panel.DataContext as FeedItem;
-            //if (item != null)
-            //    ContextMenu.Show(IoC.MainPage.Flyout, panel,
-            //        new ContextMenuItem("Download",
-            //            async () =>
-            //            {
-            //                FileOperations.Download(await item.GetDirectUrlAsync(), item.Name.Split(' ').FirstOrDefault(), () => IoC.MenuView.OpenDownloadTab());
-            //            }),
-            //        new ContextMenuItem("Remote",
-            //            async () =>
-            //            {
-            //                var url = string.Empty;
-            //                try
-            //                {
-            //                    url = await item.GetDirectUrlAsync();
-            //                }
-            //                catch (Exception exception)
-            //                {
-            //                    IoC.Logger.Error(exception);
-            //                }
-            //                if (string.IsNullOrEmpty(url)) return;
-            //                var proj = new ProjectionView
-            //                {
-            //                    Url = url
-            //                };
-            //                IoC.MainPage.ShowFlyout(proj);
-            //            })
-            //        );
-        }
-
-        private void SourcesButton_Tapped(object sender, TappedRoutedEventArgs e)
-            => IoC.MenuView.OpenSourcesTab();
-
-        public void Refresh()
-        {
-            var feed = GridView.ItemsSource as AbstractFeed;
-            if (feed != null)
-                GridView.ItemsSource = feed.Clone();
-        }
     }
 }

@@ -11,6 +11,7 @@ namespace FourClient
         public static ISourcesView SourcesView;
         public static IFeedView FeedView;
         public static IArticleView ArticleView;
+        public static ICollectionView CollectionView;
         public static IArticleCache ArticleCache;
 
         private static bool _registred;
@@ -27,6 +28,7 @@ namespace FourClient
                 Views.SourcesView.ViewLoaded += sender => SourcesView = sender;
                 Views.FeedView.ViewLoaded += sender => FeedView = sender;
                 Views.ArticleView.ViewLoaded += sender => ArticleView = sender;
+                Views.CollectionView.ViewLoaded += sender => CollectionView = sender;
                 ArticleCache = new ArticleCache();
                 _registred = true;
             }

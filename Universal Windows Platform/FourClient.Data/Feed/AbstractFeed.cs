@@ -18,15 +18,15 @@ namespace FourClient.Data.Feed
 
         private int _pageNumber = 1;
 
-        public delegate void LoadFailedEventHandler();
-        public event LoadFailedEventHandler LoadFailed;
         public delegate void LoadStartedEventHandler();
         public event LoadStartedEventHandler LoadStarted;
         public delegate void LoadCompletedEventHandler();
         public event LoadCompletedEventHandler LoadCompleted;
-        public delegate void ServiceExceptionHandler(Exception ex);
+        public delegate void LoadFailedEventHandler();
+        public event LoadFailedEventHandler LoadFailed;
+        public delegate void ServiceExceptionHandler(Exception exception);
         public event ServiceExceptionHandler ServiceExceptionThrown;
-        public delegate void ConnectionExceptionHandler(Exception ex);
+        public delegate void ConnectionExceptionHandler(Exception exception);
         public event ConnectionExceptionHandler ConnectionExceptionThrown;
 
         public bool HasMoreItems
@@ -59,21 +59,25 @@ namespace FourClient.Data.Feed
                     });
                     return new LoadMoreItemsResult() { Count = (uint)newPages.Count };
                 }
-                catch (WebServiceException se)
+                catch (WebServiceException exception)
                 {
                     await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                    () => ServiceExceptionThrown?.Invoke(se));
+                    () => LoadFailed?.Invoke());
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => ServiceExceptionThrown?.Invoke(exception));
                     _hasMoreItems = false;
                     return new LoadMoreItemsResult() { Count = 0 };
                 }
-                catch (ConnectionException se)
+                catch (ConnectionException exception)
                 {
                     await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
-                    () => ConnectionExceptionThrown?.Invoke(se));
+                    () => LoadFailed?.Invoke());
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal,
+                    () => ConnectionExceptionThrown?.Invoke(exception));
                     _hasMoreItems = false;
                     return new LoadMoreItemsResult() { Count = 0 };
                 }
-                catch
+                catch (Exception)
                 {
                     if (Count == 0)
                     {

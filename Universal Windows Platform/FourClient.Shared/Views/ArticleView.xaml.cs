@@ -62,6 +62,7 @@ namespace FourClient.Views
         
         private void UpdateUi()
         {
+            if (!UiIsVisible) return;
             if (hideUiAfter > 0)
                 hideUiAfter--;
             if (hideUiAfter == 0) HideUi();
@@ -71,15 +72,17 @@ namespace FourClient.Views
         {
             Opened = true;
             StatusBar.Visibility = Visibility.Collapsed;
+            if (_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Stop();
             HideUi();
             ProgressRing.IsActive = true;
             WebContent.Visibility = Visibility.Collapsed;
             Article = article;
+            UpdateStarState();
             var back = string.Empty;
             var front = string.Empty;
             try
             {
-                TitleBlock.Text = Article.Title;
+                TitleBlock.Text = Article?.Title;
                 _render = new HtmlRender();
                 _render.ScrollUp += (s, a) => ShowUi();
                 _render.ScrollDown += (s, a) => HideUi();
@@ -97,13 +100,17 @@ namespace FourClient.Views
                 if (string.IsNullOrEmpty(Article.Html))
                     await LoadFromService();
                 if (string.IsNullOrEmpty(Article.Html))
-                    throw new ArgumentNullException("Article is null at unexpected time");
+                {
+                    Close();
+                    return;
+                }
+                ShowUi();
             }
             catch (Exception ex)
             {
-                var dialog = new MessageDialog(ex.Message, "FourClient.ArticleView");
-                await dialog.ShowAsync();
+                App.HandleException(ex);
                 Close();
+                return;
             }
             try
             {
@@ -129,18 +136,25 @@ namespace FourClient.Views
             }
         }
 
+        private bool UiIsVisible
+            => AppBar.VisibleHeight > 0
+            && AppBar.Visibility == Visibility.Visible
+            && TitleBlock.Visibility == Visibility.Visible;
+
         private async void ShowUi()
         {
-            if (AppBar.Visibility == Visibility.Visible) return;
+            if (UiIsVisible) return;
             AppBar.Visibility = Visibility.Visible;
             TitleBlock.Visibility = Visibility.Visible;
             hideUiAfter = UiTimeout;
             await AppBar.ShowAsync();
+            AppBar.Visibility = Visibility.Visible;
         }
 
         private async void HideUi()
         {
-            if (AppBar.Visibility == Visibility.Collapsed) return;
+            if (!_loaded) return;
+            if (!UiIsVisible) return;
             TitleBlock.Visibility = Visibility.Collapsed;
             await AppBar.HideAsync();
             AppBar.Visibility = Visibility.Collapsed;
@@ -151,47 +165,37 @@ namespace FourClient.Views
             if (_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Stop();
             Opened = false;
             StatusBar.Visibility = Visibility.Visible;
-            //if (_render.CanGoBack)
-            //{
-            //    _render = new EdgeHtml();
-            //    _render.Background = (Background as SolidColorBrush).Color;
-            //    WebContent.Children.Clear();
-            //    WebContent.Children.Add(_render.Implementation);
-            //    _render.Html = _html;
-            //    return;
-            //}
             Article = null;
             WebContent.Children.Clear();
             _render = null;
         }
 
         private void LoadFromCache() 
-            => Article.Html = IoC.ArticleCache.FindHtml(Article.Prefix, Article.Link);
+            => Article = IoC.ArticleCache.FindInCache(Article.Prefix, Article.Link) ?? Article;
 
         private async Task LoadFromService()
         {
             try
             {
+                Article.InCollection = false;
                 Article.Html = await Api.GetArticleAsync(Article.Prefix, Article.Link);
             }
-            catch (WebServiceException se)
+            catch (WebServiceException ex)
             {
-                var dialog = new MessageDialog(se.Message, "WebServiceException");
-                await dialog.ShowAsync();
-                Close();
+                App.HandleException(ex);
+                return;
             }
-            catch (ConnectionException se)
+            catch (ConnectionException ex)
             {
-                var dialog = new MessageDialog(se.Message, "ConnectionException");
-                await dialog.ShowAsync();
-                Close();
+                App.HandleException(ex);
+                return;
             }
             SaveToTemp();
         }
 
         private void SaveToTemp()
         {
-            if (!string.IsNullOrEmpty(Article.Html))
+            if (!string.IsNullOrEmpty(Article?.Html))
             {
                 Article.CreatedOn = DateTime.Now;
                 IoC.ArticleCache.Put(Article);
@@ -200,13 +204,26 @@ namespace FourClient.Views
         
         private void render_Completed(object sender, EventArgs args)
         {
-            ShowUi();
             WebContent.Visibility = Visibility.Visible;
             ProgressRing.IsActive = false;
             if (_render != null) _loaded = true;
+            UpdateStarState();
             if (!_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Start();
         }
-                
+
+        private async void Star_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (Article == null) return;
+            Article.InCollection = !Article.InCollection;
+            var result = IoC.ArticleCache.UpdateCollectionState(Article);
+            if (!result)
+            {
+                var dialog = new MessageDialog("Ошибка при работе с коллекцией!");
+                await dialog.ShowAsync();
+            }
+            UpdateStarState();
+        }
+
         private async void Globe_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (Article == null) return;
@@ -237,14 +254,17 @@ namespace FourClient.Views
             request.Data.Properties.Description = "Отправлено из FourClient для Windows 10";
             try
             {
-                //var uri = new Uri(string.Format(Settings.Current.ShareTemplate, _prefix, _link, _title));
-                //request.Data.SetWebLink(uri);
+                var uri = new Uri(Article.FullLink);
+                request.Data.SetWebLink(uri);
             }
             finally
             {
                 deferral.Complete();
             }
         }
+
+        private void UpdateStarState()
+            => StarButton.Icon = Article.InCollection ? FourToolkit.UI.Icon.StarFilled : FourToolkit.UI.Icon.Star;
 
         private void Rectangle_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {

@@ -22,6 +22,9 @@
         <Rectangle Grid.Row="1" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
         <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" />
         <ui:AppBar x:Name="AppBar" Grid.Row="2" Grid.ColumnSpan="3" Visibility="Collapsed">
+            <ui:AppBar.LeftButtons>
+                <ui:AppBarButton x:Name="StarButton" Icon="Star" Tapped="Star_Tapped"/>
+            </ui:AppBar.LeftButtons>
             <ui:AppBar.Buttons>
                 <ui:AppBarButton Icon="Globe" Tapped="Globe_Tapped"/>
                 <ui:AppBarButton Icon="Comment" Tapped="Comments_Tapped"/>

@@ -3,6 +3,8 @@ using FourClient.Data;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.Phone.UI.Input;
@@ -71,11 +73,13 @@ namespace FourClient
             IoC.InterestingView.SetItemsSource(top);
             var sources = Api.GetSources();
             IoC.SourcesView.SetItemsSource(sources);
+            var collection = new ObservableCollection<Article>();
             await Task.Run(() =>
                 {
-                    IoC.ArticleCache.GetCollection();
                     IoC.ArticleCache.RemoveOldEntites();
+                    collection = IoC.ArticleCache.GetCollection();
                 });
+            IoC.CollectionView.SetItemsSource(collection);
         }
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e) => ApplySettings(Settings.Current);

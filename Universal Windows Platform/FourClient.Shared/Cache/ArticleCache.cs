@@ -2,42 +2,44 @@
 using FourToolkit.Esent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace FourClient.Cache
 {
+    public delegate void CollectionStateChangedHandler(Article sender);
+
     public interface IArticleCache
     {
-        string FindHtml(string prefix, string link);
-        List<Article> GetCollection();
-        void Put(Article item);
+        ObservableCollection<Article> GetCollection();
+        Article FindInCache(string prefix, string link);
+        Article FindInCollection(string prefix, string link);
+        bool UpdateCollectionState(Article article);
+        void Put(Article article);
         void RemoveOldEntites();
     }
 
     public class ArticleCache : Esent, IArticleCache
     {
         private const string Table = "ArticleCache";
-        
-        public List<Article> GetCollection()
+
+        private ObservableCollection<Article> _collection;
+
+        public ObservableCollection<Article> GetCollection()
         {
-            return Query(db =>
+            if (_collection == null)
+            _collection = Query(db =>
             {
-                try
+                using (var table = db.Tables[Table].Open())
                 {
-                    using (var table = db.Tables[Table].Open())
-                    {
-                        var rows = table.Where(r => r["InCollection"].AsBool);
-                        return rows?.Select(r => EsentSerializer.Deserialize<Article>(r)).ToList();
-                    }
+                    var rows = table.Where(r => r["InCollection"].AsBool);
+                    var articles = rows?.Select(r => EsentSerializer.Deserialize<Article>(r)).ToList();
+                    return new ObservableCollection<Article>(articles);
                 }
-                catch (Exception exception)
-                {
-                    App.HandleException(exception);
-                    return null;
-                }
-            }) as List<Article>;
+            }) as ObservableCollection<Article>;
+            return _collection;
         }
 
-        public string FindHtml(string prefix, string link)
+        public Article FindInCache(string prefix, string link)
         {
             return Query(db =>
             {
@@ -48,7 +50,7 @@ namespace FourClient.Cache
                         var rows = table.Where(r => r["Prefix"].AsString == prefix && r["Link"].AsString == link);
                         var row = rows?.FirstOrDefault();
                         if (row == null) return null;
-                        return EsentSerializer.Deserialize<Article>(row)?.Html;
+                        return EsentSerializer.Deserialize<Article>(row);
                     }
                 }
                 catch (Exception exception)
@@ -56,20 +58,53 @@ namespace FourClient.Cache
                     App.HandleException(exception);
                     return null;
                 }
-            }) as string;
+            }) as Article;
         }
+        
+        public Article FindInCollection(string prefix, string link)
+            => GetCollection().FirstOrDefault(a => a.Prefix == prefix && a.Link == link);
 
-        public void Put(Article item)
+        public bool UpdateCollectionState(Article article)
         {
-            Query(db =>
+            return (bool)Query(db =>
             {
                 try
                 {
                     using (var table = db.Tables[Table].Open())
                     {
-                        EsentCell[] cells = EsentSerializer.Serialize(item, table);
+                        var updated = table.Update(r => r["Prefix"].AsString == article.Prefix && r["Link"].AsString == article.Link, "InCollection", article.InCollection) > 0;
+                        if (updated && GetCollection() != null)
+                        {
+                            if (article.InCollection && !GetCollection().Contains(article))
+                                GetCollection().Add(article);
+                            if (!article.InCollection && GetCollection().Contains(article))
+                                GetCollection().Remove(article);
+                        }
+                        return updated;
+                    }
+                }
+                catch (Exception exception)
+                {
+                    App.HandleException(exception);
+                    return false;
+                }
+            });
+        }
+
+        public void Put(Article article)
+        {
+            Query(db =>
+            {
+                try
+                {
+                    var existent = FindInCollection(article.Prefix, article.Link);
+                    if (existent != null) return;
+                    using (var table = db.Tables[Table].Open())
+                    {
+                        EsentCell[] cells = EsentSerializer.Serialize(article, table);
                         table.Insert(cells);
                     }
+                    if (article.InCollection) GetCollection().Add(article);
                 }
                 catch (Exception exception)
                 {

@@ -1,6 +1,4 @@
 ﻿using FourToolkit.UI;
-using FourToolkit.UI.Extensions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -55,19 +53,25 @@ namespace FourClient.Views
 
         public void ShowSearchButton() => SearchButton.Visibility = Visibility.Visible;
         public void HideSearchButton() => SearchButton.Visibility = Visibility.Collapsed;
-
-        private object _lock = new object();
+        
+        private bool _uiUpdated = true;
 
         public async void ShowBars()
         {
+            if (!_uiUpdated) return;
+            _uiUpdated = false;
             RefreshHeader(Pivot.SelectedIndex);
             await MultiAppBar.ShowAsync();
+            _uiUpdated = true;
         }
 
         public async void HideBars()
         {
+            if (!_uiUpdated) return;
+            _uiUpdated = false;
             PivotHeader.Visibility = Visibility.Collapsed;
             await MultiAppBar.HideAsync();
+            _uiUpdated = true;
         }
 
         public bool HandleBackButton()
