@@ -22,7 +22,7 @@
         <TextBlock Grid.Row="1" x:Name="PivotHeader" FontSize="16" Margin="12,6"/>
         <Pivot x:Name="Pivot" Grid.Row="2" Style="{StaticResource HeaderlessPivotStyle}" SelectionChanged="Pivot_SelectionChanged">
             <PivotItem x:Name="InterestingView" Header="Интересное">
-                <local:InterestingView/>
+                <local:InterestingView Margin="0,0,0,20"/>
             </PivotItem>
             <PivotItem x:Name="SourcesView" Header="Источники">
                 <local:SourcesView Margin="0,0,0,20"/>

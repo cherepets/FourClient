@@ -74,7 +74,7 @@ namespace FourClient.Views
         {
             var panel = (Grid)sender;
             var item = panel.DataContext as FeedItem;
-            var article = BuildArticle(item);
+            var article = Article.Build(item);
             if (article != null) IoC.ArticleView.Open(article);
         }
 
@@ -86,7 +86,7 @@ namespace FourClient.Views
         {
             var panel = (Grid)sender;
             var item = panel.DataContext as FeedItem;
-            var article = BuildArticle(item);
+            var article = Article.Build(item);
             if (article != null)
                 ContextMenu.Show(IoC.MainPage.Flyout, panel,
                     new ContextMenuItem("В коллекцию",
@@ -115,23 +115,13 @@ namespace FourClient.Views
         private void SourcesButton_Tapped(object sender, TappedRoutedEventArgs e)
             => IoC.MenuView.OpenSourcesTab();
 
+        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args) => Refresh();
+
         public void Refresh()
         {
             var feed = GridView.ItemsSource as AbstractFeed;
             if (feed == null) return;
             GridView.ItemsSource = feed.Clone();
         }
-
-        private static Article BuildArticle(FeedItem item)
-            => item == null ? null : new Article
-            {
-                Prefix = IoC.SourcesView.SelectedSource.Prefix,
-                Title = item.Title,
-                Image = item.Image,
-                Link = item.Link,
-                Avatar = item.Avatar,
-                FullLink = item.FullLink,
-                CommentLink = item.CommentLink
-            };
     }
 }

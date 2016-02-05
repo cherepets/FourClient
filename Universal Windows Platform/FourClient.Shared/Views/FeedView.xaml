@@ -5,7 +5,7 @@
     xmlns:ui="using:FourToolkit.UI">
     <Grid>
         <ui:StatusBarController x:Name="StatusBar" />
-        <GridView x:Name="GridView" Margin="-12,0,-16,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+        <GridView x:Name="GridView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -33,10 +33,10 @@
                             </Ellipse.Fill>
                         </Ellipse>
                         <TextBlock Text="{Binding Title}" 
-                                   Margin="12,8" FontSize="16"
-                                   Foreground="White" 
-                                   VerticalAlignment="Bottom" 
-                                   TextWrapping="WrapWholeWords" />
+                                    Margin="12,8" FontSize="16"
+                                    Foreground="White" 
+                                    VerticalAlignment="Bottom" 
+                                    TextWrapping="WrapWholeWords" />
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

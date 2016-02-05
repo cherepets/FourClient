@@ -104,7 +104,6 @@ namespace FourClient.Views
                     Close();
                     return;
                 }
-                ShowUi();
             }
             catch (Exception ex)
             {
@@ -136,6 +135,9 @@ namespace FourClient.Views
             }
         }
 
+        private void BottomFiller_PointerMoved(object sender, PointerRoutedEventArgs e) => ShowUi();
+        private void BottomFiller_Tapped(object sender, TappedRoutedEventArgs e) => ShowUi();
+
         private bool UiIsVisible
             => AppBar.VisibleHeight > 0
             && AppBar.Visibility == Visibility.Visible
@@ -143,10 +145,11 @@ namespace FourClient.Views
 
         private async void ShowUi()
         {
+            hideUiAfter = UiTimeout;
+            if (!_loaded) return;
             if (UiIsVisible) return;
             AppBar.Visibility = Visibility.Visible;
             TitleBlock.Visibility = Visibility.Visible;
-            hideUiAfter = UiTimeout;
             await AppBar.ShowAsync();
             AppBar.Visibility = Visibility.Visible;
         }
@@ -206,13 +209,15 @@ namespace FourClient.Views
         {
             WebContent.Visibility = Visibility.Visible;
             ProgressRing.IsActive = false;
-            if (_render != null) _loaded = true;
+            _loaded = true;
             UpdateStarState();
+            ShowUi();
             if (!_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Start();
         }
 
         private async void Star_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            hideUiAfter = UiTimeout;
             if (Article == null) return;
             Article.InCollection = !Article.InCollection;
             var result = IoC.ArticleCache.UpdateCollectionState(Article);
@@ -226,6 +231,7 @@ namespace FourClient.Views
 
         private async void Globe_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            hideUiAfter = UiTimeout;
             if (Article == null) return;
             var uri = new Uri(Article.FullLink);
             await Launcher.LaunchUriAsync(uri);
@@ -233,6 +239,7 @@ namespace FourClient.Views
 
         private async void Comments_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            hideUiAfter = UiTimeout;
             if (Article == null) return;
             var uri = new Uri(Article.CommentLink);
             await Launcher.LaunchUriAsync(uri);
@@ -240,6 +247,7 @@ namespace FourClient.Views
         
         private void Share_Tapped(object sender, TappedRoutedEventArgs e)
         {
+            hideUiAfter = UiTimeout;
             if (Article == null) return;
             var dataTransferManager = DataTransferManager.GetForCurrentView();
             dataTransferManager.DataRequested += ShareDataRequested;

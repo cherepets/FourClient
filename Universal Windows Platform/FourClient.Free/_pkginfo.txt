@@ -1,1 +1,1 @@
-C:\Users\cherepets\Documents\GitHub\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_4.5.0.0\FourClient.Free_4.5.0.0_x86_x64_arm.appxbundle
+D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_5.0.1.0\FourClient.Free_5.0.1.0_x86_x64_arm.appxbundle

@@ -16,7 +16,6 @@
     <Import_RootNamespace>FourClient</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Assets\empty.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LockScreenLogo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SmallLogo.scale-200.png" />

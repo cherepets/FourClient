@@ -1,4 +1,6 @@
-﻿using System;
+﻿using FourClient.Data;
+using System;
+using System.Linq;
 
 namespace FourClient
 {
@@ -14,6 +16,38 @@ namespace FourClient
         public string Html { get; set; }
         public bool InCollection { get; set; }
         public DateTime CreatedOn { get; set; }
+                        
+        public static Article Build(FeedItem item)
+            => item == null ? null : new Article
+            {
+                Prefix = IoC.SourcesView.SelectedSource?.Prefix,
+                Title = item.Title,
+                Image = item.Image,
+                Link = item.Link,
+                Avatar = item.Avatar,
+                FullLink = item.FullLink,
+                CommentLink = item.CommentLink
+            };
+
+        public static Article BuildNew(FeedItem item)
+        {
+            var args = item.Link.Split(';').ToList();
+            while (args.Count() > 2)
+            {
+                args[1] += ';' + args[2];
+                args.Remove(args[2]);
+            }
+            return new Article
+            {
+                Prefix = args[0],
+                Title = item.Title,
+                Image = item.Image,
+                Link = args[1],
+                Avatar = item.Avatar,
+                FullLink = item.FullLink,
+                CommentLink = item.CommentLink
+            };
+        }
 
         public override bool Equals(object obj)
         {

@@ -23,11 +23,7 @@ namespace FourClient.Views
         {
             InitializeComponent();
             ViewLoaded?.Invoke(this);
-            Loaded += (s, e) => GridView.AttachScrollListener(OnScrollDown, OnScrollUp);
         }
-
-        public void OnScrollDown() => IoC.MenuView.HideBars();
-        public void OnScrollUp() => IoC.MenuView.ShowBars();
 
         public Source SelectedSource { get; private set; }
 
@@ -47,22 +43,7 @@ namespace FourClient.Views
             var item = panel.DataContext as FeedItem;
             if (item != null)
             {
-                var args = item.Link.Split(';').ToList();
-                while (args.Count() > 2)
-                {
-                    args[1] += ';' + args[2];
-                    args.Remove(args[2]);
-                }
-                var article = new Article
-                {
-                    Prefix = args[0],
-                    Title = item.Title,
-                    Image = item.Image,
-                    Link = args[1],
-                    Avatar = item.Avatar,
-                    FullLink = item.FullLink,
-                    CommentLink = item.CommentLink
-                };
+                var article = Article.BuildNew(item);
                 IoC.ArticleView.Open(article);
             }
         }
@@ -74,13 +55,29 @@ namespace FourClient.Views
         private static void ShowMenuOn(object sender)
         {
             var panel = (Grid)sender;
-            var item = panel.DataContext as Source;
-            if (item != null)
+            var item = panel.DataContext as FeedItem;
+            var article = Article.BuildNew(item);
+            if (article != null)
                 ContextMenu.Show(IoC.MainPage.Flyout, panel,
-                    new ContextMenuItem("Delete",
+                    new ContextMenuItem("В коллекцию",
                         async () =>
                         {
-                            //                          await item.DeleteAsync();
+                            var existent = IoC.ArticleCache.FindInCollection(article.Prefix, article.Link)
+                                ?? IoC.ArticleCache.FindInCache(article.Prefix, article.Link);
+                            if (existent != null)
+                            {
+                                if (!existent.InCollection)
+                                {
+                                    existent.InCollection = true;
+                                    IoC.ArticleCache.UpdateCollectionState(existent);
+                                }
+                            }
+                            else
+                            {
+                                article.Html = await Api.GetArticleAsync(article.Prefix, article.Link);
+                                article.InCollection = true;
+                                IoC.ArticleCache.Put(article);
+                            }
                         })
                     );
         }

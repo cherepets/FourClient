@@ -1,4 +1,6 @@
-﻿using FourToolkit.UI.Extensions;
+﻿using FourToolkit.UI;
+using FourToolkit.UI.Extensions;
+using PullToRefresh.UWP;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -21,6 +23,7 @@ namespace FourClient.Views
             InitializeComponent();
             ViewLoaded?.Invoke(this);
             Loaded += (s, e) => GridView.AttachScrollListener(OnScrollDown, OnScrollUp);
+    //        PullToRefresh.UWP.PullRefreshProgressControl
         }
 
         public void OnScrollDown() => IoC.MenuView.HideBars();
@@ -41,14 +44,31 @@ namespace FourClient.Views
                 IoC.ArticleView.Open(item);
         }
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e)
+        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
+
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
+
+        private static void ShowMenuOn(object sender)
         {
-
-        }
-
-        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e)
-        {
-
+            var panel = (Grid)sender;
+            var article = panel.DataContext as Article;
+            if (article != null)
+                ContextMenu.Show(IoC.MainPage.Flyout, panel,
+                    new ContextMenuItem("Удалить",
+                        () =>
+                        {
+                            var existent = IoC.ArticleCache.FindInCollection(article.Prefix, article.Link)
+                                ?? IoC.ArticleCache.FindInCache(article.Prefix, article.Link);
+                            if (existent != null)
+                            {
+                                if (existent.InCollection)
+                                {
+                                    existent.InCollection = false;
+                                    IoC.ArticleCache.UpdateCollectionState(existent);
+                                }
+                            }
+                        })
+                    );
         }
     }
 }

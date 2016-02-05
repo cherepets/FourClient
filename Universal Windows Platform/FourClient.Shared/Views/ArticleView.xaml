@@ -21,6 +21,8 @@
         <Grid x:Name="WebContent" Grid.Row="1" Grid.Column="1"/>
         <Rectangle Grid.Row="1" Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" ManipulationDelta="Rectangle_ManipulationDelta" ManipulationMode="TranslateX" Margin="0,0,-6,0" />
         <ProgressRing x:Name="ProgressRing" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Grid.ColumnSpan="2" />
+        <Rectangle x:Name="Filler1" Fill="Transparent" VerticalAlignment="Top" Grid.RowSpan="3" Grid.ColumnSpan="3" MinHeight="40" PointerMoved="BottomFiller_PointerMoved" Tapped="BottomFiller_Tapped"/>
+        <Rectangle x:Name="Filler2" Fill="Transparent" VerticalAlignment="Bottom" Grid.RowSpan="3" Grid.ColumnSpan="3" MinHeight="40" PointerMoved="BottomFiller_PointerMoved" Tapped="BottomFiller_Tapped"/>
         <ui:AppBar x:Name="AppBar" Grid.Row="2" Grid.ColumnSpan="3" Visibility="Collapsed">
             <ui:AppBar.LeftButtons>
                 <ui:AppBarButton x:Name="StarButton" Icon="Star" Tapped="Star_Tapped"/>

@@ -59,30 +59,36 @@ namespace FourClient.Cache
 
         public static object Query(Func<EsentDatabase, object> func, bool throwException = false)
         {
-            try
+            lock (Lock)
             {
-                using (var session = Instance.BeginSession())
-                using (var db = session.OpenDatabase(DbPath))
-                    return func.Invoke(db);
-            }
-            catch
-            {
-                if (throwException) throw;
-                return null;
+                try
+                {
+                    using (var session = Instance.BeginSession())
+                    using (var db = session.OpenDatabase(DbPath))
+                        return func.Invoke(db);
+                }
+                catch
+                {
+                    if (throwException) throw;
+                    return null;
+                }
             }
         }
 
         public static void Query(Action<EsentDatabase> action, bool throwException = false)
         {
-            try
+            lock (Lock)
             {
-                using (var session = Instance.BeginSession())
-                using (var db = session.OpenDatabase(DbPath))
-                    action.Invoke(db);
-            }
-            catch
-            {
-                if (throwException) throw;
+                try
+                {
+                    using (var session = Instance.BeginSession())
+                    using (var db = session.OpenDatabase(DbPath))
+                        action.Invoke(db);
+                }
+                catch
+                {
+                    if (throwException) throw;
+                }
             }
         }
 

@@ -32,7 +32,7 @@ namespace FourClient.Cache
                 using (var table = db.Tables[Table].Open())
                 {
                     var rows = table.Where(r => r["InCollection"].AsBool);
-                    var articles = rows?.Select(r => EsentSerializer.Deserialize<Article>(r)).ToList();
+                    var articles = rows?.Select(r => EsentSerializer.Deserialize<Article>(r)).ToList() ?? new List<Article>();
                     return new ObservableCollection<Article>(articles);
                 }
             }) as ObservableCollection<Article>;
@@ -43,50 +43,34 @@ namespace FourClient.Cache
         {
             return Query(db =>
             {
-                try
+                using (var table = db.Tables[Table].Open())
                 {
-                    using (var table = db.Tables[Table].Open())
-                    {
-                        var rows = table.Where(r => r["Prefix"].AsString == prefix && r["Link"].AsString == link);
-                        var row = rows?.FirstOrDefault();
-                        if (row == null) return null;
-                        return EsentSerializer.Deserialize<Article>(row);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    App.HandleException(exception);
-                    return null;
+                    var rows = table.Where(r => r["Prefix"].AsString == prefix && r["Link"].AsString == link);
+                    var row = rows?.FirstOrDefault();
+                    if (row == null) return null;
+                    return EsentSerializer.Deserialize<Article>(row);
                 }
             }) as Article;
         }
         
         public Article FindInCollection(string prefix, string link)
-            => GetCollection().FirstOrDefault(a => a.Prefix == prefix && a.Link == link);
+            => GetCollection()?.FirstOrDefault(a => a.Prefix == prefix && a.Link == link);
 
         public bool UpdateCollectionState(Article article)
         {
             return (bool)Query(db =>
             {
-                try
+                using (var table = db.Tables[Table].Open())
                 {
-                    using (var table = db.Tables[Table].Open())
+                    var updated = table.Update(r => r["Prefix"].AsString == article.Prefix && r["Link"].AsString == article.Link, "InCollection", article.InCollection) > 0;
+                    if (updated && GetCollection() != null)
                     {
-                        var updated = table.Update(r => r["Prefix"].AsString == article.Prefix && r["Link"].AsString == article.Link, "InCollection", article.InCollection) > 0;
-                        if (updated && GetCollection() != null)
-                        {
-                            if (article.InCollection && !GetCollection().Contains(article))
-                                GetCollection().Add(article);
-                            if (!article.InCollection && GetCollection().Contains(article))
-                                GetCollection().Remove(article);
-                        }
-                        return updated;
+                        if (article.InCollection && !GetCollection().Contains(article))
+                            GetCollection().Add(article);
+                        if (!article.InCollection && GetCollection().Contains(article))
+                            GetCollection().Remove(article);
                     }
-                }
-                catch (Exception exception)
-                {
-                    App.HandleException(exception);
-                    return false;
+                    return updated;
                 }
             });
         }
@@ -95,21 +79,14 @@ namespace FourClient.Cache
         {
             Query(db =>
             {
-                try
+                var existent = FindInCollection(article.Prefix, article.Link);
+                if (existent != null) return;
+                using (var table = db.Tables[Table].Open())
                 {
-                    var existent = FindInCollection(article.Prefix, article.Link);
-                    if (existent != null) return;
-                    using (var table = db.Tables[Table].Open())
-                    {
-                        EsentCell[] cells = EsentSerializer.Serialize(article, table);
-                        table.Insert(cells);
-                    }
-                    if (article.InCollection) GetCollection().Add(article);
+                    EsentCell[] cells = EsentSerializer.Serialize(article, table);
+                    table.Insert(cells);
                 }
-                catch (Exception exception)
-                {
-                    App.HandleException(exception);
-                }
+                if (article.InCollection) GetCollection()?.Add(article);
             });
         }
 
@@ -117,16 +94,10 @@ namespace FourClient.Cache
         {
             Query(db =>
             {
-                try
+                using (var table = db.Tables[Table].Open())
                 {
-                    using (var table = db.Tables[Table].Open())
-                    {
-                        table.Delete(r => r["InCollection"].AsBool && (r["CreatedOn"].AsDateTime - DateTime.Now).TotalDays > Settings.Current.CacheDays);
-                    }
-                }
-                catch (Exception exception)
-                {
-                    App.HandleException(exception);
+                    table.Delete(r => r["InCollection"].AsBool 
+                    && (r["CreatedOn"].AsDateTime - DateTime.Now).TotalDays > Settings.Current.CacheDays);
                 }
             });
         }
