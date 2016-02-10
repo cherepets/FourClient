@@ -11,6 +11,7 @@ namespace FourClient.Cache
     public interface IArticleCache
     {
         ObservableCollection<Article> GetCollection();
+        List<Article> GetHistory();
         Article FindInCache(string prefix, string link);
         Article FindInCollection(string prefix, string link);
         bool UpdateCollectionState(Article article);
@@ -37,6 +38,19 @@ namespace FourClient.Cache
                 }
             }) as ObservableCollection<Article>;
             return _collection;
+        }
+
+        public List<Article> GetHistory()
+        {
+            return Query(db =>
+                {
+                    using (var table = db.Tables[Table].Open())
+                    {
+                        var rows = table.Where(r => !r["InCollection"].AsBool);
+                        var articles = rows?.Select(r => EsentSerializer.Deserialize<Article>(r)).ToList() ?? new List<Article>();
+                        return articles.OrderByDescending(a => a.CreatedOn).ToList();
+                    }
+                }) as List<Article>;
         }
 
         public Article FindInCache(string prefix, string link)

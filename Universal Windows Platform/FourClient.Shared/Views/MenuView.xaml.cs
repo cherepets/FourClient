@@ -1,4 +1,6 @@
-﻿using FourToolkit.UI;
+﻿using FourClient.Data;
+using FourClient.Data.Feed;
+using FourToolkit.UI;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
@@ -103,14 +105,14 @@ namespace FourClient.Views
 
         private void SearchButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            if (IoC.SourcesView.SelectedSource == null) return;
+            if (IoC.FeedView.CurrentSource == null) return;
             var searchInput = new TextInput { VerticalAlignment = VerticalAlignment.Top, Placeholder = "search" };
             Flyout.ShowFlyout(searchInput);
             searchInput.SetFocus();
             searchInput.InputCanceled += () => Flyout.HideFlyout();
             searchInput.InputCompleted += input =>
             {
-                var feed = IoC.SourcesView.SelectedSource.SearchFeed[input];
+                var feed = IoC.FeedView.CurrentSource.SearchFeed[input];
                 IoC.FeedView.SetItemsSource(feed);
                 IoC.MenuView.OpenFeedTab();
                 Flyout.HideFlyout();
@@ -128,7 +130,13 @@ namespace FourClient.Views
             MultiAppBar.CurrentIndex = Pivot.SelectedIndex;
             Selector.Select(Pivot.SelectedIndex);
         }
-        
+
+        private void HistoryButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            var history = new HistoryView();
+            IoC.MainPage.ShowFlyout(history);
+        }
+
         private void SettingsButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var settings = new SettingsView();
@@ -141,17 +149,21 @@ namespace FourClient.Views
         private void NewsTypeButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var button = (Button)sender;
-            var source = IoC.SourcesView.SelectedSource;
+            var source = IoC.FeedView.CurrentSource;
             if (source != null)
             {
-                var items = source.Topics.Select(t =>
-                new ContextMenuItem(t.Key,
+                var items = source.Topics.Select(q =>
+                new ContextMenuItem(q.Key,
                     () =>
                     {
-                        IoC.FeedView.SetItemsSource(source.TopicFeed[t.Value]);
-                        button.Content = t.Key;
+                        IoC.FeedView.SetItemsSource(source.TopicFeed[q.Value]);
+                        button.Content = q.Key;
                     }));
-                ContextMenu.Show(IoC.MainPage.Flyout, button, items.ToArray());
+                var menu = new ContextMenu(IoC.MainPage.Flyout, button, items.ToArray());
+                menu.VerticalAlignment = VerticalAlignment.Bottom;
+                var t = menu.Margin;
+                menu.Margin = new Thickness(t.Left, 0, t.Right, button.ActualHeight);
+                IoC.MainPage.ShowFlyout(menu);
             }
         }
     }

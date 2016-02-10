@@ -38,11 +38,13 @@
             <ui:MultiAppBar.AppBars>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
+                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
                         <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
+                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
                         <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>
@@ -57,11 +59,13 @@
                             Tapped="NewsTypeButton_Tapped" />
                     </ui:AppBar.CentralControl>
                     <ui:AppBar.MenuItems>
+                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
                         <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
                     </ui:AppBar.MenuItems>
                 </ui:AppBar>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
+                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
                         <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>

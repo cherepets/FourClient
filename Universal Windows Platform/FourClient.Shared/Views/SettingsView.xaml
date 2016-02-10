@@ -6,14 +6,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
-            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="НАСТРОЙКИ" FontSize="16" Margin="12,6"/>
-        <ScrollViewer Margin="12,0" Grid.Row="2" VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer Margin="12,0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
             <StackPanel>
                 <ToggleSwitch x:Name="AppThemeToggle" Header="Тема приложения" OnContent="Белая" OffContent="Черная" Toggled="AppThemeToggle_Toggled"/>
                 <ToggleSwitch x:Name="ArticleThemeToggle" Header="Тема при чтении" OnContent="Белая" OffContent="Черная" Toggled="ArticleThemeToggle_Toggled"/>
                 <CheckBox x:Name="LiveTileBox" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" Margin="0,8" />
+                <ToggleSwitch x:Name="AllowRotationToggle" Header="Автоповорот экрана" OnContent="Включен" OffContent="Выключен" Toggled="AllowRotationToggle_Toggled"/>
+                <ToggleSwitch x:Name="EnableFlipViewerToggle" Header="Режим отображения интересного" OnContent="Одиночный" OffContent="Обычный" Toggled="EnableFlipViewerToggle_Toggled"/>
+                <TextBlock TextWrapping="Wrap" Text="При запуске отображать" FontSize="16" />
+                <ComboBox x:Name="StartUpBox" SelectionChanged="StartUpBox_SelectionChanged" Margin="0,8"/>
                 <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" />
                 <ComboBox x:Name="YouTubeBox" SelectionChanged="YouTubeBox_SelectionChanged" Margin="0,8">
                     <ComboBoxItem Content="vnd.youtube:"/>
@@ -44,6 +47,15 @@
                     <TextBlock x:Name="FontSliderCap" Grid.Column="2" FontSize="16" />
                 </Grid>
                 <Slider x:Name="FontSlider" Margin="16,10" LargeChange="1" Maximum="7" Minimum="1" TickFrequency="1" ValueChanged="FontSlider_ValueChanged" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock TextWrapping="Wrap" Text="Порог для событий прокрутки" FontSize="16"  />
+                    <TextBlock x:Name="ScrollEventSliderCap" Grid.Column="2" FontSize="16" />
+                </Grid>
+                <Slider x:Name="ScrollEventSlider" Margin="16,10" LargeChange="1" Maximum="300" Minimum="1" TickFrequency="1" ValueChanged="ScrollEventSlider_ValueChanged" />
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />

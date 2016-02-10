@@ -1,13 +1,13 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
+﻿using FourClient.Data;
+using FourClient.Data.Interfaces;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
-using FourClient.Data;
-using System.Collections.ObjectModel;
 using System;
+using System.Collections.ObjectModel;
 using System.Linq;
-using FourClient.Data.Interfaces;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace FourClient.Views
 {
@@ -15,9 +15,7 @@ namespace FourClient.Views
 
     public interface ISourcesView : ISourceSelector
     {
-        Source SelectedSource { get; }
         void SetItemsSource(object source);
-        event SourceChangedEventHandler SourceChanged;
     }
 
     public sealed partial class SourcesView : ISourcesView
@@ -26,15 +24,11 @@ namespace FourClient.Views
 
         public static event ViewEventHandler ViewLoaded;
 
-        public event SourceChangedEventHandler SourceChanged;
-
         public SourcesView()
         {
             InitializeComponent();
             ViewLoaded?.Invoke(this);
         }
-
-        public Source SelectedSource { get; private set; }
 
         public string Sources { get; private set; } = string.Empty;
 
@@ -65,13 +59,8 @@ namespace FourClient.Views
         {
             var grid = (Grid)sender;
             var source = (Source)grid.DataContext;
-            SelectedSource = source;
             IoC.MenuView.OpenFeedTab();
             IoC.FeedView.SetItemsSource(source.MainFeed);
-            IoC.MenuView.NewsTypes = source.Topics.Keys.ToList();
-            if (SelectedSource != null && SelectedSource.Searchable) IoC.MenuView.ShowSearchButton();
-            else IoC.MenuView.HideSearchButton();
-            SourceChanged?.Invoke(source);
             HideHiddenSources();
         }
 

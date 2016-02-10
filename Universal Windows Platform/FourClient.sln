@@ -21,9 +21,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourToolkit.Esent.Runtime",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourToolkit.Extensions", "..\..\..\BitBucket\FourToolkit\FourToolkit.Extensions\FourToolkit.Extensions.csproj", "{9A45724E-0829-4DC5-A90B-4F33AD242FC3}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FourToolkit.Esent.Shared", "..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Shared\FourToolkit.Esent.Shared.shproj", "{AAEB9695-B45F-48FD-A653-E354C440F2A2}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		FourClient.Shared\FourClient.Shared.projitems*{05206252-4997-4fe2-99f0-c7e005e974bb}*SharedItemsImports = 4
+		..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Shared\FourToolkit.Esent.Shared.projitems*{75366bf8-f569-4465-9dc4-11bde89d5466}*SharedItemsImports = 4
+		..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Shared\FourToolkit.Esent.Shared.projitems*{aaeb9695-b45f-48fd-a653-e354c440f2a2}*SharedItemsImports = 13
 		FourClient.Shared\FourClient.Shared.projitems*{208ef5ab-20d6-4dd2-b387-50cf674ce944}*SharedItemsImports = 13
 		FourClient.Shared\FourClient.Shared.projitems*{63a4c9e4-98e0-4873-844e-a47eba492d1f}*SharedItemsImports = 4
 	EndGlobalSection

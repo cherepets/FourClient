@@ -1,11 +1,12 @@
 ﻿using FourClient.Cache;
 using FourClient.Data;
+using FourClient.Data.Feed;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Phone.UI.Input;
 using Windows.UI.Core;
@@ -80,6 +81,32 @@ namespace FourClient
                     collection = IoC.ArticleCache.GetCollection();
                 });
             IoC.CollectionView.SetItemsSource(collection);
+            InitFirstPage(sources.FirstOrDefault());
+        }
+
+        private void InitFirstPage(Source defaultSource)
+        {
+            switch (Settings.Current.ShowAtStartup)
+            {
+                case StartUpType.Interesting:
+                    IoC.MenuView.OpenInterestingTab();
+                    break;
+                case StartUpType.Sources:
+                    IoC.MenuView.OpenSourcesTab();
+                    break;
+                case StartUpType.Feed:
+                    var defaultFeed = new AbstractFeed
+                    {
+                        Source = defaultSource,
+                        Topic = "?"
+                    };
+                    IoC.FeedView.SetItemsSource(defaultFeed);
+                    IoC.MenuView.OpenFeedTab();
+                    break;
+                case StartUpType.Collection:
+                    IoC.MenuView.OpenCollectionTab();
+                    break;
+            }
         }
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e) => ApplySettings(Settings.Current);

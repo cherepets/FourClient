@@ -1,8 +1,10 @@
 ﻿using FourClient.Data;
+using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.Graphics.Display;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -119,7 +121,8 @@ namespace FourClient.Views
                         .Replace("{2}", Settings.Current.FontSize.ToString())
                         .Replace("{3}", Settings.Current.FontFace)
                         .Replace("{4}", Settings.Current.YouTube)
-                        .Replace("{5}", Settings.Current.Align);
+                        .Replace("{5}", Settings.Current.Align)
+                        .Replace("{6}", Settings.Current.ScrollEventThreshold.ToString());
                 _loaded = false;
                 if (_render == null) return;
                 _render.Completed += render_Completed;
@@ -171,6 +174,8 @@ namespace FourClient.Views
             Article = null;
             WebContent.Children.Clear();
             _render = null;
+            if (Platform.IsMobile)
+                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
         private void LoadFromCache() 
@@ -213,6 +218,8 @@ namespace FourClient.Views
             UpdateStarState();
             ShowUi();
             if (!_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Start();
+            if (Platform.IsMobile && Settings.Current.AllowRotation)
+                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped;
         }
 
         private async void Star_Tapped(object sender, TappedRoutedEventArgs e)

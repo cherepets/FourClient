@@ -61,6 +61,34 @@ namespace FourClient
                 OnPropertyChanged();
             }
         }
+        public bool AllowRotation
+        {
+            get { return GetProperty<bool>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
+        public bool EnableFlipViewer
+        {
+            get { return GetProperty<bool>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+                IoC.InterestingView.EnableFlipViewer = value;
+            }
+        }
+        public int ScrollEventThreshold
+        {
+            get { return GetProperty<int>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
         public int FontSize
         {
             get { return GetProperty<int>(); }
@@ -85,6 +113,15 @@ namespace FourClient
             set
             {
                 SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
+        public StartUpType ShowAtStartup
+        {
+            get { return (StartUpType)GetProperty<int>(); }
+            set
+            {
+                SetProperty((int)value);
                 OnPropertyChanged();
             }
         }
@@ -134,9 +171,13 @@ namespace FourClient
                 {nameof(AppTheme), false},
                 {nameof(ArticleTheme), false},
                 {nameof(LiveTile), true},
+                {nameof(AllowRotation), false},
+                {nameof(EnableFlipViewer), true},
+                {nameof(ScrollEventThreshold), 20},
                 {nameof(FontSize), Platform.IsMobile ? 2 : 3},
                 {nameof(FontFace), "Segoe UI"},
                 {nameof(Align), "left"},
+                {nameof(ShowAtStartup), 0 },
                 {nameof(YouTube), "vnd.youtube:"},
                 {nameof(HiddenSources), string.Empty},
                 {nameof(CacheDays), 3},

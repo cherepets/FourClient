@@ -1,17 +1,19 @@
-﻿using Windows.UI.Xaml;
+﻿using FourClient.Data;
+using FourClient.Data.Feed;
+using FourToolkit.UI;
+using FourToolkit.UI.Extensions;
+using System;
+using System.Linq;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using FourToolkit.UI.Extensions;
-using FourClient.Data;
-using FourClient.Data.Feed;
-using Windows.UI.Popups;
-using System;
-using FourToolkit.UI;
 
 namespace FourClient.Views
 {
     public interface IFeedView
     {
+        Source CurrentSource { get; }
         void SetItemsSource(object source);
         void Refresh();
     }
@@ -29,6 +31,8 @@ namespace FourClient.Views
             Loaded += (s, e) => GridView.AttachScrollListener(OnScrollDown, OnScrollUp);
         }
 
+        public Source CurrentSource { get; private set; }
+
         public void OnScrollDown() => IoC.MenuView.HideBars();
         public void OnScrollUp() => IoC.MenuView.ShowBars();
 
@@ -43,6 +47,10 @@ namespace FourClient.Views
             feed.ConnectionExceptionThrown += Feed_ConnectionExceptionThrown;
             feed.ServiceExceptionThrown += Feed_ServiceExceptionThrown;
             GridView.ItemsSource = feed;
+            CurrentSource = feed.Source;
+            IoC.MenuView.NewsTypes = feed.Source.Topics.Keys.ToList();
+            if (feed.Source != null && feed.Source.Searchable) IoC.MenuView.ShowSearchButton();
+            else IoC.MenuView.HideSearchButton();
             IoC.MenuView.ShowBars();
         }
 
@@ -68,6 +76,14 @@ namespace FourClient.Views
             if (feed == null) return;
             feed.HasMoreItems = true;
             await feed.LoadMoreItemsAsync(0);
+        }
+
+        private void Item_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            if (grid == null) return;
+            grid.Width = GridView.ActualWidth;
+            GridView.SizeChanged += (s, a) => grid.Width = GridView.ActualWidth;
         }
 
         private void Item_Tapped(object sender, TappedRoutedEventArgs e)

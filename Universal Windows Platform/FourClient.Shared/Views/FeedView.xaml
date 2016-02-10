@@ -5,7 +5,7 @@
     xmlns:ui="using:FourToolkit.UI">
     <Grid>
         <ui:StatusBarController x:Name="StatusBar" />
-        <GridView x:Name="GridView" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+        <GridView x:Name="GridView" Margin="-12,0,-16,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -18,7 +18,7 @@
             </GridView.ItemContainerTransitions>
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="160" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped">
+                    <Grid Height="160" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped" Loaded="Item_Loaded">
                         <Grid.Projection>
                             <PlaneProjection/>
                         </Grid.Projection>

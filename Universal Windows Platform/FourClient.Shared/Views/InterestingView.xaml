@@ -5,41 +5,68 @@
     xmlns:ui="using:FourToolkit.UI"
     Background="{ThemeResource SystemControlBackgroundAccentBrush}">
     <Grid>
-        <FlipView x:Name="GridView" Margin="-12,0,-12,0" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollMode="Disabled">
-            <FlipView.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical"/>
-                </ItemsPanelTemplate>
-            </FlipView.ItemsPanel>
-            <FlipView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped" Loaded="Item_Loaded">
+        <ui:VerticalFlipper x:Name="VerticalFlipper" Margin="-12,0,-12,0" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped">
+            <ui:VerticalFlipper.Layer1>
+                <Grid VerticalAlignment="Top">
+                    <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
+                    <Image Source="ms-appx:///Assets/Logo.scale-200.png" Opacity="0.25"/>
+                    <Viewbox Stretch="UniformToFill">
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" Opacity="0.6" />
-                            <Image Source="ms-appx:///Assets/Logo.scale-200.png" Opacity="0.25"/>
-                            <Viewbox Stretch="UniformToFill">
-                                <Grid>
-                                    <Image Source="{Binding Image}"/>
-                                </Grid>
-                            </Viewbox>
-                            <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding Avatar}" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Rectangle Grid.Row="1" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                            <TextBlock Text="{Binding Title}" 
-                                       Margin="24,12,12,48" FontSize="32"
-                                       Foreground="White" FontWeight="ExtraLight" TextAlignment="Right"
-                                       TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
+                            <Image Source="{Binding Image}"/>
                         </Grid>
+                    </Viewbox>
+                    <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding Avatar}" />
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+            </ui:VerticalFlipper.Layer1>
+            <ui:VerticalFlipper.Layer2>
+                <Grid VerticalAlignment="Bottom">
+                    <Rectangle Grid.Row="1" Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                    <TextBlock Text="{Binding Title}" 
+                                    Margin="24,12,12,48" FontSize="32"
+                                    Foreground="White" FontWeight="ExtraLight" TextAlignment="Right"
+                                    TextWrapping="WrapWholeWords" Grid.Column="0" Grid.Row="1" />
+                </Grid>
+            </ui:VerticalFlipper.Layer2>
+        </ui:VerticalFlipper>
+        <ui:GridViewFlipper x:Name="GridViewFlipper" Margin="-12,0,-16,0" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped">
+            <ui:GridViewFlipper.ItemContainerStyle>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ui:GridViewFlipper.ItemContainerStyle>
+            <ui:GridViewFlipper.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EdgeUIThemeTransition Edge="Bottom"/>
+                </TransitionCollection>
+            </ui:GridViewFlipper.ItemContainerTransitions>
+            <ui:GridViewFlipper.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="160">
+                        <Grid.Projection>
+                            <PlaneProjection/>
+                        </Grid.Projection>
+                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
+                        <Viewbox Stretch="UniformToFill">
+                            <Image Source="{Binding Image}" />
+                        </Viewbox>
+                        <Rectangle Opacity="0.4" Fill="Black" />
+                        <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Avatar}" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <TextBlock Text="{Binding Title}" 
+                                    Margin="12,8" FontSize="16"
+                                    Foreground="White" 
+                                    VerticalAlignment="Bottom" 
+                                    TextWrapping="WrapWholeWords" />
                     </Grid>
                 </DataTemplate>
-            </FlipView.ItemTemplate>
-        </FlipView>
+            </ui:GridViewFlipper.ItemTemplate>
+        </ui:GridViewFlipper>
     </Grid>
 </UserControl>

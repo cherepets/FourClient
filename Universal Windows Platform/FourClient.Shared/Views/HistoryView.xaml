@@ -1,9 +1,14 @@
 ﻿<UserControl
-    x:Class="FourClient.Views.CollectionView"
+    x:Class="FourClient.Views.HistoryView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid>
-        <GridView x:Name="GridView" Margin="-12,0,-16,0" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="ИСТОРИЯ" FontSize="16" Margin="12,6"/>
+        <GridView x:Name="GridView" Margin="0,0,-4,0" Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <GridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -16,7 +21,7 @@
             </GridView.ItemContainerTransitions>
             <GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="160" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped" Loaded="Item_Loaded">
+                    <Grid Height="160" Tapped="Item_Tapped">
                         <Grid.Projection>
                             <PlaneProjection/>
                         </Grid.Projection>

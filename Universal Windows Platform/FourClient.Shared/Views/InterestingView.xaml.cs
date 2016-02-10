@@ -1,7 +1,6 @@
 ﻿using FourClient.Data;
 using FourToolkit.UI;
-using FourToolkit.UI.Extensions;
-using System.Linq;
+using System.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -11,6 +10,7 @@ namespace FourClient.Views
     public interface IInterestingView
     {
         void SetItemsSource(object source);
+        bool EnableFlipViewer { get; set; }
     }
 
     public sealed partial class InterestingView : IInterestingView
@@ -18,29 +18,47 @@ namespace FourClient.Views
         public delegate void ViewEventHandler(IInterestingView sender);
 
         public static event ViewEventHandler ViewLoaded;
-        
+
         public InterestingView()
         {
             InitializeComponent();
             ViewLoaded?.Invoke(this);
+            Loaded += (s, e) =>
+            {
+                GridViewFlipper.VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
+                EnableFlipViewer = Settings.Current.EnableFlipViewer;
+            };
         }
 
         public Source SelectedSource { get; private set; }
 
+        private IFlipper Flipper => _enableFlipViewer ? (IFlipper)VerticalFlipper : GridViewFlipper;
+
         public void SetItemsSource(object source)
         {
-            GridView.ItemsSource = source;
+            var list = source as IList;
+            VerticalFlipper.ItemsSource = list;
+            GridViewFlipper.ItemsSource = list;
         }
 
-        private void Item_Loaded(object sender, RoutedEventArgs e)
+        public bool EnableFlipViewer
         {
-            var grid = sender as Grid;
+            get
+            {
+                return _enableFlipViewer;
+            }
+            set
+            {
+                _enableFlipViewer = value;
+                VerticalFlipper.Visibility = value ? Visibility.Visible : Visibility.Collapsed;
+                GridViewFlipper.Visibility = value ? Visibility.Collapsed : Visibility.Visible;
+            }
         }
+        private bool _enableFlipViewer;
 
         private void Item_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            var panel = (Grid)sender;
-            var item = panel.DataContext as FeedItem;
+            var item = Flipper.SelectedItem as FeedItem;
             if (item != null)
             {
                 var article = Article.BuildNew(item);
@@ -52,13 +70,12 @@ namespace FourClient.Views
 
         private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
 
-        private static void ShowMenuOn(object sender)
+        private void ShowMenuOn(object sender)
         {
-            var panel = (Grid)sender;
-            var item = panel.DataContext as FeedItem;
+            var item = Flipper.SelectedItem as FeedItem;
             var article = Article.BuildNew(item);
             if (article != null)
-                ContextMenu.Show(IoC.MainPage.Flyout, panel,
+                ContextMenu.Show(IoC.MainPage.Flyout, Flipper as FrameworkElement,
                     new ContextMenuItem("В коллекцию",
                         async () =>
                         {

@@ -10,7 +10,7 @@ namespace FourClient.Data.Feed
             set
             {
                 base.Source = value;
-                Topic = Source.Topics.First().Key;
+                Topic = Source.Topics.First().Value;
                 SearchMode = false;
             }
         }

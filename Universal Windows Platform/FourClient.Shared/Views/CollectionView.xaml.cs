@@ -1,7 +1,7 @@
 ﻿using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
-using PullToRefresh.UWP;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
@@ -23,7 +23,6 @@ namespace FourClient.Views
             InitializeComponent();
             ViewLoaded?.Invoke(this);
             Loaded += (s, e) => GridView.AttachScrollListener(OnScrollDown, OnScrollUp);
-    //        PullToRefresh.UWP.PullRefreshProgressControl
         }
 
         public void OnScrollDown() => IoC.MenuView.HideBars();
@@ -34,6 +33,14 @@ namespace FourClient.Views
             var collection = source as ObservableCollection<Article>;
             if (collection == null) return;
             GridView.ItemsSource = collection;
+        }
+
+        private void Item_Loaded(object sender, RoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            if (grid == null) return;
+            grid.Width = GridView.ActualWidth;
+            GridView.SizeChanged += (s, a) => grid.Width = GridView.ActualWidth;
         }
 
         private void Item_Tapped(object sender, TappedRoutedEventArgs e)

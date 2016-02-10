@@ -20,7 +20,7 @@ namespace FourClient
         public static Article Build(FeedItem item)
             => item == null ? null : new Article
             {
-                Prefix = IoC.SourcesView.SelectedSource?.Prefix,
+                Prefix = IoC.FeedView.CurrentSource.Prefix,
                 Title = item.Title,
                 Image = item.Image,
                 Link = item.Link,
