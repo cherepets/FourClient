@@ -3,6 +3,7 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -1538,6 +1539,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -3163,6 +3165,7 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -4760,6 +4763,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -6390,6 +6394,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -7987,6 +7992,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -9617,6 +9623,7 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
+      "FourToolkit.Notifications/1.0.0": {},
       "Microsoft.CSharp/4.0.0": {
         "dependencies": {
           "System.Collections": "[4.0.10, )",
@@ -11215,6 +11222,17 @@
     }
   },
   "libraries": {
+    "FourToolkit.Notifications/1.0.0": {
+      "sha512": "E98a8QWCStsr3dSYQ4JzwhKaWtOVpm3FfcWLGHci/y96lm97p0jX/N4jL/8yCJrI/MlLfc6pn+HdYugXma34iQ==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "FourToolkit.Notifications.nuspec",
+        "lib/_._",
+        "package/services/metadata/core-properties/4b730692cf46455abf687335a7279c21.psmdcp"
+      ]
+    },
     "Microsoft.CSharp/4.0.0": {
       "sha512": "oWqeKUxHXdK6dL2CFjgMcaBISbkk+AqEg+yvJHE4DElNzS4QaTsCflgkkqZwVlWby1Dg9zo9n+iCAMFefFdJ/A==",
       "type": "Package",

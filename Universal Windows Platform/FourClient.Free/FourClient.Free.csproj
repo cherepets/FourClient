@@ -117,10 +117,6 @@
       <Project>{f8f6298a-2e47-4cac-b64f-d3bf13c296fc}</Project>
       <Name>FourToolkit.Extensions.Runtime</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Notifications\FourToolkit.Notifications.csproj">
-      <Project>{3453b224-cbb7-468c-8942-9388a7c07e58}</Project>
-      <Name>FourToolkit.Notifications</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Settings\FourToolkit.Settings.csproj">
       <Project>{00efbe32-88bb-49ca-aede-d7a7f195394d}</Project>
       <Name>FourToolkit.Settings</Name>
@@ -128,6 +124,10 @@
     <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.UI\FourToolkit.UI.csproj">
       <Project>{f7d0206a-f4ff-48fc-9cbd-392edfe3b421}</Project>
       <Name>FourToolkit.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\FourToolkit.Notifications\FourToolkit.Notifications\FourToolkit.Notifications.csproj">
+      <Project>{e5528e25-49d0-4c20-a438-9b9dc00c4cb9}</Project>
+      <Name>FourToolkit.Notifications</Name>
     </ProjectReference>
     <ProjectReference Include="..\FourClient.Data\FourClient.Data.csproj">
       <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
