@@ -1,0 +1,49 @@
+﻿<Tile
+    x:Class="FourClient.Notifications.PrimaryTile"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns="using:FourToolkit.Notifications.AdaptiveTile"
+      
+    Branding="NameAndLogo">
+    <Tile.Visual>
+        <Visual Template="TileMedium">
+            <Image Placement="Background" Source="Image1" UseBinding="True" Overlay="50"/>
+            <Text Content="Title1" UseBinding="True" Wrap="True" TextStyle="BaseSubtle" Alignment="Right"/>
+        </Visual>
+        <Visual Template="TileWide">
+            <Image Placement="Background" Source="Image1" UseBinding="True" Overlay="50"/>
+            <Group>
+                <Subgroup>
+                    <Text Content="Title1" UseBinding="True" MaxLines="4" Wrap="True" TextStyle="BaseSubtle"/>
+                </Subgroup>
+                <Subgroup Weight="5">
+                    <Image Placement="Inline" Source="Avatar1" UseBinding="True" Crop="Circle"/>
+                </Subgroup>
+            </Group>
+        </Visual>
+        <Visual Template="TileLarge">
+            <Group>
+                <Subgroup Weight="30">
+                    <Image Placement="Inline" Source="Image1}"/>
+                </Subgroup>
+                <Subgroup>
+                    <Text Content="Title1" UseBinding="True" MaxLines="4" Wrap="True" TextStyle="Body"/>
+                </Subgroup>
+                <Subgroup Weight="10">
+                    <Image Placement="Inline" Source="Avatar1" UseBinding="True" Crop="Circle"/>
+                </Subgroup>
+            </Group>
+            <Text />
+            <Group>
+                <Subgroup Weight="30">
+                    <Image Placement="Inline" Source="Image2}"/>
+                </Subgroup>
+                <Subgroup>
+                    <Text Content="Title2" UseBinding="True" MaxLines="4" Wrap="True" TextStyle="Body"/>
+                </Subgroup>
+                <Subgroup Weight="10">
+                    <Image Placement="Inline" Source="Avatar2" UseBinding="True" Crop="Circle"/>
+                </Subgroup>
+            </Group>
+        </Visual>
+    </Tile.Visual>
+</Tile>

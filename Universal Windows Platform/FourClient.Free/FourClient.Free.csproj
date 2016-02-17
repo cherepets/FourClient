@@ -117,6 +117,10 @@
       <Project>{f8f6298a-2e47-4cac-b64f-d3bf13c296fc}</Project>
       <Name>FourToolkit.Extensions.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Notifications\FourToolkit.Notifications.csproj">
+      <Project>{3453b224-cbb7-468c-8942-9388a7c07e58}</Project>
+      <Name>FourToolkit.Notifications</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Settings\FourToolkit.Settings.csproj">
       <Project>{00efbe32-88bb-49ca-aede-d7a7f195394d}</Project>
       <Name>FourToolkit.Settings</Name>
@@ -129,12 +133,6 @@
       <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
       <Name>FourClient.Data</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="NotificationsExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Libs\NotificationsExtensions.winmd</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="WindowsMobile, Version=10.0.10240.0">

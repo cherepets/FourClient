@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourToolkit.Extensions", ".
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FourToolkit.Esent.Shared", "..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Shared\FourToolkit.Esent.Shared.shproj", "{AAEB9695-B45F-48FD-A653-E354C440F2A2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FourToolkit.Notifications", "..\..\..\BitBucket\FourToolkit\FourToolkit.Notifications\FourToolkit.Notifications.csproj", "{3453B224-CBB7-468C-8942-9388A7C07E58}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		FourClient.Shared\FourClient.Shared.projitems*{05206252-4997-4fe2-99f0-c7e005e974bb}*SharedItemsImports = 4
@@ -178,6 +180,22 @@ Global
 		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x64.Build.0 = Release|Any CPU
 		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x86.ActiveCfg = Release|Any CPU
 		{9A45724E-0829-4DC5-A90B-4F33AD242FC3}.Release|x86.Build.0 = Release|Any CPU
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|ARM.ActiveCfg = Debug|ARM
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|ARM.Build.0 = Debug|ARM
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|x64.ActiveCfg = Debug|x64
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|x64.Build.0 = Debug|x64
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|x86.ActiveCfg = Debug|x86
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Debug|x86.Build.0 = Debug|x86
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|ARM.ActiveCfg = Release|ARM
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|ARM.Build.0 = Release|ARM
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|x64.ActiveCfg = Release|x64
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|x64.Build.0 = Release|x64
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|x86.ActiveCfg = Release|x86
+		{3453B224-CBB7-468C-8942-9388A7C07E58}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

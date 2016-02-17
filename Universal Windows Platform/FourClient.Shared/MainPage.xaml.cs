@@ -72,6 +72,7 @@ namespace FourClient
             ApplySettings(Settings.Current);
             var top = Api.GetTop();
             IoC.InterestingView.SetItemsSource(top);
+            if (Settings.Current.LiveTile) Notifier.UpdateMainTile(top);
             var sources = Api.GetSources();
             IoC.SourcesView.SetItemsSource(sources);
             var collection = new ObservableCollection<Article>();

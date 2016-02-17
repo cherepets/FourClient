@@ -59,6 +59,7 @@ namespace FourClient
             {
                 SetProperty(value);
                 OnPropertyChanged();
+                if (!value) Notifier.DisableMainTile();
             }
         }
         public bool AllowRotation
