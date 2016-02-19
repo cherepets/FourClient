@@ -106,7 +106,7 @@ namespace FourClient.Views
         private void SearchButton_Tapped(object sender, TappedRoutedEventArgs e)
         {
             if (IoC.FeedView.CurrentSource == null) return;
-            var searchInput = new TextInput { VerticalAlignment = VerticalAlignment.Top, Placeholder = "search" };
+            var searchInput = new TextInput { VerticalAlignment = VerticalAlignment.Top, Placeholder = "поиск" };
             Flyout.ShowFlyout(searchInput);
             searchInput.SetFocus();
             searchInput.InputCanceled += () => Flyout.HideFlyout();

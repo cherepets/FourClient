@@ -16,6 +16,7 @@
     <Import_RootNamespace>FourClient</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LockScreenLogo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SmallLogo.scale-200.png" />
@@ -23,7 +24,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Square150x150Logo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StoreLogo.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x310Logo.scale-200.png" />
@@ -48,6 +48,7 @@
       <DependentUpon>PrimaryTile.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Notifications\PrimaryTileViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NotifierBackgroundTask.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StartUpType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Notifier.cs" />

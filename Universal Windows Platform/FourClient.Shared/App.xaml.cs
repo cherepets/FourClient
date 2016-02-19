@@ -2,11 +2,13 @@
 using FourClient.Data;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
+using FourToolkit.Extensions.Runtime;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
@@ -59,33 +61,35 @@ namespace FourClient
             }
             try
             {
-                var argString = e.Arguments;
-                if (!string.IsNullOrEmpty(argString))
-                {
-                    var tiles = await SecondaryTile.FindAllForPackageAsync();
-                    var tile = tiles.FirstOrDefault(t => t.TileId == e.TileId);
-                    var title = tile == null ? "FourClient" : tile.DisplayName;
-                    var args = argString.Split(';').ToList();
-                    while (args.Count() > 2)
-                    {
-                        args[1] += ';' + args[2];
-                        args.Remove(args[2]);
-                    }
-                    switch (args.Count())
-                    {
-                        //case 1:
-                        //    MainPage.GoToNewsFeed(args[0]);
-                        //    break;
-                        //case 2:
-                        //    MainPage.GoToArticle(args[0], title, args[1], null, null, null);
-                        //    break;
-                    }
-                }
+                //TODO: Implement launch from secondary tile
+                //var argString = e.Arguments;
+                //if (!string.IsNullOrEmpty(argString))
+                //{
+                //    var tiles = await SecondaryTile.FindAllForPackageAsync();
+                //    var tile = tiles.FirstOrDefault(t => t.TileId == e.TileId);
+                //    var title = tile == null ? "FourClient" : tile.DisplayName;
+                //    var args = argString.Split(';').ToList();
+                //    while (args.Count() > 2)
+                //    {
+                //        args[1] += ';' + args[2];
+                //        args.Remove(args[2]);
+                //    }
+                //    switch (args.Count())
+                //    {
+                //        case 1:
+                //            MainPage.GoToNewsFeed(args[0]);
+                //            break;
+                //        case 2:
+                //            MainPage.GoToArticle(args[0], title, args[1], null, null, null);
+                //            break;
+                //    }
+                //}
             }
             finally
             {
                 Window.Current.Activate();
             }
+            new NotifierBackgroundTask().Register();
         }
 
         private static void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)

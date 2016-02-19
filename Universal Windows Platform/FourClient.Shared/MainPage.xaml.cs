@@ -9,8 +9,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.Phone.UI.Input;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace FourClient
@@ -108,6 +110,7 @@ namespace FourClient
                     IoC.MenuView.OpenCollectionTab();
                     break;
             }
+            this.AnimateFadeIn();
         }
 
         private void Settings_PropertyChanged(object sender, PropertyChangedEventArgs e) => ApplySettings(Settings.Current);
@@ -115,6 +118,16 @@ namespace FourClient
         private void ApplySettings(Settings e)
         {
             RequestedTheme = e.AppTheme ? ElementTheme.Light : ElementTheme.Dark;
+            if (RequestedTheme == ElementTheme.Dark)
+            {
+                StatusBar.ForegroundBrush = new SolidColorBrush(Colors.White);
+                StatusBar.BackgroundBrush = new SolidColorBrush(Colors.Black);
+            }
+            else
+            {
+                StatusBar.ForegroundBrush = new SolidColorBrush(Colors.Black);
+                StatusBar.BackgroundBrush = new SolidColorBrush(Colors.White);
+            }
         }
 
         private static void RegisterDataDepedencies()

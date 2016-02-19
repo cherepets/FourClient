@@ -163,6 +163,15 @@ namespace FourClient
                 OnPropertyChanged();
             }
         }
+        public int TaskExecuted
+        {
+            get { return GetProperty<int>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
 
         Settings()
         {

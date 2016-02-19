@@ -212,6 +212,8 @@ namespace FourClient.Views
         
         private void render_Completed(object sender, EventArgs args)
         {
+            if (string.IsNullOrEmpty(Article.Html))
+                return;
             WebContent.Visibility = Visibility.Visible;
             ProgressRing.IsActive = false;
             _loaded = true;

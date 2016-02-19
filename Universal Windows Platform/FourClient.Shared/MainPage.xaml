@@ -4,12 +4,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:views="using:FourClient.Views"
     xmlns:ui="using:FourToolkit.UI"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" SizeChanged="Page_SizeChanged" >
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" SizeChanged="Page_SizeChanged" Opacity="0" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="LeftColumn" />
             <ColumnDefinition x:Name="RightColumn" />
         </Grid.ColumnDefinitions>
+        
+        <ui:StatusBarController x:Name="StatusBar"/>
         
         <views:MenuView x:Name="MenuView" RenderTransformOrigin="0.5,0.5" Grid.Column="0" Visibility="Visible" >
             <views:MenuView.RenderTransform>
