@@ -1,10 +1,11 @@
-﻿using FourClient.Cache;
+﻿using FourClient.Background;
 using FourClient.Data;
+using FourClient.Library.Cache;
+using FourClient.Library.Statistics;
+using FourToolkit.Extensions.Runtime;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
-using FourToolkit.Extensions.Runtime;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -13,7 +14,6 @@ using Windows.Graphics.Display;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
-using Windows.UI.StartScreen;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -38,7 +38,8 @@ namespace FourClient
 
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-            await Esent.InitAsync();
+            await CacheBase.InitAsync();
+            await StatisticsBase.InitAsync();
             if (Platform.IsMobile)
             {
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
@@ -89,7 +90,7 @@ namespace FourClient
             {
                 Window.Current.Activate();
             }
-            new NotifierBackgroundTask().Register();
+            new NotifierBackgroundTask().Register(new TimeTrigger(15, false));
         }
 
         private static void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -173,7 +174,8 @@ namespace FourClient
         private static void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            Esent.Close();
+            CacheBase.Close();
+            StatisticsBase.Close();
             deferral.Complete();
         }
     }

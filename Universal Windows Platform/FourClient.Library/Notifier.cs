@@ -1,15 +1,15 @@
 ﻿using FourClient.Data;
-using FourClient.Notifications;
+using FourClient.Library.Notifications;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Notifications;
 
-namespace FourClient
+namespace FourClient.Library
 {
     public static class Notifier
     {
         private static TileUpdater MainTileUpdater => TileUpdateManager.CreateTileUpdaterForApplication();
-
+        
         public static void UpdateMainTile(IEnumerable<FeedItem> items)
         {
             try

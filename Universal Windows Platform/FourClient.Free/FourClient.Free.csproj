@@ -125,9 +125,17 @@
       <Project>{f7d0206a-f4ff-48fc-9cbd-392edfe3b421}</Project>
       <Name>FourToolkit.UI</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FourClient.Background\FourClient.Background.csproj">
+      <Project>{3c9fb504-c132-481b-95e7-cfdc856a49b8}</Project>
+      <Name>FourClient.Background</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FourClient.Data\FourClient.Data.csproj">
       <Project>{720a56b9-dc15-45be-a969-f13a62fe2525}</Project>
       <Name>FourClient.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FourClient.Library\FourClient.Library.csproj">
+      <Project>{04a916a3-3484-40ec-bc5c-cc089967d65f}</Project>
+      <Name>FourClient.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

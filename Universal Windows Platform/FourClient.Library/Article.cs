@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace FourClient
+namespace FourClient.Library
 {
     public class Article
     {
@@ -17,10 +17,10 @@ namespace FourClient
         public bool InCollection { get; set; }
         public DateTime CreatedOn { get; set; }
                         
-        public static Article Build(FeedItem item)
+        public static Article Build(FeedItem item, string prefix)
             => item == null ? null : new Article
             {
-                Prefix = IoC.FeedView.CurrentSource.Prefix,
+                Prefix = prefix,
                 Title = item.Title,
                 Image = item.Image,
                 Link = item.Link,

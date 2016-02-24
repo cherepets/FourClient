@@ -32,26 +32,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Article.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Cache\ArticleCache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Cache\Esent.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Cache\TopCache.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Cache\SourceCache.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleadnToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FilteredObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GridViewFlipper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HtmlRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Notifications\PrimaryTile.xaml.cs">
-      <DependentUpon>PrimaryTile.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Notifications\PrimaryTileViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)NotifierBackgroundTask.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Settings.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StartUpType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Notifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\ArticleView.xaml.cs">
       <DependentUpon>ArticleView.xaml</DependentUpon>
     </Compile>
@@ -82,10 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Notifications\PrimaryTile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,5 +111,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)esent\FourClientStatistics.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

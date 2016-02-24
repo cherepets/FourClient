@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:ui="using:FourToolkit.UI"
+    xmlns:fc="using:FourClient"
     Background="{ThemeResource SystemControlBackgroundAccentBrush}">
     <Grid>
         <ui:VerticalFlipper x:Name="VerticalFlipper" Margin="-12,0,-12,0" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped">
@@ -32,18 +33,18 @@
                 </Grid>
             </ui:VerticalFlipper.Layer2>
         </ui:VerticalFlipper>
-        <ui:GridViewFlipper x:Name="GridViewFlipper" Margin="-12,0,-16,0" Tapped="Item_Tapped">
-            <ui:GridViewFlipper.ItemContainerStyle>
+        <fc:GridViewFlipper x:Name="GridViewFlipper" Margin="-12,0,-16,0" Tapped="Item_Tapped">
+            <fc:GridViewFlipper.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 </Style>
-            </ui:GridViewFlipper.ItemContainerStyle>
-            <ui:GridViewFlipper.ItemContainerTransitions>
+            </fc:GridViewFlipper.ItemContainerStyle>
+            <fc:GridViewFlipper.ItemContainerTransitions>
                 <TransitionCollection>
                     <EdgeUIThemeTransition Edge="Bottom"/>
                 </TransitionCollection>
-            </ui:GridViewFlipper.ItemContainerTransitions>
-            <ui:GridViewFlipper.ItemTemplate>
+            </fc:GridViewFlipper.ItemContainerTransitions>
+            <fc:GridViewFlipper.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="160">
                         <Grid.Projection>
@@ -66,7 +67,7 @@
                                     TextWrapping="WrapWholeWords" />
                     </Grid>
                 </DataTemplate>
-            </ui:GridViewFlipper.ItemTemplate>
-        </ui:GridViewFlipper>
+            </fc:GridViewFlipper.ItemTemplate>
+        </fc:GridViewFlipper>
     </Grid>
 </UserControl>

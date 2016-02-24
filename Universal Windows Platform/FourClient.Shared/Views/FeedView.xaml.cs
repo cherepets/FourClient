@@ -1,5 +1,6 @@
 ﻿using FourClient.Data;
 using FourClient.Data.Feed;
+using FourClient.Library;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
@@ -90,7 +91,7 @@ namespace FourClient.Views
         {
             var panel = (Grid)sender;
             var item = panel.DataContext as FeedItem;
-            var article = Article.Build(item);
+            var article = Article.Build(item, IoC.FeedView.CurrentSource.Prefix);
             if (article != null) IoC.ArticleView.Open(article);
         }
 
@@ -102,7 +103,7 @@ namespace FourClient.Views
         {
             var panel = (Grid)sender;
             var item = panel.DataContext as FeedItem;
-            var article = Article.Build(item);
+            var article = Article.Build(item, IoC.FeedView.CurrentSource.Prefix);
             if (article != null)
                 ContextMenu.Show(IoC.MainPage.Flyout, panel,
                     new ContextMenuItem("В коллекцию",

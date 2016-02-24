@@ -1,4 +1,5 @@
-﻿using FourToolkit.UI;
+﻿using FourClient.Library;
+using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System.Collections.ObjectModel;
 using Windows.UI.Xaml;

@@ -1,4 +1,5 @@
-﻿using FourClient.Cache;
+﻿using FourClient.Library.Cache;
+using FourClient.Library.Statistics;
 using FourClient.Views;
 
 namespace FourClient
@@ -13,6 +14,7 @@ namespace FourClient
         public static IArticleView ArticleView;
         public static ICollectionView CollectionView;
         public static IArticleCache ArticleCache;
+        public static IKeywordStatistics KeywordStatistics;
 
         private static bool _registred;
         private static readonly object Lock = new object();
@@ -30,6 +32,7 @@ namespace FourClient
                 Views.ArticleView.ViewLoaded += sender => ArticleView = sender;
                 Views.CollectionView.ViewLoaded += sender => CollectionView = sender;
                 ArticleCache = new ArticleCache();
+                KeywordStatistics = new KeywordStatistics();
                 _registred = true;
             }
         }

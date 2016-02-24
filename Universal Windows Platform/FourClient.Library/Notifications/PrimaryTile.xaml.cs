@@ -1,6 +1,6 @@
 ﻿using FourToolkit.Notifications.AdaptiveTile;
 
-namespace FourClient.Notifications
+namespace FourClient.Library.Notifications
 {
     public sealed partial class PrimaryTile : Tile
     {

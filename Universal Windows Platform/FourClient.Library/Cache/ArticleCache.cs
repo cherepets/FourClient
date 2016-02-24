@@ -1,10 +1,10 @@
-﻿using System;
-using FourToolkit.Esent;
+﻿using FourToolkit.Esent;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Collections.ObjectModel;
+using System.Linq;
 
-namespace FourClient.Cache
+namespace FourClient.Library.Cache
 {
     public delegate void CollectionStateChangedHandler(Article sender);
 
@@ -19,7 +19,7 @@ namespace FourClient.Cache
         void RemoveOldEntites();
     }
 
-    public class ArticleCache : Esent, IArticleCache
+    public class ArticleCache : CacheBase, IArticleCache
     {
         private const string Table = "ArticleCache";
 

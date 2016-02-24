@@ -1,5 +1,5 @@
 ﻿<Tile
-    x:Class="FourClient.Notifications.PrimaryTile"
+    x:Class="FourClient.Library.Notifications.PrimaryTile"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns="using:FourToolkit.Notifications.AdaptiveTile"
       

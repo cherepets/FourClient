@@ -1,4 +1,4 @@
-﻿namespace FourClient.Notifications
+﻿namespace FourClient.Library.Notifications
 {
     public class PrimaryTileViewModel
     {

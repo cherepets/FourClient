@@ -14755,7 +14755,6 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FourToolkit.Notifications >= 1.0.6",
       "Microsoft.NETCore.UniversalWindowsPlatform >= 5.0.0",
       "SOMAW81_Package >= 1.6.1"
     ],

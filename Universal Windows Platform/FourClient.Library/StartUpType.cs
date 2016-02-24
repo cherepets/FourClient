@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FourClient
+namespace FourClient.Library
 {
     public enum StartUpType
     {

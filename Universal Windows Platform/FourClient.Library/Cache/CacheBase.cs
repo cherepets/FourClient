@@ -1,14 +1,14 @@
-﻿using System;
+﻿using FourToolkit.Esent;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.Storage;
-using FourToolkit.Esent;
 
-namespace FourClient.Cache
+namespace FourClient.Library.Cache
 {
-    public class Esent
+    public class CacheBase
     {
         public static EsentInstance Instance;
         public static EsentDatabase Database;
@@ -23,7 +23,7 @@ namespace FourClient.Cache
         private static bool _inited;
         private static readonly object Lock = new object();
 
-        public Esent()
+        public CacheBase()
         {
             Init();
         }
@@ -42,16 +42,16 @@ namespace FourClient.Cache
             }
             try
             {
-                Instance = new EsentInstance("EsentManagementStudio");
+                Instance = new EsentInstance(nameof(Cache));
                 using (var session = Instance.BeginSession())
                 using (var db = session.OpenDatabase(DbPath))
                     db.Close();
             }
             catch
             {
-                Instance.Close();
+                Instance?.Close();
                 await CopyFileAsync();
-                Instance = new EsentInstance("EsentManagementStudio");
+                Instance = new EsentInstance(nameof(Cache));
             }
         }
 

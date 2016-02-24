@@ -1,4 +1,5 @@
 ﻿using FourClient.Data;
+using FourClient.Library;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
@@ -97,11 +98,11 @@ namespace FourClient.Views
                 front = (Foreground as SolidColorBrush).Color.ToRgbString();
                 var emptyView = string.Format("<html><body bgcolor='{0}' /></html>", back);
                 _render.Html = emptyView;
-                if (string.IsNullOrEmpty(Article.Html))
+                if (string.IsNullOrEmpty(Article?.Html))
                     LoadFromCache();
-                if (string.IsNullOrEmpty(Article.Html))
+                if (string.IsNullOrEmpty(Article?.Html))
                     await LoadFromService();
-                if (string.IsNullOrEmpty(Article.Html))
+                if (string.IsNullOrEmpty(Article?.Html))
                 {
                     Close();
                     return;
@@ -113,29 +114,21 @@ namespace FourClient.Views
                 Close();
                 return;
             }
-            try
-            {
-                var html = Article.Html
-                        .Replace("{0}", back)
-                        .Replace("{1}", front)
-                        .Replace("{2}", Settings.Current.FontSize.ToString())
-                        .Replace("{3}", Settings.Current.FontFace)
-                        .Replace("{4}", Settings.Current.YouTube)
-                        .Replace("{5}", Settings.Current.Align)
-                        .Replace("{6}", Settings.Current.ScrollEventThreshold.ToString());
-                _loaded = false;
-                if (_render == null) return;
-                _render.Completed += render_Completed;
-                if (_render == null) return;
-                _render.Html = html;
-                if (_render == null) return;
-                while (!_loaded) await Task.Delay(100);
-            }
-            finally
-            {
-                if (_render != null)
-                    _render.Completed -= render_Completed;
-            }
+            var html = Article.Html
+                    .Replace("{0}", back)
+                    .Replace("{1}", front)
+                    .Replace("{2}", Settings.Current.FontSize.ToString())
+                    .Replace("{3}", Settings.Current.FontFace)
+                    .Replace("{4}", Settings.Current.YouTube)
+                    .Replace("{5}", Settings.Current.Align)
+                    .Replace("{6}", Settings.Current.ScrollEventThreshold.ToString());
+            _loaded = false;
+            if (_render != null)
+                lock (_render)
+                {
+                    _render.Completed += render_Completed;
+                    _render.Html = html;
+                }
         }
 
         private void BottomFiller_PointerMoved(object sender, PointerRoutedEventArgs e) => ShowUi();
@@ -178,13 +171,15 @@ namespace FourClient.Views
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
-        private void LoadFromCache() 
-            => Article = IoC.ArticleCache.FindInCache(Article.Prefix, Article.Link) ?? Article;
+        private void LoadFromCache()
+            => Article = Article == null ? null
+            : IoC.ArticleCache.FindInCache(Article.Prefix, Article.Link) ?? Article;
 
         private async Task LoadFromService()
         {
             try
             {
+                if (Article == null) return;
                 Article.InCollection = false;
                 Article.Html = await Api.GetArticleAsync(Article.Prefix, Article.Link);
             }
@@ -214,6 +209,7 @@ namespace FourClient.Views
         {
             if (string.IsNullOrEmpty(Article.Html))
                 return;
+            IoC.KeywordStatistics.UpdateWith(Article.Title);
             WebContent.Visibility = Visibility.Visible;
             ProgressRing.IsActive = false;
             _loaded = true;
@@ -222,6 +218,8 @@ namespace FourClient.Views
             if (!_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Start();
             if (Platform.IsMobile && Settings.Current.AllowRotation)
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped;
+            if (_render != null)
+                _render.Completed -= render_Completed;
         }
 
         private async void Star_Tapped(object sender, TappedRoutedEventArgs e)

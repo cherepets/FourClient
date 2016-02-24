@@ -1,6 +1,7 @@
-﻿using FourClient.Cache;
-using FourClient.Data;
+﻿using FourClient.Data;
 using FourClient.Data.Feed;
+using FourClient.Library;
+using FourClient.Library.Cache;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
@@ -117,6 +118,7 @@ namespace FourClient
 
         private void ApplySettings(Settings e)
         {
+            IoC.InterestingView.EnableFlipViewer = e.EnableFlipViewer;
             RequestedTheme = e.AppTheme ? ElementTheme.Light : ElementTheme.Dark;
             if (RequestedTheme == ElementTheme.Dark)
             {

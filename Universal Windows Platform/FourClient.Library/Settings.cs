@@ -9,7 +9,7 @@ using FourToolkit.UI;
 using System.Linq;
 using System.Collections.ObjectModel;
 
-namespace FourClient
+namespace FourClient.Library
 {
     public class Settings : FourToolkit.Settings.Settings, INotifyPropertyChanged
     {
@@ -78,7 +78,6 @@ namespace FourClient
             {
                 SetProperty(value);
                 OnPropertyChanged();
-                IoC.InterestingView.EnableFlipViewer = value;
             }
         }
         public int ScrollEventThreshold
