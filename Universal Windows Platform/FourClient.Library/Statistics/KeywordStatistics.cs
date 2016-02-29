@@ -4,8 +4,6 @@ using System.Linq;
 
 namespace FourClient.Library.Statistics
 {
-    public delegate void CollectionStateChangedHandler(Article sender);
-
     public interface IKeywordStatistics
     {
         double Score(string s);

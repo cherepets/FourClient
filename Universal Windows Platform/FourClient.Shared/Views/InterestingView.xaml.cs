@@ -1,7 +1,9 @@
 ﻿using FourClient.Data;
 using FourClient.Library;
 using FourToolkit.UI;
+using System;
 using System.Collections;
+using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -69,7 +71,12 @@ namespace FourClient.Views
 
         private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState == HoldingState.Completed);
+
+        private void ConditionalShow(object sender, bool condition)
+        {
+            if (condition) ShowMenuOn(sender);
+        }
 
         private void ShowMenuOn(object sender)
         {

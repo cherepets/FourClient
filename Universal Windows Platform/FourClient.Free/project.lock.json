@@ -3,6 +3,16 @@
   "version": 1,
   "targets": {
     "UAP,Version=v10.0": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -1557,6 +1567,16 @@
       }
     },
     "UAP,Version=v10.0/win10-arm": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -3201,6 +3221,16 @@
       }
     },
     "UAP,Version=v10.0/win10-arm-aot": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -4817,6 +4847,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x64": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -6466,6 +6506,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x64-aot": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -8082,6 +8132,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x86": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -9731,6 +9791,16 @@
       }
     },
     "UAP,Version=v10.0/win10-x86-aot": {
+      "FourToolkit.Esent/1.1.0": {
+        "compile": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        },
+        "runtime": {
+          "lib/netcore45/Esent.Interop.Wsa.dll": {},
+          "lib/netcore45/FourToolkit.Esent.dll": {}
+        }
+      },
       "FourToolkit.Notifications/1.0.6": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
@@ -11348,6 +11418,20 @@
     }
   },
   "libraries": {
+    "FourToolkit.Esent/1.1.0": {
+      "sha512": "FgNEwn0GJz8ZDwnMnjw9nNEEbBVl6SrQdg8OfbuHmj9h3hETQ2DVp2kU90OuI4tKPxwcAyUkIYtBe4GF6iZaDA==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "FourToolkit.Esent.nuspec",
+        "lib/net40/Esent.Interop.dll",
+        "lib/net40/FourToolkit.Esent.dll",
+        "lib/netcore45/Esent.Interop.Wsa.dll",
+        "lib/netcore45/FourToolkit.Esent.dll",
+        "package/services/metadata/core-properties/918bb2edb8ce42389f6c8b501bafaf20.psmdcp"
+      ]
+    },
     "FourToolkit.Notifications/1.0.6": {
       "sha512": "UlsTymWO6gjxiQfSrkSnPznnzl3BjQzm0QADm7+9tLkagjaylGvVkHc7tRNZ+KapSTDjdiLR0lQfu0JKmGmCXg==",
       "type": "Package",

@@ -111,10 +111,6 @@
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Runtime\FourToolkit.Esent.Runtime.csproj">
-      <Project>{75366bf8-f569-4465-9dc4-11bde89d5466}</Project>
-      <Name>FourToolkit.Esent.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Extensions.Runtime\FourToolkit.Extensions.Runtime.csproj">
       <Project>{f8f6298a-2e47-4cac-b64f-d3bf13c296fc}</Project>
       <Name>FourToolkit.Extensions.Runtime</Name>

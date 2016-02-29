@@ -15,6 +15,7 @@ namespace FourClient
         public static ICollectionView CollectionView;
         public static IArticleCache ArticleCache;
         public static IKeywordStatistics KeywordStatistics;
+        public static ILaunchStatistics LaunchStatistics;
 
         private static bool _registred;
         private static readonly object Lock = new object();
@@ -33,6 +34,7 @@ namespace FourClient
                 Views.CollectionView.ViewLoaded += sender => CollectionView = sender;
                 ArticleCache = new ArticleCache();
                 KeywordStatistics = new KeywordStatistics();
+                LaunchStatistics = new LaunchStatistics();
                 _registred = true;
             }
         }

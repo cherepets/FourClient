@@ -85,6 +85,7 @@ namespace FourClient
                     collection = IoC.ArticleCache.GetCollection();
                 });
             IoC.CollectionView.SetItemsSource(collection);
+            IoC.LaunchStatistics.UpdateWith(DateTime.Now);
             InitFirstPage(sources.FirstOrDefault());
         }
 

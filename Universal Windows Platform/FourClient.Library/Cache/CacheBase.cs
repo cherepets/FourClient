@@ -20,6 +20,7 @@ namespace FourClient.Library.Cache
         private static StorageFolder AppxFolder => Package.Current.InstalledLocation;
         private static StorageFolder LocalFolder => ApplicationData.Current.LocalFolder;
 
+        private static bool _background;
         private static bool _inited;
         private static readonly object Lock = new object();
 
@@ -28,13 +29,14 @@ namespace FourClient.Library.Cache
             Init();
         }
 
-        public static async Task InitAsync()
+        public static async Task InitAsync(bool background = false)
         {
             lock (Lock)
             {
                 if (_inited) return;
                 _inited = true;
             }
+            _background = background;
             if (!await CopyFileIfNeeded())
             {
                 _inited = false;
@@ -119,10 +121,14 @@ namespace FourClient.Library.Cache
 
         private static async Task<StorageFile> GetDbFileAsync()
         {
+            if (_background && Settings.Current.CacheDbPath != null)
+                return await StorageFile.GetFileFromPathAsync(Settings.Current.CacheDbPath);
             var dbFolder = await GetDbFolderAsync();
             if (dbFolder == null) return null;
             var files = await dbFolder.GetFilesAsync();
             var file = files.FirstOrDefault(q => q.Name == DbFileName);
+            if (file != null)
+                Settings.Current.CacheDbPath = file.Path;
             return file;
         }
 

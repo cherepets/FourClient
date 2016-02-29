@@ -90,7 +90,7 @@ namespace FourClient
             {
                 Window.Current.Activate();
             }
-            new NotifierBackgroundTask().Register(new TimeTrigger(15, false));
+            new NotifierBackgroundTask().Register(new TimeTrigger(60, false));
         }
 
         private static void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)

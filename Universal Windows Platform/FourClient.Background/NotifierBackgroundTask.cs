@@ -10,8 +10,9 @@ namespace FourClient.Background
         {
             if (Settings.Current.LiveTile)
             {
-                var top = Api.GetTop();
+                var top = Api.GetTop(false);
                 Notifier.UpdateMainTile(top);
+                Notifier.ShowReminderToast(top);
             }
         }
     }

@@ -11,11 +11,13 @@ namespace FourClient.Data
     {
         public const string Url = "http://fourclientwebserver.azurewebsites.net/Service.aspx";
 
-        public static ObservableCollection<FeedItem> GetTop()
+        public static ObservableCollection<FeedItem> GetTop(bool withCache = true)
         {
             var client = new WebServiceClient(Url);
             var task = client.CallAsync<FeedItem>("MVW_GetPage");
-            return new CollectionWithCache<FeedItem>(IoC.TopCache, task);
+            if (withCache)
+                return new CollectionWithCache<FeedItem>(IoC.TopCache, task);
+            return new ObservableCollection<FeedItem>(task.Result);
         }
         
         public static ObservableCollection<Source> GetSources()

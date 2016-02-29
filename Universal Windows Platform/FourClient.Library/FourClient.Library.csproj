@@ -112,24 +112,27 @@
     <Compile Include="Cache\CacheBase.cs" />
     <Compile Include="Cache\SourceCache.cs" />
     <Compile Include="Cache\TopCache.cs" />
+    <Compile Include="Notifications\RemindToastViewModel.cs" />
+    <Compile Include="Notifications\RemindToast.xaml.cs">
+      <DependentUpon>RemindToast.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Statistics\Keyword.cs" />
     <Compile Include="Statistics\KeywordStatistics.cs" />
     <Compile Include="Notifications\PrimaryTile.xaml.cs">
       <DependentUpon>PrimaryTile.xaml</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Notifications\PrimaryTileViewModel.cs" />
     <Compile Include="Notifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="StartUpType.cs" />
+    <Compile Include="Statistics\Launch.cs" />
+    <Compile Include="Statistics\LaunchStatistics.cs" />
     <Compile Include="Statistics\StatisticsBase.cs" />
     <Content Include="Properties\FourClient.Library.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Esent.Runtime\FourToolkit.Esent.Runtime.csproj">
-      <Project>{75366bf8-f569-4465-9dc4-11bde89d5466}</Project>
-      <Name>FourToolkit.Esent.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Extensions.Runtime\FourToolkit.Extensions.Runtime.csproj">
       <Project>{f8f6298a-2e47-4cac-b64f-d3bf13c296fc}</Project>
       <Name>FourToolkit.Extensions.Runtime</Name>
@@ -148,9 +151,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Notifications\PrimaryTile.xaml">
+    <Content Include="Notifications\PrimaryTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Page Include="Notifications\RemindToast.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

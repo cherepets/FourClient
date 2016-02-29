@@ -162,9 +162,18 @@ namespace FourClient.Library
                 OnPropertyChanged();
             }
         }
-        public int TaskExecuted
+        public string CacheDbPath
         {
-            get { return GetProperty<int>(); }
+            get { return GetProperty<string>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
+        public string StatisticsDbPath
+        {
+            get { return GetProperty<string>(); }
             set
             {
                 SetProperty(value);
