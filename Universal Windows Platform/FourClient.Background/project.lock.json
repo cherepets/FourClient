@@ -13,7 +13,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -217,6 +217,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -1566,7 +1574,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -1813,6 +1821,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -3209,7 +3225,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -3442,6 +3458,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -4824,7 +4848,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -5076,6 +5100,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -6472,7 +6504,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -6705,6 +6737,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -8087,7 +8127,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -8339,6 +8379,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -9735,7 +9783,7 @@
           "lib/netcore45/FourToolkit.Esent.dll": {}
         }
       },
-      "FourToolkit.Notifications/1.0.6": {
+      "FourToolkit.Notifications/1.0.7": {
         "compile": {
           "lib/uap10.0/FourToolkit.Notifications.dll": {}
         },
@@ -9968,6 +10016,14 @@
         },
         "runtime": {
           "lib/dotnet/Microsoft.Win32.Primitives.dll": {}
+        }
+      },
+      "QueryString.NET/1.0.0": {
+        "compile": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
+        },
+        "runtime": {
+          "lib/dotnet/QueryString.NETCore.dll": {}
         }
       },
       "System.AppContext/4.0.0": {
@@ -11355,16 +11411,15 @@
         "package/services/metadata/core-properties/918bb2edb8ce42389f6c8b501bafaf20.psmdcp"
       ]
     },
-    "FourToolkit.Notifications/1.0.6": {
-      "sha512": "UlsTymWO6gjxiQfSrkSnPznnzl3BjQzm0QADm7+9tLkagjaylGvVkHc7tRNZ+KapSTDjdiLR0lQfu0JKmGmCXg==",
+    "FourToolkit.Notifications/1.0.7": {
+      "sha512": "b1W7mjcWvRdSktwu8piY76LOGg7EvLgLEJeWuam6nJahtpdliDIp2WyFLNHn+no6Ms4HgpVA/vtqNiMa/6eBIA==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",
         "_rels/.rels",
         "FourToolkit.Notifications.nuspec",
         "lib/uap10.0/FourToolkit.Notifications.dll",
-        "lib/uap10.0/FourToolkit.Notifications.pri",
-        "package/services/metadata/core-properties/c63badb1c35a4a40ac58a9e90624a7eb.psmdcp"
+        "package/services/metadata/core-properties/e2906d12b5f94e3ebf4e925de7d58ef0.psmdcp"
       ]
     },
     "Microsoft.CSharp/4.0.0": {
@@ -12018,6 +12073,22 @@
         "ref/net46/Microsoft.Win32.Primitives.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._"
+      ]
+    },
+    "QueryString.NET/1.0.0": {
+      "sha512": "u+MbuqDtckYQv90rphUgmz1PXA4lBSG50MvP5yHUiCzn/kxAs2W8Pyb9VQRlnc+fBB0q6C/Q+bk+nuKbFVqiIg==",
+      "type": "Package",
+      "files": [
+        "[Content_Types].xml",
+        "_rels/.rels",
+        "lib/dotnet/QueryString.NETCore.dll",
+        "lib/dotnet/QueryString.NETCore.pdb",
+        "lib/dotnet/QueryString.NETCore.XML",
+        "lib/portable-net4+sl50+win+wpa81+wp80/QueryString.Portable.dll",
+        "lib/portable-net4+sl50+win+wpa81+wp80/QueryString.Portable.pdb",
+        "lib/portable-net4+sl50+win+wpa81+wp80/QueryString.Portable.xml",
+        "package/services/metadata/core-properties/643187e148944d5892c2282c5396136a.psmdcp",
+        "QueryString.NET.nuspec"
       ]
     },
     "System.AppContext/4.0.0": {

@@ -8,12 +8,13 @@ namespace FourClient.Background
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
+            if (!Settings.Current.LiveTile && !Settings.Current.Toast)
+                return;
+            var top = Api.GetTop(false);
             if (Settings.Current.LiveTile)
-            {
-                var top = Api.GetTop(false);
                 Notifier.UpdateMainTile(top);
+            if (Settings.Current.Toast)
                 Notifier.ShowReminderToast(top);
-            }
         }
     }
 }

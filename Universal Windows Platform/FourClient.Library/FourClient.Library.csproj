@@ -116,6 +116,8 @@
     <Compile Include="Notifications\RemindToast.xaml.cs">
       <DependentUpon>RemindToast.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Notifications\ViewModelHelper.cs" />
+    <Compile Include="Query.cs" />
     <Compile Include="Statistics\Keyword.cs" />
     <Compile Include="Statistics\KeywordStatistics.cs" />
     <Compile Include="Notifications\PrimaryTile.xaml.cs">
@@ -151,11 +153,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Notifications\PrimaryTile.xaml">
+    <Page Include="Notifications\PrimaryTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Page>
     <Page Include="Notifications\RemindToast.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

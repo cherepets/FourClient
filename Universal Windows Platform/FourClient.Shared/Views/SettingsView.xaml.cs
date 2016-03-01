@@ -29,6 +29,7 @@ namespace FourClient.Views
             AppThemeToggle.IsOn = Settings.Current.AppTheme;
             ArticleThemeToggle.IsOn = Settings.Current.ArticleTheme;
             LiveTileBox.IsChecked = Settings.Current.LiveTile;
+            ToastBox.IsChecked = Settings.Current.Toast;
             AllowRotationToggle.IsOn = Settings.Current.AllowRotation;
             EnableFlipViewerToggle.IsOn = Settings.Current.EnableFlipViewer;
             SetComboBoxValue(StartUpBox, Settings.Current.ShowAtStartup.GetName());
@@ -63,6 +64,12 @@ namespace FourClient.Views
         {
             if (!_init) return;
             Settings.Current.LiveTile = LiveTileBox.IsChecked ?? true;
+        }
+
+        private void ToastBox_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (!_init) return;
+            Settings.Current.Toast = ToastBox.IsChecked ?? true;
         }
 
         private void AllowRotationToggle_Toggled(object sender, RoutedEventArgs e)

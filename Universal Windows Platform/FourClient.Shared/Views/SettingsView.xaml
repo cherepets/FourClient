@@ -13,6 +13,7 @@
                 <ToggleSwitch x:Name="AppThemeToggle" Header="Тема приложения" OnContent="Белая" OffContent="Черная" Toggled="AppThemeToggle_Toggled"/>
                 <ToggleSwitch x:Name="ArticleThemeToggle" Header="Тема при чтении" OnContent="Белая" OffContent="Черная" Toggled="ArticleThemeToggle_Toggled"/>
                 <CheckBox x:Name="LiveTileBox" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" Margin="0,8" />
+                <CheckBox x:Name="ToastBox" Content="Уведомления" FontSize="16" IsChecked="False" Tapped="ToastBox_Tapped" Margin="0,8" />
                 <ToggleSwitch x:Name="AllowRotationToggle" Header="Автоповорот экрана" OnContent="Включен" OffContent="Выключен" Toggled="AllowRotationToggle_Toggled"/>
                 <ToggleSwitch x:Name="EnableFlipViewerToggle" Header="Режим отображения интересного" OnContent="Одиночный" OffContent="Обычный" Toggled="EnableFlipViewerToggle_Toggled"/>
                 <TextBlock TextWrapping="Wrap" Text="При запуске отображать" FontSize="16" />

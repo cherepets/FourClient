@@ -21,7 +21,21 @@ namespace FourClient.Library.Cache
                 }
             }) as List<FeedItem>;
         }
-        
+
+        public FeedItem FindInCache(string link)
+        {
+            return Query(db =>
+            {
+                using (var table = db.Tables[Table].Open())
+                {
+                    var rows = table.Where(r => r["Link"].AsString == link);
+                    var row = rows?.FirstOrDefault();
+                    if (row == null) return null;
+                    return EsentSerializer.Deserialize<FeedItem>(row);
+                }
+            }) as FeedItem;
+        }
+
         public void Put(List<FeedItem> values)
         {
             Query(db =>

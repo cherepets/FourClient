@@ -1,23 +1,25 @@
-﻿using FourToolkit.Notifications.AdaptiveTile;
-using System;
-using System.Threading.Tasks;
-using Windows.Storage;
-using Windows.UI.Xaml.Markup;
+﻿using Windows.Data.Xml.Dom;
+using Windows.UI.Notifications;
 
 namespace FourClient.Library.Notifications
 {
-    public sealed partial class PrimaryTile : Tile
+    public sealed partial class PrimaryTile
     {
-        public PrimaryTile()
+        public void RegenerateDummy()
         {
+            InitializeComponent();
+            var vm = ViewModelHelper.GenerateDummy(new PrimaryTileViewModel());
+            DataContext = vm;
+            Settings.Current.DummyPrimaryTile = CreateNotification().Content.GetXml();
         }
 
-        public static async Task<PrimaryTile> CreateInstanceAsync()
+        public TileNotification CreateBackgroundNotification()
         {
-            var file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///FourClient.Library/Notifications/PrimaryTile.xaml"));
-            var xaml = await FileIO.ReadTextAsync(file);
-            var content = (PrimaryTile)XamlReader.Load(xaml);
-            return content;
+            var vm = DataContext as PrimaryTileViewModel;
+            var xml = ViewModelHelper.FillXml(vm, Settings.Current.DummyPrimaryTile);
+            var doc = new XmlDocument();
+            doc.LoadXml(xml);
+            return new TileNotification(doc);
         }
     }
 }

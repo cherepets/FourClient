@@ -3,19 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns="using:FourToolkit.Notifications.InteractiveToast"
     
-    ActivationType="Background"
-    Launch="[Link]">
+    ActivationType="Foreground"
+    Launch="[LaunchArgument]">
     <Toast.Visual>
         <Visual Template="ToastGeneric">
             <Text Content="FourClient"/>
             <Text Content="[Title]"/>
-            <!--
             <Image Placement="AppLogoOverride" Source="[Avatar]" Crop="Circle"/>
-            -->
             <Image Placement="Inline" Source="[Image]"/>
         </Visual>
     </Toast.Visual>
     <Toast.Actions>
-        <Action Content="В коллекцию" ActivationType="Background" Arguments="[Link]"/>
+        <Action Content="В коллекцию" ActivationType="Background" Arguments="[CollectionArgument]"/>
     </Toast.Actions>
 </Toast>

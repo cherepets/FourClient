@@ -62,6 +62,16 @@ namespace FourClient.Library
                 if (!value) Notifier.DisableMainTile();
             }
         }
+        public bool Toast
+        {
+            get { return GetProperty<bool>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+                if (!value) Notifier.DisableMainTile();
+            }
+        }
         public bool AllowRotation
         {
             get { return GetProperty<bool>(); }
@@ -180,6 +190,33 @@ namespace FourClient.Library
                 OnPropertyChanged();
             }
         }
+        public string DummyPrimaryTile
+        {
+            get { return GetProperty<string>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
+        public string DummyRemindToast
+        {
+            get { return GetProperty<string>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
+        public string LastNotification
+        {
+            get { return GetProperty<string>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
+            }
+        }
 
         Settings()
         {
@@ -189,6 +226,7 @@ namespace FourClient.Library
                 {nameof(AppTheme), false},
                 {nameof(ArticleTheme), false},
                 {nameof(LiveTile), true},
+                {nameof(Toast), true},
                 {nameof(AllowRotation), false},
                 {nameof(EnableFlipViewer), true},
                 {nameof(ScrollEventThreshold), 20},

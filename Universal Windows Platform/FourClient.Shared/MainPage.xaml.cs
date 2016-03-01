@@ -24,6 +24,7 @@ namespace FourClient
         void ShowFlyout(UIElement element);
         void HideFlyout();
         CoreDispatcher Dispatcher { get; }
+        void LoadSuggestedArticle();
     }
 
     public sealed partial class MainPage : IMainPage
@@ -75,6 +76,7 @@ namespace FourClient
             ApplySettings(Settings.Current);
             var top = Api.GetTop();
             IoC.InterestingView.SetItemsSource(top);
+            Notifier.RegenerateDummies();
             if (Settings.Current.LiveTile) Notifier.UpdateMainTile(top);
             var sources = Api.GetSources();
             IoC.SourcesView.SetItemsSource(sources);
@@ -87,6 +89,7 @@ namespace FourClient
             IoC.CollectionView.SetItemsSource(collection);
             IoC.LaunchStatistics.UpdateWith(DateTime.Now);
             InitFirstPage(sources.FirstOrDefault());
+            LoadSuggestedArticle();
         }
 
         private void InitFirstPage(Source defaultSource)
@@ -185,6 +188,13 @@ namespace FourClient
         {
             base.OnNavigatedFrom(e);
             this.DetachBackHandler();
+        }
+
+        public void LoadSuggestedArticle()
+        {
+            if (App.SuggestedArticle != null)
+                IoC.ArticleView.Open(App.SuggestedArticle);
+            App.SuggestedArticle = null;
         }
     }
 }

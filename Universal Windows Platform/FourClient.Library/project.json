@@ -1,8 +1,9 @@
 ﻿{
   "dependencies": {
     "FourToolkit.Esent": "1.1.0",
-    "FourToolkit.Notifications": "1.0.6",
-    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0"
+    "FourToolkit.Notifications": "1.0.7",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
+    "QueryString.NET": "1.0.0"
   },
   "frameworks": {
     "uap10.0": {}

@@ -14,7 +14,13 @@ namespace FourClient.Library
         private static TileUpdater TileManager => TileUpdateManager.CreateTileUpdaterForApplication();
         private static ToastNotifier ToastManager => ToastNotificationManager.CreateToastNotifier();
 
-        public static async void UpdateMainTile(IEnumerable<FeedItem> items)
+        public static void RegenerateDummies()
+        {
+            new PrimaryTile().RegenerateDummy();
+            new RemindToast().RegenerateDummy();
+        }
+
+        public static void UpdateMainTile(IEnumerable<FeedItem> items)
         {
             try
             {
@@ -30,9 +36,11 @@ namespace FourClient.Library
                     Image2 = itemArray[1].Image,
                     Avatar2 = itemArray[1].Avatar
                 };
-                var tile = await PrimaryTile.CreateInstanceAsync();
-                tile.DataContext = vm;
-                var notification = tile.CreateNotification();
+                var tile = new PrimaryTile
+                {
+                    DataContext = vm
+                };
+                var notification = tile.CreateBackgroundNotification();
                 TileManager.Update(notification);
             }
             catch { }
@@ -59,25 +67,37 @@ namespace FourClient.Library
                 await CacheBase.InitAsync(true);
                 var launchStat = new LaunchStatistics();
                 var keywordStat = new KeywordStatistics();
-                var cache = new ArticleCache();
+                var articleCache = new ArticleCache();
+                var topCache = new TopCache();
+                topCache.Put(items.ToList());
                 var articles = items.Select(i => Article.BuildNew(i)).ToList();
-                articles.RemoveAll(a => cache.FindInCache(a.Prefix, a.Link) != null);
-                if (!articles.Any()) return;
+                articles.RemoveAll(a => articleCache.FindInCache(a.Prefix, a.Link) != null);
                 articles = articles.OrderBy(a => keywordStat.Score(a.Title)).ToList();
-  //              if (launchStat.Score(DateTime.Now))
+                // Check conditions
+                if (!articles.Any())
+                    return;
+                //if (Settings.Current.LastNotification == articles[0].Title)
+                //    return;
+                //if (!launchStat.Score(DateTime.Now))
+                //    return;
+                var link = $"{articles[0].Prefix};{articles[0].Link}";
+                var vm = new RemindToastViewModel
                 {
-                    var vm = new RemindToastViewModel
-                    {
-                        Title = articles[0].Title,
-                        Image = articles[0].Image,
-                        Avatar = articles[0].Avatar,
-                        Link = articles[0].Prefix + ";" + articles[0].Link
-                    };
-                    var toast = new RemindToast
-                    {
-                        DataContext = vm
-                    };
-                }
+                    Title = articles[0].Title,
+                    Image = articles[0].Image,
+                    Avatar = articles[0].Avatar,
+                    LaunchArgument = Query.Serialize("OpenArticle", articles[0]),
+                    CollectionArgument = Query.Serialize("AddToCollection", articles[0])
+                };
+                var toast = new RemindToast
+                {
+                    DataContext = vm
+                };
+                var notification = toast.CreateBackgroundNotification();
+                ToastManager.Show(notification);
+                Settings.Current.LastNotification = articles[0].Title;
+                StatisticsBase.Close();
+                CacheBase.Close();
             }
             catch { }
         }

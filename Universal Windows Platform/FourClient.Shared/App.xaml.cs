@@ -1,5 +1,6 @@
 ﻿using FourClient.Background;
 using FourClient.Data;
+using FourClient.Library;
 using FourClient.Library.Cache;
 using FourClient.Library.Statistics;
 using FourToolkit.Extensions.Runtime;
@@ -36,7 +37,25 @@ namespace FourClient
 
         public static void HandleException(Exception e) => ShowExceptionMessage(e);
 
+        public static Article SuggestedArticle { get; set; }
+
+        protected override async void OnActivated(IActivatedEventArgs args)
+        {
+            if (args is ToastNotificationActivatedEventArgs)
+            {
+                var toastArgs = args as ToastNotificationActivatedEventArgs;
+                var arguments = Query.Deserialize(toastArgs.Argument);
+                await InitAsync(null);
+                SuggestedArticle = arguments.Item2;
+                if (IoC.MainPage != null)
+                    IoC.MainPage.LoadSuggestedArticle();
+            }
+        }
+
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
+            => await InitAsync(e.Arguments);
+
+        private async Task InitAsync(string argument)
         {
             await CacheBase.InitAsync();
             await StatisticsBase.InitAsync();
@@ -55,41 +74,12 @@ namespace FourClient
             if (rootFrame.Content == null)
             {
                 rootFrame.ContentTransitions = null;
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(MainPage), argument))
                 {
                     throw new Exception("Failed to create initial page");
                 }
             }
-            try
-            {
-                //TODO: Implement launch from secondary tile
-                //var argString = e.Arguments;
-                //if (!string.IsNullOrEmpty(argString))
-                //{
-                //    var tiles = await SecondaryTile.FindAllForPackageAsync();
-                //    var tile = tiles.FirstOrDefault(t => t.TileId == e.TileId);
-                //    var title = tile == null ? "FourClient" : tile.DisplayName;
-                //    var args = argString.Split(';').ToList();
-                //    while (args.Count() > 2)
-                //    {
-                //        args[1] += ';' + args[2];
-                //        args.Remove(args[2]);
-                //    }
-                //    switch (args.Count())
-                //    {
-                //        case 1:
-                //            MainPage.GoToNewsFeed(args[0]);
-                //            break;
-                //        case 2:
-                //            MainPage.GoToArticle(args[0], title, args[1], null, null, null);
-                //            break;
-                //    }
-                //}
-            }
-            finally
-            {
-                Window.Current.Activate();
-            }
+            Window.Current.Activate();
             new NotifierBackgroundTask().Register(new TimeTrigger(60, false));
         }
 

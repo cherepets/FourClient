@@ -5,6 +5,7 @@
         public string Title { get; set; }
         public string Image { get; set; }
         public string Avatar { get; set; }
-        public string Link { get; set; }
+        public string LaunchArgument { get; set; }
+        public string CollectionArgument { get; set; }
     }
 }
