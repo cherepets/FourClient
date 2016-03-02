@@ -33,6 +33,11 @@
         </uap:InitialRotationPreference>
       </uap:VisualElements>
       <Extensions>
+        <Extension Category="windows.backgroundTasks" EntryPoint="FourClient.Background.ToastHandlerBackgroundTask">
+          <BackgroundTasks>
+            <Task Type="systemEvent" />
+          </BackgroundTasks>
+        </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="FourClient.Background.NotifierBackgroundTask">
           <BackgroundTasks>
             <Task Type="timer" />

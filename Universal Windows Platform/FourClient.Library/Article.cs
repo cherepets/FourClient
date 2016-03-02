@@ -1,6 +1,8 @@
 ﻿using FourClient.Data;
+using FourClient.Library.Cache;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FourClient.Library
 {
@@ -47,6 +49,36 @@ namespace FourClient.Library
                 FullLink = item.FullLink,
                 CommentLink = item.CommentLink
             };
+        }
+
+        public void FillFromCache(TopCache cache)
+        {
+            var item = cache.FindInCache($"{Prefix};{Link}");
+            Avatar = item.Avatar;
+            CommentLink = item.CommentLink;
+            FullLink = item.FullLink;
+            Image = item.Image;
+            Title = item.Title;
+        }
+
+        public async Task PreloadAsync(IArticleCache cache)
+        {
+            var existent = cache.FindInCollection(Prefix, Link)
+                ?? cache.FindInCache(Prefix, Link);
+            if (existent != null)
+            {
+                if (!existent.InCollection)
+                {
+                    existent.InCollection = true;
+                    cache.UpdateCollectionState(existent);
+                }
+            }
+            else
+            {
+                Html = await Api.GetArticleAsync(Prefix, Link);
+                InCollection = true;
+                cache.Put(this);
+            }
         }
 
         public override bool Equals(object obj)

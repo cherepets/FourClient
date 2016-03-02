@@ -20,8 +20,8 @@ namespace FourClient.Library.Statistics
         public bool Score(DateTime d)
         {
             var ordered = Launches.OrderBy(l => l.Count).ToList();
-            if (ordered[0].Hour == d.Hour) return true;
-            if (ordered[1].Hour == d.Hour) return true;
+            for (int i = 0; i < 8; i++)
+                if (ordered[i].Hour == d.Hour && ordered[i].Count > 0) return true;
             return false;
         }
 

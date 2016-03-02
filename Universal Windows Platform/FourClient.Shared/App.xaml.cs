@@ -81,6 +81,7 @@ namespace FourClient
             }
             Window.Current.Activate();
             new NotifierBackgroundTask().Register(new TimeTrigger(60, false));
+            new ToastHandlerBackgroundTask().Register(new ToastNotificationActionTrigger());
         }
 
         private static void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)

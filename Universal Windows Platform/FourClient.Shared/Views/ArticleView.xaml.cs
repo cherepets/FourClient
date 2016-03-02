@@ -76,7 +76,7 @@ namespace FourClient.Views
         {
             Opened = true;
             if (string.IsNullOrEmpty(article.Title))
-                article = FillFromCache(article);
+                article.FillFromCache(Data.IoC.TopCache as TopCache);
             StatusBar.Visibility = Visibility.Collapsed;
             if (_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Stop();
             HideUi();
@@ -132,18 +132,6 @@ namespace FourClient.Views
                     _render.Completed += render_Completed;
                     _render.Html = html;
                 }
-        }
-
-        private Article FillFromCache(Article article)
-        {
-            var cache = Data.IoC.TopCache as TopCache;
-            var item = cache.FindInCache($"{article.Prefix};{article.Link}");
-            article.Avatar = item.Avatar;
-            article.CommentLink = item.CommentLink;
-            article.FullLink = item.FullLink;
-            article.Image = item.Image;
-            article.Title = item.Title;
-            return article;
         }
 
         private void BottomFiller_PointerMoved(object sender, PointerRoutedEventArgs e) => ShowUi();

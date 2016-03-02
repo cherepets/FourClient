@@ -107,25 +107,7 @@ namespace FourClient.Views
             if (article != null)
                 ContextMenu.Show(IoC.MainPage.Flyout, panel,
                     new ContextMenuItem("В коллекцию",
-                        async () =>
-                        {
-                            var existent = IoC.ArticleCache.FindInCollection(article.Prefix, article.Link)
-                                ?? IoC.ArticleCache.FindInCache(article.Prefix, article.Link);
-                            if (existent != null)
-                            {
-                                if (!existent.InCollection)
-                                {
-                                    existent.InCollection = true;
-                                    IoC.ArticleCache.UpdateCollectionState(existent);
-                                }
-                            }
-                            else
-                            {
-                                article.Html = await Api.GetArticleAsync(article.Prefix, article.Link);
-                                article.InCollection = true;
-                                IoC.ArticleCache.Put(article);
-                            }
-                        })
+                        async () => await article.PreloadAsync(IoC.ArticleCache))
                     );
         }
 

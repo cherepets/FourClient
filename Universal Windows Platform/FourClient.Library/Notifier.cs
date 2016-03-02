@@ -24,7 +24,7 @@ namespace FourClient.Library
         {
             try
             {
-                DisableMainTile();
+                var manager = TileManager;
                 var itemArray = items.ToArray();
                 if (itemArray.Length < 2) return;
                 var vm = new PrimaryTileViewModel
@@ -41,7 +41,8 @@ namespace FourClient.Library
                     DataContext = vm
                 };
                 var notification = tile.CreateBackgroundNotification();
-                TileManager.Update(notification);
+                manager.Update(notification);
+                manager.EnableNotificationQueue(false);
             }
             catch { }
         }
@@ -76,10 +77,10 @@ namespace FourClient.Library
                 // Check conditions
                 if (!articles.Any())
                     return;
-                //if (Settings.Current.LastNotification == articles[0].Title)
-                //    return;
-                //if (!launchStat.Score(DateTime.Now))
-                //    return;
+                if (Settings.Current.LastNotification == articles[0].Title)
+                    return;
+                if (!launchStat.Score(DateTime.Now))
+                    return;
                 var link = $"{articles[0].Prefix};{articles[0].Link}";
                 var vm = new RemindToastViewModel
                 {

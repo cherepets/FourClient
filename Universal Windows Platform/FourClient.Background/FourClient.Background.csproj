@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="NotifierBackgroundTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ToastHandlerBackgroundTask.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FourClient.Data\FourClient.Data.csproj">
