@@ -5,6 +5,7 @@ using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
 using System.Linq;
+using Windows.UI.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -30,6 +31,7 @@ namespace FourClient.Views
             InitializeComponent();
             ViewLoaded?.Invoke(this);
             Loaded += (s, e) => GridView.AttachScrollListener(OnScrollDown, OnScrollUp);
+            ProgressBar.Visibility = Platform.IsDesktop ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public Source CurrentSource { get; private set; }
@@ -55,11 +57,23 @@ namespace FourClient.Views
             IoC.MenuView.ShowBars();
         }
 
-        private void Feed_LoadStarted() => StatusBar.ProgressValue = -1;
+        private void Feed_LoadStarted()
+        {
+            StatusBar.ProgressValue = -1;
+            ProgressBar.IsIndeterminate = true;
+        }
 
-        private void Feed_LoadCompleted() => StatusBar.ProgressValue = null;
+        private void Feed_LoadCompleted()
+        {
+            StatusBar.ProgressValue = null;
+            ProgressBar.IsIndeterminate = false;
+        }
 
-        private void Feed_LoadFailed() => StatusBar.ProgressValue = null;
+        private void Feed_LoadFailed()
+        {
+            StatusBar.ProgressValue = null;
+            ProgressBar.IsIndeterminate = false;
+        }
 
         private void Feed_ServiceExceptionThrown(Exception exception) => App.HandleException(exception);
 
@@ -97,7 +111,10 @@ namespace FourClient.Views
 
         private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOn(sender);
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState == HoldingState.Completed);
+
+        private void ConditionalShow(object sender, bool condition)
+            => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);
 
         private static void ShowMenuOn(object sender)
         {

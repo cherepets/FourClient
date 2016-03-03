@@ -46,21 +46,30 @@
             </fc:GridViewFlipper.ItemContainerTransitions>
             <fc:GridViewFlipper.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="160">
-                        <Grid.Projection>
-                            <PlaneProjection/>
-                        </Grid.Projection>
-                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
-                        <Viewbox Stretch="UniformToFill">
+                    <Grid Height="160" Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Grid.RowSpan="2" />
+                        <Viewbox Stretch="UniformToFill" Grid.RowSpan="2">
                             <Image Source="{Binding Image}" />
                         </Viewbox>
-                        <Rectangle Opacity="0.4" Fill="Black" />
-                        <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16">
+                        <Rectangle >
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#00000000" Offset="0"/>
+                                    <GradientStop Color="#99000000" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                        <Rectangle Fill="#99000000" Grid.Row="1" />
+                        <Ellipse Width="32" Height="32" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="16" Grid.RowSpan="2">
                             <Ellipse.Fill>
                                 <ImageBrush ImageSource="{Binding Avatar}" />
                             </Ellipse.Fill>
                         </Ellipse>
-                        <TextBlock Text="{Binding Title}" 
+                        <TextBlock Text="{Binding Title}" Grid.Row="1"
                                     Margin="12,8" FontSize="16"
                                     Foreground="White" 
                                     VerticalAlignment="Bottom" 

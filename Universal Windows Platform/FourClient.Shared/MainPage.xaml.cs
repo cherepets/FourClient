@@ -126,13 +126,13 @@ namespace FourClient
             RequestedTheme = e.AppTheme ? ElementTheme.Light : ElementTheme.Dark;
             if (RequestedTheme == ElementTheme.Dark)
             {
-                StatusBar.ForegroundBrush = new SolidColorBrush(Colors.White);
-                StatusBar.BackgroundBrush = new SolidColorBrush(Colors.Black);
+                StatusBar.Foreground = new SolidColorBrush(Colors.White);
+                StatusBar.Background = new SolidColorBrush(Colors.Black);
             }
             else
             {
-                StatusBar.ForegroundBrush = new SolidColorBrush(Colors.Black);
-                StatusBar.BackgroundBrush = new SolidColorBrush(Colors.White);
+                StatusBar.Foreground = new SolidColorBrush(Colors.Black);
+                StatusBar.Background = new SolidColorBrush(Colors.White);
             }
         }
 
@@ -149,11 +149,11 @@ namespace FourClient
 
         private void UpdateVisualState(bool paneOpened)
         {
-            _state = !Platform.IsMobile
+            _state = paneOpened 
+                ? !Platform.IsMobile
                 && ActualWidth > 800
                 && ActualWidth > ActualHeight ?
                 "TwoPanes" :
-                paneOpened ?
                 "RightPane" :
                 "LeftPane";
             if (_state == "RightPane")

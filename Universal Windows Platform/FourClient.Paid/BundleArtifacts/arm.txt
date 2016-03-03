@@ -1,2 +1,2 @@
-MainPackage=C:\Users\cherepets\Documents\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\bin\ARM\Release\FourClient.Paid_4.5.0.0_ARM.appx
-SymbolPackage=C:\Users\cherepets\Documents\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_4.5.0.0_Test\FourClient.Paid_4.5.0.0_ARM.appxsym
+MainPackage=D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\bin\ARM\Release\FourClient.Paid_5.6.0.0_ARM.appx
+SymbolPackage=D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.6.0.0\FourClient.Paid_5.6.0.0_ARM.appxsym

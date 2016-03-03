@@ -74,9 +74,7 @@ namespace FourClient.Views
         private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState == HoldingState.Completed);
 
         private void ConditionalShow(object sender, bool condition)
-        {
-            if (condition) ShowMenuOn(sender);
-        }
+            => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);
 
         private void ShowMenuOn(object sender)
         {
