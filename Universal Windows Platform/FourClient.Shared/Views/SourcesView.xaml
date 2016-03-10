@@ -67,7 +67,7 @@
             </GridView>
             <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" />
             <TextBlock Text="ОТКЛЮЧЕННЫЕ" FontSize="16" Grid.Row="2" VerticalAlignment="Center" />
-            <ui:AppBarButton Icon="SmallUpArrow" Tapped="SmallUpArrow_Tapped" Grid.Row="2" HorizontalAlignment="Right" Margin="-12, 0"/>
+            <ui:AppBarButton InversedColor="true" Icon="SmallUpArrow" Tapped="SmallUpArrow_Tapped" Grid.Row="2" HorizontalAlignment="Right" Margin="-12, 0"/>
         </Grid>
     </Grid>
 </UserControl>

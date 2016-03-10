@@ -1,7 +1,8 @@
 ﻿<UserControl
     x:Class="FourClient.Views.SettingsView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ui="using:FourToolkit.UI">
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -37,7 +38,10 @@
                     <ComboBoxItem Content="Arial"/>
                     <ComboBoxItem Content="Georgia"/>
                     <ComboBoxItem Content="Times New Roman"/>
-                    <ComboBoxItem Content="Veranda"/>
+                    <ComboBoxItem Content="Verdana"/>
+                    <ComboBoxItem Content="Segoe UI Light"/>
+                    <ComboBoxItem Content="Segoe UI Black"/>
+                    <ComboBoxItem Content="Segoe Script"/>
                 </ComboBox>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -66,6 +70,8 @@
                     <TextBlock x:Name="CacheSliderCap" Grid.Column="2" FontSize="16" />
                 </Grid>
                 <Slider x:Name="CacheSlider" Margin="16,10" LargeChange="1" Maximum="30" Minimum="1" TickFrequency="1" ValueChanged="CacheSlider_ValueChanged" />
+                <TextBlock x:Uid="RateMe" FontSize="16" />
+                <ui:RateMe DesiredRatingSelected="RateMe_DesiredRatingSelected" UndesiredRatingSelected="RateMe_UndesiredRatingSelected" />
                 <TextBlock x:Name="VersionBlock" HorizontalAlignment="Right" Grid.Row="2" Margin="12"/>
             </StackPanel>
         </ScrollViewer>

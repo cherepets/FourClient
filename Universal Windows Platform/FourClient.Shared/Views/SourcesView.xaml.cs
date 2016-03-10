@@ -48,7 +48,7 @@ namespace FourClient.Views
             };
             GridView.ItemsSource = active;
             HiddenView.ItemsSource = inactive;
-            Sources = string.Join(",", active.Select(s => s.Prefix));
+            Sources = string.Join(",", active.Where(s => s.Prefix != "NEW").Select(s => s.Prefix));
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
@@ -68,14 +68,14 @@ namespace FourClient.Views
 
         private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState == HoldingState.Completed);
-        
-        private void ConditionalShow(object sender, bool condition)
-            => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState != HoldingState.Completed);
 
         private void HiddenItem_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOnHidden(sender);
 
-        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e) => ShowMenuOnHidden(sender);
+        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShowHidden(sender, e.HoldingState != HoldingState.Completed);
+
+        private void ConditionalShow(object sender, bool condition)
+            => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);
 
         private static void ShowMenuOn(object sender)
         {
@@ -91,6 +91,9 @@ namespace FourClient.Views
                         })
                     );
         }
+        
+        private void ConditionalShowHidden(object sender, bool condition)
+            => (condition ? ShowMenuOnHidden : (Action<object>)null)?.Invoke(sender);
 
         private static void ShowMenuOnHidden(object sender)
         {

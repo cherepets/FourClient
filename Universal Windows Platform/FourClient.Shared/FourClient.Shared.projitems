@@ -16,17 +16,48 @@
     <Import_RootNamespace>FourClient</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-200.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\SmallLogo.scale-200.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\SmallLogo.targetsize-24.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\BadgeLogo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NewStoreLogo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NewStoreLogo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NewStoreLogo.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NewStoreLogo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NewStoreLogo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square150x150Logo.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square310x310Logo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square310x310Logo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square310x310Logo.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square310x310Logo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square310x310Logo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.scale-200.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\StoreLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Square71x71Logo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x150Logo.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x310Logo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Wide310x150Logo.scale-400.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">

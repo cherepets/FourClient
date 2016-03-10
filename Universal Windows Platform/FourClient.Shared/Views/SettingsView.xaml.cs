@@ -1,5 +1,8 @@
 ﻿using FourClient.Library;
+using System;
 using System.Linq;
+using Windows.ApplicationModel.Store;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -144,5 +147,11 @@ namespace FourClient.Views
         {
             return (((ComboBoxItem)box.SelectedItem).Tag);
         }
+
+        private async void RateMe_DesiredRatingSelected(object sender, int e)
+            => await Launcher.LaunchUriAsync(new Uri($"ms-windows-store:reviewapp?appid={CurrentApp.AppId}"));
+
+        private async void RateMe_UndesiredRatingSelected(object sender, int e)
+            => await Launcher.LaunchUriAsync(new Uri($"mailto:?to=cherepets@live.ru&subject=FourClient ({e} здезд)"));
     }
 }

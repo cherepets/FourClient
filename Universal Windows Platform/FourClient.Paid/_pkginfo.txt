@@ -1,1 +1,1 @@
-D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.6.0.0\FourClient.Paid_5.6.0.0_x86_x64_arm.appxbundle
+D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.7.0.0\FourClient.Paid_5.7.0.0_x86_x64_arm.appxbundle

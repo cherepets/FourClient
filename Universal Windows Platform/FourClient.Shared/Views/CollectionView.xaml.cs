@@ -56,7 +56,7 @@ namespace FourClient.Views
 
         private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState == HoldingState.Completed);
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState != HoldingState.Completed);
 
         private void ConditionalShow(object sender, bool condition)
             => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);
