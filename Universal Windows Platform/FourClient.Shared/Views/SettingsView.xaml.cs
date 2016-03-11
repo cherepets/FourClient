@@ -1,7 +1,7 @@
 ﻿using FourClient.Library;
+using FourToolkit.Extensions.Runtime;
 using System;
 using System.Linq;
-using Windows.ApplicationModel.Store;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -149,7 +149,7 @@ namespace FourClient.Views
         }
 
         private async void RateMe_DesiredRatingSelected(object sender, int e)
-            => await Launcher.LaunchUriAsync(new Uri($"ms-windows-store:reviewapp?appid={CurrentApp.AppId}"));
+            => await Launcher.LaunchUriAsync(new Uri($"ms-windows-store:review?ProductId={App.Current.GetProductId()}"));
 
         private async void RateMe_UndesiredRatingSelected(object sender, int e)
             => await Launcher.LaunchUriAsync(new Uri($"mailto:?to=cherepets@live.ru&subject=FourClient ({e} здезд)"));

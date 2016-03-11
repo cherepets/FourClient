@@ -26,13 +26,13 @@ namespace FourClient.Views
         event StateEventHandler StateChanged;
     }
 
-    public sealed partial class ArticleView : IArticleView
+    public sealed partial class ArticleView : UserControl, IArticleView
     {
         public delegate void ViewEventHandler(IArticleView sender);
         public static event ViewEventHandler ViewLoaded;
 
         public event StateEventHandler StateChanged;
-
+        
         public bool Opened
         {
             get
@@ -47,12 +47,37 @@ namespace FourClient.Views
         }
         private bool _opened;
 
-        public Article Article { get; private set; }
+        private ArticleViewImpl _impl;
 
         public ArticleView()
         {
-            InitializeComponent();
             ViewLoaded?.Invoke(this);
+        }
+
+        public void Open(Article article)
+        {
+            Opened = true;
+            _impl = new ArticleViewImpl();
+            Content = _impl;
+            _impl.Open(article);
+        }
+
+        public void Close()
+        {
+            Opened = false;
+            _impl.Close();
+            _impl = null;
+        }
+    }
+
+    public sealed partial class ArticleViewImpl
+    {
+
+        public Article Article { get; private set; }
+
+        public ArticleViewImpl()
+        {
+            InitializeComponent();
             _uiUpdateTimer.Tick += (s, a) => UpdateUi();
         }
 
@@ -74,7 +99,6 @@ namespace FourClient.Views
 
         public async void Open(Article article)
         {
-            Opened = true;
             if (string.IsNullOrEmpty(article.Title))
                 article.FillFromCache(Data.IoC.TopCache as TopCache);
             StatusBar.Visibility = Visibility.Collapsed;
@@ -165,7 +189,6 @@ namespace FourClient.Views
         public void Close()
         {
             if (_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Stop();
-            Opened = false;
             StatusBar.Visibility = Visibility.Visible;
             Article = null;
             WebContent.Children.Clear();

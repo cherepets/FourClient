@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="FourClient.Views.ArticleView"
+    x:Class="FourClient.Views.ArticleViewImpl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:FourClient.Views"

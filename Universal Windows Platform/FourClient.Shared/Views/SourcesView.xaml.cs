@@ -45,10 +45,16 @@ namespace FourClient.Views
             {
                 active.Recheck();
                 inactive.Recheck();
+                RefreshSources(active);
             };
             GridView.ItemsSource = active;
             HiddenView.ItemsSource = inactive;
-            Sources = string.Join(",", active.Where(s => s.Prefix != "NEW").Select(s => s.Prefix));
+            RefreshSources(active);
+        }
+
+        private void RefreshSources(FilteredObservableCollection<Source> active)
+        {
+            Sources = string.Join(";", active.Where(q => q.Prefix != "NEW").Select(q => q.Prefix));
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)

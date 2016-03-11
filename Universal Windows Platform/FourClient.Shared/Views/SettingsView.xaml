@@ -70,7 +70,7 @@
                     <TextBlock x:Name="CacheSliderCap" Grid.Column="2" FontSize="16" />
                 </Grid>
                 <Slider x:Name="CacheSlider" Margin="16,10" LargeChange="1" Maximum="30" Minimum="1" TickFrequency="1" ValueChanged="CacheSlider_ValueChanged" />
-                <TextBlock x:Uid="RateMe" FontSize="16" />
+                <TextBlock Text="Оценить приложение" FontSize="16" />
                 <ui:RateMe DesiredRatingSelected="RateMe_DesiredRatingSelected" UndesiredRatingSelected="RateMe_UndesiredRatingSelected" />
                 <TextBlock x:Name="VersionBlock" HorizontalAlignment="Right" Grid.Row="2" Margin="12"/>
             </StackPanel>
