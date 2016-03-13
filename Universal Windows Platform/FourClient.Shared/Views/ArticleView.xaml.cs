@@ -65,14 +65,13 @@ namespace FourClient.Views
         public void Close()
         {
             Opened = false;
-            _impl.Close();
+            _impl?.Close();
             _impl = null;
         }
     }
 
     public sealed partial class ArticleViewImpl
     {
-
         public Article Article { get; private set; }
 
         public ArticleViewImpl()
@@ -305,11 +304,11 @@ namespace FourClient.Views
         }
 
         private void UpdateStarState()
-            => StarButton.Icon = Article.InCollection ? FourToolkit.UI.Icon.StarFilled : FourToolkit.UI.Icon.Star;
+            => StarButton.Icon = Article.InCollection ? Icon.StarFilled : Icon.Star;
 
         private void Rectangle_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
         {
-            if (e.Delta.Translation.X > 5) Close();
+            if (e.Delta.Translation.X > 4) IoC.ArticleView.Close();
         }
     }
 }

@@ -12153,7 +12153,7 @@
       ]
     },
     "QueryString.NET/1.0.0": {
-      "sha512": "u+MbuqDtckYQv90rphUgmz1PXA4lBSG50MvP5yHUiCzn/kxAs2W8Pyb9VQRlnc+fBB0q6C/Q+bk+nuKbFVqiIg==",
+      "sha512": "wmOG5qPFYH7jKp3fMXQ2VeMXTgcyoI4hwPF8AxFAyrT/uVBDe0ISzyh/iFEnwmFBUm19UgbDoFRU3o47a1/vUw==",
       "type": "Package",
       "files": [
         "[Content_Types].xml",

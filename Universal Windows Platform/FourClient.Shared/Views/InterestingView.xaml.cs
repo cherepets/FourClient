@@ -3,6 +3,9 @@ using FourClient.Library;
 using FourToolkit.UI;
 using System;
 using System.Collections;
+using System.Collections.ObjectModel;
+using System.Linq;
+using Windows.Devices.Input;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,7 +15,7 @@ namespace FourClient.Views
 {
     public interface IInterestingView
     {
-        void SetItemsSource(object source);
+        void Refresh();
         bool EnableFlipViewer { get; set; }
     }
 
@@ -37,9 +40,27 @@ namespace FourClient.Views
 
         private IFlipper Flipper => _enableFlipViewer ? (IFlipper)VerticalFlipper : GridViewFlipper;
 
-        public void SetItemsSource(object source)
+        public void Refresh()
         {
-            var list = source as IList;
+            var top = Api.GetTop();
+            SetItemsSource(top);
+            Notifier.RegenerateDummies();
+        }
+
+        private void SetItemsSource(object source)
+        {
+            var items = source as ObservableCollection<FeedItem>;
+            if (Settings.Current.FilterInteresting && items != null)
+            {
+                var filtered = new FilteredObservableCollection<FeedItem>(items,
+                    f => !Settings.Current.HiddenSources.Any(
+                        s => f.Link.StartsWith(s)));
+                Settings.Current.HiddenSources.CollectionChanged += 
+                    (s, a) => filtered.Recheck();
+                items = filtered;
+                if (Settings.Current.LiveTile) Notifier.UpdateMainTile(items);
+            }
+            var list = items as IList;
             VerticalFlipper.ItemsSource = list;
             GridViewFlipper.ItemsSource = list;
         }
@@ -69,9 +90,9 @@ namespace FourClient.Views
             }
         }
 
-        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
+        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ConditionalShow(sender, e.PointerDeviceType != PointerDeviceType.Touch);
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState != HoldingState.Completed);
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState != HoldingState.Completed && e.PointerDeviceType != PointerDeviceType.Pen);
 
         private void ConditionalShow(object sender, bool condition)
             => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);

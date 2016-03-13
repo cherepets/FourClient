@@ -74,10 +74,7 @@ namespace FourClient
             Settings.Current.LastVersion = Settings.Current.CurrentVersion;
             Settings.Current.PropertyChanged += Settings_PropertyChanged;
             ApplySettings(Settings.Current);
-            var top = Api.GetTop();
-            IoC.InterestingView.SetItemsSource(top);
-            Notifier.RegenerateDummies();
-            if (Settings.Current.LiveTile) Notifier.UpdateMainTile(top);
+            IoC.InterestingView.Refresh();
             var sources = Api.GetSources();
             IoC.SourcesView.SetItemsSource(sources);
             var collection = new ObservableCollection<Article>();

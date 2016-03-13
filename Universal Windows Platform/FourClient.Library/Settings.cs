@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using FourToolkit.Extensions.Runtime;
+using FourToolkit.Settings.SettingsProviders;
+using FourToolkit.UI;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Windows.ApplicationModel;
-using FourToolkit.Extensions.Runtime;
-using FourToolkit.Settings.SettingsProviders;
-using System;
-using FourToolkit.UI;
-using System.Linq;
-using System.Collections.ObjectModel;
 
 namespace FourClient.Library
 {
@@ -70,6 +70,15 @@ namespace FourClient.Library
                 SetProperty(value);
                 OnPropertyChanged();
                 if (!value) Notifier.DisableMainTile();
+            }
+        }
+        public bool FilterInteresting
+        {
+            get { return GetProperty<bool>(); }
+            set
+            {
+                SetProperty(value);
+                OnPropertyChanged();
             }
         }
         public bool AllowRotation
@@ -150,7 +159,7 @@ namespace FourClient.Library
             {
                 if (_hiddenSources == null)
                 {
-                    _hiddenSources = new ObservableCollection<string>(GetProperty<string>().Split(','));
+                    _hiddenSources = new ObservableCollection<string>(GetProperty<string>().Split(',').Where(p => p.Length == 3));
                     _hiddenSources.CollectionChanged += (s, a) => HiddenSources = s as ObservableCollection<string>;
                 }
                 return _hiddenSources;
@@ -227,6 +236,7 @@ namespace FourClient.Library
                 {nameof(ArticleTheme), false},
                 {nameof(LiveTile), true},
                 {nameof(Toast), true},
+                {nameof(FilterInteresting), false},
                 {nameof(AllowRotation), false},
                 {nameof(EnableFlipViewer), true},
                 {nameof(ScrollEventThreshold), 20},

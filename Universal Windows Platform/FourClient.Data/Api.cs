@@ -40,7 +40,7 @@ namespace FourClient.Data
         {
             var client = new WebServiceClient(Url);
             var selectedTopic = topic;
-            if (topic == "?") selectedTopic = IoC.SourceSelector.Sources;
+            if (topic == "?") selectedTopic = string.Join(";", IoC.SourceSelector.Sources.Select(q => q.Prefix));
             var collection = await client.CallAsync<FeedItem>(source.Prefix + "_GetPage", new string[] 
             {
                 selectedTopic,

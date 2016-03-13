@@ -15,6 +15,7 @@
                 <ToggleSwitch x:Name="ArticleThemeToggle" Header="Тема при чтении" OnContent="Белая" OffContent="Черная" Toggled="ArticleThemeToggle_Toggled"/>
                 <CheckBox x:Name="LiveTileBox" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" Margin="0,8" />
                 <CheckBox x:Name="ToastBox" Content="Уведомления" FontSize="16" IsChecked="False" Tapped="ToastBox_Tapped" Margin="0,8" />
+                <CheckBox x:Name="FilterInterestingBox" Content="Фильтровать интересное" FontSize="16" IsChecked="False" Tapped="FilterInterestingBox_Tapped" Margin="0,8" />
                 <ToggleSwitch x:Name="AllowRotationToggle" Header="Автоповорот экрана" OnContent="Включен" OffContent="Выключен" Toggled="AllowRotationToggle_Toggled"/>
                 <ToggleSwitch x:Name="EnableFlipViewerToggle" Header="Режим отображения интересного" OnContent="Одиночный" OffContent="Обычный" Toggled="EnableFlipViewerToggle_Toggled"/>
                 <TextBlock TextWrapping="Wrap" Text="При запуске отображать" FontSize="16" />
@@ -71,7 +72,7 @@
                 </Grid>
                 <Slider x:Name="CacheSlider" Margin="16,10" LargeChange="1" Maximum="30" Minimum="1" TickFrequency="1" ValueChanged="CacheSlider_ValueChanged" />
                 <TextBlock Text="Оценить приложение" FontSize="16" />
-                <ui:RateMe DesiredRatingSelected="RateMe_DesiredRatingSelected" UndesiredRatingSelected="RateMe_UndesiredRatingSelected" />
+                <ui:RateMe CurrentRating="5" DesiredRatingSelected="RateMe_DesiredRatingSelected" UndesiredRatingSelected="RateMe_UndesiredRatingSelected" />
                 <TextBlock x:Name="VersionBlock" HorizontalAlignment="Right" Grid.Row="2" Margin="12"/>
             </StackPanel>
         </ScrollViewer>

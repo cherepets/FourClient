@@ -1,2 +1,2 @@
-MainPackage=D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\bin\x64\Release\FourClient.Paid_5.8.0.0_x64.appx
-SymbolPackage=D:\tmp\src\GitHub\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.8.0.0\FourClient.Paid_5.8.0.0_x64.appxsym
+MainPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\bin\x64\Release\FourClient.Paid_5.8.5.0_x64.appx
+SymbolPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.8.5.0_Test\FourClient.Paid_5.8.5.0_x64.appxsym

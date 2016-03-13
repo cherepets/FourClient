@@ -1,7 +1,9 @@
-﻿namespace FourClient.Data.Interfaces
+﻿using System.Collections.Generic;
+
+namespace FourClient.Data.Interfaces
 {
     public interface ISourceSelector
     {
-        string Sources { get; }
+        IEnumerable<Source> Sources { get; }
     }
 }

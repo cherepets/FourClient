@@ -4,6 +4,7 @@ using FourClient.Library;
 using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Windows.UI.Input;
@@ -32,7 +33,7 @@ namespace FourClient.Views
             ViewLoaded?.Invoke(this);
         }
 
-        public string Sources { get; private set; } = string.Empty;
+        public IEnumerable<Source> Sources { get; private set; } = new List<Source>();
 
         public void SetItemsSource(object source)
         {
@@ -54,7 +55,7 @@ namespace FourClient.Views
 
         private void RefreshSources(FilteredObservableCollection<Source> active)
         {
-            Sources = string.Join(";", active.Where(q => q.Prefix != "NEW").Select(q => q.Prefix));
+            Sources = active.Where(q => q.Prefix != "NEW").ToList();
         }
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
