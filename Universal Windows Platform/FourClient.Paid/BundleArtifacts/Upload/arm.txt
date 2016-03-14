@@ -1,5 +1,5 @@
-MainPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\bin\ARM\Release\Upload\FourClient.Paid_5.8.5.0_ARM.appx
-SymbolPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.8.5.0\FourClient.Paid_5.8.5.0_ARM.appxsym
+MainPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\bin\ARM\Release\Upload\FourClient.Paid_5.8.7.0_ARM.appx
+SymbolPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.8.7.0\FourClient.Paid_5.8.7.0_ARM.appxsym
 ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-100.appx
 ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-125.appx
 ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-150.appx

@@ -1,6 +1,7 @@
 ﻿using FourClient.Library;
 using FourToolkit.Extensions.Runtime;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -12,6 +13,8 @@ namespace FourClient.Views
 {
     public sealed partial class SettingsView
     {
+        private List<ScrollViewer> Scrollers = new List<ScrollViewer>();
+
         public SettingsView()
         {
             InitializeComponent();
@@ -172,10 +175,30 @@ namespace FourClient.Views
             return (((ComboBoxItem)box.SelectedItem).Tag);
         }
 
+        private async void ContactMe_Tapped(object sender, TappedRoutedEventArgs e)
+            => await Launcher.LaunchUriAsync(new Uri("mailto:?to=cherepets@live.ru&subject=FourClient (отзыв)"));
+
         private async void RateMe_DesiredRatingSelected(object sender, int e)
             => await Launcher.LaunchUriAsync(new Uri($"ms-windows-store:review?ProductId={App.Current.GetProductId()}"));
 
         private async void RateMe_UndesiredRatingSelected(object sender, int e)
             => await Launcher.LaunchUriAsync(new Uri($"mailto:?to=cherepets@live.ru&subject=FourClient ({e} здезд)"));
+
+        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+            => Scrollers.Add(sender as ScrollViewer);
+
+        private void SettingsView_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            var isWide = e.NewSize.Width >= e.NewSize.Height;
+            RootPanel.Orientation = isWide ? Orientation.Horizontal : Orientation.Vertical;
+            RootScroller.HorizontalScrollMode = isWide ? ScrollMode.Enabled : ScrollMode.Disabled;
+            RootScroller.HorizontalScrollBarVisibility = isWide ? ScrollBarVisibility.Visible : ScrollBarVisibility.Disabled;
+            RootScroller.VerticalScrollMode = isWide ? ScrollMode.Disabled : ScrollMode.Enabled;
+            RootScroller.VerticalScrollBarVisibility = isWide ? ScrollBarVisibility.Disabled : ScrollBarVisibility.Visible;
+            Scrollers.ForEach(s => s.VerticalScrollMode = isWide ? ScrollMode.Enabled : ScrollMode.Disabled);
+        }
+
+        private void RootScroller_SizeChanged(object sender, SizeChangedEventArgs e)
+            => Scrollers.ForEach(s => s.MaxHeight = e.NewSize.Height);
     }
 }
