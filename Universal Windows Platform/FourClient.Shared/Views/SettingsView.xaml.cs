@@ -29,6 +29,15 @@ namespace FourClient.Views
                 };
                 StartUpBox.Items.Add(item);
             }
+            foreach (var pair in TwoColumnsModeExt.GetDictionary())
+            {
+                var item = new ComboBoxItem
+                {
+                    Tag = pair.Key,
+                    Content = pair.Value
+                };
+                TwoColumnsModeBox.Items.Add(item);
+            }
             AppThemeToggle.IsOn = Settings.Current.AppTheme;
             ArticleThemeToggle.IsOn = Settings.Current.ArticleTheme;
             LiveTileBox.IsChecked = Settings.Current.LiveTile;
@@ -37,6 +46,7 @@ namespace FourClient.Views
             AllowRotationToggle.IsOn = Settings.Current.AllowRotation;
             EnableFlipViewerToggle.IsOn = Settings.Current.EnableFlipViewer;
             SetComboBoxValue(StartUpBox, Settings.Current.ShowAtStartup.GetName());
+            SetComboBoxValue(TwoColumnsModeBox, Settings.Current.TwoColumnsMode.GetName());
             SetComboBoxValue(YouTubeBox, Settings.Current.YouTube);
             SetComboBoxValue(AlignBox, Settings.Current.Align);
             SetComboBoxValue(FontBox, Settings.Current.FontFace);
@@ -99,6 +109,12 @@ namespace FourClient.Views
         {
             if (!_init) return;
             Settings.Current.ShowAtStartup = (StartUpType)GetComboBoxTag(StartUpBox);
+        }
+
+        private void TwoColumnsModeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_init) return;
+            Settings.Current.TwoColumnsMode = (TwoColumnsMode)GetComboBoxTag(TwoColumnsModeBox);
         }
 
         private void YouTubeBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

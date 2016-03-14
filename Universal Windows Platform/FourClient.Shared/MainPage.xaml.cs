@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Graphics.Display;
 using Windows.Phone.UI.Input;
 using Windows.UI;
 using Windows.UI.Core;
@@ -121,6 +122,7 @@ namespace FourClient
         {
             IoC.InterestingView.EnableFlipViewer = e.EnableFlipViewer;
             RequestedTheme = e.AppTheme ? ElementTheme.Light : ElementTheme.Dark;
+            ArticleView.RequestedTheme = e.ArticleTheme ? ElementTheme.Light : ElementTheme.Dark;
             if (RequestedTheme == ElementTheme.Dark)
             {
                 StatusBar.Foreground = new SolidColorBrush(Colors.White);
@@ -131,6 +133,7 @@ namespace FourClient
                 StatusBar.Foreground = new SolidColorBrush(Colors.Black);
                 StatusBar.Background = new SolidColorBrush(Colors.White);
             }
+            UpdateVisualState(IoC.ArticleView.Opened);
         }
 
         private static void RegisterDataDepedencies()
@@ -147,12 +150,41 @@ namespace FourClient
         private void UpdateVisualState(bool paneOpened)
         {
             _state = paneOpened 
-                ? !Platform.IsMobile
-                && ActualWidth > 800
-                && ActualWidth > ActualHeight ?
-                "TwoPanes" :
-                "RightPane" :
-                "LeftPane";
+                ? "RightPane"
+                : "LeftPane";
+            switch (Settings.Current.TwoColumnsMode)
+            {
+                case TwoColumnsMode.Default:
+                    if (!Platform.IsMobile
+                        && ActualWidth >= 800
+                        && ActualWidth > ActualHeight)
+                        _state = "TwoPanes";
+                    if (Platform.IsMobile)
+                    {
+                        DisplayInformation.AutoRotationPreferences = _state == "RightPane" && Settings.Current.AllowRotation
+                            ? DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped
+                            : DisplayOrientations.Portrait;
+                    }
+                    break;
+                case TwoColumnsMode.Never:
+                    if (Platform.IsMobile)
+                    {
+                        DisplayInformation.AutoRotationPreferences = _state == "RightPane" && Settings.Current.AllowRotation
+                            ? DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped
+                            : DisplayOrientations.Portrait;
+                    }
+                    break;
+                case TwoColumnsMode.Always:
+                    if (ActualWidth >= 800 && ActualWidth > ActualHeight)
+                        _state = "TwoPanes";
+                    if (Platform.IsMobile)
+                    {
+                        DisplayInformation.AutoRotationPreferences = Settings.Current.AllowRotation && (paneOpened || ActualWidth >= 800 || ActualHeight >= 800)
+                            ? DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped
+                            : DisplayOrientations.Portrait;
+                    }
+                    break;
+            }
             if (_state == "RightPane")
                 this.AttachBackHandler(Back);
             else

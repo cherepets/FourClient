@@ -108,6 +108,15 @@ namespace FourClient.Library
                 OnPropertyChanged();
             }
         }
+        public TwoColumnsMode TwoColumnsMode
+        {
+            get { return (TwoColumnsMode)GetProperty<int>(); }
+            set
+            {
+                SetProperty((int)value);
+                OnPropertyChanged();
+            }
+        }
         public int FontSize
         {
             get { return GetProperty<int>(); }

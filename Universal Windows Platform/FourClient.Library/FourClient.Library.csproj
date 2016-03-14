@@ -112,6 +112,7 @@
     <Compile Include="Cache\CacheBase.cs" />
     <Compile Include="Cache\SourceCache.cs" />
     <Compile Include="Cache\TopCache.cs" />
+    <Compile Include="TwoColumnsMode.cs" />
     <Compile Include="Notifications\RemindToastViewModel.cs" />
     <Compile Include="Notifications\RemindToast.xaml.cs">
       <DependentUpon>RemindToast.xaml</DependentUpon>

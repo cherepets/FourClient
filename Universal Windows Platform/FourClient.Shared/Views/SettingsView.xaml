@@ -20,6 +20,8 @@
                 <ToggleSwitch x:Name="EnableFlipViewerToggle" Header="Режим отображения интересного" OnContent="Одиночный" OffContent="Обычный" Toggled="EnableFlipViewerToggle_Toggled"/>
                 <TextBlock TextWrapping="Wrap" Text="При запуске отображать" FontSize="16" />
                 <ComboBox x:Name="StartUpBox" SelectionChanged="StartUpBox_SelectionChanged" Margin="0,8"/>
+                <TextBlock TextWrapping="Wrap" Text="Двухколоночный режим" FontSize="16" />
+                <ComboBox x:Name="TwoColumnsModeBox" SelectionChanged="TwoColumnsModeBox_SelectionChanged" Margin="0,8"/>
                 <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" />
                 <ComboBox x:Name="YouTubeBox" SelectionChanged="YouTubeBox_SelectionChanged" Margin="0,8">
                     <ComboBoxItem Content="vnd.youtube:"/>

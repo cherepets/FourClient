@@ -192,8 +192,6 @@ namespace FourClient.Views
             Article = null;
             WebContent.Children.Clear();
             _render = null;
-            if (Platform.IsMobile)
-                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
         }
 
         private void LoadFromCache()
@@ -241,8 +239,6 @@ namespace FourClient.Views
             UpdateStarState();
             ShowUi();
             if (!_uiUpdateTimer.IsEnabled) _uiUpdateTimer.Start();
-            if (Platform.IsMobile && Settings.Current.AllowRotation)
-                DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped;
             if (_render != null)
                 _render.Completed -= render_Completed;
         }

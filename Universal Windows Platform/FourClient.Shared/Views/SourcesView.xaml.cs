@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using Windows.Devices.Input;
 using Windows.UI.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -54,9 +55,7 @@ namespace FourClient.Views
         }
 
         private void RefreshSources(FilteredObservableCollection<Source> active)
-        {
-            Sources = active.Where(q => q.Prefix != "NEW").ToList();
-        }
+            => Sources = active.Where(q => q.Prefix != "NEW").ToList();
 
         private void Item_Loaded(object sender, RoutedEventArgs e)
         {
@@ -73,13 +72,13 @@ namespace FourClient.Views
             HideHiddenSources();
         }
 
-        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOn(sender);
+        private void Item_RightTapped(object sender, RightTappedRoutedEventArgs e) => ConditionalShow(sender, e.PointerDeviceType != PointerDeviceType.Touch);
 
-        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState != HoldingState.Completed);
+        private void Item_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShow(sender, e.HoldingState != HoldingState.Completed && e.PointerDeviceType != PointerDeviceType.Pen);
 
-        private void HiddenItem_RightTapped(object sender, RightTappedRoutedEventArgs e) => ShowMenuOnHidden(sender);
+        private void HiddenItem_RightTapped(object sender, RightTappedRoutedEventArgs e) => ConditionalShowHidden(sender, e.PointerDeviceType != PointerDeviceType.Touch);
 
-        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShowHidden(sender, e.HoldingState != HoldingState.Completed);
+        private void HiddenItem_Holding(object sender, HoldingRoutedEventArgs e) => ConditionalShowHidden(sender, e.HoldingState != HoldingState.Completed && e.PointerDeviceType != PointerDeviceType.Pen);
 
         private void ConditionalShow(object sender, bool condition)
             => (condition ? ShowMenuOn : (Action<object>)null)?.Invoke(sender);
