@@ -59,6 +59,7 @@ namespace FourClient
         {
             await CacheBase.InitAsync();
             await StatisticsBase.InitAsync();
+            Settings.OverrideDefaults(DefaultSettings.Dictionary);
             if (Platform.IsMobile)
             {
                 DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;

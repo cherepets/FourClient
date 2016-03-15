@@ -238,31 +238,14 @@ namespace FourClient.Library
 
         Settings()
         {
-            var defaults = new Dictionary<string, object>
-            {
-                {nameof(LastVersion), new PackageVersion()},
-                {nameof(AppTheme), false},
-                {nameof(ArticleTheme), false},
-                {nameof(LiveTile), true},
-                {nameof(Toast), true},
-                {nameof(FilterInteresting), false},
-                {nameof(AllowRotation), false},
-                {nameof(EnableFlipViewer), true},
-                {nameof(ScrollEventThreshold), 20},
-                {nameof(FontSize), Platform.IsMobile ? 2 : 3},
-                {nameof(FontFace), "Segoe UI"},
-                {nameof(Align), "left"},
-                {nameof(ShowAtStartup), 0 },
-                {nameof(YouTube), "vnd.youtube:"},
-                {nameof(HiddenSources), string.Empty},
-                {nameof(CacheDays), 3},
-            };
-            DefaultsProvider = new DictionarySettingsProvider(defaults);
             SettingsProvider = new ApplicationDataSettingsProvider(ApplicationDataContainerType.Local);
         }
 
         public static Settings Current { get; } = new Settings();
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public static void OverrideDefaults(Dictionary<string, object> defaults)
+            => Current.DefaultsProvider = new DictionarySettingsProvider(defaults);
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

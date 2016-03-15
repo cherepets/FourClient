@@ -60,6 +60,16 @@ namespace FourClient.Views
             CacheSlider.Value = Settings.Current.CacheDays;
             CacheSliderCap.Text = CacheSlider.Value.ToString();
             VersionBlock.Text = $"v. {Settings.Current.DisplayVersion}";
+            #region Free version restrictions
+            if (!PayState.IsPaid)
+            {
+                ToastBox.IsEnabled = false;
+                FilterInterestingBox.IsEnabled = false;
+                EnableFlipViewerToggle.IsEnabled = false;
+                FontBox.IsEnabled = false;
+                YouTubeBox.IsEnabled = false;
+            }
+            #endregion
             _init = true;
         }
 

@@ -20,7 +20,7 @@ namespace FourClient
         private static bool _registred;
         private static readonly object Lock = new object();
 
-        public static void RegisterViews()
+        public static void RegisterDependencies()
         {
             lock (Lock)
             {

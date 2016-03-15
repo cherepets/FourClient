@@ -24,12 +24,12 @@
                 <ScrollViewer Margin="12,0" VerticalScrollBarVisibility="Hidden" Loaded="ScrollViewer_Loaded">
                     <StackPanel Margin="0,0,0,18">
                         <TextBlock Text="Оформление" Margin="0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16" />
+                        <TextBlock TextWrapping="Wrap" Text="Двухколоночный режим" FontSize="16" />
+                        <ComboBox x:Name="TwoColumnsModeBox" SelectionChanged="TwoColumnsModeBox_SelectionChanged" Margin="0,8"/>
                         <ToggleSwitch x:Name="AppThemeToggle" Header="Тема приложения" OnContent="Белая" OffContent="Черная" Toggled="AppThemeToggle_Toggled"/>
                         <ToggleSwitch x:Name="ArticleThemeToggle" Header="Тема при чтении" OnContent="Белая" OffContent="Черная" Toggled="ArticleThemeToggle_Toggled"/>
                         <ToggleSwitch x:Name="AllowRotationToggle" Header="Автоповорот экрана" OnContent="Включен" OffContent="Выключен" Toggled="AllowRotationToggle_Toggled"/>
                         <ToggleSwitch x:Name="EnableFlipViewerToggle" Header="Режим отображения интересного" OnContent="Одиночный" OffContent="Обычный" Toggled="EnableFlipViewerToggle_Toggled"/>
-                        <TextBlock TextWrapping="Wrap" Text="Двухколоночный режим" FontSize="16" />
-                        <ComboBox x:Name="TwoColumnsModeBox" SelectionChanged="TwoColumnsModeBox_SelectionChanged" Margin="0,8"/>
                     </StackPanel>
                 </ScrollViewer>
                 <ScrollViewer Margin="12,0" VerticalScrollBarVisibility="Hidden" Loaded="ScrollViewer_Loaded">

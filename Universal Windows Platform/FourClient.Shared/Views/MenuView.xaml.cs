@@ -1,11 +1,13 @@
-﻿using FourClient.Data;
-using FourClient.Data.Feed;
-using FourToolkit.UI;
+﻿using FourToolkit.UI;
+using FourToolkit.UI.Extensions;
 using System.Collections.Generic;
 using System.Linq;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using System;
+using Windows.System;
 
 namespace FourClient.Views
 {
@@ -32,6 +34,7 @@ namespace FourClient.Views
             InitializeComponent();
             ViewLoaded?.Invoke(this);
             RefreshHeader(0);
+            ShowBars();
         }
 
         public List<string> NewsTypes
@@ -63,6 +66,7 @@ namespace FourClient.Views
             if (!_uiUpdated) return;
             _uiUpdated = false;
             RefreshHeader(Pivot.SelectedIndex);
+            PayButton.Visibility = PayState.IsPaid ? Visibility.Collapsed : Visibility.Visible;
             await MultiAppBar.ShowAsync();
             _uiUpdated = true;
         }
@@ -72,6 +76,7 @@ namespace FourClient.Views
             if (!_uiUpdated) return;
             _uiUpdated = false;
             PivotHeader.Visibility = Visibility.Collapsed;
+            PayButton.Visibility = Visibility.Collapsed;
             await MultiAppBar.HideAsync();
             _uiUpdated = true;
         }
@@ -166,5 +171,22 @@ namespace FourClient.Views
                 IoC.MainPage.ShowFlyout(menu);
             }
         }
+
+        private async void PayButton_Tapped(object sender, TappedRoutedEventArgs e)
+            => await new MessageDialog(
+@"Платная версия необходима для оплаты облачного сервиса в Microsoft Azure, который разбирает инфорацию с сайтов, вырезает из статей лишнее, обновляет список источников отдельно от приложения и многое дургое.
+Платная версия включает:
+- Отсутствие этой кнопки :)
+- Больше настроек
+- Обновления выходят после тестирования на бесплатной версии",
+"Купить платную версию?")
+                .WithCommand("Купить", Buy)
+                .WithCommand("Отмена")
+                .SetDefaultCommandIndex(0)
+                .SetCancelCommandIndex(1)
+                .ShowAsync();
+
+        private async void Buy()
+            => await Launcher.LaunchUriAsync(new Uri("https://www.microsoft.com/store/apps/9nblggh0chck"));
     }
 }

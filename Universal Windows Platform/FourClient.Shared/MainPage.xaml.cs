@@ -32,10 +32,12 @@ namespace FourClient
     {
         public delegate void PageEventHandler(IMainPage sender);
         public static event PageEventHandler PageLoaded;
-                
+
+        private const int ViewTrigger = 720;
+
         public MainPage()
         {
-            IoC.RegisterViews();
+            IoC.RegisterDependencies();
             InitializeComponent();
             Loaded += MainPage_Loaded;
             PageLoaded?.Invoke(this);
@@ -65,7 +67,7 @@ namespace FourClient
                     return;
             }
         }
-
+        
         private string _state;
         private TimeSpan _animationLength = TimeSpan.FromSeconds(0.2);
 
@@ -156,7 +158,7 @@ namespace FourClient
             {
                 case TwoColumnsMode.Default:
                     if (!Platform.IsMobile
-                        && ActualWidth >= 800
+                        && ActualWidth >= ViewTrigger
                         && ActualWidth > ActualHeight)
                         _state = "TwoPanes";
                     if (Platform.IsMobile)
@@ -175,11 +177,11 @@ namespace FourClient
                     }
                     break;
                 case TwoColumnsMode.Always:
-                    if (ActualWidth >= 800 && ActualWidth > ActualHeight)
+                    if (ActualWidth >= ViewTrigger && ActualWidth > ActualHeight)
                         _state = "TwoPanes";
                     if (Platform.IsMobile)
                     {
-                        DisplayInformation.AutoRotationPreferences = Settings.Current.AllowRotation && (paneOpened || ActualWidth >= 800 || ActualHeight >= 800)
+                        DisplayInformation.AutoRotationPreferences = Settings.Current.AllowRotation && (paneOpened || ActualWidth >= ViewTrigger || ActualHeight >= ViewTrigger)
                             ? DisplayOrientations.Portrait | DisplayOrientations.Landscape | DisplayOrientations.LandscapeFlipped
                             : DisplayOrientations.Portrait;
                     }

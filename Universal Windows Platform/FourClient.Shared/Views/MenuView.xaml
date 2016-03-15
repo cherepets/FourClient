@@ -8,6 +8,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ui:HorizontalSelector x:Name="Selector" Selected="HorizontalSelector_Selected">
@@ -20,7 +21,8 @@
         </ui:HorizontalSelector>
         <ui:AppBarButton Grid.Row="0" Height="46" x:Name="SearchButton" Visibility="Collapsed" Icon="Search" HorizontalAlignment="Right" VerticalAlignment="Top" Tapped="SearchButton_Tapped"/>
         <TextBlock Grid.Row="1" x:Name="PivotHeader" FontSize="16" Margin="12,6"/>
-        <Pivot x:Name="Pivot" Grid.Row="2" Style="{StaticResource HeaderlessPivotStyle}" SelectionChanged="Pivot_SelectionChanged">
+        <Button x:Name="PayButton" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" Content="КУПИТЬ ПОЛНУЮ ВЕРСИЮ" HorizontalAlignment="Stretch" Visibility="Collapsed" Tapped="PayButton_Tapped" />
+        <Pivot x:Name="Pivot" Grid.Row="3" Style="{StaticResource HeaderlessPivotStyle}" SelectionChanged="Pivot_SelectionChanged">
             <PivotItem x:Name="InterestingView" Header="Интересное">
                 <local:InterestingView Margin="0,0,0,20"/>
             </PivotItem>
@@ -34,7 +36,7 @@
                 <local:CollectionView/>
             </PivotItem>
         </Pivot>
-        <ui:MultiAppBar x:Name="MultiAppBar" Grid.RowSpan="3">
+        <ui:MultiAppBar x:Name="MultiAppBar" Grid.RowSpan="4">
             <ui:MultiAppBar.AppBars>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
@@ -71,6 +73,6 @@
                 </ui:CompactAppBar>
             </ui:MultiAppBar.AppBars>
         </ui:MultiAppBar>
-        <ui:Flyout Grid.Row="0" Grid.RowSpan="3" x:Name="Flyout"/>
+        <ui:Flyout Grid.Row="0" Grid.RowSpan="4" x:Name="Flyout"/>
     </Grid>
 </UserControl>

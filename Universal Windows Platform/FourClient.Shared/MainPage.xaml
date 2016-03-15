@@ -32,7 +32,7 @@
                 <VisualState x:Name="TwoPanes">
                     <Storyboard>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="400"/>
+                            <DiscreteObjectKeyFrame KeyTime="0" Value="360"/>
                         </ObjectAnimationUsingKeyFrames>
                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightColumn" Storyboard.TargetProperty="Width">
                             <DiscreteObjectKeyFrame KeyTime="0" Value="*"/>
