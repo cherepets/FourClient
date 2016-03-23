@@ -6,14 +6,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace FourClient
+namespace FourClient.Collections.Decoration.ObservableCollection
 {
-    public class FilteredObservableCollection<T> : ObservableCollection<T>
+    internal class FilterDecorator<T> : ObservableCollection<T>
     {
         private Func<T, bool> _filter;
         private ObservableCollection<T> _collection;
 
-        public FilteredObservableCollection(ObservableCollection<T> collection, Expression<Func<T, bool>> filter)
+        public FilterDecorator(ObservableCollection<T> collection, Expression<Func<T, bool>> filter)
         {
             _filter = filter.Compile();
             _collection = collection;
@@ -40,8 +40,11 @@ namespace FourClient
         private void Sort()
         {
             var ordered = this.OrderBy(e => _collection.IndexOf(e)).ToList();
-            foreach (var item in ordered)
-                Move(IndexOf(item), ordered.IndexOf(item));
+            for (var newIndex = 0; newIndex < ordered.Count; newIndex++)
+            {
+                var oldIndex = IndexOf(ordered[newIndex]);
+                if (oldIndex != newIndex) Move(oldIndex, newIndex);
+            }
         }
 
         private void Collection_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

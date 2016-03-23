@@ -64,8 +64,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\Decoration\ObservableCollection\FilterDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\Decoration\ObservableCollection\ObservableCollectionExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleadnToVisibilityConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)FilteredObservableCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GridViewFlipper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HtmlRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC.cs" />

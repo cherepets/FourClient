@@ -1,4 +1,5 @@
-﻿using FourClient.Data;
+﻿using FourClient.Collections.Decoration.ObservableCollection;
+using FourClient.Data;
 using FourClient.Data.Interfaces;
 using FourClient.Library;
 using FourToolkit.UI;
@@ -41,15 +42,15 @@ namespace FourClient.Views
             var collection = source as ObservableCollection<Source>;
             if (collection == null) return;
             var hiddenSources = Settings.Current.HiddenSources;
-            var active = new FilteredObservableCollection<Source>(collection, s => !hiddenSources.Any(p => p == s.Prefix));
-            var inactive = new FilteredObservableCollection<Source>(collection, s => hiddenSources.Any(p => p == s.Prefix));
+            var active = collection.AttachFilter(s => !hiddenSources.Any(p => p == s.Prefix));
+            var inactive = collection.AttachFilter(s => hiddenSources.Any(p => p == s.Prefix));
             hiddenSources.CollectionChanged += (s, a) => RefreshSources(active);
             GridView.ItemsSource = active;
             HiddenView.ItemsSource = inactive;
             RefreshSources(active);
         }
 
-        private void RefreshSources(FilteredObservableCollection<Source> active)
+        private void RefreshSources(ObservableCollection<Source> active)
             => Sources = active.Where(q => q.Prefix != "NEW").ToList();
 
         private void Item_Loaded(object sender, RoutedEventArgs e)

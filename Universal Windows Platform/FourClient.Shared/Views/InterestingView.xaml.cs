@@ -1,4 +1,5 @@
-﻿using FourClient.Data;
+﻿using FourClient.Collections.Decoration.ObservableCollection;
+using FourClient.Data;
 using FourClient.Library;
 using FourToolkit.UI;
 using System;
@@ -52,9 +53,8 @@ namespace FourClient.Views
             var items = source as ObservableCollection<FeedItem>;
             if (Settings.Current.FilterInteresting && items != null)
             {
-                var filtered = new FilteredObservableCollection<FeedItem>(items,
-                    f => !Settings.Current.HiddenSources.Any(
-                        s => f.Link.StartsWith(s)));
+                var filtered = items.AttachFilter(f => 
+                    !Settings.Current.HiddenSources.Any(s => f.Link.StartsWith(s)));
                 items = filtered;
                 if (Settings.Current.LiveTile) Notifier.UpdateMainTile(items);
             }
