@@ -68,6 +68,9 @@ namespace FourClient.Views
             var article = panel.DataContext as Article;
             if (article != null)
                 ContextMenu.Show(IoC.MainPage.Flyout, panel,
+                    new ContextMenuItem("Открыть в браузере", () => article.OpenWeb()),
+                    new ContextMenuItem("Комментарии", () => article.OpenComments()),
+                    new ContextMenuItem("Поделиться", () => article.Share()),
                     new ContextMenuItem("Удалить",
                         () =>
                         {

@@ -55,8 +55,6 @@ namespace FourClient.Views
                 var filtered = new FilteredObservableCollection<FeedItem>(items,
                     f => !Settings.Current.HiddenSources.Any(
                         s => f.Link.StartsWith(s)));
-                Settings.Current.HiddenSources.CollectionChanged += 
-                    (s, a) => filtered.Recheck();
                 items = filtered;
                 if (Settings.Current.LiveTile) Notifier.UpdateMainTile(items);
             }
@@ -122,7 +120,10 @@ namespace FourClient.Views
                                 article.InCollection = true;
                                 IoC.ArticleCache.Put(article);
                             }
-                        })
+                        }),
+                    new ContextMenuItem("Открыть в браузере", () => article.OpenWeb()),
+                    new ContextMenuItem("Комментарии", () => article.OpenComments()),
+                    new ContextMenuItem("Поделиться", () => article.Share())
                     );
         }
     }

@@ -5,9 +5,6 @@ using FourToolkit.UI;
 using FourToolkit.UI.Extensions;
 using System;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Graphics.Display;
-using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -257,46 +254,22 @@ namespace FourClient.Views
             UpdateStarState();
         }
 
-        private async void Globe_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Globe_Tapped(object sender, TappedRoutedEventArgs e)
         {
             hideUiAfter = UiTimeout;
-            if (Article == null) return;
-            var uri = new Uri(Article.FullLink);
-            await Launcher.LaunchUriAsync(uri);
+            Article?.OpenWeb();
         }
 
-        private async void Comments_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Comments_Tapped(object sender, TappedRoutedEventArgs e)
         {
             hideUiAfter = UiTimeout;
-            if (Article == null) return;
-            var uri = new Uri(Article.CommentLink);
-            await Launcher.LaunchUriAsync(uri);
+            Article?.OpenComments();
         }
         
         private void Share_Tapped(object sender, TappedRoutedEventArgs e)
         {
             hideUiAfter = UiTimeout;
-            if (Article == null) return;
-            var dataTransferManager = DataTransferManager.GetForCurrentView();
-            dataTransferManager.DataRequested += ShareDataRequested;
-            DataTransferManager.ShowShareUI();
-        }
-
-        private void ShareDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
-        {
-            DataRequest request = args.Request;
-            DataRequestDeferral deferral = request.GetDeferral();
-            request.Data.Properties.Title = Article.Title;
-            request.Data.Properties.Description = "Отправлено из FourClient для Windows 10";
-            try
-            {
-                var uri = new Uri(Article.FullLink);
-                request.Data.SetWebLink(uri);
-            }
-            finally
-            {
-                deferral.Complete();
-            }
+            Article?.Share();
         }
 
         private void UpdateStarState()

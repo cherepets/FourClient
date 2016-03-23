@@ -43,12 +43,7 @@ namespace FourClient.Views
             var hiddenSources = Settings.Current.HiddenSources;
             var active = new FilteredObservableCollection<Source>(collection, s => !hiddenSources.Any(p => p == s.Prefix));
             var inactive = new FilteredObservableCollection<Source>(collection, s => hiddenSources.Any(p => p == s.Prefix));
-            hiddenSources.CollectionChanged += (s, a) =>
-            {
-                active.Recheck();
-                inactive.Recheck();
-                RefreshSources(active);
-            };
+            hiddenSources.CollectionChanged += (s, a) => RefreshSources(active);
             GridView.ItemsSource = active;
             HiddenView.ItemsSource = inactive;
             RefreshSources(active);

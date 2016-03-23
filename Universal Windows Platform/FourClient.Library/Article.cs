@@ -3,6 +3,8 @@ using FourClient.Library.Cache;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
+using Windows.System;
 
 namespace FourClient.Library
 {
@@ -49,6 +51,42 @@ namespace FourClient.Library
                 FullLink = item.FullLink,
                 CommentLink = item.CommentLink
             };
+        }
+
+        public async void OpenWeb()
+        {
+            var uri = new Uri(FullLink);
+            await Launcher.LaunchUriAsync(uri);
+        }
+
+        public async void OpenComments()
+        {
+            var uri = new Uri(CommentLink);
+            await Launcher.LaunchUriAsync(uri);
+        }
+
+        public void Share()
+        {
+            var dataTransferManager = DataTransferManager.GetForCurrentView();
+            dataTransferManager.DataRequested += ShareDataRequested;
+            DataTransferManager.ShowShareUI();
+        }
+
+        private void ShareDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            DataRequest request = args.Request;
+            DataRequestDeferral deferral = request.GetDeferral();
+            request.Data.Properties.Title = Title;
+            request.Data.Properties.Description = "Отправлено из FourClient для Windows 10";
+            try
+            {
+                var uri = new Uri(FullLink);
+                request.Data.SetWebLink(uri);
+            }
+            finally
+            {
+                deferral.Complete();
+            }
         }
 
         public void FillFromCache(TopCache cache)
