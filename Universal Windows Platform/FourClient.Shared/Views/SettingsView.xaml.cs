@@ -185,7 +185,7 @@ namespace FourClient.Views
             return (((ComboBoxItem)box.SelectedItem).Tag);
         }
 
-        private async void ContactMe_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void ContactMe_Click(object sender, EventArgs e)
             => await Launcher.LaunchUriAsync(new Uri("mailto:?to=cherepets@live.ru&subject=FourClient (отзыв)"));
 
         private async void RateMe_DesiredRatingSelected(object sender, int e)
@@ -193,9 +193,6 @@ namespace FourClient.Views
 
         private async void RateMe_UndesiredRatingSelected(object sender, int e)
             => await Launcher.LaunchUriAsync(new Uri($"mailto:?to=cherepets@live.ru&subject=FourClient ({e} здезд)"));
-
-        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
-            => Scrollers.Add(sender as ScrollViewer);
 
         private void SettingsView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
@@ -207,6 +204,9 @@ namespace FourClient.Views
             RootScroller.VerticalScrollBarVisibility = isWide ? ScrollBarVisibility.Disabled : ScrollBarVisibility.Visible;
             Scrollers.ForEach(s => s.VerticalScrollMode = isWide ? ScrollMode.Enabled : ScrollMode.Disabled);
         }
+
+        private void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+            => Scrollers.Add(sender as ScrollViewer);
 
         private void RootScroller_SizeChanged(object sender, SizeChangedEventArgs e)
             => Scrollers.ForEach(s => s.MaxHeight = e.NewSize.Height);

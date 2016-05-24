@@ -8,12 +8,12 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBlock Text="НАСТРОЙКИ" FontSize="16" Margin="12,6"/>
+        <TextBlock Text="НАСТРОЙКИ" FontSize="16" Margin="12,6,12,0"/>
         <ScrollViewer x:Name="RootScroller" Grid.Row="1" SizeChanged="RootScroller_SizeChanged">
             <StackPanel x:Name="RootPanel">
                 <ScrollViewer Margin="12,0" VerticalScrollBarVisibility="Hidden" Loaded="ScrollViewer_Loaded">
                     <StackPanel Margin="0,0,0,18">
-                        <TextBlock Text="Основное" Margin="0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16"/>
+                        <TextBlock Text="Основное" Margin="0,6,0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16"/>
                         <TextBlock TextWrapping="Wrap" Text="При запуске отображать" FontSize="16" />
                         <ComboBox x:Name="StartUpBox" SelectionChanged="StartUpBox_SelectionChanged" Margin="0,8"/>
                         <CheckBox x:Name="LiveTileBox" Content="Живая плитка" FontSize="16" IsChecked="False" Tapped="LiveTileBox_Tapped" Margin="0,8" />
@@ -23,7 +23,7 @@
                 </ScrollViewer>
                 <ScrollViewer Margin="12,0" VerticalScrollBarVisibility="Hidden" Loaded="ScrollViewer_Loaded">
                     <StackPanel Margin="0,0,0,18">
-                        <TextBlock Text="Оформление" Margin="0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16" />
+                        <TextBlock Text="Оформление" Margin="0,6,0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16" />
                         <TextBlock TextWrapping="Wrap" Text="Двухколоночный режим" FontSize="16" />
                         <ComboBox x:Name="TwoColumnsModeBox" SelectionChanged="TwoColumnsModeBox_SelectionChanged" Margin="0,8"/>
                         <ToggleSwitch x:Name="AppThemeToggle" Header="Тема приложения" OnContent="Белая" OffContent="Черная" Toggled="AppThemeToggle_Toggled"/>
@@ -34,7 +34,7 @@
                 </ScrollViewer>
                 <ScrollViewer Margin="12,0" VerticalScrollBarVisibility="Hidden" Loaded="ScrollViewer_Loaded">
                     <StackPanel Margin="0,0,0,18">
-                        <TextBlock Text="Режим чтения" Margin="0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16" />
+                        <TextBlock Text="Режим чтения" Margin="0,6,0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16" />
                         <TextBlock TextWrapping="Wrap" Text="Клиент YouTube" FontSize="16" />
                         <ComboBox x:Name="YouTubeBox" SelectionChanged="YouTubeBox_SelectionChanged" Margin="0,8">
                             <ComboBoxItem Content="vnd.youtube:"/>
@@ -90,10 +90,10 @@
                 </ScrollViewer>
                 <ScrollViewer Margin="12,0" VerticalScrollBarVisibility="Hidden" Loaded="ScrollViewer_Loaded">
                     <StackPanel Margin="0,0,0,18">
-                        <TextBlock Text="О приложении" Margin="0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16"/>
+                        <TextBlock Text="О приложении" Margin="0,6,0,12" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}" FontSize="16"/>
                         <TextBlock Text="Оценить приложение" FontSize="16" />
                         <ui:RateMe CurrentRating="5" DesiredRatingSelected="RateMe_DesiredRatingSelected" UndesiredRatingSelected="RateMe_UndesiredRatingSelected" />
-                        <Button Content="Связаться с разработчиком" Margin="0,8" Tapped="ContactMe_Tapped" />
+                        <ui:Button Content="Связаться с разработчиком" Margin="0,8" Click="ContactMe_Click" />
                         <TextBlock x:Name="VersionBlock" HorizontalAlignment="Right" Grid.Row="2" Margin="12"/>
                     </StackPanel>
                 </ScrollViewer>

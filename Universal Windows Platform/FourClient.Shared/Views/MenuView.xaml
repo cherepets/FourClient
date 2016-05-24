@@ -40,35 +40,35 @@
             <ui:MultiAppBar.AppBars>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
-                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
-                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                        <ui:MenuItem Text="История" Click="HistoryButton_Click"/>
+                        <ui:MenuItem Text="Настройки" Click="SettingsButton_Click"/>
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
-                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
-                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                        <ui:MenuItem Text="История" Click="HistoryButton_Click"/>
+                        <ui:MenuItem Text="Настройки" Click="SettingsButton_Click"/>
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>
                 <ui:AppBar>
                     <ui:AppBar.LeftButtons>
-                        <ui:AppBarButton Icon="Refresh" Tapped="RefreshButton_Tapped"/>
+                        <ui:AppBarButton Icon="Refresh" Click="RefreshButton_Click"/>
                     </ui:AppBar.LeftButtons>
                     <ui:AppBar.CentralControl>
-                        <Button x:Name="NewsTypeButton" HorizontalAlignment="Stretch" BorderBrush="{x:Null}"  
+                        <ui:Button x:Name="NewsTypeButton" HorizontalAlignment="Stretch" BorderBrush="{x:Null}"  
                             Background="Transparent" VerticalAlignment="Stretch"
                             Foreground="White"
-                            Tapped="NewsTypeButton_Tapped" />
+                            Click="NewsTypeButton_Click" />
                     </ui:AppBar.CentralControl>
                     <ui:AppBar.MenuItems>
-                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
-                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                        <ui:MenuItem Text="История" Click="HistoryButton_Click"/>
+                        <ui:MenuItem Text="Настройки" Click="SettingsButton_Click"/>
                     </ui:AppBar.MenuItems>
                 </ui:AppBar>
                 <ui:CompactAppBar>
                     <ui:CompactAppBar.MenuItems>
-                        <ui:MenuItem Text="История" Tapped="HistoryButton_Tapped"/>
-                        <ui:MenuItem Text="Настройки" Tapped="SettingsButton_Tapped"/>
+                        <ui:MenuItem Text="История" Click="HistoryButton_Click"/>
+                        <ui:MenuItem Text="Настройки" Click="SettingsButton_Click"/>
                     </ui:CompactAppBar.MenuItems>
                 </ui:CompactAppBar>
             </ui:MultiAppBar.AppBars>

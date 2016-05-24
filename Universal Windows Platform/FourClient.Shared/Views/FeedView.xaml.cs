@@ -132,11 +132,9 @@ namespace FourClient.Views
                     );
         }
 
-        private void SourcesButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void SourcesButton_Click(object sender, EventArgs e)
             => IoC.MenuView.OpenSourcesTab();
-
-        private void PullToRefreshBox_RefreshInvoked(DependencyObject sender, object args) => Refresh();
-
+        
         public void Refresh()
         {
             var feed = GridView.ItemsSource as AbstractFeed;

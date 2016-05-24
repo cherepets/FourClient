@@ -136,24 +136,21 @@ namespace FourClient.Views
             Selector.Select(Pivot.SelectedIndex);
         }
 
-        private void HistoryButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void HistoryButton_Click(object sender, EventArgs e)
         {
             var history = new HistoryView();
             IoC.MainPage.ShowFlyout(history);
         }
 
-        private void SettingsButton_Tapped(object sender, TappedRoutedEventArgs e)
-        {
-            var settings = new SettingsView();
-            IoC.MainPage.ShowFlyout(settings);
-        }
+        private void SettingsButton_Click(object sender, EventArgs e)
+            => IoC.MainPage.ShowFlyout(new SettingsView());
 
-        private void RefreshButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void RefreshButton_Click(object sender, EventArgs e)
             => IoC.FeedView.Refresh();
 
-        private void NewsTypeButton_Tapped(object sender, TappedRoutedEventArgs e)
+        private void NewsTypeButton_Click(object sender, EventArgs e)
         {
-            var button = (Button)sender;
+            var button = (FourToolkit.UI.Button)sender;
             var source = IoC.FeedView.CurrentSource;
             if (source != null)
             {

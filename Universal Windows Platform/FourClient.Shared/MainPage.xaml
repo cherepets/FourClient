@@ -13,13 +13,13 @@
         
         <ui:StatusBarController x:Name="StatusBar"/>
         
-        <views:MenuView x:Name="MenuView" RenderTransformOrigin="0.5,0.5" Grid.Column="0" Visibility="Visible" >
+        <views:MenuView x:Name="MenuView" RenderTransformOrigin="0.5,0.5" Grid.Column="0" >
             <views:MenuView.RenderTransform>
                 <CompositeTransform/>
             </views:MenuView.RenderTransform>
         </views:MenuView>
 
-        <views:ArticleView x:Name="ArticleView" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Visibility="Visible" >
+        <views:ArticleView x:Name="ArticleView" RenderTransformOrigin="0.5,0.5" Grid.Column="1" >
             <views:ArticleView.RenderTransform>
                 <CompositeTransform/>
             </views:ArticleView.RenderTransform>
@@ -30,58 +30,32 @@
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup x:Name="ViewStates">
                 <VisualState x:Name="TwoPanes">
+                    <VisualState.Setters>
+                        <Setter Target="StatusBar.Hidden" Value="true" />
+                        <Setter Target="LeftColumn.Width" Value="360" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="LeftPane">
+                    <VisualState.Setters>
+                        <Setter Target="RightColumn.Width" Value="0" />
+                        <Setter Target="ArticleView.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="360"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="*"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ArticleView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="MenuView">
-                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="1"/>
+                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="MenuView">
+                            <LinearDoubleKeyFrame KeyTime="0" Value="-360"/>
+                            <LinearDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>
-                <VisualState x:Name="LeftPane">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="*"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ArticleView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
                 <VisualState x:Name="RightPane">
+                    <VisualState.Setters>
+                        <Setter Target="LeftColumn.Width" Value="0" />
+                        <Setter Target="MenuView.Visibility" Value="Collapsed" />
+                    </VisualState.Setters>
                     <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="LeftColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="0"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RightColumn" Storyboard.TargetProperty="Width">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="*"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ArticleView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Visible"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuView" Storyboard.TargetProperty="Visibility">
-                            <DiscreteObjectKeyFrame KeyTime="0" Value="Collapsed"/>
-                        </ObjectAnimationUsingKeyFrames>
                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(CompositeTransform.TranslateX)" Storyboard.TargetName="ArticleView">
-                            <EasingDoubleKeyFrame KeyTime="0" Value="1000"/>
-                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
+                            <LinearDoubleKeyFrame KeyTime="0" Value="1000"/>
+                            <LinearDoubleKeyFrame KeyTime="0:0:0.25" Value="0"/>
                         </DoubleAnimationUsingKeyFrames>
                     </Storyboard>
                 </VisualState>

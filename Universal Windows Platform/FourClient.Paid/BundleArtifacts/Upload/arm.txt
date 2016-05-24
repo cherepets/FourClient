@@ -1,6 +1,6 @@
-MainPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\bin\ARM\Release\Upload\FourClient.Paid_5.8.7.0_ARM.appx
-SymbolPackage=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.8.7.0\FourClient.Paid_5.8.7.0_ARM.appxsym
-ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-100.appx
-ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-125.appx
-ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-150.appx
-ResourcePack=D:\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-400.appx
+MainPackage=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Paid\bin\ARM\Release\Upload\FourClient.Paid_5.9.1.0_ARM.appx
+SymbolPackage=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Paid\AppPackages\FourClient.Paid_5.9.1.0\FourClient.Paid_5.9.1.0_ARM.appxsym
+ResourcePack=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-100.appx
+ResourcePack=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-125.appx
+ResourcePack=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-150.appx
+ResourcePack=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Paid\_scale-400.appx

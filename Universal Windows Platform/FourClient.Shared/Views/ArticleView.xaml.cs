@@ -79,7 +79,7 @@ namespace FourClient.Views
 
         private DispatcherTimer _uiUpdateTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
 
-        private const int UiTimeout = 30;
+        private const int UiTimeout = 300;
 
         private bool _loaded;
         private HtmlRender _render;
@@ -240,7 +240,7 @@ namespace FourClient.Views
                 _render.Completed -= render_Completed;
         }
 
-        private async void Star_Tapped(object sender, TappedRoutedEventArgs e)
+        private async void Star_Tapped(object sender, EventArgs e)
         {
             hideUiAfter = UiTimeout;
             if (Article == null) return;
@@ -254,19 +254,19 @@ namespace FourClient.Views
             UpdateStarState();
         }
 
-        private void Globe_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Globe_Tapped(object sender, EventArgs e)
         {
             hideUiAfter = UiTimeout;
             Article?.OpenWeb();
         }
 
-        private void Comments_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Comments_Tapped(object sender, EventArgs e)
         {
             hideUiAfter = UiTimeout;
             Article?.OpenComments();
         }
         
-        private void Share_Tapped(object sender, TappedRoutedEventArgs e)
+        private void Share_Tapped(object sender, EventArgs e)
         {
             hideUiAfter = UiTimeout;
             Article?.Share();

@@ -1,1 +1,1 @@
-D:\Github\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_5.8.7.0\FourClient.Free_5.8.7.0_x86_x64_arm.appxbundle
+C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_5.9.1.0\FourClient.Free_5.9.1.0_x86_x64_arm.appxbundle

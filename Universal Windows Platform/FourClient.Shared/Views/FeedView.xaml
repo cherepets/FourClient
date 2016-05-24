@@ -53,10 +53,10 @@
         <ProgressBar x:Name="ProgressBar" Background="Transparent" Foreground="{StaticResource ApplicationForegroundThemeBrush}" VerticalAlignment="Top" />
         <Grid x:Name="Placeholder">
             <TextBlock Text="Выберите сначала источник" FontSize="16" Foreground="{ThemeResource SystemControlDisabledListMediumBrush}" />
-            <Button x:Name="SourcesButton" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+            <ui:Button x:Name="SourcesButton" BorderBrush="{x:Null}" HorizontalAlignment="Stretch" VerticalAlignment="Center"
                 Background="{ThemeResource SystemControlBackgroundAccentBrush}" 
                 Foreground="White"
-                Content="Источники" Tapped="SourcesButton_Tapped" />
+                Content="Источники" Click="SourcesButton_Click" />
         </Grid>
     </Grid>
 </UserControl>
