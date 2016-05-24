@@ -5,13 +5,19 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.UI.Xaml.Data;
 
 namespace FourClient.Collections.Decoration.ObservableCollection
 {
-    internal class FilterDecorator<T> : ObservableCollection<T>
+    internal class FilterDecorator<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
         private Func<T, bool> _filter;
         private ObservableCollection<T> _collection;
+        private ISupportIncrementalLoading _incrementalLoader;
+
+        public bool HasMoreItems { get; private set; }
 
         public FilterDecorator(ObservableCollection<T> collection, Expression<Func<T, bool>> filter)
         {
@@ -19,6 +25,8 @@ namespace FourClient.Collections.Decoration.ObservableCollection
             _collection = collection;
             Recheck();
             collection.CollectionChanged += Collection_CollectionChanged;
+            _incrementalLoader = collection as ISupportIncrementalLoading;
+            HasMoreItems = _incrementalLoader != null;
             foreach (var member in new MemberDetector().Detect(filter))
             {
                 var propertyNotifier = member as INotifyPropertyChanged;
@@ -62,6 +70,9 @@ namespace FourClient.Collections.Decoration.ObservableCollection
                 case NotifyCollectionChangedAction.Reset:
                     Clear();
                     break;
+                case NotifyCollectionChangedAction.Move:
+                    Sort();
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -77,6 +88,16 @@ namespace FourClient.Collections.Decoration.ObservableCollection
         {
             if (!_filter(item) && Contains(item))
                 Remove(item);
+        }
+
+        public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
+        {
+            return Task.Run(async () =>
+            {
+                var res = await _incrementalLoader?.LoadMoreItemsAsync(count);
+                HasMoreItems = _incrementalLoader?.HasMoreItems ?? false;
+                return res;
+            }).AsAsyncOperation();
         }
 
         #region MemberDetector
