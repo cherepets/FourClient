@@ -122,7 +122,7 @@ namespace FourClient.Library.Statistics
         private static async Task<StorageFile> GetDbFileAsync()
         {
             if (_background && Settings.Current.StatisticsDbPath != null)
-                return await StorageFile.GetFileFromPathAsync(Settings.Current.CacheDbPath);
+                return await StorageFile.GetFileFromPathAsync(Settings.Current.StatisticsDbPath);
             var dbFolder = await GetDbFolderAsync();
             if (dbFolder == null) return null;
             var files = await dbFolder.GetFilesAsync();
