@@ -1,6 +1,5 @@
 ﻿using FourToolkit.Extensions.Runtime;
 using FourToolkit.Settings.SettingsProviders;
-using FourToolkit.UI;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -244,7 +243,7 @@ namespace FourClient.Library
         public static Settings Current { get; } = new Settings();
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public static void OverrideDefaults(Dictionary<string, object> defaults)
+        public static void OverrideDefaults(IDictionary<string, object> defaults)
             => Current.DefaultsProvider = new DictionarySettingsProvider(defaults);
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

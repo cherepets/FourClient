@@ -4,23 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:converters="using:FourClient.Converters"
     xmlns:ui="using:FourToolkit.UI" SizeChanged="UserControl_SizeChanged">
-    <UserControl.Resources>
-        <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <GridView x:Name="GridView" ScrollViewer.VerticalScrollBarVisibility="Hidden" Padding="0,0,-6,0">
-            <GridView.ItemContainerTransitions>
-                <TransitionCollection>
-                    <AddDeleteThemeTransition />
-                </TransitionCollection>
-            </GridView.ItemContainerTransitions>
-            <GridView.ItemTemplate>
+        <ui:GridView DesiredItemSize="96" SquareItems="True" ScrollVisibility="Collapsed" x:Name="GridView" Margin="-2,0,-3,0">
+            <ui:GridView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped" Loaded="Item_Loaded" IsHitTestVisible="{Binding Enabled}">
+                    <Grid Tapped="Item_Tapped" Holding="Item_Holding" RightTapped="Item_RightTapped" IsHitTestVisible="{Binding Enabled}" Margin="2">
                         <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                         <Viewbox Stretch="UniformToFill">
                             <Image Source="{Binding ImageUrl}" />
@@ -30,11 +22,11 @@
             					   Foreground="White" 
             					   VerticalAlignment="Bottom" 
             					   TextWrapping="WrapWholeWords" />
-                        <Rectangle Opacity="0.5" Fill="Black" Visibility="{Binding Enabled, Converter={StaticResource VisibilityConverter}}"/>
+                        <Rectangle Opacity="0.5" Fill="Black" Visibility="{Binding Enabled, Converter={StaticResource BoolToVisibility}}"/>
                     </Grid>
                 </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+            </ui:GridView.ItemTemplate>
+        </ui:GridView>
         <Grid x:Name="HiddenGrid" Grid.Row="1" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -42,15 +34,10 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" Height="16" Margin="-12,0" Visibility="Visible" />
-            <GridView x:Name="HiddenView" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.Row="1" Padding="0,12,-6,0">
-                <GridView.ItemContainerTransitions>
-                    <TransitionCollection>
-                        <AddDeleteThemeTransition />
-                    </TransitionCollection>
-                </GridView.ItemContainerTransitions>
-                <GridView.ItemTemplate>
+            <ui:GridView Visibility="Collapsed" DesiredItemSize="96" SquareItems="True" ScrollVisibility="Collapsed" x:Name="HiddenView" Grid.Row="1" Margin="-2,0,-3,0">
+                <ui:GridView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Tapped="Item_Tapped" RightTapped="HiddenItem_RightTapped" Holding="HiddenItem_Holding" Loaded="Item_Loaded" IsHitTestVisible="{Binding Enabled}">
+                        <Grid Tapped="Item_Tapped" RightTapped="HiddenItem_RightTapped" Holding="HiddenItem_Holding" IsHitTestVisible="{Binding Enabled}" Margin="2">
                             <Rectangle Fill="{ThemeResource SystemControlBackgroundAccentBrush}" />
                             <Viewbox Stretch="UniformToFill">
                                 <Image Source="{Binding ImageUrl}" />
@@ -60,11 +47,11 @@
             						   Foreground="White" 
             						   VerticalAlignment="Bottom" 
             						   TextWrapping="WrapWholeWords" />
-                            <Rectangle Opacity="0.5" Fill="Black" Visibility="{Binding Enabled, Converter={StaticResource VisibilityConverter}}"/>
+                            <Rectangle Opacity="0.5" Fill="Black" Visibility="{Binding Enabled, Converter={StaticResource BoolToVisibility}}"/>
                         </Grid>
                     </DataTemplate>
-                </GridView.ItemTemplate>
-            </GridView>
+                </ui:GridView.ItemTemplate>
+            </ui:GridView>
             <Rectangle Fill="{ThemeResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" />
             <TextBlock Text="ОТКЛЮЧЕННЫЕ" FontSize="16" Grid.Row="2" VerticalAlignment="Center" />
             <AppBarButton Tapped="SmallUpArrow_Tapped" Grid.Row="2" HorizontalAlignment="Right" IsCompact="True" Margin="-12, 0">

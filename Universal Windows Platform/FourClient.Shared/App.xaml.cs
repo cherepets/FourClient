@@ -19,7 +19,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace FourClient
 {
@@ -73,13 +72,7 @@ namespace FourClient
                 Window.Current.Content = rootFrame;
             }
             if (rootFrame.Content == null)
-            {
-                rootFrame.ContentTransitions = null;
-                if (!rootFrame.Navigate(typeof(MainPage), argument))
-                {
-                    throw new Exception("Failed to create initial page");
-                }
-            }
+                rootFrame.Navigate(typeof(MainPage), argument);
             Window.Current.Activate();
             new NotifierBackgroundTask().Register(new TimeTrigger(60, false));
             new ToastHandlerBackgroundTask().Register(new ToastNotificationActionTrigger());
@@ -88,30 +81,28 @@ namespace FourClient
         private static void Current_UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
             e.Handled = true;
-            if (e.Message == "Unspecified error\r\n" || e.Exception?.Message == null) return;
             HandleException(e.Exception);
         }
 
         private static void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             e.SetObserved();
-            if (e.Exception?.Message == null) return;
             HandleException(e.Exception);
         }
 
         private static async void ShowExceptionMessage(Exception e)
         {
-            var dispatcher = Window.Current?.CoreWindow?.Dispatcher;
-            if (dispatcher == null) return;
+            if (e.Message.StartsWith("UnspecifiedError") || e?.Message == null) return;
+            var dispatcher = Dispatcher.GetCurrent();
             await dispatcher.RunAsync(CoreDispatcherPriority.Low, async () =>
             {
                 var wse = e as WebServiceException;
                 var dialog = new MessageDialog(
                     wse == null ? e.Message : wse.Message,
                     e.GetType().Name)
-                    .WithCommand("Close")
-                    .SetCancelCommandIndex(0)
                     .SetDefaultCommandIndex(0);
+                if (Platform.IsDesktop)
+                    dialog.WithCommand("Закрыть");
                 if (e.StackTrace != null)
                     dialog.WithCommand("StackTrace", () => ShowStackTrace(e));
                 if (e.InnerException != null)
@@ -123,19 +114,14 @@ namespace FourClient
         private static async void ShowStackTrace(Exception e)
         {
             var dialog = new MessageDialog(e.StackTrace, e.GetType().Name)
-                .WithCommand("Close")
-                .SetCancelCommandIndex(0)
                 .SetDefaultCommandIndex(0);
+            if (Platform.IsDesktop)
+                dialog.WithCommand("Закрыть");
             if (e.Message != null)
                 dialog.WithCommand("Message", () => ShowExceptionMessage(e));
             if (e.InnerException != null)
                 dialog.WithCommand("InnerException", () => ShowExceptionMessage(e.InnerException));
             await dialog.ShowAsync();
-        }
-
-        private static void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }
 
         private void ChangeNameBarColor()

@@ -115,6 +115,10 @@
       <Project>{f8f6298a-2e47-4cac-b64f-d3bf13c296fc}</Project>
       <Name>FourToolkit.Extensions.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Extensions\FourToolkit.Extensions.csproj">
+      <Project>{9a45724e-0829-4dc5-a90b-4f33ad242fc3}</Project>
+      <Name>FourToolkit.Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\BitBucket\FourToolkit\FourToolkit.Settings\FourToolkit.Settings.csproj">
       <Project>{00efbe32-88bb-49ca-aede-d7a7f195394d}</Project>
       <Name>FourToolkit.Settings</Name>

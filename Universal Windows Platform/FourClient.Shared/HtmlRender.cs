@@ -24,7 +24,7 @@ namespace FourClient
 
         private void _webView_ScriptNotify(object sender, NotifyEventArgs e)
         {
-            if (DateTime.Now - _lastEventTime < TimeSpan.FromMilliseconds(1200))
+            if (DateTime.Now - _lastEventTime < TimeSpan.FromSeconds(0.5))
                 return;
             _lastEventTime = DateTime.Now;
             if (e.Value == "scrollDown") ScrollDown?.Invoke(this, null);

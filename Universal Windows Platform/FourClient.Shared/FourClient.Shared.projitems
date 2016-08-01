@@ -65,7 +65,8 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Collections\Decoration\ObservableCollection\FilterDecorator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collections\Decoration\ObservableCollection\ObservableCollectionExt.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleadnToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BoolToVisibility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DefaultSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GridViewFlipper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HtmlRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IoC.cs" />

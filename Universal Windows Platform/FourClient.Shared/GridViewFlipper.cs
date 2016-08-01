@@ -97,7 +97,7 @@ namespace FourClient
             }
         }
 
-        private GridView _view = new GridView();
+        private Windows.UI.Xaml.Controls.GridView _view = new Windows.UI.Xaml.Controls.GridView();
 
         public GridViewFlipper()
         {

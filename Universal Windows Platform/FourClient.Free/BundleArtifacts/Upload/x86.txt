@@ -1,2 +1,2 @@
-MainPackage=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Free\bin\x86\Release\Upload\FourClient.Free_5.9.1.0_x86.appx
-SymbolPackage=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_5.9.1.0\FourClient.Free_5.9.1.0_x86.appxsym
+MainPackage=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Free\bin\x86\Release\Upload\FourClient.Free_5.9.2.0_x86.appx
+SymbolPackage=C:\Users\chere\Documents\Visual Studio 2015\Github\FourClient\Universal Windows Platform\FourClient.Free\AppPackages\FourClient.Free_5.9.2.0\FourClient.Free_5.9.2.0_x86.appxsym

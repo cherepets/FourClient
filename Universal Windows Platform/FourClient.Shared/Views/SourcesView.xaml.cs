@@ -53,12 +53,6 @@ namespace FourClient.Views
         private void RefreshSources(ObservableCollection<Source> active)
             => Sources = active.Where(q => q.Prefix != "NEW").ToList();
 
-        private void Item_Loaded(object sender, RoutedEventArgs e)
-        {
-            var grid = sender as Grid;
-            grid.ResizeViewItem(GridView, ResizeMode.Both, 90);
-        }
-
         private void Item_Tapped(object sender, TappedRoutedEventArgs e)
         {
             var grid = (Grid)sender;

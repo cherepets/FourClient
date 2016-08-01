@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Data;
 
 namespace FourClient.Converters
 {
-    public class BooleanToVisibilityConverter : IValueConverter
+    public class BoolToVisibility : IValueConverter
     {
 
         public object Convert(object value, Type type, object parameter, string language)
